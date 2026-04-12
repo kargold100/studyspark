@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudySpark — Free Australian Study Portal (Grades 6–10 + Selective Prep)</title>
+  <meta name="description" content="Free study portal for Australian students Grades 6-10. AI-powered question bank, timed mock exams, VIC & NSW selective entry preparation, study notes, and AI tutor." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicon (emoji fallback) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <a class="logo" onclick="App.navigate('home')" href="#">
+      <span style="font-size:22px">🎓</span>
+      <span class="logo-text">StudySpark</span>
+    </a>
+    <nav id="nav" class="nav">
+      <!-- Rendered by ui.js renderNav() -->
+    </nav>
+  </header>
+
+  <!-- ── MAIN APP CONTAINER ── -->
+  <main id="app">
+    <div class="loading">
+      <span class="spinner">⏳</span>
+      Loading StudySpark...
+    </div>
+  </main>
+
+  <!-- ── SCRIPTS — load order matters ── -->
+  <script src="js/questions.js"></script>   <!-- QB — question bank loader -->
+  <script src="js/ui.js"></script>          <!-- UI — shared rendering helpers -->
+  <script src="js/browse.js"></script>      <!-- Browse — question bank browser -->
+  <script src="js/practice.js"></script>    <!-- Practice — answer + validate -->
+  <script src="js/exams.js"></script>       <!-- Exams — timed mock exams -->
+  <script src="js/selective.js"></script>   <!-- Selective — VIC/NSW prep -->
+  <script src="js/study.js"></script>       <!-- Study — notes viewer -->
+  <script src="js/tutor.js"></script>       <!-- Tutor — AI tutor -->
+  <script src="js/app.js"></script>         <!-- App — router + home + boot -->
+
+</body>
+</html>

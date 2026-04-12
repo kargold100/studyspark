@@ -1,0 +1,78 @@
+{
+  "subjects": {
+    "Mathematics": {
+      "Algebra": {
+        "grades": ["7","8","9","10"],
+        "notes": "## What is Algebra?\nAlgebra uses letters (variables) to represent unknown numbers.\n\n## Key Rules\n- Like terms: 3x + 2x = 5x\n- Distributive law: a(b+c) = ab + ac\n- Whatever you do to one side, do to the other\n\n## Solving Equations\nExample: Solve 2x + 5 = 13\n→ 2x = 13 − 5 = 8\n→ x = 8 ÷ 2 = 4\n\n## Expanding Brackets\n3(x + 4) = 3x + 12\n2(x − 3) + x = 2x − 6 + x = 3x − 6"
+      },
+      "Geometry": {
+        "grades": ["7","8","9","10"],
+        "notes": "## Angles\n- Acute: less than 90°\n- Right: exactly 90°\n- Obtuse: between 90° and 180°\n- Straight: 180°\n- Reflex: more than 180°\n\n## Triangles\n- Angles always sum to 180°\n- Area = ½ × base × height\n- Pythagorean theorem: a² + b² = c² (right triangles only)\n\n## Circles\n- Circumference = 2πr (or πd)\n- Area = πr²\n- π ≈ 3.14159\n\n## Quadrilaterals\n- Rectangle: Area = l × w, Perimeter = 2(l+w)\n- Square: Area = s², Perimeter = 4s\n- Parallelogram: Area = base × height"
+      },
+      "Statistics": {
+        "grades": ["7","8","9","10"],
+        "notes": "## Measures of Centre\n- Mean: sum ÷ count  (Example: 4,7,9 → mean = 20÷3 = 6.67)\n- Median: middle value when ordered  (Example: 3,5,8 → median = 5)\n- Mode: most frequent value\n\n## Spread\n- Range: highest − lowest\n\n## Reading Data\n- Bar charts: compare categories\n- Line graphs: show change over time\n- Pie charts: show proportions (360° total)\n\n## Example\nScores: 70, 82, 75, 82, 91\nMean = (70+82+75+82+91) ÷ 5 = 400 ÷ 5 = 80\nMedian = 82 (middle when ordered: 70,75,82,82,91)\nMode = 82 (appears twice)"
+      },
+      "Fractions & Decimals": {
+        "grades": ["6","7","8"],
+        "notes": "## Adding Fractions\nFind a common denominator:\n½ + ⅓ = 3/6 + 2/6 = 5/6\n\n## Multiplying Fractions\nMultiply tops, then bottoms:\n½ × ⅔ = 2/6 = ⅓\n\n## Dividing Fractions\nFlip the second fraction and multiply:\n½ ÷ ¼ = ½ × 4/1 = 4/2 = 2\n\n## Converting\n- Fraction → Decimal: divide top by bottom (¾ = 3÷4 = 0.75)\n- Decimal → Percentage: multiply by 100 (0.75 = 75%)\n- Percentage → Decimal: divide by 100 (45% = 0.45)\n\n## Ordering\nConvert to decimals first: ⅔=0.667, ¾=0.75, 3/5=0.6\nOrder: 3/5 < ⅔ < ¾"
+      },
+      "Probability": {
+        "grades": ["7","8","9","10"],
+        "notes": "## Probability Scale\nProbability = number of favourable outcomes ÷ total outcomes\nValue is always between 0 (impossible) and 1 (certain)\n\n## Examples\n- Rolling a 6 on a die: 1/6\n- Rolling an even number: 3/6 = ½\n- Drawing a red card from a deck: 26/52 = ½\n\n## Complementary Events\nP(event) + P(not event) = 1\nIf P(rain) = 0.3, then P(no rain) = 0.7\n\n## Tree Diagrams\nUsed for two-step events.\nExample: Flip two coins → HH, HT, TH, TT\nP(both heads) = 1/4"
+      }
+    },
+    "English": {
+      "Reading Comprehension": {
+        "grades": ["6","7","8","9","10","selective"],
+        "notes": "## Key Strategies\n1. Skim first — read headings, first and last sentences\n2. Identify the main idea — what is the whole passage about?\n3. Answers are always IN the text — don't make things up\n4. For inference questions — think about what the author implies\n\n## Question Types\n- Literal: directly stated in text\n- Inferential: read between the lines\n- Vocabulary in context: what does this word mean HERE?\n- Author's purpose: why did the author write this?\n- Text structure: how is the passage organised?\n\n## Tip\nFor inference questions, ask: 'What does this suggest?' not 'What does this say?'"
+      },
+      "Grammar & Punctuation": {
+        "grades": ["6","7","8","9","10"],
+        "notes": "## Parts of Speech\n- Noun: person, place, thing (dog, school, happiness)\n- Verb: action or state (run, is, seems)\n- Adjective: describes a noun (big, red, beautiful)\n- Adverb: describes a verb or adjective (quickly, never, very)\n- Pronoun: replaces a noun (he, she, they, it)\n- Conjunction: joins clauses (and, but, because, although)\n\n## Punctuation Rules\n- Comma: separate clauses, items in a list\n- Semicolon: join two related independent clauses\n- Apostrophe: possession (dog's) or contraction (don't)\n- Colon: introduce a list or explanation\n\n## Common Errors\n- Its (possessive) vs It's (it is)\n- Their (possessive) vs There (place) vs They're (they are)\n- Effect (noun) vs Affect (verb)"
+      },
+      "Persuasive Writing": {
+        "grades": ["7","8","9","10","selective"],
+        "notes": "## Structure: PEEL Paragraphs\n- Point: state your argument\n- Evidence: facts, statistics, examples\n- Explanation: explain how evidence supports your point\n- Link: connect back to the topic\n\n## Persuasive Techniques (DAFOREST)\n- Direct address: 'You should...'\n- Alliteration: 'Brilliant, bold, brave'\n- Facts & statistics: '90% of students...'\n- Opinion: 'It is clear that...'\n- Rhetorical questions: 'Who wouldn't want this?'\n- Emotive language: 'devastating', 'crucial'\n- Simile/metaphor: make ideas vivid\n- Triples: 'fast, efficient, affordable'\n\n## Opening Lines\nStart with a hook: statistic, rhetorical question, bold statement\n\n## For Selective Exams\nAim for 200-300 words. Use paragraphs. End with a strong conclusion."
+      },
+      "Creative Writing": {
+        "grades": ["6","7","8","9","10","selective"],
+        "notes": "## Story Structure\n- Orientation: introduce character, setting, situation\n- Complication: problem or conflict arises\n- Rising action: tension builds\n- Climax: the turning point\n- Resolution: problem solved or changed\n\n## Show Don't Tell\nWeak: 'She was scared.'\nStrong: 'Her hands trembled. She pressed herself against the wall, barely breathing.'\n\n## Sentence Variety\nMix short punchy sentences with longer, flowing ones.\nExample: 'She ran. The door was close — ten steps, maybe eight. She could make it. She had to.'\n\n## Literary Devices\n- Simile: like/as comparison (hair like fire)\n- Metaphor: direct comparison (the world was a stage)\n- Personification: human qualities to objects (the wind howled)\n- Alliteration: repeated first sounds (dark, damp, dangerous)\n\n## For Selective Exams\n- Start in the action or with interesting dialogue\n- Focus on ONE moment rather than a full life story\n- End with a memorable line or full circle back to opening"
+      }
+    },
+    "Science": {
+      "Cells & Biology": {
+        "grades": ["7","8","9"],
+        "notes": "## Cell Theory\n- All living things are made of cells\n- Cells come from pre-existing cells\n- The cell is the basic unit of life\n\n## Animal Cell Parts\n- Nucleus: control centre, contains DNA\n- Cytoplasm: jelly-like fluid where reactions occur\n- Cell membrane: controls what enters/leaves\n- Mitochondria: produces energy (ATP)\n- Ribosome: makes proteins\n\n## Plant Cell — Additional Parts\n- Cell wall: provides structure (made of cellulose)\n- Chloroplasts: contains chlorophyll for photosynthesis\n- Large vacuole: stores water and maintains shape\n\n## Photosynthesis\nCO₂ + H₂O + sunlight → Glucose + O₂\n(Happens in chloroplasts)\n\n## Cellular Respiration\nGlucose + O₂ → CO₂ + H₂O + Energy\n(Happens in mitochondria)"
+      },
+      "Forces & Physics": {
+        "grades": ["7","8","9","10"],
+        "notes": "## Newton's Laws\n1. An object stays still or moving unless a force acts on it\n2. Force = mass × acceleration (F = ma)\n3. For every action, there is an equal and opposite reaction\n\n## Weight vs Mass\n- Mass: amount of matter (kg) — stays the same everywhere\n- Weight: force due to gravity (N) — changes on different planets\n- Weight = mass × g (g = 9.8 m/s² on Earth)\n\n## Types of Forces\n- Gravity: pulls objects toward Earth\n- Friction: opposes motion between surfaces\n- Normal force: surface pushes back on object\n- Tension: pull through a rope or cable\n\n## Energy\n- Kinetic energy: energy of movement (KE = ½mv²)\n- Potential energy: stored energy (PE = mgh)\n- Conservation of energy: energy cannot be created or destroyed"
+      },
+      "Elements & Chemistry": {
+        "grades": ["8","9","10"],
+        "notes": "## The Periodic Table\n- Organised by atomic number (number of protons)\n- Groups (columns): elements with similar properties\n- Periods (rows): elements with same number of electron shells\n\n## Key Terms\n- Atom: smallest unit of an element\n- Element: substance made of one type of atom\n- Compound: two or more elements chemically joined (H₂O)\n- Mixture: two or more substances not chemically joined (salt water)\n\n## Chemical Reactions\n- Reactants → Products\n- Signs of reaction: colour change, gas produced, temperature change, precipitate forms\n- Law of conservation of mass: mass of reactants = mass of products\n\n## Common Compounds\n- H₂O: water\n- CO₂: carbon dioxide\n- NaCl: sodium chloride (table salt)\n- O₂: oxygen gas"
+      }
+    },
+    "History": {
+      "World War I & II": {
+        "grades": ["9","10"],
+        "notes": "## World War I (1914–1918)\nCauses (MAIN):\n- Militarism: arms race between nations\n- Alliances: Triple Entente vs Triple Alliance\n- Imperialism: competition for colonies\n- Nationalism: pride and rivalry between nations\n+ Spark: assassination of Archduke Franz Ferdinand (1914)\n\nKey events: Gallipoli (ANZAC landing April 25, 1915), trench warfare, Treaty of Versailles (1919)\n\n## World War II (1939–1945)\nCauses:\n- Rise of Adolf Hitler and Nazi Germany\n- Failure of appeasement policy\n- German invasion of Poland (Sept 1939)\n\nKey events: Battle of Britain, Holocaust, D-Day (1944), atomic bombs on Japan (Aug 1945)\n\n## Australia's Role\n- ANZAC spirit from WW1 at Gallipoli\n- WW2: fought in North Africa, Pacific, defended Australia from Japanese advance\n- Kokoda Track Campaign (1942) — crucial defence"
+      },
+      "Australian History": {
+        "grades": ["7","8","9","10"],
+        "notes": "## First Peoples\n- Aboriginal and Torres Strait Islander peoples have lived in Australia for 60,000+ years\n- One of the oldest continuous cultures on Earth\n- Diverse nations, languages, and traditions\n- Deep spiritual connection to Country\n\n## European Colonisation\n- 1770: James Cook claims eastern Australia for Britain\n- 1788: First Fleet arrives, British colony established at Port Jackson\n- Impact on First Nations: dispossession, disease, violence\n\n## Federation\n- 1901: Six colonies became the Commonwealth of Australia\n- New constitution, federal parliament established\n- Original constitution excluded Aboriginal Australians\n\n## 20th Century\n- 1915: ANZAC landing at Gallipoli (April 25 — ANZAC Day)\n- 1967: Referendum — Aboriginal Australians counted in census\n- 1975: Whitlam Government dismissed\n- 2008: Prime Minister Rudd's National Apology to Stolen Generations"
+      }
+    },
+    "Geography": {
+      "Climate & Weather": {
+        "grades": ["7","8","9"],
+        "notes": "## Weather vs Climate\n- Weather: short-term atmospheric conditions (today's rain)\n- Climate: long-term patterns in a region (tropical, desert, temperate)\n\n## Climate Zones\n- Tropical: near equator, hot and wet year-round\n- Arid/Desert: very little rainfall, extreme temperatures\n- Temperate: mild temperatures, four seasons (most of Australia's population)\n- Polar: extreme cold, permanent ice\n\n## Factors Affecting Climate\n- Latitude: closer to equator = warmer\n- Altitude: higher = colder\n- Distance from sea: coastal areas milder than inland\n- Ocean currents: warm or cold currents affect nearby land\n\n## Australia's Climate\n- Most of inland Australia is arid or semi-arid\n- Northern Australia: tropical (wet/dry seasons)\n- Southern Australia: temperate (four seasons)\n- Climate change is increasing temperatures and changing rainfall patterns"
+      },
+      "Natural Disasters": {
+        "grades": ["7","8","9","10"],
+        "notes": "## Types of Natural Disasters\n\n## Earthquakes\n- Caused by movement of tectonic plates\n- Measured on Richter scale\n- Most common along plate boundaries (Pacific Ring of Fire)\n\n## Volcanoes\n- Occur where tectonic plates meet or pull apart\n- Types: shield (gentle), composite (explosive)\n- Australia has no active volcanoes\n\n## Floods\n- River floods: heavy rain causes rivers to overflow\n- Flash floods: sudden, very fast — most dangerous\n- Australia: flooding common in inland and northern regions\n\n## Bushfires\n- Major hazard in Australia — hot, dry, windy conditions\n- Black Summer 2019-20: worst on record\n- Fire Triangle: heat + fuel + oxygen\n\n## Cyclones\n- Tropical storms with wind speeds above 119 km/h\n- Common in northern Australia (Nov–April)\n- Bring heavy rain and storm surges"
+      }
+    }
+  }
+}

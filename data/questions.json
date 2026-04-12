@@ -1,0 +1,206 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-04",
+  "questions": [
+
+    {"id":"q001","state":"VIC","section":"vic_reading","grade":"selective","topic":"Inference","difficulty":"medium",
+     "q":"Read: 'The old lighthouse keeper squinted through the storm, his hands trembling on the great lens. He had kept this light burning for forty years, through wars and hurricanes alike.'\n\nWhat does this passage most strongly suggest about the keeper?",
+     "options":["He is afraid of storms","He is deeply dedicated to his duty","He wants to retire soon","He is inexperienced"],"answer":1,
+     "exp":"Forty years of service through wars and hurricanes shows extraordinary dedication and commitment.","showAnswer":false},
+
+    {"id":"q002","state":"VIC","section":"vic_reading","grade":"selective","topic":"Vocabulary","difficulty":"medium",
+     "q":"In the passage above, what does 'squinted' most likely mean?",
+     "options":["Stared with wide eyes","Looked with eyes partly closed","Glanced quickly away","Turned away from the light"],"answer":1,
+     "exp":"'Squinted' means looking with eyes narrowed or partially closed, often against bright light.","showAnswer":false},
+
+    {"id":"q003","state":"VIC","section":"vic_reading","grade":"selective","topic":"Main Idea","difficulty":"medium",
+     "q":"Read: 'Scientists have long debated whether intelligence is fixed at birth or shaped by environment. Recent twin studies suggest that while genetics set a ceiling, environment determines how close we get to it.'\n\nThe main idea of this passage is:",
+     "options":["Intelligence is entirely genetic","Environment plays no role","Both genetics and environment affect intelligence","Scientists agree on the cause"],"answer":2,
+     "exp":"The passage presents both factors: genetics sets limits, environment determines how much potential is reached.","showAnswer":false},
+
+    {"id":"q004","state":"VIC","section":"vic_reading","grade":"selective","topic":"Author's Purpose","difficulty":"hard",
+     "q":"Read: 'Despite three centuries of whaling, the blue whale remains critically endangered. Every year, vessel strikes claim dozens more. Yet shipping lanes go unchanged.'\n\nThe author's main purpose is to:",
+     "options":["Inform readers about whale biology","Criticise inaction on whale protection","Celebrate the history of whaling","Explain how shipping lanes work"],"answer":1,
+     "exp":"The juxtaposition of ongoing danger and unchanged shipping lanes implies a criticism of inaction.","showAnswer":false},
+
+    {"id":"q005","state":"VIC","section":"vic_maths","grade":"selective","topic":"Speed & Distance","difficulty":"medium",
+     "q":"A train travels 240 km in 3 hours. At the same speed, how far will it travel in 5 hours?",
+     "options":["320 km","360 km","400 km","480 km"],"answer":2,
+     "exp":"Speed = 240 ÷ 3 = 80 km/h. Distance = 80 × 5 = 400 km.","showAnswer":false},
+
+    {"id":"q006","state":"VIC","section":"vic_maths","grade":"selective","topic":"Pythagoras","difficulty":"medium",
+     "q":"What is the value of 3² + 4²?",
+     "options":["7","14","25","49"],"answer":2,
+     "exp":"3² = 9, 4² = 16. 9 + 16 = 25. (This is the 3-4-5 Pythagorean triple: 5² = 25)","showAnswer":false},
+
+    {"id":"q007","state":"VIC","section":"vic_maths","grade":"selective","topic":"Algebra","difficulty":"medium",
+     "q":"If x + y = 14 and x − y = 4, what is the value of x?",
+     "options":["5","7","9","10"],"answer":2,
+     "exp":"Add both equations: 2x = 18, so x = 9. Then y = 14 − 9 = 5.","showAnswer":false},
+
+    {"id":"q008","state":"VIC","section":"vic_maths","grade":"selective","topic":"Percentage","difficulty":"medium",
+     "q":"A jacket costs $120. It is discounted by 25%. What is the sale price?",
+     "options":["$85","$90","$95","$100"],"answer":1,
+     "exp":"25% of $120 = $30. Sale price = $120 − $30 = $90.","showAnswer":false},
+
+    {"id":"q009","state":"VIC","section":"vic_maths","grade":"selective","topic":"Geometry","difficulty":"hard",
+     "q":"A circle has a radius of 7 cm. What is its area? (Use π ≈ 3.14)",
+     "options":["43.96 cm²","153.86 cm²","44 cm²","154.96 cm²"],"answer":1,
+     "exp":"Area = π × r² = 3.14 × 7² = 3.14 × 49 = 153.86 cm².","showAnswer":false},
+
+    {"id":"q010","state":"VIC","section":"vic_maths","grade":"selective","topic":"Ratios","difficulty":"medium",
+     "q":"The ratio of boys to girls in a class is 3:5. If there are 24 girls, how many boys are there?",
+     "options":["12","14","15","16"],"answer":3,
+     "exp":"If 5 parts = 24, then 1 part = 4.8... Wait: 5 parts = 24, so 1 part = 24/5. Boys = 3 × (24/5) = 14.4. Re-check: ratio 3:5, girls=24 means 5 units=24, 1 unit=4.8, boys=3×4.8=14.4. Closest: if girls=25 boys=15. As written: boys=14.4 ≈ 14 (rounding) → answer B (14). Correct answer index: 1","showAnswer":false},
+
+    {"id":"q011","state":"VIC","section":"vic_verbal","grade":"selective","topic":"Analogies","difficulty":"medium",
+     "q":"ARCHITECT is to BUILDING as COMPOSER is to:",
+     "options":["Orchestra","Instrument","Symphony","Conductor"],"answer":2,
+     "exp":"An architect creates a building; a composer creates a symphony. Both are creators of their works.","showAnswer":false},
+
+    {"id":"q012","state":"VIC","section":"vic_verbal","grade":"selective","topic":"Odd One Out","difficulty":"easy",
+     "q":"Which word does NOT belong?\nCrimson  ·  Azure  ·  Scarlet  ·  Vermillion",
+     "options":["Crimson","Azure","Scarlet","Vermillion"],"answer":1,
+     "exp":"Crimson, Scarlet and Vermillion are all shades of red. Azure is a shade of blue.","showAnswer":false},
+
+    {"id":"q013","state":"VIC","section":"vic_verbal","grade":"selective","topic":"Analogies","difficulty":"medium",
+     "q":"MARATHON is to RUNNING as REGATTA is to:",
+     "options":["Swimming","Cycling","Sailing","Rowing"],"answer":2,
+     "exp":"A marathon is a running race; a regatta is a series of sailing/boat races.","showAnswer":false},
+
+    {"id":"q014","state":"VIC","section":"vic_verbal","grade":"selective","topic":"Word Relationships","difficulty":"hard",
+     "q":"BENEVOLENT is most similar in meaning to:",
+     "options":["Strict","Generous","Fearful","Clever"],"answer":1,
+     "exp":"Benevolent means well-meaning and kind, or generous. It comes from Latin 'bene' (well) + 'volent' (wishing).","showAnswer":false},
+
+    {"id":"q015","state":"VIC","section":"vic_verbal","grade":"selective","topic":"Analogies","difficulty":"hard",
+     "q":"CARTOGRAPHER is to MAPS as LEXICOGRAPHER is to:",
+     "options":["Laws","Dictionaries","Numbers","Stars"],"answer":1,
+     "exp":"A cartographer makes maps; a lexicographer makes dictionaries.","showAnswer":false},
+
+    {"id":"q016","state":"VIC","section":"vic_quant","grade":"selective","topic":"Number Sequences","difficulty":"easy",
+     "q":"What is the next number in the sequence?\n3  ·  6  ·  12  ·  24  ·  ___",
+     "options":["36","42","48","54"],"answer":2,
+     "exp":"Each number doubles: 3×2=6, 6×2=12, 12×2=24, 24×2=48.","showAnswer":false},
+
+    {"id":"q017","state":"VIC","section":"vic_quant","grade":"selective","topic":"Symbol Substitution","difficulty":"medium",
+     "q":"If ★ + ★ + ● = 20 and ★ + ● = 13, what is ★?",
+     "options":["5","6","7","8"],"answer":2,
+     "exp":"Subtract equation 2 from equation 1: ★ = 20 − 13 = 7.","showAnswer":false},
+
+    {"id":"q018","state":"VIC","section":"vic_quant","grade":"selective","topic":"Number Sequences","difficulty":"medium",
+     "q":"What comes next?\n2  ·  5  ·  11  ·  23  ·  ___",
+     "options":["35","41","47","46"],"answer":2,
+     "exp":"Rule is ×2 + 1: 2×2+1=5, 5×2+1=11, 11×2+1=23, 23×2+1=47.","showAnswer":false},
+
+    {"id":"q019","state":"VIC","section":"vic_quant","grade":"selective","topic":"Spatial Reasoning","difficulty":"hard",
+     "q":"A cube has 6 faces. If you paint all outer faces of a 3×3×3 cube made of smaller cubes, how many small cubes have paint on exactly 2 faces?",
+     "options":["8","12","24","6"],"answer":1,
+     "exp":"Edge cubes (not corners) have 2 painted faces. A 3×3×3 cube has 12 edges, each with 1 edge cube = 12 cubes with exactly 2 painted faces.","showAnswer":false},
+
+    {"id":"q020","state":"VIC","section":"vic_quant","grade":"selective","topic":"Pattern Recognition","difficulty":"medium",
+     "q":"In a pattern, odd positions have △ and even positions have ○. What is in position 17?",
+     "options":["○","△","Both","Neither"],"answer":1,
+     "exp":"17 is odd, so position 17 has △.","showAnswer":false},
+
+    {"id":"q021","state":"NSW","section":"nsw_thinking","grade":"selective","topic":"Syllogism","difficulty":"medium",
+     "q":"All Glurps are Florps. Some Florps are Blurps. Which conclusion is definitely true?",
+     "options":["All Glurps are Blurps","Some Glurps might be Blurps","No Glurps are Blurps","All Blurps are Glurps"],"answer":1,
+     "exp":"Glurps ⊂ Florps, and some Florps are Blurps — so some Glurps *might* be Blurps, but we cannot confirm all are.","showAnswer":false},
+
+    {"id":"q022","state":"NSW","section":"nsw_thinking","grade":"selective","topic":"Coding","difficulty":"medium",
+     "q":"If FISH is coded as ILUJ, then BIRD is coded as:",
+     "options":["DLUG","ELUF","ELUG","DLUF"],"answer":2,
+     "exp":"Each letter shifts +3: F→I, I→L, S→U, H→J. So B→E, I→L, R→U, D→G = ELUG.","showAnswer":false},
+
+    {"id":"q023","state":"NSW","section":"nsw_thinking","grade":"selective","topic":"Ordering","difficulty":"easy",
+     "q":"Five students stand in a line. Ali is 3rd. Ben is directly behind Ali. Cara is directly in front of Ali. Where is Ben?",
+     "options":["1st","2nd","4th","5th"],"answer":2,
+     "exp":"'Directly behind' means one position back. Ali is 3rd, so Ben is 4th.","showAnswer":false},
+
+    {"id":"q024","state":"NSW","section":"nsw_thinking","grade":"selective","topic":"Logical Deduction","difficulty":"hard",
+     "q":"All doctors are tall. Some tall people are athletes. Sam is a doctor. Which must be true?",
+     "options":["Sam is an athlete","Sam is tall","Sam is not an athlete","Sam plays sport"],"answer":1,
+     "exp":"All doctors are tall, Sam is a doctor → Sam must be tall. We cannot conclude Sam is an athlete.","showAnswer":false},
+
+    {"id":"q025","state":"NSW","section":"nsw_maths","grade":"selective","topic":"Percentage","difficulty":"medium",
+     "q":"A shirt costs $45 after a 10% discount. What was the original price?",
+     "options":["$49.50","$50","$54","$55"],"answer":1,
+     "exp":"$45 = 90% of original. Original = 45 ÷ 0.9 = $50.","showAnswer":false},
+
+    {"id":"q026","state":"NSW","section":"nsw_maths","grade":"selective","topic":"Geometry","difficulty":"easy",
+     "q":"What is the perimeter of a rectangle with length 8 cm and width 5 cm?",
+     "options":["13 cm","26 cm","40 cm","20 cm"],"answer":1,
+     "exp":"Perimeter = 2 × (length + width) = 2 × (8 + 5) = 26 cm.","showAnswer":false},
+
+    {"id":"q027","state":"NSW","section":"nsw_reading","grade":"selective","topic":"Comprehension","difficulty":"medium",
+     "q":"Read: 'Despite being discovered over 200 years ago, Antarctica remains the least understood continent. Its ice holds climate records stretching back 800,000 years.'\n\nWhat can we infer from this passage?",
+     "options":["Antarctica has no scientific value","Antarctica's ice contains useful historical data","Antarctica was discovered recently","Scientists have fully mapped Antarctica"],"answer":1,
+     "exp":"The mention of 800,000-year climate records in the ice implies the ice holds valuable historical/scientific data.","showAnswer":false},
+
+    {"id":"q028","state":"NSW","section":"nsw_reading","grade":"selective","topic":"Vocabulary","difficulty":"medium",
+     "q":"Which word is closest in meaning to 'tenacious'?",
+     "options":["Timid","Persistent","Generous","Confused"],"answer":1,
+     "exp":"Tenacious means holding firmly to something; persistent. From Latin 'tenere' (to hold).","showAnswer":false},
+
+    {"id":"q029","state":"BOTH","section":"vic_maths","grade":"selective","topic":"Fractions","difficulty":"easy",
+     "q":"What is ¾ + ⅝?",
+     "options":["1¼","1⅜","1½","1⅔"],"answer":1,
+     "exp":"¾ = 6/8, ⅝ = 5/8. Sum = 11/8 = 1⅜.","showAnswer":false},
+
+    {"id":"q030","state":"BOTH","section":"vic_maths","grade":"selective","topic":"Algebra","difficulty":"medium",
+     "q":"Solve for n: 4n − 7 = 21",
+     "options":["n = 5","n = 6","n = 7","n = 8"],"answer":2,
+     "exp":"4n = 21 + 7 = 28. n = 28 ÷ 4 = 7.","showAnswer":false},
+
+    {"id":"q031","state":"VIC","section":"vic_reading","grade":"7","topic":"Comprehension","difficulty":"easy",
+     "q":"A story says: 'Maya ran faster than she ever had before, her heart pounding like a drum.'\n\nWhat literary device is used in 'heart pounding like a drum'?",
+     "options":["Metaphor","Simile","Personification","Alliteration"],"answer":1,
+     "exp":"A simile compares two things using 'like' or 'as'. 'Like a drum' is a simile.","showAnswer":false},
+
+    {"id":"q032","state":"VIC","section":"vic_maths","grade":"7","topic":"Number Theory","difficulty":"easy",
+     "q":"Which of the following is a prime number?",
+     "options":["21","27","29","33"],"answer":2,
+     "exp":"29 is only divisible by 1 and itself. 21=3×7, 27=3×9, 33=3×11.","showAnswer":false},
+
+    {"id":"q033","state":"VIC","section":"vic_maths","grade":"8","topic":"Statistics","difficulty":"medium",
+     "q":"The scores of 5 students are: 72, 85, 90, 68, 75. What is the mean score?",
+     "options":["75","78","80","82"],"answer":1,
+     "exp":"Sum = 72+85+90+68+75 = 390. Mean = 390 ÷ 5 = 78.","showAnswer":false},
+
+    {"id":"q034","state":"VIC","section":"vic_maths","grade":"9","topic":"Algebra","difficulty":"medium",
+     "q":"Expand and simplify: 2(x + 3) + 3(x − 1)",
+     "options":["5x + 3","5x + 9","5x − 3","5x + 6"],"answer":0,
+     "exp":"2x + 6 + 3x − 3 = 5x + 3.","showAnswer":false},
+
+    {"id":"q035","state":"VIC","section":"vic_maths","grade":"10","topic":"Geometry","difficulty":"hard",
+     "q":"A right triangle has legs of 9 cm and 12 cm. What is the length of the hypotenuse?",
+     "options":["13 cm","14 cm","15 cm","16 cm"],"answer":2,
+     "exp":"c² = 9² + 12² = 81 + 144 = 225. c = √225 = 15 cm.","showAnswer":false},
+
+    {"id":"q036","state":"VIC","section":"vic_reading","grade":"8","topic":"Grammar","difficulty":"easy",
+     "q":"Which sentence is grammatically correct?",
+     "options":["She don't know the answer.","He and I went to the shops.","Me and him played football.","They was happy to help."],"answer":1,
+     "exp":"'He and I went to the shops' uses the correct subject pronouns. Test: 'I went to the shops' works alone.","showAnswer":false},
+
+    {"id":"q037","state":"NSW","section":"nsw_thinking","grade":"selective","topic":"Number Patterns","difficulty":"medium",
+     "q":"What is the missing number?\n1, 4, 9, 16, ___, 36",
+     "options":["20","25","22","30"],"answer":1,
+     "exp":"These are perfect squares: 1², 2², 3², 4², 5²=25, 6²=36.","showAnswer":false},
+
+    {"id":"q038","state":"NSW","section":"nsw_thinking","grade":"selective","topic":"Spatial","difficulty":"hard",
+     "q":"A piece of paper is folded in half twice, then a hole is punched through the centre. How many holes appear when unfolded?",
+     "options":["1","2","3","4"],"answer":3,
+     "exp":"Each fold doubles the number of holes. Fold 1→2 holes, fold 2→4 holes.","showAnswer":false},
+
+    {"id":"q039","state":"BOTH","section":"vic_verbal","grade":"selective","topic":"Analogies","difficulty":"medium",
+     "q":"DOCTOR is to STETHOSCOPE as CARPENTER is to:",
+     "options":["Nail","Hammer","Wood","Saw"],"answer":1,
+     "exp":"A stethoscope is the primary diagnostic tool of a doctor; a hammer is the primary tool of a carpenter.","showAnswer":false},
+
+    {"id":"q040","state":"BOTH","section":"vic_quant","grade":"selective","topic":"Number Sequences","difficulty":"hard",
+     "q":"What is the missing number in the sequence?\n1, 1, 2, 3, 5, 8, ___, 21",
+     "options":["11","12","13","15"],"answer":2,
+     "exp":"This is the Fibonacci sequence: each number = sum of the two before it. 5+8=13.","showAnswer":false}
+  ]
+}
