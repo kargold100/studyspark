@@ -9,9 +9,9 @@ const STL = {acer:'ACER',hendersons:'Hendersons',psle:'PSLE',contour:'Contour',j
 const NAV_ITEMS = [
   {id:'home',l:'🏠 Home'},{id:'browse',l:'📋 Questions'},
   {id:'practice',l:'✏️ Practice'},{id:'exams',l:'📝 Exams'},
-  {id:'selective',l:'🏆 Selective'},{id:'study',l:'📚 Study'},
-  {id:'tutor',l:'🤖 Tutor'},{id:'funzone',l:'🎮 Fun Zone'},
-  {id:'profile',l:'👤 Profile'},
+  {id:'selective',l:'🏆 Selective'},{id:'tips',l:'💡 Tips'},
+  {id:'study',l:'📚 Study'},{id:'tutor',l:'🤖 Tutor'},
+  {id:'funzone',l:'🎮 Fun Zone'},{id:'profile',l:'👤 Profile'},
 ];
 
 const EXAM_DEFS = [
@@ -121,7 +121,7 @@ const App={home:()=>nav('home')};
 function render(){
   const el=document.getElementById('app');
   if(!currentUser&&screen!=='profile'){el.innerHTML=renderProfilePicker();return;}
-  const R={home:renderHome,browse:renderBrowse,practice:renderPractice,exams:renderExams,examrun:renderExamRun,selective:renderSelective,study:renderStudy,tutor:renderTutor,funzone:renderFunZone,profile:renderProfile};
+  const R={home:renderHome,browse:renderBrowse,practice:renderPractice,exams:renderExams,examrun:renderExamRun,selective:renderSelective,tips:renderTips,study:renderStudy,tutor:renderTutor,funzone:renderFunZone,profile:renderProfile};
   el.innerHTML=(R[screen]||renderHome)();
 }
 
@@ -491,8 +491,14 @@ function renderSelective(){
         <button class="btn bsm" style="background:var(--accent);color:#fff;min-width:80px">${isW?'✍️ Write':'▶ Practice'}</button>
       </div>`;}).join('')}</div>
     ${selSec?renderSelPanel():''}
-    <div class="g2"><div class="card"><strong style="color:var(--red)">❌ NOT tested</strong><p class="mt sm" style="margin-top:5px">Memorised facts, curriculum content, prior subject knowledge.</p></div>
+    <div class="g2 mb20"><div class="card"><strong style="color:var(--red)">❌ NOT tested</strong><p class="mt sm" style="margin-top:5px">Memorised facts, curriculum content, prior subject knowledge.</p></div>
     <div class="card" style="border-color:rgba(79,142,247,.3)"><strong style="color:var(--accent)">✅ What IS tested</strong><p class="mt sm" style="margin-top:5px">HOW you reason — inference, patterns, problem-solving, argument quality, writing.</p></div></div>
+    <div class="card" style="border-color:rgba(79,216,247,.3);padding:20px">
+      <h3 class="mb12">💡 Section-by-section tips</h3>
+      <div class="fc gap8 wrap">
+        ${[['reading','📖 Reading Tips'],['maths','🔢 Maths Tips'],['verbal','🧠 Verbal Tips'],['quant','📐 Quant Tips'],['writing','✍️ Writing Tips'],['examday','⏱️ Exam Day']].map(([id,lbl])=>`<button class="btn bm bsm" onclick="tipPage='${id}';nav('tips')">${lbl}</button>`).join('')}
+      </div>
+    </div>
   </div>`;
 }
 function renderSelPanel(){
@@ -726,10 +732,188 @@ function renderHome(){
 
     ${weakSpots.length?`<div class="card mb24" style="border-color:rgba(247,79,79,.3)"><h3 style="color:var(--red);margin-bottom:10px">⚠️ Your Weak Spots — Practise to Level Up!</h3><div class="fc gap8 wrap">${weakSpots.map(t=>`<button class="btn bm bsm" onclick="startPractice({topic:'${t.topic}'},'oneByOne',8)">${t.topic} — ${t.pct}% · Fix it ✏️</button>`).join('')}</div></div>`:''}
 
+    <!-- Tips & techniques callout -->
+    <div class="card mb24" style="border-color:rgba(79,216,247,.35);background:linear-gradient(135deg,rgba(79,216,247,.05),transparent);padding:22px">
+      <div class="fc gap12 mb14 wrap">
+        <span style="font-size:36px">💡</span>
+        <div>
+          <h2 style="margin-bottom:4px">Tips & Techniques</h2>
+          <p class="mt sm">Written for you — not your parents. Real strategies that work for every section.</p>
+        </div>
+      </div>
+      <div class="g4">
+        ${['mindset','reading','maths','verbal','quant','writing','examday','habits'].map(id => {
+          const c = TIPS_DATA.overview.find(x=>x.id===id);
+          if (!c) return '';
+          return `<div class="card hov" style="border-color:${c.color}33;padding:12px;text-align:center;cursor:pointer" onclick="tipPage='${id}';nav('tips')">
+            <div style="font-size:22px;margin-bottom:5px">${c.emoji}</div>
+            <div style="font-size:12px;font-weight:700;line-height:1.4">${c.title}</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <button class="btn bt bsm mt14" onclick="tipPage=null;nav('tips')">View All Tips & Guides →</button>
+    </div>
+
     <h2 class="mb14">Practice by Provider Style</h2>
     <div class="g3 mb20">${PROVIDERS.map(p=>`<div class="card hov" style="border-color:${p.c}44" onclick="startPractice({style:'${p.s}'},'oneByOne',10)"><div style="font-size:22px;margin-bottom:6px">${p.e}</div><div style="font-weight:800;margin-bottom:3px">${p.l}</div><div class="mt xs mb10">${filterQs({style:p.s}).length} questions</div><button class="btn bsm" style="background:${p.c};color:${p.c.includes('yellow')?'#1a1200':'#fff'};font-size:11px">Practice</button></div>`).join('')}</div>
 
     <div class="g2"><div class="card"><strong style="color:var(--red)">❌ NOT tested in selective</strong><p class="mt sm" style="margin-top:5px">Memorised facts, curriculum content, prior subject knowledge.</p></div><div class="card" style="border-color:rgba(79,142,247,.3)"><strong style="color:var(--accent)">✅ What IS tested</strong><p class="mt sm" style="margin-top:5px">HOW you reason — patterns, inference, problem-solving, argument quality, writing.</p></div></div>
+  </div>`;
+}
+
+// ── TIPS & TECHNIQUES ────────────────────────────────────────────────────────
+let tipPage = null; // null = overview, string = page id
+
+function renderTips() {
+  if (tipPage && TIPS_DATA.pages[tipPage]) return renderTipPage(tipPage);
+  return renderTipsOverview();
+}
+
+function renderTipsOverview() {
+  const cards = TIPS_DATA.overview;
+  return `<div class="page">
+    ${profileBar()}
+    <div class="hero" style="background:linear-gradient(135deg,#0d1a18,#0d0f1a);border-color:rgba(79,216,247,.25)">
+      <div class="mb8"><span class="tag tt">💡 TIPS & TECHNIQUES · SELECTIVE EXAM PREP</span></div>
+      <h1>Study Smarter, <span class="grad">Not Harder</span></h1>
+      <p class="mt sm" style="max-width:540px;margin:10px 0 0;line-height:1.75">
+        Everything you need to know about how to prepare — written for you, not your parents.
+        Click any topic to read the full guide with worked examples and tricks.
+      </p>
+    </div>
+
+    <div class="g2 mb24" style="margin-top:22px">
+      ${cards.map(c => `
+        <div class="card hov" style="border-color:${c.color}44;cursor:pointer" onclick="tipPage='${c.id}';render()">
+          <div class="fc gap12 mb8">
+            <span style="font-size:32px">${c.emoji}</span>
+            <div>
+              <h3 style="margin-bottom:4px">${c.title}</h3>
+              <div class="xs mt" style="font-style:italic;line-height:1.5">"${c.tagline}"</div>
+            </div>
+          </div>
+          <p class="sm mt" style="line-height:1.6">${c.preview}</p>
+          <button class="btn bsm mt14" style="background:${c.color};color:${c.color.includes('yellow')?'#1a1200':'#fff'}">Read Guide →</button>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="card" style="border-color:rgba(79,216,247,.3);padding:22px">
+      <div class="fc gap12 mb14">
+        <span style="font-size:28px">🎯</span>
+        <div><h3>How to use these tips</h3><p class="mt sm" style="margin-top:4px">Read a guide, then immediately try questions in that area. Tips without practice don't stick.</p></div>
+      </div>
+      <div class="fc gap8 wrap">
+        <button class="btn ba bsm" onclick="startPractice({},'oneByOne',10)">✏️ Practice Now</button>
+        <button class="btn bm bsm" onclick="nav('selective')">🏆 Selective Prep</button>
+        <button class="btn bm bsm" onclick="nav('exams')">📝 Mock Exam</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderTipPage(id) {
+  const page = TIPS_DATA.pages[id];
+  const overview = TIPS_DATA.overview.find(c => c.id === id);
+  if (!page) return renderTipsOverview();
+
+  // Related practice suggestions per section
+  const practiceMap = {
+    reading: {section:'vic_reading', label:'Reading Questions'},
+    maths:   {section:'vic_maths',   label:'Maths Questions'},
+    verbal:  {section:'vic_verbal',  label:'Verbal Reasoning'},
+    quant:   {section:'vic_quant',   label:'Quantitative Questions'},
+    writing: {section:'vic_writing', label:'Writing Practice'},
+    examday: null,
+    habits:  null,
+    mindset: null,
+  };
+  const practice = practiceMap[id];
+
+  return `<div class="page">
+    <button class="btn bm bsm mb20" onclick="tipPage=null;render()">← All Tips</button>
+
+    <div style="background:${page.color}11;border:2px solid ${page.color}33;border-radius:var(--r);padding:26px 28px;margin-bottom:24px">
+      <div class="fc gap12 mb12">
+        <span style="font-size:40px">${page.emoji}</span>
+        <div>
+          <h1 style="margin-bottom:4px">${page.title}</h1>
+          ${overview ? `<div class="sm" style="color:${page.color};font-style:italic">"${overview.tagline}"</div>` : ''}
+        </div>
+      </div>
+      <p class="sm" style="line-height:1.8;max-width:640px">${page.intro}</p>
+    </div>
+
+    ${page.sections.map((sec, i) => `
+      <div class="card mb14" style="padding:22px 24px">
+        <h2 style="margin-bottom:16px;font-size:16px">${sec.heading}</h2>
+        <div class="sm" style="line-height:1.95;white-space:pre-line;color:var(--text)">${sec.content}</div>
+        ${sec.tip ? `<div style="margin-top:16px;padding:12px 16px;background:rgba(247,200,79,.07);border-left:3px solid var(--yellow);border-radius:0 8px 8px 0;font-size:13px;line-height:1.7;color:var(--text)">${sec.tip}</div>` : ''}
+      </div>
+    `).join('')}
+
+    <!-- Quick summary box -->
+    <div class="card mb20" style="border-color:${page.color}44;padding:20px">
+      <h3 class="mb12">⚡ Quick Summary — ${page.title}</h3>
+      <ul class="sm" style="padding-left:18px;line-height:2.1;color:var(--text)">
+        ${page.sections.map(s => {
+          // Extract the key tip from each section's tip field
+          const tipText = s.tip ? s.tip.replace('💡 Tip: ','') : s.heading.replace(/^[^\s]+ /,'');
+          return `<li>${tipText}</li>`;
+        }).join('')}
+      </ul>
+    </div>
+
+    <!-- Navigation between pages -->
+    <div class="g2 mb20">
+      <div>
+        ${(() => {
+          const ids = TIPS_DATA.overview.map(c=>c.id);
+          const idx = ids.indexOf(id);
+          if (idx > 0) {
+            const prev = TIPS_DATA.overview[idx-1];
+            return `<div class="card hov" onclick="tipPage='${prev.id}';render();window.scrollTo(0,0)">
+              <div class="xs mt mb4">← Previous</div>
+              <div style="font-weight:700">${prev.emoji} ${prev.title}</div>
+            </div>`;
+          }
+          return '<div></div>';
+        })()}
+      </div>
+      <div>
+        ${(() => {
+          const ids = TIPS_DATA.overview.map(c=>c.id);
+          const idx = ids.indexOf(id);
+          if (idx < ids.length - 1) {
+            const next = TIPS_DATA.overview[idx+1];
+            return `<div class="card hov" style="text-align:right" onclick="tipPage='${next.id}';render();window.scrollTo(0,0)">
+              <div class="xs mt mb4">Next →</div>
+              <div style="font-weight:700">${next.emoji} ${next.title}</div>
+            </div>`;
+          }
+          return '<div></div>';
+        })()}
+      </div>
+    </div>
+
+    <!-- Practice CTA -->
+    ${practice ? `<div class="card" style="border-color:rgba(79,142,247,.3);padding:22px;text-align:center">
+      <div style="font-size:32px;margin-bottom:8px">✏️</div>
+      <h3>Put it into practice</h3>
+      <p class="mt sm mt14 mb14">Reading about techniques only gets you so far — practise them now while they're fresh.</p>
+      <div class="fc gap8 wrap" style="justify-content:center">
+        <button class="btn ba" onclick="startPractice({section:'${practice.section}'},'oneByOne',10)">Practice ${practice.label} →</button>
+        <button class="btn bm" onclick="nav('exams')">📝 Try a Timed Exam</button>
+      </div>
+    </div>` : `<div class="card" style="border-color:rgba(79,142,247,.3);padding:22px;text-align:center">
+      <div style="font-size:32px;margin-bottom:8px">🚀</div>
+      <h3>Ready to apply these strategies?</h3>
+      <div class="fc gap8 wrap mt14" style="justify-content:center">
+        <button class="btn ba" onclick="startPractice({},'oneByOne',12)">✏️ Start Practising</button>
+        <button class="btn bm" onclick="nav('exams')">📝 Mock Exam</button>
+        <button class="btn bm" onclick="tipPage=null;render()">← More Tips</button>
+      </div>
+    </div>`}
   </div>`;
 }
 
