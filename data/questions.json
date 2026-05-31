@@ -58,7 +58,7 @@
         "10"
       ],
       "answer": 2,
-      "exp": "Add both equations: 2x = 18, so x = 9. Check: 9 + 5 = 14 ✓",
+      "exp": "Step 1: From 3a+2b=12 and 3a−b=6, subtract equation 2 from 1:\n3b=6 → b=2\nStep 2: Substitute b=2 into eq 2: 3a−2=6 → 3a=8 → a=8/3\nAlways substitute back to verify.",
       "hint": "Try adding the two equations together to eliminate y."
     },
     {
@@ -96,7 +96,7 @@
         "44 cm²"
       ],
       "answer": 1,
-      "exp": "Area = π × r² = 3.14 × 7² = 3.14 × 49 = 153.86 cm²",
+      "exp": "The angle in a semicircle (angle subtended by a diameter) is ALWAYS 90°.\nThis is Thales' Theorem — one of the oldest geometry theorems.\n💡 If you see a triangle inscribed in a semicircle with the diameter as one side, the angle opposite the diameter = 90°.",
       "hint": "Area of circle = π × r². Remember to square the radius, not the diameter."
     },
     {
@@ -172,7 +172,7 @@
         "n = 8"
       ],
       "answer": 2,
-      "exp": "4n = 21 + 7 = 28\nn = 28 ÷ 4 = 7",
+      "exp": "2x − 5 < 9\nAdd 5 both sides: 2x < 14\nDivide by 2: x < 7\n💡 With inequalities, the only rule change is: if you MULTIPLY or DIVIDE by a negative number, you FLIP the inequality sign.",
       "hint": "Get n by itself — add 7 to both sides first."
     },
     {
@@ -191,7 +191,7 @@
         "82"
       ],
       "answer": 1,
-      "exp": "Sum = 72 + 85 + 90 + 68 + 75 = 390\nMean = 390 ÷ 5 = 78",
+      "exp": "Mean = sum ÷ count = (12+15+18+20+25) ÷ 5 = 90 ÷ 5 = 18\nMedian = middle value when ordered: 12,15,18,20,25 → middle = 18\nHere mean = median = 18 (they're equal in this dataset).",
       "hint": "Add all scores, then divide by how many there are."
     },
     {
@@ -400,7 +400,7 @@
         "2"
       ],
       "answer": 0,
-      "exp": "29 → 2+9=11. Next would be 11.",
+      "exp": "Pattern: add 1, then 2, then 3, then 4, then 5...\nDifferences: 3,6,11,18... — wait, differences are: +3,+5,+7,+9 (odd numbers)\n3+5+7+9 shows the differences, so 18+next odd = 18+11=29.",
       "hint": "Add the individual digits of 29."
     },
     {
@@ -818,7 +818,7 @@
         "30"
       ],
       "answer": 1,
-      "exp": "These are perfect squares: 1², 2², 3², 4², 5², 6²\n5² = 25",
+      "exp": "The differences are: 4, 8, 16, 32 (each doubling)\nSo next difference = 64\n29 + 32 = 61 ✓\nThis is a second-order sequence — the differences themselves follow a geometric pattern.",
       "hint": "What pattern do 1, 4, 9, 16 share?"
     },
     {
@@ -875,7 +875,7 @@
         "$55"
       ],
       "answer": 1,
-      "exp": "$45 = 90% of original price.\nOriginal = $45 ÷ 0.9 = $50",
+      "exp": "Original price → ×1.25 (25% increase) → ×0.90 (10% decrease off marked price)\n= 100 × 1.25 × 0.90 = 100 × 1.125 = 112.50\nProfit = $12.50 on $100 cost = 12.5%\n💡 Apply multipliers in sequence, don't try to add/subtract percentages.",
       "hint": "If $45 is 90%, find what 100% is."
     },
     {
@@ -1008,7 +1008,7 @@
         "1⅔"
       ],
       "answer": 1,
-      "exp": "¾ = 6/8, ⅝ = 5/8\n6/8 + 5/8 = 11/8 = 1⅜",
+      "exp": "3/8 of 200 = (200 ÷ 8) × 3 = 25 × 3 = 75\nAlways find the unit fraction first (÷ denominator), then multiply by numerator.",
       "hint": "Convert to a common denominator (eighths)."
     },
     {
@@ -1065,7 +1065,7 @@
         "4"
       ],
       "answer": 1,
-      "exp": "In y = mx + b, m is the gradient.\nHere m = 3.",
+      "exp": "3(2x − 1) = 2(x + 5)\n6x − 3 = 2x + 10\n4x = 13\nx = 3.25\n💡 Always expand brackets fully before collecting like terms.",
       "hint": "The equation is in y = mx + b form. What is the coefficient of x?"
     },
     {
@@ -1141,7 +1141,7 @@
         "260 cm³"
       ],
       "answer": 2,
-      "exp": "Volume = length × width × height = 10 × 6 × 4 = 240 cm³",
+      "exp": "Volume of cylinder = π × r² × h\n= 3.14 × 4² × 10\n= 3.14 × 16 × 10\n= 502.4 cm³\n💡 Don't forget to square the radius, not the diameter.",
       "hint": "Volume of a rectangular box = l × w × h."
     },
     {
@@ -5264,7 +5264,7 @@
         "10"
       ],
       "answer": 2,
-      "exp": "3x+7=4x−2 → 9=x",
+      "exp": "3x + 7 = 4x − 2\nStep 1: Move x terms left → 3x − 4x = −2 − 7\nStep 2: −x = −9 → x = 9\n✓ Check: 3(9)+7 = 34 and 4(9)−2 = 34 ✓",
       "hint": "Move x to one side, numbers to other."
     },
     {
@@ -5302,7 +5302,7 @@
         "x=1 or x=12"
       ],
       "answer": 0,
-      "exp": "(x−3)(x−4)=0 → x=3 or x=4",
+      "exp": "To factorise x² − 7x + 12, find two numbers that:\n  • Multiply to give +12\n  • Add to give −7\nThose numbers are −3 and −4\n∴ (x − 3)(x − 4) = 0 → x = 3 or x = 4\n✓ Check: 3×4=12 ✓, 3+4=7 ✓",
       "hint": "Find two numbers multiplying to 12 and adding to 7."
     },
     {
@@ -5321,7 +5321,7 @@
         "27"
       ],
       "answer": 1,
-      "exp": "(x+1/x)²=x²+2+1/x²=25 → x²+1/x²=23",
+      "exp": "Key identity: (x + 1/x)² = x² + 2(x)(1/x) + 1/x² = x² + 2 + 1/x²\nSo x² + 1/x² = (x + 1/x)² − 2 = 5² − 2 = 25 − 2 = 23\n💡 This is a standard identity worth memorising.",
       "hint": "Square both sides: (x+1/x)²=x²+2+1/x²."
     },
     {
@@ -5378,7 +5378,7 @@
         "20"
       ],
       "answer": 1,
-      "exp": "(a+b)²=a²+2ab+b² → 49=29+2ab → ab=10",
+      "exp": "We need p² + q².\nUse the identity: (p+q)² = p² + 2pq + q²\nRearrange: p² + q² = (p+q)² − 2pq = 7² − 2(10) = 49 − 20 = 29\n\nWait — check: p+q=7 and pq=21? Let's verify: p²+q²=(p+q)²−2pq = 49−42 = 7? Hmm, that gives 7 not a listed option.\nActually with p+q=7, pq=10: p²+q²=49−20=29 ✓",
       "hint": "Use the identity (a+b)²=a²+2ab+b²."
     },
     {
@@ -5416,7 +5416,7 @@
         "7 cm"
       ],
       "answer": 1,
-      "exp": "C=2πr → r=31.4÷6.28=5 cm",
+      "exp": "C = 2πr\nRearrange for r: r = C ÷ (2π) = 31.4 ÷ (2 × 3.14) = 31.4 ÷ 6.28 = 5 cm\n💡 Remember the two circle formulas: C = 2πr (circumference) and A = πr² (area).",
       "hint": "Circumference=2πr. Rearrange to find r."
     },
     {
@@ -5473,7 +5473,7 @@
         "8 cm"
       ],
       "answer": 2,
-      "exp": "Width=84÷12=7 cm",
+      "exp": "Total surface area of a cone = πr² (base) + πrl (curved side) = πr(r + l)\n= 3.14 × 3 × (3 + 5)\n= 3.14 × 3 × 8\n= 3.14 × 24\n= 75.36 cm²\n💡 Slant height (l) is the distance along the side, not the vertical height.",
       "hint": "Area=l×w. Rearrange to find width."
     },
     {
@@ -5511,7 +5511,7 @@
         "100 cm²"
       ],
       "answer": 1,
-      "exp": "Area=d²/2=100/2=50 cm²",
+      "exp": "The diagonal of a square splits it into two right-angled triangles.\nIf diagonal = d, then by Pythagoras: s² + s² = d² → 2s² = d²\nArea = s² = d²/2 = 10²/2 = 100/2 = 50 cm²\n💡 This shortcut — area = d²/2 — works for ALL squares.",
       "hint": "Area of square = d²/2 where d is the diagonal."
     },
     {
@@ -5568,7 +5568,7 @@
         "225 cm²"
       ],
       "answer": 1,
-      "exp": "Area ratio = (3:5)² = 9:25\n27×(25/9)=75 cm²",
+      "exp": "For similar figures, the ratio of areas = (ratio of sides)²\nSide ratio = 3:5, so area ratio = 3²:5² = 9:25\nIf smaller area = 27 cm²:\n27/9 = 3 (one part)\nLarger area = 3 × 25 = 75 cm²",
       "hint": "Area ratio = square of side ratio."
     },
     {
@@ -5644,7 +5644,7 @@
         "28"
       ],
       "answer": 2,
-      "exp": "360=2³×3²×5 → factors=(3+1)(2+1)(1+1)=24",
+      "exp": "360 = 2³ × 3² × 5¹\nRule: if n = p^a × q^b × r^c then number of factors = (a+1)(b+1)(c+1)\n= (3+1)(2+1)(1+1) = 4 × 3 × 2 = 24\n\nYou can verify: 1,2,3,4,5,6,8,9,10,12,15,18,20,24,30,36,40,45,60,72,90,120,180,360 = 24 factors ✓",
       "hint": "If n=p^a×q^b, factors=(a+1)(b+1)."
     },
     {
@@ -5834,7 +5834,7 @@
         "1/4"
       ],
       "answer": 0,
-      "exp": "Pairs summing to 7: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1)=6/36=1/6",
+      "exp": "Sample space: all pairs (die1, die2) = 6×6 = 36 total outcomes\nPairs that sum to 7: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) = 6 pairs\nP(sum=7) = 6/36 = 1/6\n💡 Sum of 7 is the MOST common result when rolling two dice.",
       "hint": "List pairs summing to 7, divide by 36 total outcomes."
     },
     {
@@ -5853,7 +5853,7 @@
         "13"
       ],
       "answer": 2,
-      "exp": "Total=90, New total=60, New mean=60÷5=12",
+      "exp": "Using inclusion-exclusion:\nP(prime OR even) = P(prime) + P(even) − P(prime AND even)\nPrimes 1–10: 2,3,5,7 → 4/10\nEvens 1–10: 2,4,6,8,10 → 5/10\nBoth prime AND even: only 2 → 1/10\nAnswer: 4/10 + 5/10 − 1/10 = 8/10 = 4/5",
       "hint": "Total=mean×count. Remove number, divide by new count."
     },
     {
@@ -5929,7 +5929,7 @@
         "21 hours"
       ],
       "answer": 2,
-      "exp": "Net rate=1/6−1/9=1/18 per hour → 18 hours",
+      "exp": "Fill rate = 1 pool per 6 hours = 1/6 per hour\nDrain rate = 1 pool per 9 hours = 1/9 per hour\nNet fill rate = 1/6 − 1/9\nFind common denominator: = 3/18 − 2/18 = 1/18 per hour\nTime to fill = 18 hours\n💡 Always subtract the drain rate from the fill rate.",
       "hint": "Net fill rate = fill rate minus drain rate."
     },
     {
@@ -5986,7 +5986,7 @@
         "250000 m"
       ],
       "answer": 1,
-      "exp": "1 km=1000 m, 2.5 km=2500 m",
+      "exp": "Relative speed = 60 + 80 = 140 km/h (opposite directions, so add)\nConvert to m/s: 140 × 1000 ÷ 3600 = 38.89 m/s\nTotal distance to cover = 200 + 300 = 500 m\nTime = 500 ÷ 38.89 ≈ 12.86 s ≈ 13 seconds\n💡 Key insight: both trains must fully pass — so use the SUM of their lengths.",
       "hint": "Multiply by 1000 to convert km to m."
     },
     {
@@ -6119,7 +6119,7 @@
         "Gradual"
       ],
       "answer": 1,
-      "exp": "Chronic↔Acute are opposites. Permanent↔Temporary are opposites.",
+      "exp": "CHRONIC (long-lasting, ongoing) and ACUTE (brief, sudden) are medical opposites.\nPERMANENT (lasting forever) and TEMPORARY (lasting only a short time) are the same type of opposition.\nBoth pairs contrast duration.\n💡 CHRONIC conditions (like diabetes) last long-term; ACUTE conditions (like a broken arm) are intense but short.",
       "hint": "Chronic and acute are medical opposites. Find the opposite of permanent."
     },
     {
@@ -6176,7 +6176,7 @@
         "Some"
       ],
       "answer": 1,
-      "exp": "Oligarchy=rule by few. Democracy=rule by many.",
+      "exp": "OLIGARCHY: 'oligos' (Greek) = few + 'arche' = rule → rule by a few\nDEMOCRACY: 'demos' (Greek) = people + 'kratos' = power → rule by the many (people)\nThe relationship: type of rule → by how many\n💡 Other -archy words: monarchy (mono=one), anarchy (an=without)",
       "hint": "Oligo=few, demos=people/many in Greek."
     },
     {
@@ -6385,7 +6385,7 @@
         "Unusually talented"
       ],
       "answer": 1,
-      "exp": "Recalcitrant=obstinate resistance to authority. From Latin recalcitrare (to kick back).",
+      "exp": "Re·cal·ci·trant = stubbornly resistant to authority or control.\nFrom Latin: re (back) + calcitrare (to kick) — literally 'to kick back'.\nExample: 'The recalcitrant student refused to sit down despite three warnings.'\nSynonyms: defiant, obstinate, unruly, unmanageable",
       "hint": "Someone who refuses to follow rules no matter what."
     },
     {
@@ -6404,7 +6404,7 @@
         "Unnecessarily harsh"
       ],
       "answer": 1,
-      "exp": "Perfidious=guilty of betrayal; deceitfully faithless. From Latin perfidia.",
+      "exp": "Per·fid·i·ous = guilty of betrayal; deceitfully faithless.\nFrom Latin: perfidia (faithlessness) = per (through/against) + fides (faith/trust)\nExample: 'The perfidious advisor leaked the king's secrets to his enemies.'\nRelated word: 'perfidy' (the noun) = an act of betrayal",
       "hint": "Perfidy means betrayal. What does perfidious describe?"
     },
     {
@@ -6423,7 +6423,7 @@
         "Stubbornly proud"
       ],
       "answer": 1,
-      "exp": "Pusillanimous=lacking courage. From Latin pusillus (tiny)+animus (spirit).",
+      "exp": "Pu·sil·lan·i·mous = lacking courage; timid.\nFrom Latin: pusillus (very small) + animus (spirit, courage)\nLiterally: 'small-spirited'\nExample: 'The pusillanimous leader backed down at the first sign of resistance.'\nOpposite: magnanimous (great-spirited), courageous, valiant",
       "hint": "Tiny spirit → what does that suggest?"
     },
     {
@@ -6480,7 +6480,7 @@
         "pleasant"
       ],
       "answer": 1,
-      "exp": "'Despite' signals contrast: bad weather + pressing on. 'Treacherous' (dangerous) fits.",
+      "exp": "'Despite' signals a CONTRAST — what follows should be the opposite of what you'd expect.\nThe hikers press on despite difficulty → the weather should be NEGATIVE.\n'Treacherous' (extremely dangerous) creates the strongest contrast.\n💡 Signal words: despite/although/but/however → expect contrast; therefore/because/so → expect consequence.",
       "hint": "'Despite' means 'even though' — the weather should be negative."
     },
     {
@@ -6518,7 +6518,7 @@
         "aggressive"
       ],
       "answer": 2,
-      "exp": "Nuanced=carefully balanced. Evasive wouldn't convey position. Blunt would cause confrontation.",
+      "exp": "A 'nuanced' response means carefully balanced, considering multiple perspectives.\nThe key clues:\n• 'avoided direct confrontation' → not blunt or aggressive\n• 'while still conveying the position' → not evasive (evasive would avoid saying anything)\nOnly 'nuanced' satisfies both conditions simultaneously.",
       "hint": "Which word means thoughtfully balanced?"
     },
     {
@@ -6727,7 +6727,7 @@
         "MLLO"
       ],
       "answer": 0,
-      "exp": "G=T(7th→20th), O=L(15th→12th), O=L, D=W(4th→23rd) → TLLW",
+      "exp": "Reverse alphabet: A=Z, B=Y, C=X... so to decode, reverse again.\nZ=A (1st from end), O=L (15th letter, reversed = 26−15+1 = 12th = L), O=L\nZOO → A, L, L → ALL\n💡 Quick trick: position from end = 27 − position from start.\nO is 15th from start → 27−15 = 12th = L",
       "hint": "In reverse alphabet: A=Z, B=Y, ... Z=A. Find position from end."
     },
     {
@@ -6784,7 +6784,7 @@
         "Invalid — guitars vary"
       ],
       "answer": 1,
-      "exp": "Strings are necessary but not sufficient for guitar. Violin also has strings.",
+      "exp": "This is the logical fallacy of 'affirming the consequent'.\nValid form: 'All guitars have strings. This IS a guitar. Therefore it has strings.' ✓\nInvalid form: 'All guitars have strings. This has strings. Therefore it's a guitar.' ✗\nCounterexample: violins, cellos, harps, pianos all have strings but aren't guitars.",
       "hint": "Having strings guarantees it's a guitar?"
     },
     {
@@ -6879,7 +6879,7 @@
         "Yes if puddles"
       ],
       "answer": 1,
-      "exp": "'Rain→wet' does NOT mean 'wet→rain'. Fallacy: affirming the consequent.",
+      "exp": "This is VALID deductive reasoning (modus ponens):\nPremise 1: All passers didn't cheat (P → ¬C)\nPremise 2: Sam passed (P)\nConclusion: Sam didn't cheat (¬C)\n✓ The logic is airtight — there's no way Sam could have cheated if the premise is true.",
       "hint": "Does 'if A then B' mean 'if B then A'?"
     },
     {
@@ -6898,7 +6898,7 @@
         "ETA"
       ],
       "answer": 0,
-      "exp": "1=E, 3=A, 2=T → EAT",
+      "exp": "This commits the fallacy of 'affirming the consequent':\nWe know: Rain → Wet ground\nWe see: Wet ground\nWe CANNOT conclude: It rained\nWhy? The ground could be wet from: sprinklers, flooding, a spilled pipe, dew, a hose.\n💡 'If A then B' does NOT mean 'if B then A'. B can have many other causes.",
       "hint": "Substitute each number for its letter."
     },
     {
@@ -6917,7 +6917,7 @@
         "16"
       ],
       "answer": 2,
-      "exp": "4,9,16,25,36 are perfect squares. 47 is not (√47≈6.86).",
+      "exp": "4, 9, 16, 25, 36 are perfect squares: 2²=4, 3²=9, 4²=16, 5²=25, 6²=36\n47 is NOT a perfect square: √47 ≈ 6.86 (not a whole number)\nTo check: 6²=36, 7²=49 — so 47 falls between squares → not a perfect square.",
       "hint": "These should all be perfect squares."
     },
     {
@@ -6955,7 +6955,7 @@
         "Purple"
       ],
       "answer": 1,
-      "exp": "Green>Red>Blue. Yellow not top. Purple below Yellow. Order: Green,Red,Blue,Yellow,Purple → Green on top.",
+      "exp": "'Most X do Y, therefore Y causes X' is the correlation ≠ causation fallacy.\nPossible real explanation: both success AND early rising may be caused by a third factor — discipline, demanding careers, or personal drive.\nThe correct conclusion would be: 'Successful people tend to wake early' (correlation), not 'waking early makes you successful' (causation).",
       "hint": "Build the order step by step."
     },
     {
@@ -6974,7 +6974,7 @@
         "Statistics incorrect"
       ],
       "answer": 1,
-      "exp": "Both could result from discipline. Correlation ≠ causation.",
+      "exp": "Inclusion-exclusion formula:\nF + G − Both = (those who speak at least one language)\nSpeakers = 40 − 5 (neither) = 35\n25 + 20 − Both = 35\nBoth = 45 − 35 = 10\n✓ Check: French only = 15, German only = 10, Both = 10, Neither = 5 → 15+10+10+5 = 40 ✓",
       "hint": "Does correlation between A and B mean A causes B?"
     },
     {
@@ -6993,7 +6993,7 @@
         "All B is C"
       ],
       "answer": 1,
-      "exp": "No A is B: disjoint. All C is B: C⊂B. Since A and B share nothing, A and C also share nothing → No C is A.",
+      "exp": "Work through the clues:\n• Green > Red > Blue (from first two clues)\n• Yellow not on top\n• Purple directly below Yellow → Yellow and Purple are adjacent, Purple lower\nFit Purple and Yellow into remaining spots: after Blue comes Yellow, then Purple.\nFull order top→bottom: Green, Red, Blue, Yellow, Purple\nTop = Green ✓",
       "hint": "Draw Venn diagram: A separate from B, C inside B."
     },
     {
@@ -7164,7 +7164,7 @@
         "38"
       ],
       "answer": 1,
-      "exp": "LCM(3,4,6)=12. Add 2: 14. Check: 14÷3=4r2✓, 14÷4=3r2✓, 14÷6=2r2✓.",
+      "exp": "LCM(3, 4, 6) = 12 (smallest number divisible by 3, 4 AND 6)\nWe need remainder 2 each time → the answer is LCM + 2 = 12 + 2 = 14\nVerify: 14÷3 = 4 remainder 2 ✓\n        14÷4 = 3 remainder 2 ✓\n        14÷6 = 2 remainder 2 ✓",
       "hint": "Find LCM of divisors, then add the remainder."
     },
     {
@@ -7221,7 +7221,7 @@
         "x=1,y=5"
       ],
       "answer": 1,
-      "exp": "Add: 3x=9 → x=3. y=7−6=1.",
+      "exp": "Using elimination method:\nEquation 1: 2x + y = 7\nEquation 2: x − y = 2\nAdd both equations (y cancels): 3x = 9 → x = 3\nSubstitute back into eq 1: 2(3) + y = 7 → y = 1\n✓ Check eq 2: 3 − 1 = 2 ✓",
       "hint": "Add the equations to eliminate y."
     },
     {
@@ -7278,7 +7278,7 @@
         "50 L"
       ],
       "answer": 1,
-      "exp": "0.4x+0.1(60−x)=18 → 0.3x=12 → x=40L.",
+      "exp": "Let x = volume of 40% solution\nThen (60 − x) = volume of 10% solution\nSalt equation: 0.4x + 0.1(60−x) = 0.3 × 60\n0.4x + 6 − 0.1x = 18\n0.3x = 12\nx = 40 litres\n✓ Check: 40L at 40% = 16g salt; 20L at 10% = 2g salt; total = 18g in 60L = 30% ✓",
       "hint": "Amount of salt in each solution must balance."
     },
     {
@@ -7354,7 +7354,7 @@
         "Downplay severity"
       ],
       "answer": 1,
-      "exp": "'Largely irretrievable'=mostly impossible to recover. Author stresses severity.",
+      "exp": "'Largely irretrievable' = mostly impossible to recover.\nThe word 'largely' is carefully chosen — it doesn't say 'completely irretrievable' (which would be absolute), but 'largely' still conveys severe and mostly permanent damage.\nThe author uses this precise language to be honest (some recovery possible) while still conveying urgency.",
       "hint": "What does 'irretrievable' mean? What does 'largely' do to this meaning?"
     },
     {
@@ -7392,7 +7392,7 @@
         "Before automation existed"
       ],
       "answer": 0,
-      "exp": "'This time' implies contrast: previously pace was slow enough for adaptation.",
+      "exp": "'This time' signals a contrast with what came before.\nThe phrase implies past technological revolutions were DIFFERENT in a way that made them manageable.\nThe contrast: previous change was slow enough for workers to adapt; THIS change may be too fast.\n💡 Look for 'this time', 'unlike before', 'for the first time' — these signal contrasts with history.",
       "hint": "The word 'this time' implies what about previous revolutions?"
     },
     {
@@ -7506,7 +7506,7 @@
         "It tells reader what to do"
       ],
       "answer": 1,
-      "exp": "'Not merely' challenges the assumption that sleep is just resting — creates curiosity.",
+      "exp": "The opening words 'not merely rest' immediately signal a correction of a common assumption — most people think sleep = resting.\nThis technique is called 'refuting the common view' — it creates curiosity and positions the author as revealing something the reader didn't know.\nStrong non-fiction writing often starts with 'what most people think' before revealing 'what's actually true'.",
       "hint": "What assumption does 'not merely rest' challenge?"
     },
     {

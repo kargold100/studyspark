@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   {id:'practice',l:'✏️ Practice'},{id:'exams',l:'📝 Exams'},
   {id:'selective',l:'🏆 Selective'},{id:'tips',l:'💡 Tips'},
   {id:'study',l:'📚 Study'},{id:'tutor',l:'🤖 Tutor'},
-  {id:'funzone',l:'🎮 Fun Zone'},{id:'profile',l:'👤 Profile'},
+  {id:'funzone',l:'🎮 Fun Zone'},{id:'languages',l:'🗣️ Languages'},{id:'profile',l:'👤 Profile'},
 ];
 
 const EXAM_DEFS = [
@@ -79,7 +79,8 @@ let selState='VIC',selSec=null,selPQs=[],selPAns=[],selPSub=false;
 let selWritingPrompt=null,selWritingText='',selWritingFeedback='',selWritingLoading=false;
 let studySub=null,studyTopic=null,studyNotes='',studyLoading=false;
 let tutorQ='',tutorR='',tutorLoading=false;
-let funTab='math',funAnswered={},funShowExp={};
+let funTab='little',funAnswered={},funShowExp={},littleZone='early',littleSection=null;
+let langSelected=null,langSection=null,langAnswered={},langShowExp={};
 let activeQuiz=null,quizAnswers=[],quizSub=false;
 let dailyAnswers={m:null,e:null,b:null};
 let AIcache={},AIloading=new Set();
@@ -121,7 +122,7 @@ const App={home:()=>nav('home')};
 function render(){
   const el=document.getElementById('app');
   if(!currentUser&&screen!=='profile'){el.innerHTML=renderProfilePicker();return;}
-  const R={home:renderHome,browse:renderBrowse,practice:renderPractice,exams:renderExams,examrun:renderExamRun,selective:renderSelective,tips:renderTips,study:renderStudy,tutor:renderTutor,funzone:renderFunZone,profile:renderProfile};
+  const R={home:renderHome,browse:renderBrowse,practice:renderPractice,exams:renderExams,examrun:renderExamRun,selective:renderSelective,tips:renderTips,study:renderStudy,tutor:renderTutor,funzone:renderFunZone,languages:renderLanguages,profile:renderProfile};
   el.innerHTML=(R[screen]||renderHome)();
 }
 
@@ -324,13 +325,13 @@ function qCard(q,idx,mode,userAns,submitted,revealed,showHint){
   else if(revealed)cls+=' revealed';
   const opts=q.options.map((opt,oi)=>{
     let c='opt';const sel=userAns===oi;
-    if(mode!=='browse'&&sel&&!submitted)c+=' sel';
+    if(mode!=='browse'&&mode!=='review'&&sel&&!submitted)c+=' sel';
     if(submitted||revealed){c+=' dis';if(oi===q.answer)c+=' cor';else if(submitted&&sel)c+=' wrg';}
     const tick=(submitted||revealed)&&oi===q.answer?'<span class="otick">✓</span>':submitted&&sel&&oi!==q.answer?'<span class="otick">✗</span>':'';
     const click=(!submitted&&!revealed&&mode!=='browse')?`onclick="handleAnswer('${mode}',${idx},${oi})"` :'';
     return `<div class="${c}" ${click}><span class="oltr">${'ABCD'[oi]}.</span><span style="flex:1">${opt}</span>${tick}</div>`;
   }).join('');
-  const expHtml=(submitted&&userAns!==null||revealed)&&q.exp?`<div class="exp"><strong style="color:var(--accent)">Explanation:</strong>\n${q.exp}</div>`:'';
+  const expHtml=(submitted&&userAns!==null||revealed||mode==='review')&&q.exp?`<div class="exp"><strong style="color:var(--accent)">Explanation:</strong>\n${q.exp}</div>`:'';
   const hintHtml=showHint&&q.hint&&!submitted&&!revealed?`<div class="hint-box">💡 ${q.hint}</div>`:'';
   let aiFb='';
   if(submitted&&userAns!==null){
@@ -364,8 +365,19 @@ function startPractice(f={},mode='oneByOne',limit=12,qList=null){
   pAns=Array(pQs.length).fill(null);pSub=false;pMode=mode;pScore=0;pIdx=0;pResult=null;
   nav('practice');
 }
-function nextQ(){pIdx++;pSub=false;if(pIdx>=pQs.length){pResult=currentUser?Profiles.recordSession(currentUser,pQs,pAns,pMode,null):null;render();}else render();}
-function goToQ(i){pIdx=i;pSub=pAns[i]!==null;render();}
+function nextQ(){
+  if(pIdx<pQs.length-1){pIdx++;pSub=pAns[pIdx]!==null;render();return;}
+  pIdx=pQs.length;
+  if(!pResult)pResult=currentUser?Profiles.recordSession(currentUser,pQs,pAns,pMode,null):null;
+  render();
+}
+function goToQ(i){
+  if(i>=pQs.length){
+    if(!pResult)pResult=currentUser?Profiles.recordSession(currentUser,pQs,pAns,pMode,null):null;
+    pIdx=pQs.length;render();return;
+  }
+  pIdx=i;pSub=pAns[i]!==null;render();
+}
 function submitBatch(){
   pSub=true;let c=0;
   pQs.forEach((q,i)=>{if(pAns[i]!==null){const ok=pAns[i]===q.answer;if(ok)c++;if(currentUser)Profiles.recordAnswer(currentUser,q,ok);getAIFeedback(q,pAns[i],ok);}});
@@ -400,26 +412,91 @@ function sessionResultBlock(pct,correct,total,result){
 }
 
 function renderOneByOne(){
+  // ── RESULTS + FULL REVIEW SCREEN ──────────────────────────────────────────
   if(pIdx>=pQs.length){
     const pct=Math.round(pScore/pQs.length*100);
-    return `<div class="page">${sessionResultBlock(pct,pScore,pQs.length,pResult)}<div class="fc gap8 wrap" style="justify-content:center"><button class="btn ba" onclick="startPractice({},'oneByOne',12)">🔄 New Session</button><button class="btn bm" onclick="pQs=[];render()">← Menu</button><button class="btn bm" onclick="nav('profile')">👤 My Profile</button></div></div>`;
+    const wrongQs=pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer);
+    return `<div class="page">
+      ${sessionResultBlock(pct,pScore,pQs.length,pResult)}
+      <div class="fc gap8 wrap mb24" style="justify-content:center">
+        <button class="btn ba" onclick="startPractice({},'oneByOne',12)">🔄 New Session</button>
+        <button class="btn bm" onclick="pQs=[];render()">← Menu</button>
+        <button class="btn bm" onclick="nav('profile')">👤 My Profile</button>
+      </div>
+      <h2 class="mb8">📋 Review All Questions</h2>
+      <p class="mt sm mb14">Tap any question number to jump to it. All answers, explanations and AI coaching are shown below.</p>
+      ${pQs.map((q,i)=>{
+        const ans=pAns[i];
+        const answered=ans!==null;
+        const correct=answered&&ans===q.answer;
+        const statusDot=!answered?'⬜':correct?'✅':'❌';
+        return `<div class="card mb10" style="border-color:${!answered?'var(--border)':correct?'rgba(61,214,140,.4)':'rgba(247,79,79,.35)'}">
+          <div class="fc jsb mb8">
+            <span class="sm" style="font-weight:700;color:var(--muted)">Q${i+1} ${statusDot} ${q.topic||''}</span>
+            <span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>
+          </div>
+          ${qCard(q,i,'review',ans,answered,false,false)}
+        </div>`;
+      }).join('')}
+      ${wrongQs.length?`<div class="card mt20" style="border-color:rgba(247,79,79,.3);padding:20px">
+        <h3 style="color:var(--red);margin-bottom:10px">⚠️ ${wrongQs.length} question${wrongQs.length>1?'s':''} to practise again</h3>
+        <button class="btn bo" onclick="startPractice({},'oneByOne',${wrongQs.length},[...pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer)])">🔄 Redo Wrong Questions</button>
+      </div>`:''}
+    </div>`;
   }
+
+  // ── LIVE QUESTION SCREEN ───────────────────────────────────────────────────
   const q=pQs[pIdx],ans=pAns[pIdx],sub=pSub&&ans!==null;
-  const dots=pQs.map((_,i)=>{const bg=i===pIdx?'var(--accent)':pAns[i]!==null?(pAns[i]===pQs[i].answer?'var(--green)':'var(--red)'):'var(--border)';return `<div style="background:${bg};width:22px;height:22px;border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0" onclick="goToQ(${i})">${i+1}</div>`;}).join('');
-  return `<div class="page"><div class="fc jsb mb14 wrap gap8"><div><h1>✏️ Practice</h1><p class="mt sm">Q${pIdx+1}/${pQs.length} · ${pScore} correct</p></div><button class="btn bm bsm" onclick="pQs=[];render()">✖ Exit</button></div>
-    <div class="pbar mb8"><div class="pfill" style="width:${Math.round(pIdx/pQs.length*100)}%"></div></div>
-    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px">${dots}</div>
+  const answered=pAns.filter(a=>a!==null).length;
+  const dots=pQs.map((_,i)=>{
+    const a=pAns[i];
+    const bg=i===pIdx?'var(--accent)':a!==null?(a===pQs[i].answer?'var(--green)':'var(--red)'):'var(--border)';
+    const icon=i===pIdx?'→':a!==null?(a===pQs[i].answer?'✓':'✗'):(i+1);
+    return `<div title="Q${i+1}" style="background:${bg};min-width:24px;height:24px;border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;padding:0 3px" onclick="goToQ(${i})">${icon}</div>`;
+  }).join('');
+
+  return `<div class="page">
+    <div class="fc jsb mb14 wrap gap8">
+      <div><h1>✏️ Practice</h1><p class="mt sm">Q${pIdx+1}/${pQs.length} · ${pScore} correct · ${answered} answered</p></div>
+      <button class="btn bm bsm" onclick="pQs=[];render()">✖ Exit</button>
+    </div>
+    <div class="pbar mb8"><div class="pfill" style="width:${Math.round((answered)/pQs.length*100)}%"></div></div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px">${dots}</div>
     ${qCard(q,pIdx,'oneByOne',ans,sub,false,hintVisible[q.id])}
-    <div class="fc gap8 mt14 wrap">${!sub?`<button class="btn ba" onclick="handleAnswer('oneByOne',${pIdx},${ans!==null?ans:-1})" ${ans===null?'disabled':''}>✅ Check Answer</button>${q.hint&&!hintVisible[q.id]&&ans===null?`<button class="btn bm bsm" onclick="toggleHint('${q.id}')">💡 Hint</button>`:''}`
-    :pIdx<pQs.length-1?`<button class="btn ba" onclick="nextQ()">Next →</button>`:`<button class="btn bg" onclick="nextQ()">See Results 🎉</button>`}</div></div>`;
+    <div class="fc gap8 mt14 wrap">
+      ${pIdx>0?`<button class="btn bm bsm" onclick="goToQ(${pIdx-1})">← Back</button>`:''}
+      ${!sub
+        ?`<button class="btn ba" onclick="handleAnswer('oneByOne',${pIdx},${ans!==null?ans:-1})" ${ans===null?'disabled':''}>✅ Check Answer</button>
+           ${q.hint&&!hintVisible[q.id]&&ans===null?`<button class="btn bm bsm" onclick="toggleHint('${q.id}')">💡 Hint</button>`:''}`
+        :pIdx<pQs.length-1
+          ?`<button class="btn ba" onclick="nextQ()">Next →</button>`
+          :`<button class="btn bg" onclick="nextQ()">See Results & Review 🎉</button>`
+      }
+      ${sub&&pIdx<pQs.length-1?`<button class="btn bm bsm" onclick="goToQ(${pQs.length})" style="margin-left:auto">Skip to Results</button>`:''}
+    </div>
+  </div>`;
 }
 
 function renderBatch(){
   const c=pAns.filter((a,i)=>a===pQs[i]?.answer).length,pct=pSub?Math.round(c/pQs.length*100):0,answered=pAns.filter(a=>a!==null).length;
-  return `<div class="page"><div class="fc jsb mb14 wrap gap8"><div><h1>📋 Batch Practice</h1><p class="mt sm">${pQs.length} questions</p></div><button class="btn bm bsm" onclick="pQs=[];render()">✖ Exit</button></div>
-    ${pSub?`${sessionResultBlock(pct,c,pQs.length,pResult)}<div class="fc gap8 mb20" style="justify-content:center"><button class="btn ba" onclick="startPractice({},'batch',15)">🔄 Again</button><button class="btn bm" onclick="pQs=[];render()">← Menu</button></div>`:''}
-    ${pQs.map((q,i)=>qCard(q,i,'batch',pAns[i],pSub,false,false)).join('')}
-    ${!pSub?`<button class="btn ba bfull mt20" style="padding:13px" onclick="submitBatch()" ${answered===pQs.length?'':'disabled'}>${answered===pQs.length?'✅ Submit All':'Answer all first ('+answered+'/'+pQs.length+')'}</button>`:''}
+  const wrongQs=pSub?pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer):[];
+  return `<div class="page">
+    <div class="fc jsb mb14 wrap gap8"><div><h1>📋 Batch Practice</h1><p class="mt sm">${pQs.length} questions${pSub?` · ${c} correct`:`· ${answered} answered`}</p></div><button class="btn bm bsm" onclick="pQs=[];render()">✖ Exit</button></div>
+    ${pSub?`${sessionResultBlock(pct,c,pQs.length,pResult)}<div class="fc gap8 mb20 wrap" style="justify-content:center">
+      <button class="btn ba" onclick="startPractice({},'batch',15)">🔄 New Session</button>
+      <button class="btn bm" onclick="pQs=[];render()">← Menu</button>
+      ${wrongQs.length?`<button class="btn bo bsm" onclick="startPractice({},'oneByOne',${wrongQs.length},[...pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer)])">🔄 Redo ${wrongQs.length} Wrong</button>`:''}
+    </div><h2 class="mb8">📋 Full Review</h2><p class="mt sm mb14">All questions with correct answers and explanations below.</p>`:''}
+    ${pQs.map((q,i)=>{
+      const a=pAns[i],correct=pSub&&a===q.answer;
+      return pSub
+        ?`<div class="card mb10" style="border-color:${a===null?'var(--border)':correct?'rgba(61,214,140,.4)':'rgba(247,79,79,.35)'}">
+            <div class="fc jsb mb8"><span class="sm" style="font-weight:700;color:var(--muted)">Q${i+1} ${a===null?'⬜':correct?'✅':'❌'} ${q.topic||''}</span><span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span></div>
+            ${qCard(q,i,'review',a,a!==null,false,false)}
+          </div>`
+        :qCard(q,i,'batch',a,false,false,false);
+    }).join('')}
+    ${!pSub?`<button class="btn ba bfull mt20" style="padding:13px" onclick="submitBatch()" ${answered===pQs.length?'':'disabled'}>${answered===pQs.length?'✅ Submit & Review All':'Answer all first ('+answered+'/'+pQs.length+')'}</button>`:''}
   </div>`;
 }
 
@@ -562,10 +639,16 @@ function renderFunZone(){
       <h1>🎮 <span class="grad-fun">Fun Zone</span></h1>
       <p class="mt sm" style="max-width:480px;margin:10px 0 18px;line-height:1.75">Puzzles, quizzes, games and brain teasers. <strong>${funSolved} puzzles solved!</strong> Earn XP and achievement badges.</p>
       <div class="fc gap8 wrap">
-        ${['math','english','brain','quiz'].map(t=>`<button class="fun-tab ${funTab===t?'on':''}" onclick="funTab='${t}';render()">${t==='math'?'🔢 Maths':t==='english'?'📖 English':t==='brain'?'🧠 Brain Gym':'📋 GK Quizzes'}</button>`).join('')}
+        <div class="fc gap8 wrap">
+          <button class="fun-tab" style="${funTab==='little'?'background:linear-gradient(135deg,var(--green),var(--teal));color:#fff':'background:var(--card2);color:var(--muted);border:1px solid var(--border)'}" onclick="funTab='little';render()">🌱 Little Learners (KG–Gr5)</button>
+          <button class="fun-tab ${funTab==='math'?'on':''}" onclick="funTab='math';render()">🔢 Maths Puzzles</button>
+          <button class="fun-tab ${funTab==='english'?'on':''}" onclick="funTab='english';render()">📖 English Games</button>
+          <button class="fun-tab ${funTab==='brain'?'on':''}" onclick="funTab='brain';render()">🧠 Brain Gym</button>
+          <button class="fun-tab ${funTab==='quiz'?'on':''}" onclick="funTab='quiz';render()">📋 GK Quizzes</button>
+        </div>
       </div>
     </div>
-    ${funTab==='math'?renderFunMath():funTab==='english'?renderFunEnglish():funTab==='brain'?renderFunBrain():renderQuizzes()}
+    ${funTab==='little'?renderLittleLearners():funTab==='math'?renderFunMath():funTab==='english'?renderFunEnglish():funTab==='brain'?renderFunBrain():renderQuizzes()}
   </div>`;
 }
 
@@ -600,6 +683,151 @@ function renderFunQ(item,zone){
 function funAnswer(key,chosen,correct_answer,zone){
   funAnswered[key]=chosen;funShowExp[key]=true;
   if(chosen===correct_answer&&currentUser)Profiles.recordFun(currentUser,zone);
+  render();
+}
+
+// ── LITTLE LEARNERS RENDERER ─────────────────────────────────────────────────
+function renderLittleLearners() {
+  const zones = LITTLE_LEARNERS;
+
+  // Zone picker
+  if (!littleSection) {
+    const zoneKeys = ['early','junior','rising'];
+    return `<div>
+      <h2 class="mb8">🌱 Little Learners</h2>
+      <p class="mt sm mb20">Fun learning activities for younger students — pick your level!</p>
+      ${zoneKeys.map(zk => {
+        const z = zones[zk];
+        // Count total activities
+        const total = z.sections.reduce((sum,s) => sum + s.activities.length, 0);
+        const done = z.sections.reduce((sum,s) =>
+          sum + s.activities.filter(a => funAnswered[zk+'_'+a.id] !== undefined).length, 0);
+        return `<div class="card hov mb14" style="border-color:${z.color}44" onclick="littleZone='${zk}';littleSection='picker';render()">
+          <div class="fc gap12 mb8">
+            <span style="font-size:36px">${zk==='early'?'🌱':zk==='junior'?'🌿':'⭐'}</span>
+            <div style="flex:1">
+              <h3 style="margin-bottom:3px">${z.label}</h3>
+              <div class="sm mt">${z.subtitle}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:800;color:${z.color}">${done}/${total}</div>
+              <div class="xs mt">completed</div>
+            </div>
+          </div>
+          <div class="pbar"><div class="pfill" style="width:${total?Math.round(done/total*100):0}%;background:${z.color}"></div></div>
+          <div class="fc gap8 mt14 wrap">
+            ${z.sections.map(s => `<span class="tag tm">${s.emoji} ${s.title}</span>`).join('')}
+          </div>
+          <button class="btn bsm mt14" style="background:${z.color};color:${z.color.includes('purple')?'#fff':'#0a1a0a'}">Start Learning →</button>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  // Section picker within a zone
+  const zone = zones[littleZone];
+  if (littleSection === 'picker') {
+    return `<div>
+      <div class="fc gap8 mb14">
+        <button class="btn bm bsm" onclick="littleSection=null;render()">← All Levels</button>
+      </div>
+      <div class="fc gap12 mb20">
+        <span style="font-size:36px">${littleZone==='early'?'🌱':littleZone==='junior'?'🌿':'⭐'}</span>
+        <div><h2 style="margin-bottom:3px">${zone.label}</h2><p class="mt sm">${zone.subtitle}</p></div>
+      </div>
+      <div class="g2">
+        ${zone.sections.map(sec => {
+          const done = sec.activities.filter(a => funAnswered[littleZone+'_'+a.id] !== undefined).length;
+          const allDone = done === sec.activities.length;
+          return `<div class="card hov" style="border-color:${zone.color}44;${allDone?'border-color:rgba(61,214,140,.5)':''}" onclick="littleSection='${sec.id}';render()">
+            <div style="font-size:30px;margin-bottom:8px">${sec.emoji}</div>
+            <h3 style="margin-bottom:4px">${sec.title}</h3>
+            <div class="sm mt mb10">${sec.activities.length} activities</div>
+            <div class="pbar mb10"><div class="pfill" style="width:${Math.round(done/sec.activities.length*100)}%;background:${zone.color}"></div></div>
+            <div class="fc jsb">
+              <span class="xs mt">${done}/${sec.activities.length} done</span>
+              ${allDone?'<span class="tag tg xs">✅ Complete!</span>':''}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Show activities in a section
+  const sec = zone.sections.find(s => s.id === littleSection);
+  if (!sec) { littleSection = 'picker'; return renderLittleLearners(); }
+
+  const allDone = sec.activities.every(a => funAnswered[littleZone+'_'+a.id] !== undefined);
+  const correct = sec.activities.filter(a => {
+    const ans = funAnswered[littleZone+'_'+a.id];
+    return ans !== undefined && ans === a.answer;
+  }).length;
+
+  return `<div>
+    <div class="fc gap8 mb14 wrap">
+      <button class="btn bm bsm" onclick="littleSection='picker';render()">← ${zone.label}</button>
+    </div>
+    <div class="fc gap12 mb20">
+      <span style="font-size:30px">${sec.emoji}</span>
+      <div>
+        <h2 style="margin-bottom:3px">${sec.title}</h2>
+        <p class="mt sm">${zone.subtitle}</p>
+      </div>
+    </div>
+    ${allDone ? `<div class="sbox pass mb20">
+      <div style="font-size:32px;margin-bottom:8px">🎉</div>
+      <div style="font-weight:900;font-size:22px;color:var(--green)">${correct}/${sec.activities.length} Correct!</div>
+      <div class="mt sm mt14">Amazing work! You completed this section.</div>
+      <button class="btn bg bsm mt14" onclick="littleSection='picker';render()">Try Another Section →</button>
+    </div>` : ''}
+    ${sec.activities.map(item => {
+      const key = littleZone + '_' + item.id;
+      const answered = funAnswered[key];
+      const showExp = funShowExp[key];
+      const correct = answered !== undefined && answered === item.answer;
+      const wrong = answered !== undefined && answered !== item.answer;
+
+      const opts = item.options.map((opt, oi) => {
+        let style = 'background:#090b18;border:1px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;color:var(--text);font-size:14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;transition:all .12s;';
+        if (answered !== undefined) {
+          style += 'cursor:default;';
+          if (oi === item.answer) style += 'border-color:var(--green);background:rgba(61,214,140,.1);color:var(--green);font-weight:700;font-size:15px;';
+          else if (answered === oi) style += 'border-color:var(--red);background:rgba(247,79,79,.1);color:var(--red);';
+        }
+        const tick = answered !== undefined && oi === item.answer ? ' ✓' : answered === oi && oi !== item.answer ? ' ✗' : '';
+        const click = answered === undefined ? `onclick="littleAnswer('${key}',${oi},${item.answer},'${littleZone}')"` : '';
+        return `<div style="${style}" ${click}><span style="font-weight:700;min-width:22px;opacity:.5">${'ABCD'[oi]}.</span><span style="flex:1">${opt}</span>${tick ? `<span style="font-weight:900">${tick}</span>` : ''}</div>`;
+      }).join('');
+
+      const expHtml = (answered !== undefined) && item.exp
+        ? `<div style="margin-top:12px;padding:12px 16px;background:#12152a;border-radius:8px;font-size:13px;color:var(--muted);line-height:1.85;white-space:pre-line">${item.exp}</div>` : '';
+
+      const hintHtml = item.hint && answered === undefined
+        ? `<button class="btn bm bsm mt10" onclick="funShowExp['${key}_hint']=!funShowExp['${key}_hint'];render()" style="font-size:11px">💡 Need a hint?</button>
+           ${funShowExp[key+'_hint'] ? `<div class="hint-box mt10">${item.hint}</div>` : ''}` : '';
+
+      return `<div class="card mb14" style="border-color:${wrong?'rgba(247,79,79,.4)':correct?'rgba(61,214,140,.4)':'var(--border)'}">
+        <div class="fc jsb mb10">
+          <span class="tag tm xs">${item.type}</span>
+          <span class="tag ty xs">+${item.xp} XP</span>
+        </div>
+        <h3 style="margin-bottom:12px;font-size:15px">${item.title}</h3>
+        <div style="font-weight:600;font-size:14px;line-height:1.7;margin-bottom:12px;white-space:pre-line">${item.q}</div>
+        ${opts}
+        ${hintHtml}
+        ${expHtml}
+        ${answered !== undefined ? `<div class="sm mt14" style="color:${correct?'var(--green)':'var(--red)'};">${correct ? '🌟 Well done!' : '💪 Good try — read the explanation above to learn!'}</div>` : ''}
+      </div>`;
+    }).join('')}
+    ${allDone ? '' : `<div class="card tc mt14" style="padding:20px;border-style:dashed"><p class="mt sm">Answer all questions above to complete this section and earn your stars! ⭐</p></div>`}
+  </div>`;
+}
+
+function littleAnswer(key, chosen, correct_answer, zone) {
+  funAnswered[key] = chosen;
+  funShowExp[key] = true;
+  if (chosen === correct_answer && currentUser) Profiles.recordFun(currentUser, zone);
   render();
 }
 
@@ -752,6 +980,25 @@ function renderHome(){
         }).join('')}
       </div>
       <button class="btn bt bsm mt14" onclick="tipPage=null;nav('tips')">View All Tips & Guides →</button>
+    </div>
+
+    <!-- Languages callout -->
+    <div class="card mb24" style="border-color:rgba(155,89,247,.35);background:linear-gradient(135deg,rgba(155,89,247,.05),transparent);padding:22px">
+      <div class="fc gap12 mb14 wrap">
+        <span style="font-size:36px">🗣️</span>
+        <div>
+          <h2 style="margin-bottom:4px">Indian Language Zone</h2>
+          <p class="mt sm">Explore Tamil, Telugu, Malayalam and Hindi — script, numbers, words, culture and riddles.</p>
+        </div>
+      </div>
+      <div class="g4">
+        ${Object.entries(LANGUAGES).map(([key,lang]) => `<div class="card hov" style="border-color:${lang.color}33;padding:12px;text-align:center;cursor:pointer" onclick="langSelected='${key}';langSection=null;nav('languages')">
+          <div style="font-size:26px;margin-bottom:5px">${lang.emoji}</div>
+          <div style="font-size:13px;font-weight:800">${lang.name}</div>
+          <div style="font-size:12px;color:${lang.color};margin-top:2px">${lang.nativeName}</div>
+        </div>`).join('')}
+      </div>
+      <button class="btn bsm mt14" style="background:var(--purple);color:#fff" onclick="langSelected=null;nav('languages')">Explore All Languages →</button>
     </div>
 
     <h2 class="mb14">Practice by Provider Style</h2>
@@ -915,6 +1162,187 @@ function renderTipPage(id) {
       </div>
     </div>`}
   </div>`;
+}
+
+// ── LANGUAGES ─────────────────────────────────────────────────────────────────
+function renderLanguages() {
+
+  // ── LANGUAGE OVERVIEW ────────────────────────────────────────────────────
+  if (!langSelected) {
+    const langs = Object.entries(LANGUAGES);
+    return `<div class="page">
+      ${profileBar()}
+      <div class="hero" style="background:linear-gradient(135deg,#1a0d2a,#0d1a1a);border-color:rgba(155,89,247,.3)">
+        <div class="mb8"><span class="tag tpu">🗣️ LANGUAGE ZONE · TAMIL · TELUGU · MALAYALAM · HINDI</span></div>
+        <h1>🗣️ <span class="grad">Indian Language Zone</span></h1>
+        <p class="mt sm" style="max-width:560px;margin:10px 0 0;line-height:1.8">
+          Explore four beautiful Indian languages — script, numbers, words, culture and riddles.
+          No previous knowledge needed. Each activity teaches you something new!
+        </p>
+      </div>
+
+      <div class="g2 mt20 mb24">
+        ${langs.map(([key, lang]) => {
+          const totalActs = lang.sections.reduce((s,sec) => s + sec.activities.length, 0);
+          const doneActs  = lang.sections.reduce((s,sec) =>
+            s + sec.activities.filter(a => langAnswered[key+'_'+a.id] !== undefined).length, 0);
+          const pct = totalActs ? Math.round(doneActs/totalActs*100) : 0;
+          return `<div class="card hov" style="border-color:${lang.color}44;cursor:pointer" onclick="langSelected='${key}';langSection=null;render()">
+            <div class="fc gap12 mb10">
+              <span style="font-size:40px">${lang.emoji}</span>
+              <div style="flex:1">
+                <h2 style="margin-bottom:2px">${lang.name}</h2>
+                <div style="font-size:20px;color:${lang.color};font-weight:700">${lang.nativeName}</div>
+              </div>
+              <div style="text-align:right;flex-shrink:0">
+                <div style="font-weight:800;color:${lang.color};font-size:18px">${pct}%</div>
+                <div class="xs mt">${doneActs}/${totalActs} done</div>
+              </div>
+            </div>
+            <div class="pbar mb12"><div class="pfill" style="width:${pct}%;background:${lang.color}"></div></div>
+            <p class="sm mt" style="line-height:1.65;margin-bottom:12px">${lang.fact}</p>
+            <div class="fc gap8 wrap mb12">
+              ${lang.sections.map(s => `<span class="tag tm xs">${s.emoji} ${s.title}</span>`).join('')}
+            </div>
+            <button class="btn bsm" style="background:${lang.color};color:${lang.color.includes('green')?'#0a1a0a':'#fff'}">Start Learning ${lang.name} →</button>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <div class="card" style="border-color:rgba(79,216,247,.3);padding:22px">
+        <h3 class="mb10">🌏 About These Languages</h3>
+        <div class="g2">
+          <div class="sm" style="line-height:1.9">
+            <strong style="color:var(--orange)">Tamil (தமிழ்)</strong> — Over 2,000 years old, spoken across Tamil Nadu, Sri Lanka, Singapore and Australia.<br/>
+            <strong style="color:var(--teal)">Telugu (తెలుగు)</strong> — "Italian of the East", spoken in Andhra Pradesh and Telangana.
+          </div>
+          <div class="sm" style="line-height:1.9">
+            <strong style="color:var(--green)">Malayalam (മലയാളം)</strong> — The palindrome language, spoken in Kerala.<br/>
+            <strong style="color:var(--purple)">Hindi (हिन्दी)</strong> — Most spoken language in India; Devanagari script also used for Sanskrit.
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  const lang = LANGUAGES[langSelected];
+  if (!lang) { langSelected = null; return renderLanguages(); }
+
+  // ── SECTION PICKER ───────────────────────────────────────────────────────
+  if (!langSection) {
+    return `<div class="page">
+      <button class="btn bm bsm mb20" onclick="langSelected=null;render()">← All Languages</button>
+      <div class="fc gap14 mb20">
+        <span style="font-size:44px">${lang.emoji}</span>
+        <div>
+          <h1 style="margin-bottom:4px">${lang.name}</h1>
+          <div style="font-size:22px;color:${lang.color};font-weight:700">${lang.nativeName}</div>
+          <p class="mt sm" style="margin-top:6px;max-width:520px">${lang.fact}</p>
+        </div>
+      </div>
+      <h2 class="mb14">Choose a section</h2>
+      <div class="g2">
+        ${lang.sections.map(sec => {
+          const done = sec.activities.filter(a => langAnswered[langSelected+'_'+a.id] !== undefined).length;
+          const total = sec.activities.length;
+          const allDone = done === total;
+          return `<div class="card hov" style="border-color:${allDone?'rgba(61,214,140,.5)':lang.color+'33'}" onclick="langSection='${sec.id}';render()">
+            <div style="font-size:32px;margin-bottom:8px">${sec.emoji}</div>
+            <h3 style="margin-bottom:4px">${sec.title}</h3>
+            <p class="mt sm mb12" style="line-height:1.5">${sec.description}</p>
+            <div class="pbar mb8"><div class="pfill" style="width:${Math.round(done/total*100)}%;background:${lang.color}"></div></div>
+            <div class="fc jsb">
+              <span class="xs mt">${done}/${total} activities</span>
+              ${allDone ? '<span class="tag tg xs">✅ Complete!</span>' : ''}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }
+
+  // ── ACTIVITIES IN A SECTION ───────────────────────────────────────────────
+  const sec = lang.sections.find(s => s.id === langSection);
+  if (!sec) { langSection = null; return renderLanguages(); }
+
+  const doneInSec = sec.activities.filter(a => langAnswered[langSelected+'_'+a.id] !== undefined);
+  const correctInSec = doneInSec.filter(a => langAnswered[langSelected+'_'+a.id] === a.answer);
+  const allDone = doneInSec.length === sec.activities.length;
+
+  return `<div class="page">
+    <div class="fc gap8 mb14 wrap">
+      <button class="btn bm bsm" onclick="langSection=null;render()">← ${lang.name}</button>
+    </div>
+    <div class="fc gap12 mb20">
+      <span style="font-size:30px">${sec.emoji}</span>
+      <div>
+        <h2 style="margin-bottom:2px">${sec.title}</h2>
+        <div style="font-size:16px;color:${lang.color};font-weight:700">${lang.name} · ${lang.nativeName}</div>
+      </div>
+    </div>
+
+    ${allDone ? `<div class="sbox pass mb20">
+      <div style="font-size:32px;margin-bottom:8px">${correctInSec.length === sec.activities.length ? '🌟' : '🎉'}</div>
+      <div style="font-weight:900;font-size:22px;color:var(--green)">${correctInSec.length}/${sec.activities.length} Correct!</div>
+      <div class="mt sm mt14">Section complete! ${correctInSec.length === sec.activities.length ? 'Perfect score!' : 'Well done!'}</div>
+      <div class="fc gap8 mt14" style="justify-content:center">
+        <button class="btn bg bsm" onclick="langSection=null;render()">← Try Another Section</button>
+      </div>
+    </div>` : ''}
+
+    ${sec.activities.map(item => {
+      const key = langSelected + '_' + item.id;
+      const answered = langAnswered[key];
+      const showExp = langShowExp[key];
+      const isCorrect = answered !== undefined && answered === item.answer;
+      const isWrong = answered !== undefined && answered !== item.answer;
+
+      const opts = item.options.map((opt, oi) => {
+        let style = 'background:#090b18;border:1px solid var(--border);border-radius:9px;padding:11px 16px;cursor:pointer;color:var(--text);font-size:14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;transition:all .15s;line-height:1.5;';
+        if (answered !== undefined) {
+          style += 'cursor:default;';
+          if (oi === item.answer) style += `border-color:var(--green);background:rgba(61,214,140,.1);color:var(--green);font-weight:700;`;
+          else if (answered === oi) style += 'border-color:var(--red);background:rgba(247,79,79,.08);color:var(--red);';
+        }
+        const tick = answered !== undefined && oi === item.answer ? '<span style="margin-left:auto;font-weight:900">✓</span>'
+          : answered === oi && oi !== item.answer ? '<span style="margin-left:auto">✗</span>' : '';
+        const click = answered === undefined ? `onclick="langAnswer('${key}',${oi},${item.answer},'${langSelected}')"` : '';
+        return `<div style="${style}" ${click}><span style="font-weight:700;opacity:.4;min-width:20px">${'ABCD'[oi]}.</span><span style="flex:1">${opt}</span>${tick}</div>`;
+      }).join('');
+
+      const expHtml = answered !== undefined && item.exp
+        ? `<div style="margin-top:12px;padding:14px 18px;background:#12152a;border-radius:10px;font-size:13px;line-height:1.9;white-space:pre-line;color:var(--text)">${item.exp}</div>` : '';
+
+      const hintHtml = item.hint && answered === undefined
+        ? `<button class="btn bm bsm mt10" onclick="langShowExp['${key}_h']=!langShowExp['${key}_h'];render()" style="font-size:11px">💡 Hint</button>
+           ${langShowExp[key+'_h'] ? `<div class="hint-box mt10">${item.hint}</div>` : ''}` : '';
+
+      return `<div class="card mb14" style="border-color:${isCorrect?'rgba(61,214,140,.4)':isWrong?'rgba(247,79,79,.35)':'var(--border)'}">
+        <div class="fc jsb mb10 wrap gap8">
+          <h3 style="font-size:15px">${item.title}</h3>
+          <span class="tag ty xs">+${item.xp} XP</span>
+        </div>
+        <div style="font-size:14px;font-weight:600;line-height:1.75;margin-bottom:14px;white-space:pre-line">${item.q}</div>
+        ${opts}
+        ${hintHtml}
+        ${expHtml}
+        ${answered !== undefined ? `<div class="sm mt12" style="color:${isCorrect?'var(--green)':'var(--orange)'};">${isCorrect ? '🌟 Great answer!' : '💡 Have a read of the explanation above — it\'s interesting!'}</div>` : ''}
+      </div>`;
+    }).join('')}
+
+    ${!allDone ? `<div class="card tc mt14" style="padding:20px;border-style:dashed">
+      <p class="mt sm">Complete all ${sec.activities.length} activities in this section to earn your reward! ⭐</p>
+    </div>` : ''}
+  </div>`;
+}
+
+function langAnswer(key, chosen, correct_answer, langKey) {
+  langAnswered[key] = chosen;
+  langShowExp[key] = true;
+  if (chosen === correct_answer && currentUser) {
+    Profiles.recordFun(currentUser, 'brain'); // reuse brain XP category
+  }
+  render();
 }
 
 // ── BOOT ──────────────────────────────────────────────────────────────────────
