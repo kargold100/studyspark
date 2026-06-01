@@ -94,8 +94,84 @@ function pctColor(p){return p>=75?'var(--green)':p>=50?'var(--orange)':'var(--re
 function starsHtml(n,max=3){return Array.from({length:max},(_,i)=>`<span class="star ${i<n?'earned':'empty'}">${i<n?'⭐':'☆'}</span>`).join('');}
 function filterQs(f={}){return QUESTIONS.filter(q=>{if(f.section&&f.section!=='ALL'&&q.section!==f.section)return false;if(f.grade&&f.grade!=='ALL'&&q.grade!==f.grade)return false;if(f.topic&&f.topic!=='ALL'&&q.topic!==f.topic)return false;if(f.difficulty&&f.difficulty!=='ALL'&&q.difficulty!==f.difficulty)return false;if(f.style&&f.style!=='ALL'&&q.style!==f.style)return false;return true;});}
 
+// ── API KEY MANAGEMENT ───────────────────────────────────────────────────────
+function getApiKey(){return localStorage.getItem('ss_apikey')||'';}
+function setApiKey(k){localStorage.setItem('ss_apikey',k.trim());}
+function hasApiKey(){return !!getApiKey();}
+
+function showApiKeyPrompt(onSave){
+  const existing=getApiKey();
+  const modal=document.createElement('div');
+  modal.className='modal-overlay';modal.id='apikey-modal';
+  modal.innerHTML=`<div class="modal" style="max-width:500px">
+    <h3 class="mb8">🔑 Enter your Anthropic API Key</h3>
+    <p class="mt sm mb14" style="line-height:1.7">AI features (coaching, study notes, writing feedback, tutor) need an Anthropic API key.<br/>
+    Get a free key at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a></p>
+    <p class="mt xs mb14">Your key is stored only in this browser — never sent anywhere except Anthropic.</p>
+    <input type="password" id="apikey-input" placeholder="sk-ant-api03-..." value="${existing}" style="margin-bottom:12px;font-family:monospace;font-size:12px"/>
+    <div class="fc gap8">
+      <button class="btn ba" onclick="
+        const k=document.getElementById('apikey-input').value.trim();
+        if(!k){alert('Please paste your API key.');return;}
+        setApiKey(k);
+        document.getElementById('apikey-modal').remove();
+        ${onSave?onSave:'render();'}
+      ">Save & Continue</button>
+      <button class="btn bm" onclick="document.getElementById('apikey-modal').remove()">Cancel</button>
+    </div>
+    <p class="xs mt" style="margin-top:12px;line-height:1.6">💡 Tip: after pasting your key once, it's remembered in this browser. You only need to enter it again if you clear your browser data or switch devices.</p>
+  </div>`;
+  document.body.appendChild(modal);
+  setTimeout(()=>document.getElementById('apikey-input')?.focus(),100);
+}
+
 async function callClaude(system,user,maxTok=700){
-  try{const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:maxTok,system,messages:[{role:'user',content:user}]})});const d=await r.json();return d.content?.map(c=>c.text||'').join('')||'';}catch{return'';}
+  const key=getApiKey();
+  if(!key){return '__NO_KEY__';}
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key':key,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:maxTok,
+        system,
+        messages:[{role:'user',content:user}]
+      })
+    });
+    const d=await r.json();
+    if(d.error){
+      if(d.error.type==='authentication_error'){
+        localStorage.removeItem('ss_apikey');
+        return '__BAD_KEY__';
+      }
+      console.error('API error:',d.error);
+      return '';
+    }
+    return d.content?.map(c=>c.text||'').join('')||'';
+  }catch(e){
+    console.error('callClaude error:',e);
+    return '';
+  }
+}
+
+// Wrapper that handles key errors gracefully
+async function callClaudeUI(system,user,maxTok=700,onNoKey){
+  const result=await callClaude(system,user,maxTok);
+  if(result==='__NO_KEY__'){
+    showApiKeyPrompt(onNoKey||'render()');
+    return null;
+  }
+  if(result==='__BAD_KEY__'){
+    showApiKeyPrompt("alert('Key saved. Please try again.');render();");
+    return null;
+  }
+  return result;
 }
 async function getAIFeedback(q,userAns,correct){
   const key=`${q.id}_${userAns}`;if(AIcache[key]||AIloading.has(key))return;AIloading.add(key);render();
@@ -105,7 +181,8 @@ ${correct?'✅ CORRECT! [one sentence: reinforce the reasoning skill]':'❌ Not 
 🎯 IMPROVE: [concrete practice suggestion — max 12 words]
 🔥 CHALLENGE: [harder follow-up idea — max 12 words]`;
   const usr=`Q: ${q.q.slice(0,200)}\nTopic: ${q.topic} | Style: ${STL[q.style]||q.style} | Difficulty: ${q.difficulty}\nChose: "${q.options[userAns]}" → ${correct?'CORRECT':'WRONG'}\nCorrect: "${q.options[q.answer]}"\nExp: ${(q.exp||'').slice(0,150)}`;
-  const fb=await callClaude(sys,usr,350);
+  const fb=await callClaudeUI(sys,usr,350);
+  if(fb===null){AIloading.delete(key);render();return;}
   AIcache[key]=fb||`${correct?'✅ Correct!':'❌ Not quite.'}\n💡 CONCEPT: Review the explanation.\n🎯 IMPROVE: Try 3 more ${q.topic} questions.\n🔥 CHALLENGE: Can you explain this to someone else?`;
   AIloading.delete(key);render();
 }
@@ -233,6 +310,7 @@ function renderProfile(){
     <div class="fc gap8 mb20 wrap">
       <button class="btn bm bsm" onclick="currentUser=null;showCreateForm=false;screen='profile';render()">🔄 Switch Profile</button>
       <button class="btn bm bsm" onclick="changeAvatarPrompt()">🎨 Change Avatar</button>
+      <button class="btn bm bsm" onclick="showApiKeyPrompt('render()')" style="border-color:${hasApiKey()?'rgba(61,214,140,.5)':'rgba(247,144,79,.5)'}">🔑 ${hasApiKey()?'✅ API Key Set':'⚠️ Set API Key'}</button>
       ${profiles.length>1?`<button class="btn bm bsm" style="color:var(--red)" onclick="if(confirm('Delete profile ${stats.nickname}? All progress will be lost.')){Profiles.deleteProfile('${stats.nickname}');currentUser=null;screen='profile';render();}">🗑 Delete</button>`:''}
     </div>
 
@@ -599,7 +677,8 @@ function renderSelPanel(){
 function submitSelPractice(){selPSub=true;selPQs.forEach((q,i)=>{if(selPAns[i]!==null){if(currentUser)Profiles.recordAnswer(currentUser,q,selPAns[i]===q.answer);getAIFeedback(q,selPAns[i],selPAns[i]===q.answer);}});render();}
 async function doWritingMark(){if(selWritingText.split(/\s+/).filter(Boolean).length<20)return;selWritingLoading=true;render();
   const prompt=selWritingPrompt||WRITING_PROMPTS[0];
-  const fb=await callClaude(`You are an expert marker for Australian selective high school entry exams. Format exactly:\nSCORES:\nIdeas & Content: X/10\nStructure & Organisation: X/10\nLanguage & Vocabulary: X/10\nGrammar & Mechanics: X/10\nTOTAL: X/40\n\nSTRENGTHS:\n• [specific strength]\n• [second strength]\n\nTO IMPROVE:\n• [actionable suggestion]\n• [second suggestion]\n\nVERDICT: [One encouraging sentence with a clear next step]`,`Prompt: ${prompt.text}\n\nStudent response:\n${selWritingText}`,900);
+  const fb=await callClaudeUI(`You are an expert marker for Australian selective high school entry exams. Format exactly:\nSCORES:\nIdeas & Content: X/10\nStructure & Organisation: X/10\nLanguage & Vocabulary: X/10\nGrammar & Mechanics: X/10\nTOTAL: X/40\n\nSTRENGTHS:\n• [specific strength]\n• [second strength]\n\nTO IMPROVE:\n• [actionable suggestion]\n• [second suggestion]\n\nVERDICT: [One encouraging sentence with a clear next step]`,`Prompt: ${prompt.text}\n\nStudent response:\n${selWritingText}`,900);
+  if(fb===null){selWritingLoading=false;render();return;}
   selWritingFeedback=fb||'Unable to retrieve feedback. Please try again.';selWritingLoading=false;if(currentUser)Profiles.recordWriting(currentUser);render();
 }
 
@@ -613,7 +692,14 @@ function renderStudy(){
     <div class="fc gap8 wrap"><button class="btn ba" onclick="startPractice({topic:'${studyTopic}'},'oneByOne',8)">✏️ Practice</button><button class="btn bog" onclick="doLoadNotes()">🔄 Regenerate</button><button class="btn bm" onclick="tutorQ='Give me 3 practice questions about ${studyTopic} with full solutions';nav('tutor')">🤖 Ask Tutor</button></div>`}
   </div>`;
 }
-async function doLoadNotes(){studyLoading=true;studyNotes='';render();const t=await callClaude('Clear tutor for Australian Year 7–10. Use ## for headings. Key concepts, formulas, 2 worked examples. Under 350 words. No bold markdown.',`Topic: ${studyTopic} (${studySub}), Year 8–9.`);studyNotes=t||'Could not load. Try again.';studyLoading=false;if(currentUser)Profiles.recordStudy(currentUser);render();}
+async function doLoadNotes(){
+  if(!hasApiKey()){showApiKeyPrompt('doLoadNotes()');return;}
+  studyLoading=true;studyNotes='';render();
+  const t=await callClaudeUI('You are a clear tutor for Australian Year 7–10 students. Write structured study notes using ## for main headings. Include: key concepts, important formulas or rules, 2 worked examples with clear steps. Keep under 350 words. No bold markdown, just ## headings and plain text.',`Study notes topic: ${studyTopic} (${studySub}), for Australian Year 8–9 students.`);
+  if(t===null){studyLoading=false;render();return;}
+  studyNotes=t||'Could not load notes. Please check your API key in the 👤 Profile page and try again.';
+  studyLoading=false;if(currentUser)Profiles.recordStudy(currentUser);render();
+}
 
 // ── TUTOR ─────────────────────────────────────────────────────────────────────
 const QUICK_PROMPTS=['How do I solve number sequence questions quickly?','Explain verbal analogies with examples','How to structure a persuasive essay for selective?','Key difference between VIC ACER and NSW tests?','Give me 3 PSLE-style maths problems with solutions','Explain the Pythagorean theorem with examples','Best reading comprehension strategies for inference?','What are EduTest verbal reasoning question types?','Explain necessary vs sufficient conditions','How do I manage time pressure in exams?'];
@@ -627,7 +713,16 @@ function renderTutor(){
     ${tutorR&&!tutorLoading?`<div class="card" style="border-color:rgba(79,142,247,.4);padding:22px"><div style="font-weight:800;color:var(--accent);margin-bottom:12px">🤖 Answer</div><div style="line-height:1.85;font-size:14px;white-space:pre-wrap">${tutorR}</div><div class="fc gap8 mt14 wrap"><button class="btn bm bsm" onclick="tutorQ='Give me another example';doAsk()">Another example</button><button class="btn bm bsm" onclick="tutorQ='Quiz me on this — 3 questions with answers';doAsk()">Quiz me</button><button class="btn bm bsm" onclick="tutorQ='';tutorR='';render()">Clear</button></div></div>`
     :!tutorR&&!tutorLoading?`<div class="card tc" style="padding:40px;opacity:.5"><div style="font-size:36px;margin-bottom:10px">💬</div><div class="mt">Ask me anything!</div></div>`:''}</div></div>`;
 }
-async function doAsk(){const inp=document.getElementById('tutor-input');if(inp)tutorQ=inp.value;if(!tutorQ.trim())return;tutorLoading=true;tutorR='';render();const t=await callClaude(`Friendly expert tutor for Australian students Grades 4–10. Clear explanations, worked examples. For maths: show full working. Under 300 words. Plain text only. Warm and encouraging.`,tutorQ,800);tutorR=t||'Sorry, try again.';tutorLoading=false;if(currentUser)Profiles.recordTutor(currentUser);render();}
+async function doAsk(){
+  const inp=document.getElementById('tutor-input');if(inp)tutorQ=inp.value;
+  if(!tutorQ.trim())return;
+  if(!hasApiKey()){showApiKeyPrompt('doAsk()');return;}
+  tutorLoading=true;tutorR='';render();
+  const t=await callClaudeUI('You are a friendly, expert tutor for Australian students Grades 4–10 preparing for school or selective entry exams. Give clear, specific explanations with worked examples. For maths: show full working step by step. Keep under 300 words. Plain text only (no markdown). Be warm and encouraging.',tutorQ,800);
+  if(t===null){tutorLoading=false;render();return;}
+  tutorR=t||'Sorry, something went wrong. Please check your API key in the 👤 Profile page and try again.';
+  tutorLoading=false;if(currentUser)Profiles.recordTutor(currentUser);render();
+}
 
 // ── FUN ZONE ─────────────────────────────────────────────────────────────────
 function renderFunZone(){
@@ -926,6 +1021,7 @@ function renderHome(){
 
   return `<div class="page">
     ${profileBar()}
+    ${noKey?`<div class="card mb14" style="border-color:rgba(247,144,79,.5);background:rgba(247,144,79,.06);padding:14px 18px"><div class="fc gap10 wrap" style="align-items:center"><span style="font-size:20px">⚠️</span><div style="flex:1"><strong>AI features need an API key</strong><p class="sm mt" style="margin-top:3px">Study Notes, AI Tutor, Writing Feedback and AI Coaching all need a free Anthropic API key.</p></div><button class="btn bo bsm" onclick="showApiKeyPrompt('render()')">🔑 Set API Key</button></div></div>`:''}
     <div class="hero">
       <div class="mb8"><span class="tag ta">FREE · GRADES 4–10 · VIC & NSW · ${QUESTIONS.length} QUESTIONS · 9 STYLES</span></div>
       <h1>Welcome back${d?`, <span class="grad">${d.nickname}</span>`:''}! 🎓</h1>

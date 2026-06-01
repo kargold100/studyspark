@@ -128,3 +128,30 @@ For development/testing, the API calls in `js/app.js` include a note about where
 ---
 
 Built with ❤️ for Australian students. All questions are original.
+
+---
+
+## 🔑 Setting Up Your API Key (Required for AI Features)
+
+AI features include: AI Coaching on answers, AI Tutor, Study Notes, Writing Feedback.
+
+### Step 1 — Get a free API key
+1. Go to **console.anthropic.com**
+2. Sign up for a free account
+3. Go to API Keys → Create new key
+4. Copy the key (starts with `sk-ant-...`)
+
+### Step 2 — Enter the key in StudySpark
+1. Open StudySpark in your browser
+2. Log in with your profile
+3. Click **👤 Profile** in the nav
+4. Click **🔑 Set API Key**
+5. Paste your key and click **Save & Continue**
+
+The key is saved only in your browser's local storage — never sent anywhere except Anthropic's API.
+
+### Free tier limits
+Anthropic's free tier gives you enough credits for hundreds of AI coaching sessions. For a family using it daily, a small paid plan (~$5/month) would be more than enough.
+
+### Non-AI features (work without a key)
+All question practice, exams, Fun Zone puzzles, Language Zone, Little Learners, Tips & Techniques, and progress tracking work **without any API key**.
