@@ -125,12 +125,19 @@ function showApiKeyPrompt(onSave){
   setTimeout(()=>document.getElementById('apikey-input')?.focus(),100);
 }
 
-async function callClaude(system,user,maxTok=700){
+async function callClaude(system,user,maxTok=400,model='fast'){
   const key=getApiKey();
-  if(!key){return '__NO_KEY__';}
+  if(!key) return '__NO_KEY__';
+  // Use Haiku for speed on feedback/tutor, Sonnet only for writing marking
+  const modelId = model==='smart'
+    ? 'claude-sonnet-4-5'
+    : 'claude-haiku-4-5-20251001';
+  const controller = new AbortController();
+  const timeout = setTimeout(()=>controller.abort(), 25000); // 25s timeout
   try{
     const r=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
+      signal:controller.signal,
       headers:{
         'Content-Type':'application/json',
         'x-api-key':key,
@@ -138,31 +145,34 @@ async function callClaude(system,user,maxTok=700){
         'anthropic-dangerous-direct-browser-access':'true'
       },
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
+        model:modelId,
         max_tokens:maxTok,
         system,
         messages:[{role:'user',content:user}]
       })
     });
+    clearTimeout(timeout);
     const d=await r.json();
     if(d.error){
-      if(d.error.type==='authentication_error'){
+      console.error('API error:',d.error.type, d.error.message);
+      if(d.error.type==='authentication_error'||d.error.type==='permission_error'){
         localStorage.removeItem('ss_apikey');
         return '__BAD_KEY__';
       }
-      console.error('API error:',d.error);
       return '';
     }
     return d.content?.map(c=>c.text||'').join('')||'';
   }catch(e){
-    console.error('callClaude error:',e);
+    clearTimeout(timeout);
+    if(e.name==='AbortError') console.error('API timeout');
+    else console.error('callClaude error:',e.message);
     return '';
   }
 }
 
 // Wrapper that handles key errors gracefully
-async function callClaudeUI(system,user,maxTok=700,onNoKey){
-  const result=await callClaude(system,user,maxTok);
+async function callClaudeUI(system,user,maxTok=400,onNoKey,model='fast'){
+  const result=await callClaude(system,user,maxTok,model);
   if(result==='__NO_KEY__'){
     showApiKeyPrompt(onNoKey||'render()');
     return null;
@@ -174,16 +184,18 @@ async function callClaudeUI(system,user,maxTok=700,onNoKey){
   return result;
 }
 async function getAIFeedback(q,userAns,correct){
-  const key=`${q.id}_${userAns}`;if(AIcache[key]||AIloading.has(key))return;AIloading.add(key);render();
-  const sys=`You are an expert Australian selective school tutor. 4 lines, no markdown:
-${correct?'✅ CORRECT! [one sentence: reinforce the reasoning skill]':'❌ Not quite. [one sentence: identify the error kindly]'}
-💡 CONCEPT: [key rule — max 12 words]
-🎯 IMPROVE: [concrete practice suggestion — max 12 words]
-🔥 CHALLENGE: [harder follow-up idea — max 12 words]`;
-  const usr=`Q: ${q.q.slice(0,200)}\nTopic: ${q.topic} | Style: ${STL[q.style]||q.style} | Difficulty: ${q.difficulty}\nChose: "${q.options[userAns]}" → ${correct?'CORRECT':'WRONG'}\nCorrect: "${q.options[q.answer]}"\nExp: ${(q.exp||'').slice(0,150)}`;
-  const fb=await callClaudeUI(sys,usr,350);
-  if(fb===null){AIloading.delete(key);render();return;}
-  AIcache[key]=fb||`${correct?'✅ Correct!':'❌ Not quite.'}\n💡 CONCEPT: Review the explanation.\n🎯 IMPROVE: Try 3 more ${q.topic} questions.\n🔥 CHALLENGE: Can you explain this to someone else?`;
+  if(!hasApiKey()) return;
+  const key=`${q.id}_${userAns}`;
+  if(AIcache[key]||AIloading.has(key)) return;
+  AIloading.add(key);
+  const sys=`Selective exam tutor. 3 short lines, plain text:
+${correct?'✅ [why correct, 8 words]':'❌ [what went wrong, 8 words]'}
+💡 [key rule for this question type, 8 words]
+🎯 [one practice tip, 8 words]`;
+  const usr=`${q.topic} Q: ${q.q.slice(0,100)}. Chosen: ${q.options[userAns]}. Correct: ${q.options[q.answer]}.`;
+  const fb=await callClaude(sys,usr,120);
+  if(fb && fb!=='__NO_KEY__' && fb!=='__BAD_KEY__') AIcache[key]=fb;
+  else if(fb==='__BAD_KEY__') localStorage.removeItem('ss_apikey');
   AIloading.delete(key);render();
 }
 
@@ -413,8 +425,18 @@ function qCard(q,idx,mode,userAns,submitted,revealed,showHint){
   const hintHtml=showHint&&q.hint&&!submitted&&!revealed?`<div class="hint-box">💡 ${q.hint}</div>`:'';
   let aiFb='';
   if(submitted&&userAns!==null){
-    if(fbLoad)aiFb=`<div class="aifb ${correct?'correct':'wrong'}"><span class="spin">⏳</span> <em style="color:var(--muted)">Getting coaching...</em></div>`;
-    else if(fb){const lines=fb.split('\n').filter(l=>l.trim());aiFb=`<div class="aifb ${correct?'correct':'wrong'}"><div class="aifb-hdr" style="color:var(--${correct?'green':'orange'})">🤖 AI Coaching</div>${lines.map(l=>`<div style="margin-bottom:4px">${l}</div>`).join('')}</div>`;}
+    if(fbLoad){
+      aiFb=`<div class="aifb ${correct?'correct':'wrong'}"><span class="spin">⏳</span> <em style="color:var(--muted)">Getting tip...</em></div>`;
+    } else if(fb){
+      const lines=fb.split('\n').filter(l=>l.trim());
+      aiFb=`<div class="aifb ${correct?'correct':'wrong'}">
+        <div class="aifb-hdr" style="color:var(--${correct?'green':'orange'})">🤖 Quick Tip</div>
+        ${lines.map(l=>`<div style="margin-bottom:3px">${l}</div>`).join('')}
+      </div>`;
+    } else if(hasApiKey()){
+      // Show a small "get tip" button instead of auto-loading
+      aiFb=`<div style="margin-top:8px"><button class="btn bm bsm" style="font-size:12px" onclick="getAIFeedback(QUESTIONS.find(x=>x.id==='${q.id}')||{id:'${q.id}',topic:'${q.topic||''}',difficulty:'${q.difficulty||'medium'}',q:'',options:${JSON.stringify(q.options)},answer:${q.answer},exp:''},${userAns},${correct})">🤖 Get quick tip</button></div>`;
+    }
   }
   const browseActs=mode==='browse'?`<div class="fc gap8 mt14 wrap"><button class="btn bm bsm" onclick="toggleReveal('${q.id}')">${revealed?'🙈 Hide':'👁 Show'}</button>${!revealed?`<button class="btn bm bsm" onclick="toggleHint('${q.id}')">💡 Hint</button>`:''}<button class="btn ba bsm" onclick="practiceOne('${q.id}')">✏️ Practice</button></div>`:'';
   return `<div class="${cls}"><div class="mb8 fc gap8 wrap">${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''} ${q.topic?`<span class="tag tm">${q.topic}</span>`:''} ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''} ${q.style?`<span class="tag tm xs">${STL[q.style]||q.style}</span>`:''}</div><div class="qtxt">Q${idx+1}. ${q.q}</div>${hintHtml}${opts}${expHtml}${aiFb}${browseActs}</div>`;
@@ -458,7 +480,7 @@ function goToQ(i){
 }
 function submitBatch(){
   pSub=true;let c=0;
-  pQs.forEach((q,i)=>{if(pAns[i]!==null){const ok=pAns[i]===q.answer;if(ok)c++;if(currentUser)Profiles.recordAnswer(currentUser,q,ok);getAIFeedback(q,pAns[i],ok);}});
+  pQs.forEach((q,i)=>{if(pAns[i]!==null){const ok=pAns[i]===q.answer;if(ok)c++;if(currentUser)Profiles.recordAnswer(currentUser,q,ok);}});
   pScore=c;
   pResult=currentUser?Profiles.recordSession(currentUser,pQs,pAns,'batch',null):null;
   render();
@@ -605,7 +627,7 @@ function updateTimer(){const el=document.getElementById('exam-timer');if(!el)ret
 function submitExam(){
   clearInterval(examTimer);examTimer=null;examSub=true;
   const elapsed=examStart?Math.round((Date.now()-examStart)/1000):null;
-  exam.questions.forEach((q,i)=>{if(exam.answers[i]!==null)getAIFeedback(q,exam.answers[i],exam.answers[i]===q.answer);});
+  // AI feedback loads on demand when user taps 'Get Feedback' on each question
   examResult=currentUser?Profiles.recordSession(currentUser,exam.questions,exam.answers,'exam',exam.def):null;
   render();
 }
@@ -674,10 +696,10 @@ function renderSelPanel(){
   }
   return `<div class="card mb24" style="border-color:rgba(79,142,247,.3)"><div class="fc jsb mb14 wrap gap8"><h2 style="margin:0">${sec.e} ${sec.l}</h2><div class="fc gap8">${!isW?`<button class="btn bm bsm" onclick="selPQs=[];selPAns=[];selPSub=false;render()">🔄 New</button>`:''}<button class="btn bm bsm" onclick="selSec=null;render()">✖</button></div></div>${body}</div>`;
 }
-function submitSelPractice(){selPSub=true;selPQs.forEach((q,i)=>{if(selPAns[i]!==null){if(currentUser)Profiles.recordAnswer(currentUser,q,selPAns[i]===q.answer);getAIFeedback(q,selPAns[i],selPAns[i]===q.answer);}});render();}
+function submitSelPractice(){selPSub=true;selPQs.forEach((q,i)=>{if(selPAns[i]!==null){if(currentUser)Profiles.recordAnswer(currentUser,q,selPAns[i]===q.answer);}});render();}
 async function doWritingMark(){if(selWritingText.split(/\s+/).filter(Boolean).length<20)return;selWritingLoading=true;render();
   const prompt=selWritingPrompt||WRITING_PROMPTS[0];
-  const fb=await callClaudeUI(`You are an expert marker for Australian selective high school entry exams. Format exactly:\nSCORES:\nIdeas & Content: X/10\nStructure & Organisation: X/10\nLanguage & Vocabulary: X/10\nGrammar & Mechanics: X/10\nTOTAL: X/40\n\nSTRENGTHS:\n• [specific strength]\n• [second strength]\n\nTO IMPROVE:\n• [actionable suggestion]\n• [second suggestion]\n\nVERDICT: [One encouraging sentence with a clear next step]`,`Prompt: ${prompt.text}\n\nStudent response:\n${selWritingText}`,900);
+  const fb=await callClaudeUI('Selective exam writing marker. Format exactly:\nSCORES: Ideas X/10, Structure X/10, Language X/10, Mechanics X/10, TOTAL X/40\nSTRENGTH: [one line]\nIMPROVE: [one line]\nVERDICT: [one encouraging sentence]',`Prompt: ${prompt.text.slice(0,100)}\nResponse: ${selWritingText.slice(0,600)}`,250,null,'smart');
   if(fb===null){selWritingLoading=false;render();return;}
   selWritingFeedback=fb||'Unable to retrieve feedback. Please try again.';selWritingLoading=false;if(currentUser)Profiles.recordWriting(currentUser);render();
 }
@@ -695,7 +717,7 @@ function renderStudy(){
 async function doLoadNotes(){
   if(!hasApiKey()){showApiKeyPrompt('doLoadNotes()');return;}
   studyLoading=true;studyNotes='';render();
-  const t=await callClaudeUI('You are a clear tutor for Australian Year 7–10 students. Write structured study notes using ## for main headings. Include: key concepts, important formulas or rules, 2 worked examples with clear steps. Keep under 350 words. No bold markdown, just ## headings and plain text.',`Study notes topic: ${studyTopic} (${studySub}), for Australian Year 8–9 students.`);
+  const t=await callClaudeUI('Year 8-9 Australia tutor. Study notes with ## headings. Key concepts, 1 formula, 1 worked example. Under 200 words. Plain text only.',`Topic: ${studyTopic} (${studySub}).`);
   if(t===null){studyLoading=false;render();return;}
   studyNotes=t||'Could not load notes. Please check your API key in the 👤 Profile page and try again.';
   studyLoading=false;if(currentUser)Profiles.recordStudy(currentUser);render();
@@ -718,7 +740,7 @@ async function doAsk(){
   if(!tutorQ.trim())return;
   if(!hasApiKey()){showApiKeyPrompt('doAsk()');return;}
   tutorLoading=true;tutorR='';render();
-  const t=await callClaudeUI('You are a friendly, expert tutor for Australian students Grades 4–10 preparing for school or selective entry exams. Give clear, specific explanations with worked examples. For maths: show full working step by step. Keep under 300 words. Plain text only (no markdown). Be warm and encouraging.',tutorQ,800);
+  const t=await callClaudeUI('Australian selective exam tutor, Grades 4-10. Clear explanation, show full working for maths. Under 200 words. Plain text only.',tutorQ,400);
   if(t===null){tutorLoading=false;render();return;}
   tutorR=t||'Sorry, something went wrong. Please check your API key in the 👤 Profile page and try again.';
   tutorLoading=false;if(currentUser)Profiles.recordTutor(currentUser);render();
