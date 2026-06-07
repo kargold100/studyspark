@@ -81,6 +81,7 @@ let studySub=null,studyTopic=null,studyNotes='',studyLoading=false;
 let tutorQ='',tutorR='',tutorLoading=false;
 let funTab='little',funAnswered={},funShowExp={},littleZone='early',littleSection=null;
 let langSelected=null,langSection=null,langAnswered={},langShowExp={};
+let browseAnswered={},browseShowExp={}; // per-question state in browse mode
 let activeQuiz=null,quizAnswers=[],quizSub=false;
 let dailyAnswers={m:null,e:null,b:null};
 let AIcache={},AIloading=new Set();
@@ -445,23 +446,34 @@ function qCard(q,idx,mode,userAns,submitted,revealed,showHint){
 // ── HANDLERS ──────────────────────────────────────────────────────────────────
 function handleAnswer(mode,idx,oi){
   if(mode==='oneByOne'){
-    if(pSub||pAns[pIdx]!==null)return;
-    pAns[pIdx]=oi;const q=pQs[pIdx];const ok=oi===q.answer;
-    if(ok)pScore++;if(currentUser)Profiles.recordAnswer(currentUser,q,ok);
-    pSub=true;getAIFeedback(q,oi,ok);render();
+    if(pSub)return;
+    pAns[pIdx]=oi;render();
   }else if(mode==='batch'){if(pSub)return;pAns[idx]=oi;render();}
   else if(mode==='exam'){if(examSub)return;exam.answers[idx]=oi;render();}
   else if(mode==='sel'){if(selPSub)return;selPAns[idx]=oi;render();}
   else if(mode==='quiz'){if(quizSub)return;quizAnswers[idx]=oi;render();}
+}
+
+function submitOneByOne(){
+  const ans=pAns[pIdx];
+  if(ans===null||pSub)return;
+  const q=pQs[pIdx];const ok=ans===q.answer;
+  if(ok)pScore++;
+  if(currentUser)Profiles.recordAnswer(currentUser,q,ok);
+  pSub=true;
+  getAIFeedback(q,ans,ok);
+  render();
 }
 function toggleReveal(id){revealedIds.has(id)?revealedIds.delete(id):revealedIds.add(id);render();}
 function toggleHint(id){hintVisible[id]=!hintVisible[id];render();}
 function practiceOne(id){const q=QUESTIONS.find(x=>x.id===id);if(!q)return;pQs=[q];pAns=[null];pSub=false;pMode='oneByOne';pScore=0;pIdx=0;pResult=null;screen='practice';nav('practice');}
 
 // ── PRACTICE ──────────────────────────────────────────────────────────────────
-function startPractice(f={},mode='oneByOne',limit=12,qList=null){
-  pQs=qList||shuffle(filterQs(f)).slice(0,limit);
-  if(!pQs.length){alert('No questions match those filters.');return;}
+function startPractice(f={},mode='oneByOne',limit=20,qList=null){
+  const pool=qList||shuffle(filterQs(f));
+  // If limit explicitly passed use it, otherwise default to 20 but allow up to all
+  pQs=pool.slice(0,Math.min(pool.length,limit));
+  if(!pQs.length){alert('No questions match those filters. Try different settings.');return;}
   pAns=Array(pQs.length).fill(null);pSub=false;pMode=mode;pScore=0;pIdx=0;pResult=null;
   nav('practice');
 }
@@ -492,11 +504,11 @@ function renderPracticeMenu(){
   const styles=['acer','hendersons','psle','contour','james_ann','edutest','matrix','hast','oc'];
   return `<div class="page">${profileBar()}<h1>✏️ Practice Mode</h1><p class="mt mb20">Every correct answer earns XP and counts toward achievements.</p>
     <div class="g2 mb24">
-      <div class="card hov" style="border-color:rgba(79,142,247,.4)" onclick="startPractice({},'oneByOne',12)"><div style="font-size:28px;margin-bottom:8px">1️⃣</div><h3>One at a Time</h3><p class="mt sm">Answer → AI coaching → next. Earn XP on every correct answer.</p><button class="btn ba bsm mt14">Start (12 Qs)</button></div>
-      <div class="card hov" style="border-color:rgba(61,214,140,.4)" onclick="startPractice({},'batch',15)"><div style="font-size:28px;margin-bottom:8px">📋</div><h3>Answer All First</h3><p class="mt sm">Do all questions then submit — get stars for your accuracy.</p><button class="btn bg bsm mt14">Start (15 Qs)</button></div>
+      <div class="card hov" style="border-color:rgba(79,142,247,.4)" onclick="startPractice({},'oneByOne',20)"><div style="font-size:28px;margin-bottom:8px">1️⃣</div><h3>One at a Time</h3><p class="mt sm">Select an answer → Check it → get coaching → move on. Best for focused learning.</p><div class="fc gap8 mt14 wrap"><button class="btn ba bsm" onclick="event.stopPropagation();startPractice({},'oneByOne',10)">10 Qs</button><button class="btn ba bsm" onclick="event.stopPropagation();startPractice({},'oneByOne',20)">20 Qs</button><button class="btn ba bsm" onclick="event.stopPropagation();startPractice({},'oneByOne',9999)">All Qs</button></div></div>
+      <div class="card hov" style="border-color:rgba(61,214,140,.4)" onclick="startPractice({},'batch',20)"><div style="font-size:28px;margin-bottom:8px">📋</div><h3>Answer All Then Submit</h3><p class="mt sm">Answer all questions, then submit to see your score and review all at once.</p><div class="fc gap8 mt14 wrap"><button class="btn bg bsm" onclick="event.stopPropagation();startPractice({},'batch',10)">10 Qs</button><button class="btn bg bsm" onclick="event.stopPropagation();startPractice({},'batch',20)">20 Qs</button><button class="btn bg bsm" onclick="event.stopPropagation();startPractice({},'batch',9999)">All Qs</button></div></div>
     </div>
-    <h2 class="mb14">By Section</h2><div class="g3 mb20">${rows.map(s=>`<div class="card hov" onclick="startPractice({section:'${s.s}'},'oneByOne',10)"><div style="font-weight:800;margin-bottom:3px">${s.l}</div><div class="mt xs">${filterQs({section:s.s}).length} Qs</div><button class="btn bsm mt14" style="background:${s.c};color:#fff">Go →</button></div>`).join('')}</div>
-    <h2 class="mb14">By Provider Style</h2><div class="g3">${styles.map(st=>`<div class="card hov" onclick="startPractice({style:'${st}'},'oneByOne',10)"><div style="font-weight:800;margin-bottom:3px">${STL[st]}</div><div class="mt xs">${filterQs({style:st}).length} Qs</div><button class="btn bm bsm mt14">Go →</button></div>`).join('')}</div>
+    <h2 class="mb14">By Section</h2><div class="g3 mb20">${rows.map(s=>{const cnt=filterQs({section:s.s}).length;return `<div class="card hov" onclick="startPractice({section:'${s.s}'},'oneByOne',9999)"><div style="font-weight:800;margin-bottom:3px">${s.l}</div><div class="mt xs">${cnt} questions available</div><div class="fc gap8 mt14 wrap"><button class="btn bsm" style="background:${s.c};color:#fff" onclick="event.stopPropagation();startPractice({section:'${s.s}'},'oneByOne',10)">10 Qs</button><button class="btn bsm" style="background:${s.c};color:#fff" onclick="event.stopPropagation();startPractice({section:'${s.s}'},'oneByOne',9999)">All ${cnt}</button></div></div>`;}).join('')}</div>
+    <h2 class="mb14">By Provider Style</h2><div class="g3">${styles.map(st=>{const cnt=filterQs({style:st}).length;return `<div class="card hov" onclick="startPractice({style:'${st}'},'oneByOne',9999)"><div style="font-weight:800;margin-bottom:3px">${STL[st]}</div><div class="mt xs">${cnt} questions</div><div class="fc gap8 mt14 wrap"><button class="btn bm bsm" onclick="event.stopPropagation();startPractice({style:'${st}'},'oneByOne',10)">10 Qs</button><button class="btn bm bsm" onclick="event.stopPropagation();startPractice({style:'${st}'},'oneByOne',9999)">All ${cnt}</button></div></div>`;}).join('')}</div>
   </div>`;
 }
 
@@ -566,7 +578,7 @@ function renderOneByOne(){
     <div class="fc gap8 mt14 wrap">
       ${pIdx>0?`<button class="btn bm bsm" onclick="goToQ(${pIdx-1})">← Back</button>`:''}
       ${!sub
-        ?`<button class="btn ba" onclick="handleAnswer('oneByOne',${pIdx},${ans!==null?ans:-1})" ${ans===null?'disabled':''}>✅ Check Answer</button>
+        ?`<button class="btn ba" onclick="submitOneByOne()" ${ans===null?'disabled':''}>✅ Check Answer</button>
            ${q.hint&&!hintVisible[q.id]&&ans===null?`<button class="btn bm bsm" onclick="toggleHint('${q.id}')">💡 Hint</button>`:''}`
         :pIdx<pQs.length-1
           ?`<button class="btn ba" onclick="nextQ()">Next →</button>`
@@ -603,15 +615,61 @@ function renderBatch(){
 // ── BROWSE ────────────────────────────────────────────────────────────────────
 function renderBrowse(){
   const filtered=filterQs(browseFilters);
-  const sel=(k,lbl,opts)=>`<div><label>${lbl}</label><select onchange="browseFilters['${k}']=this.value;render()">${opts.map(v=>`<option value="${v}"${browseFilters[k]===v?' selected':''}>${v==='ALL'?'All':v}</option>`).join('')}</select></div>`;
+  const selEl=(k,lbl,opts)=>`<div>
+    <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px">${lbl}</label>
+    <select onchange="browseFilters['${k}']=this.value;browseAnswered={};browseShowExp={};render()" style="width:auto;min-width:110px;padding:6px 9px;font-size:12px">
+      ${opts.map(v=>`<option value="${v}"${browseFilters[k]===v?' selected':''}>${v==='ALL'?'All':v}</option>`).join('')}
+    </select>
+  </div>`;
   return `<div class="page">${profileBar()}
-    <div class="fc jsb mb14 wrap gap8"><div><h1>📋 Question Bank</h1><p class="mt sm">${QUESTIONS.length} total · <strong>${filtered.length}</strong> matching</p></div>
-    <div class="fc gap8 wrap"><button class="btn boa bsm" onclick="filtered.forEach(q=>revealedIds.add(q.id));render()">👁 Reveal All</button><button class="btn bm bsm" onclick="revealedIds.clear();render()">🙈 Hide</button>${filtered.length?`<button class="btn ba bsm" onclick="startPractice(browseFilters,'oneByOne',12)">✏️ Practice These</button>`:''}</div></div>
-    <div class="fbar">${sel('section','Section',['ALL',...uniq(QUESTIONS.map(q=>q.section))])}${sel('difficulty','Difficulty',['ALL','easy','medium','hard'])}${sel('style','Style',['ALL',...uniq(QUESTIONS.map(q=>q.style).filter(Boolean))])}${sel('topic','Topic',['ALL',...uniq(QUESTIONS.map(q=>q.topic)).sort()])}${sel('grade','Grade',['ALL',...uniq(QUESTIONS.map(q=>q.grade))])}</div>
-    ${filtered.length===0?`<div class="loading">🔍 No questions match.</div>`:filtered.map((q,i)=>qCard(q,i,'browse',null,false,revealedIds.has(q.id),hintVisible[q.id])).join('')}
+    <div class="fc jsb mb14 wrap gap8">
+      <div><h1>📋 Question Bank</h1>
+        <p class="mt sm">${QUESTIONS.length} total · <strong>${filtered.length}</strong> matching — click any option to answer</p>
+      </div>
+      <div class="fc gap8 wrap">
+        <button class="btn ba bsm" onclick="startPractice(browseFilters,'oneByOne',Math.min(${filtered.length},20))">✏️ Practice ${Math.min(filtered.length,20)} of These</button>
+        <button class="btn bm bsm" onclick="browseAnswered={};browseShowExp={};render()">🔄 Reset Answers</button>
+      </div>
+    </div>
+    <div class="fbar" style="gap:8px">
+      ${selEl('section','Section',['ALL',...uniq(QUESTIONS.map(q=>q.section))])}
+      ${selEl('difficulty','Difficulty',['ALL','easy','medium','hard'])}
+      ${selEl('style','Style',['ALL',...uniq(QUESTIONS.map(q=>q.style).filter(Boolean))])}
+      ${selEl('topic','Topic',['ALL',...uniq(QUESTIONS.map(q=>q.topic)).sort()])}
+    </div>
+    ${filtered.length===0
+      ? `<div class="loading">🔍 No questions match. Try clearing some filters.</div>`
+      : filtered.map((q,i)=>{
+          const bKey='br_'+q.id;
+          const bAns=browseAnswered[bKey];
+          const bSub=bAns!==undefined;
+          const bCorrect=bSub&&bAns===q.answer;
+          // Build interactive card
+          const opts=q.options.map((opt,oi)=>{
+            let c='opt';
+            if(bSub){c+=' dis';if(oi===q.answer)c+=' cor';else if(bAns===oi)c+=' wrg';}
+            const click=!bSub?`onclick="browseAnswered['${bKey}']=${oi};browseShowExp['${bKey}']=true;if(${oi}===${q.answer}&&currentUser)Profiles.recordAnswer(currentUser,QUESTIONS.find(x=>x.id==='${q.id}'),true);render()"` :'';
+            const tick=bSub&&oi===q.answer?'<span class="otick">✓</span>':bSub&&bAns===oi?'<span class="otick">✗</span>':'';
+            return `<div class="${c}" ${click}><span class="oltr">${'ABCD'[oi]}.</span><span style="flex:1">${opt}</span>${tick}</div>`;
+          }).join('');
+          const exp=bSub&&q.exp?`<div class="exp"><strong style="color:var(--accent)">Explanation:</strong>\n${q.exp}</div>`:'';
+          const hint=browseShowExp[bKey+'_hint']?`<div class="hint-box">💡 ${q.hint}</div>`:
+            (!bSub&&q.hint?`<button class="btn bm bsm mt8" onclick="browseShowExp['${bKey}_hint']=true;render()" style="font-size:11px">💡 Hint</button>`:'');
+          const result=bSub?`<div class="sm mt10" style="color:var(--${bCorrect?'green':'orange'})">${bCorrect?'✅ Correct!':'❌ Not quite — see the explanation below.'}</div>`:'';
+          return `<div class="qcard ${bSub?bCorrect?'correct':'wrong':''}" style="margin-bottom:12px">
+            <div class="mb8 fc gap8 wrap">
+              ${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''}
+              ${q.topic?`<span class="tag tm">${q.topic}</span>`:''}
+              ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''}
+              ${q.style?`<span class="tag tm xs">${STL[q.style]||q.style}</span>`:''}
+            </div>
+            <div class="qtxt">Q${i+1}. ${q.q}</div>
+            ${opts}${hint}${result}${exp}
+          </div>`;
+        }).join('')
+    }
   </div>`;
 }
-
 // ── EXAMS ─────────────────────────────────────────────────────────────────────
 function startExam(defIdx){
   const def=EXAM_DEFS[defIdx];clearInterval(examTimer);
@@ -688,11 +746,11 @@ function renderSelPanel(){
     <div class="fc jsb mt14 mb14 wrap gap8"><span class="mt sm">${wc} words ${wc>=200?'<span style="color:var(--green)">✓</span>':''}</span><button class="btn bp" onclick="doWritingMark()" ${selWritingLoading||wc<20?'disabled':''}>${selWritingLoading?'<span class="spin">⏳</span> Marking...':'📋 Get AI Score'}</button></div>
     ${selWritingFeedback?`<div class="card" style="border-color:rgba(61,214,140,.4);padding:20px"><div style="font-weight:800;color:var(--green);margin-bottom:12px">📋 AI Marker Feedback</div><pre style="white-space:pre-wrap;font-size:13px;line-height:1.9;font-family:var(--font)">${selWritingFeedback}</pre></div>`:''}`;
   }else{
-    if(!selPQs.length){body=`<div class="loading"><span class="spin">⏳</span></div>`;setTimeout(()=>{selPQs=shuffle(filterQs({section:selSec})).slice(0,6);selPAns=Array(selPQs.length).fill(null);render();},50);}
+    if(!selPQs.length){body=`<div class="loading"><span class="spin">⏳</span></div>`;setTimeout(()=>{const pool=filterQs({section:selSec});selPQs=shuffle(pool).slice(0,Math.min(pool.length,15));selPAns=Array(selPQs.length).fill(null);render();},50);}
     else{const c=selPAns.filter((a,i)=>a===selPQs[i]?.answer).length;const pct=selPSub?Math.round(c/selPQs.length*100):0;
       body=`${selPSub?`<div class="sbox ${pct>=60?'pass':'fail'} mb14"><div class="stars-display">${starsHtml(pct>=90?3:pct>=70?2:pct>=50?1:0)}</div><div style="font-weight:900;font-size:22px;color:var(--${pct>=60?'green':'orange'})">${c}/${selPQs.length} — ${pct}%</div></div>`:''}
       ${selPQs.map((q,i)=>qCard(q,i,'sel',selPAns[i],selPSub,false,false)).join('')}
-      ${!selPSub?`<button class="btn ba bfull mt14" style="padding:11px" onclick="submitSelPractice()">✅ Check Answers</button>`:`<button class="btn bm bsm mt14" onclick="selPQs=[];selPAns=[];selPSub=false;render()">🔄 New Questions</button>`}`;}
+      ${!selPSub?`<button class="btn ba bfull mt14" style="padding:11px" onclick="submitSelPractice()">✅ Check Answers</button>`:`<div class="fc gap8 wrap mt14"><button class="btn bm bsm" onclick="selPQs=[];selPAns=[];selPSub=false;render()">🔄 10 New Questions</button><button class="btn ba bsm" onclick="startPractice({section:selSec},'oneByOne',9999)">✏️ Do All in Practice Mode</button></div>`}`;}
   }
   return `<div class="card mb24" style="border-color:rgba(79,142,247,.3)"><div class="fc jsb mb14 wrap gap8"><h2 style="margin:0">${sec.e} ${sec.l}</h2><div class="fc gap8">${!isW?`<button class="btn bm bsm" onclick="selPQs=[];selPAns=[];selPSub=false;render()">🔄 New</button>`:''}<button class="btn bm bsm" onclick="selSec=null;render()">✖</button></div></div>${body}</div>`;
 }
