@@ -74,6 +74,7 @@ let screen='home', currentUser=null;
 let browseFilters={section:'ALL',grade:'ALL',topic:'ALL',difficulty:'ALL',style:'ALL'};
 let revealedIds=new Set(), hintVisible={};
 let pQs=[],pAns=[],pSub=false,pMode='oneByOne',pScore=0,pIdx=0,pResult=null;
+let pPageSize=10,pPagePool=[],pPageFilters={},pTotalDone=0,pTotalCorrect=0; // pagination
 let exam=null,examSub=false,examTL=0,examTimer=null,examStart=null,examResult=null;
 let selState='VIC',selSec=null,selPQs=[],selPAns=[],selPSub=false;
 let selWritingPrompt=null,selWritingText='',selWritingFeedback='',selWritingLoading=false;
@@ -469,13 +470,23 @@ function toggleHint(id){hintVisible[id]=!hintVisible[id];render();}
 function practiceOne(id){const q=QUESTIONS.find(x=>x.id===id);if(!q)return;pQs=[q];pAns=[null];pSub=false;pMode='oneByOne';pScore=0;pIdx=0;pResult=null;screen='practice';nav('practice');}
 
 // ── PRACTICE ──────────────────────────────────────────────────────────────────
-function startPractice(f={},mode='oneByOne',limit=20,qList=null){
-  const pool=qList||shuffle(filterQs(f));
-  // If limit explicitly passed use it, otherwise default to 20 but allow up to all
-  pQs=pool.slice(0,Math.min(pool.length,limit));
-  if(!pQs.length){alert('No questions match those filters. Try different settings.');return;}
-  pAns=Array(pQs.length).fill(null);pSub=false;pMode=mode;pScore=0;pIdx=0;pResult=null;
+function startPractice(f={},mode='oneByOne',pageSize=10,qList=null){
+  const fullPool=qList||shuffle(filterQs(f));
+  if(!fullPool.length){alert('No questions match those filters. Try different settings.');return;}
+  pPagePool=fullPool;
+  pPageFilters=f;
+  pPageSize=Math.min(pageSize,fullPool.length);
+  pMode=mode; // set mode BEFORE loadPracticePage
+  pTotalDone=0;pTotalCorrect=0;
+  loadPracticePage(0);
   nav('practice');
+}
+
+function loadPracticePage(startIdx){
+  const page=pPagePool.slice(startIdx,startIdx+pPageSize);
+  pQs=page;
+  pAns=Array(page.length).fill(null);
+  pSub=false;pMode=pMode||'oneByOne';pScore=0;pIdx=0;pResult=null;
 }
 function nextQ(){
   if(pIdx<pQs.length-1){pIdx++;pSub=pAns[pIdx]!==null;render();return;}
@@ -504,8 +515,28 @@ function renderPracticeMenu(){
   const styles=['acer','hendersons','psle','contour','james_ann','edutest','matrix','hast','oc'];
   return `<div class="page">${profileBar()}<h1>✏️ Practice Mode</h1><p class="mt mb20">Every correct answer earns XP and counts toward achievements.</p>
     <div class="g2 mb24">
-      <div class="card hov" style="border-color:rgba(79,142,247,.4)" onclick="startPractice({},'oneByOne',20)"><div style="font-size:28px;margin-bottom:8px">1️⃣</div><h3>One at a Time</h3><p class="mt sm">Select an answer → Check it → get coaching → move on. Best for focused learning.</p><div class="fc gap8 mt14 wrap"><button class="btn ba bsm" onclick="event.stopPropagation();startPractice({},'oneByOne',10)">10 Qs</button><button class="btn ba bsm" onclick="event.stopPropagation();startPractice({},'oneByOne',20)">20 Qs</button><button class="btn ba bsm" onclick="event.stopPropagation();startPractice({},'oneByOne',9999)">All Qs</button></div></div>
-      <div class="card hov" style="border-color:rgba(61,214,140,.4)" onclick="startPractice({},'batch',20)"><div style="font-size:28px;margin-bottom:8px">📋</div><h3>Answer All Then Submit</h3><p class="mt sm">Answer all questions, then submit to see your score and review all at once.</p><div class="fc gap8 mt14 wrap"><button class="btn bg bsm" onclick="event.stopPropagation();startPractice({},'batch',10)">10 Qs</button><button class="btn bg bsm" onclick="event.stopPropagation();startPractice({},'batch',20)">20 Qs</button><button class="btn bg bsm" onclick="event.stopPropagation();startPractice({},'batch',9999)">All Qs</button></div></div>
+      <div class="card" style="border-color:rgba(79,142,247,.4)">
+        <div style="font-size:28px;margin-bottom:8px">1️⃣</div>
+        <h3 class="mb8">One at a Time</h3>
+        <p class="mt sm mb14">Select → Check → get tip → Next. Pages of 10 — keep going as long as you like!</p>
+        <p class="xs mt mb10">How many per page?</p>
+        <div class="fc gap8 wrap">
+          <button class="btn ba bsm" onclick="startPractice({},'oneByOne',5)">5 per page</button>
+          <button class="btn ba bsm" onclick="startPractice({},'oneByOne',10)">10 per page</button>
+          <button class="btn ba bsm" onclick="startPractice({},'oneByOne',20)">20 per page</button>
+        </div>
+      </div>
+      <div class="card" style="border-color:rgba(61,214,140,.4)">
+        <div style="font-size:28px;margin-bottom:8px">📋</div>
+        <h3 class="mb8">Answer All Then Submit</h3>
+        <p class="mt sm mb14">Answer a full page, submit it, review answers, then keep going to the next page.</p>
+        <p class="xs mt mb10">How many per page?</p>
+        <div class="fc gap8 wrap">
+          <button class="btn bg bsm" onclick="startPractice({},'batch',5)">5 per page</button>
+          <button class="btn bg bsm" onclick="startPractice({},'batch',10)">10 per page</button>
+          <button class="btn bg bsm" onclick="startPractice({},'batch',20)">20 per page</button>
+        </div>
+      </div>
     </div>
     <h2 class="mb14">By Section</h2><div class="g3 mb20">${rows.map(s=>{const cnt=filterQs({section:s.s}).length;return `<div class="card hov" onclick="startPractice({section:'${s.s}'},'oneByOne',9999)"><div style="font-weight:800;margin-bottom:3px">${s.l}</div><div class="mt xs">${cnt} questions available</div><div class="fc gap8 mt14 wrap"><button class="btn bsm" style="background:${s.c};color:#fff" onclick="event.stopPropagation();startPractice({section:'${s.s}'},'oneByOne',10)">10 Qs</button><button class="btn bsm" style="background:${s.c};color:#fff" onclick="event.stopPropagation();startPractice({section:'${s.s}'},'oneByOne',9999)">All ${cnt}</button></div></div>`;}).join('')}</div>
     <h2 class="mb14">By Provider Style</h2><div class="g3">${styles.map(st=>{const cnt=filterQs({style:st}).length;return `<div class="card hov" onclick="startPractice({style:'${st}'},'oneByOne',9999)"><div style="font-weight:800;margin-bottom:3px">${STL[st]}</div><div class="mt xs">${cnt} questions</div><div class="fc gap8 mt14 wrap"><button class="btn bm bsm" onclick="event.stopPropagation();startPractice({style:'${st}'},'oneByOne',10)">10 Qs</button><button class="btn bm bsm" onclick="event.stopPropagation();startPractice({style:'${st}'},'oneByOne',9999)">All ${cnt}</button></div></div>`;}).join('')}</div>
@@ -528,31 +559,58 @@ function renderOneByOne(){
   if(pIdx>=pQs.length){
     const pct=Math.round(pScore/pQs.length*100);
     const wrongQs=pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer);
+    // Accumulate totals across pages (only once per result view)
+    if(!pResult){
+      pTotalDone=(pTotalDone||0)+pQs.length;
+      pTotalCorrect=(pTotalCorrect||0)+pScore;
+    }
+    // Work out pagination position
+    const currentPageStart=pPagePool.indexOf(pQs[0]);
+    const nextStart=currentPageStart+pQs.length;
+    const hasMore=pPagePool.length>0&&nextStart<pPagePool.length;
+    const pagesTotal=Math.ceil(pPagePool.length/pPageSize);
+    const pageCurrent=Math.ceil((currentPageStart+1)/pPageSize);
+
+    if(!pResult)pResult=currentUser?Profiles.recordSession(currentUser,pQs,pAns,pMode,null):null;
+
     return `<div class="page">
       ${sessionResultBlock(pct,pScore,pQs.length,pResult)}
-      <div class="fc gap8 wrap mb24" style="justify-content:center">
-        <button class="btn ba" onclick="startPractice({},'oneByOne',12)">🔄 New Session</button>
-        <button class="btn bm" onclick="pQs=[];render()">← Menu</button>
+
+      ${hasMore?`<div class="card mb20" style="border-color:rgba(79,142,247,.4);padding:22px;text-align:center">
+        <div style="font-size:28px;margin-bottom:8px">➡️</div>
+        <h3 class="mb8">Page ${pageCurrent} of ${pagesTotal} complete</h3>
+        <p class="mt sm mb14">${pPagePool.length-nextStart} more questions available in this set.</p>
+        <div class="fc gap8 wrap" style="justify-content:center">
+          <button class="btn ba blg" onclick="loadPracticePage(${nextStart});pMode='oneByOne';render()">
+            ▶ Next ${Math.min(pPageSize,pPagePool.length-nextStart)} Questions →
+          </button>
+          <button class="btn bm" onclick="pTotalDone=0;pTotalCorrect=0;pPagePool=[];pQs=[];render()">✖ Stop Here</button>
+        </div>
+        <div class="mt xs mt14">Running total: ${pTotalCorrect}/${pTotalDone} correct (${Math.round(pTotalCorrect/pTotalDone*100)}%)</div>
+      </div>`
+      :`<div class="fc gap8 wrap mb20" style="justify-content:center">
+        ${pTotalDone>pQs.length?`<div class="card mb14" style="text-align:center;width:100%;border-color:rgba(61,214,140,.4)"><h3>🏁 All Done! Running total: ${pTotalCorrect}/${pTotalDone} (${Math.round(pTotalCorrect/pTotalDone*100)}%)</h3></div>`:''}
+        <button class="btn ba" onclick="startPractice(pPageFilters,pMode,pPageSize)">🔄 New Session</button>
+        <button class="btn bm" onclick="pTotalDone=0;pTotalCorrect=0;pPagePool=[];pQs=[];render()">← Menu</button>
         <button class="btn bm" onclick="nav('profile')">👤 My Profile</button>
-      </div>
-      <h2 class="mb8">📋 Review All Questions</h2>
-      <p class="mt sm mb14">Tap any question number to jump to it. All answers, explanations and AI coaching are shown below.</p>
+      </div>`
+      }
+
+      <h2 class="mb8">📋 Review — Page ${pageCurrent}</h2>
+      <p class="mt sm mb14">All answers and explanations for this page.</p>
       ${pQs.map((q,i)=>{
-        const ans=pAns[i];
-        const answered=ans!==null;
-        const correct=answered&&ans===q.answer;
-        const statusDot=!answered?'⬜':correct?'✅':'❌';
+        const ans=pAns[i];const answered=ans!==null;const correct=answered&&ans===q.answer;
         return `<div class="card mb10" style="border-color:${!answered?'var(--border)':correct?'rgba(61,214,140,.4)':'rgba(247,79,79,.35)'}">
           <div class="fc jsb mb8">
-            <span class="sm" style="font-weight:700;color:var(--muted)">Q${i+1} ${statusDot} ${q.topic||''}</span>
+            <span class="sm" style="font-weight:700;color:var(--muted)">Q${i+1} ${!answered?'⬜':correct?'✅':'❌'} ${q.topic||''}</span>
             <span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>
           </div>
           ${qCard(q,i,'review',ans,answered,false,false)}
         </div>`;
       }).join('')}
       ${wrongQs.length?`<div class="card mt20" style="border-color:rgba(247,79,79,.3);padding:20px">
-        <h3 style="color:var(--red);margin-bottom:10px">⚠️ ${wrongQs.length} question${wrongQs.length>1?'s':''} to practise again</h3>
-        <button class="btn bo" onclick="startPractice({},'oneByOne',${wrongQs.length},[...pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer)])">🔄 Redo Wrong Questions</button>
+        <h3 style="color:var(--red);margin-bottom:10px">⚠️ ${wrongQs.length} to redo</h3>
+        <button class="btn bo" onclick="pPagePool=[...pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer)];pPageSize=${Math.min(wrongQs.length,10)};pMode='oneByOne';loadPracticePage(0);render()">🔄 Redo Wrong Questions</button>
       </div>`:''}
     </div>`;
   }
@@ -592,13 +650,29 @@ function renderOneByOne(){
 function renderBatch(){
   const c=pAns.filter((a,i)=>a===pQs[i]?.answer).length,pct=pSub?Math.round(c/pQs.length*100):0,answered=pAns.filter(a=>a!==null).length;
   const wrongQs=pSub?pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer):[];
+  const currentPageStart=pPagePool.length>0?pPagePool.indexOf(pQs[0]):0;
+  const nextStart=currentPageStart+pQs.length;
+  const hasMore=pSub&&pPagePool.length>0&&nextStart<pPagePool.length;
+  const pagesTotal=pPagePool.length>0?Math.ceil(pPagePool.length/pPageSize):1;
+  const pageCurrent=pPagePool.length>0?Math.ceil((currentPageStart+1)/pPageSize):1;
+  // Note: totals tracked in result section to avoid double-count on re-renders
   return `<div class="page">
-    <div class="fc jsb mb14 wrap gap8"><div><h1>📋 Batch Practice</h1><p class="mt sm">${pQs.length} questions${pSub?` · ${c} correct`:`· ${answered} answered`}</p></div><button class="btn bm bsm" onclick="pQs=[];render()">✖ Exit</button></div>
-    ${pSub?`${sessionResultBlock(pct,c,pQs.length,pResult)}<div class="fc gap8 mb20 wrap" style="justify-content:center">
-      <button class="btn ba" onclick="startPractice({},'batch',15)">🔄 New Session</button>
-      <button class="btn bm" onclick="pQs=[];render()">← Menu</button>
-      ${wrongQs.length?`<button class="btn bo bsm" onclick="startPractice({},'oneByOne',${wrongQs.length},[...pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer)])">🔄 Redo ${wrongQs.length} Wrong</button>`:''}
-    </div><h2 class="mb8">📋 Full Review</h2><p class="mt sm mb14">All questions with correct answers and explanations below.</p>`:''}
+    <div class="fc jsb mb14 wrap gap8"><div><h1>📋 Batch Practice</h1><p class="mt sm">${pQs.length} questions${pSub?` · ${c} correct`:`· ${answered} answered`}${pPagePool.length>pQs.length?` · Page ${pageCurrent}/${pagesTotal}`:''}</p></div><button class="btn bm bsm" onclick="pTotalDone=0;pTotalCorrect=0;pPagePool=[];pQs=[];render()">✖ Exit</button></div>
+    ${pSub?`${sessionResultBlock(pct,c,pQs.length,pResult)}
+    ${hasMore?`<div class="card mb20" style="border-color:rgba(79,142,247,.4);padding:20px;text-align:center">
+      <h3 class="mb8">Page ${pageCurrent} done! ${pPagePool.length-nextStart} more questions available.</h3>
+      <div class="fc gap8 wrap" style="justify-content:center">
+        <button class="btn ba" onclick="pSub=false;loadPracticePage(${nextStart});pMode='batch';render()">▶ Next ${Math.min(pPageSize,pPagePool.length-nextStart)} Questions →</button>
+        <button class="btn bm bsm" onclick="pTotalDone=0;pTotalCorrect=0;pPagePool=[];pQs=[];render()">✖ Stop</button>
+      </div>
+      ${pTotalDone>pQs.length?`<div class="mt xs mt10">Running total: ${pTotalCorrect}/${pTotalDone} correct</div>`:''}
+    </div>`:
+    `<div class="fc gap8 mb16 wrap" style="justify-content:center">
+      <button class="btn ba" onclick="startPractice(pPageFilters,'batch',pPageSize)">🔄 New Session</button>
+      <button class="btn bm" onclick="pTotalDone=0;pTotalCorrect=0;pPagePool=[];pQs=[];render()">← Menu</button>
+      ${wrongQs.length?`<button class="btn bo bsm" onclick="pPagePool=[...pQs.filter((_,i)=>pAns[i]!==null&&pAns[i]!==pQs[i].answer)];pPageSize=10;pMode='batch';loadPracticePage(0);render()">🔄 Redo ${wrongQs.length} Wrong</button>`:''}
+    </div>`}
+    <h2 class="mb8">📋 Full Review — Page ${pageCurrent}</h2><p class="mt sm mb14">All answers and explanations below.</p>`:''}
     ${pQs.map((q,i)=>{
       const a=pAns[i],correct=pSub&&a===q.answer;
       return pSub
