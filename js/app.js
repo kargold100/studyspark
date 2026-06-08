@@ -67,6 +67,7 @@ const SUBJECTS={
   Science:{e:'🔬',c:'var(--green)',t:['Cells & Biology','Elements & Chemistry','Forces & Physics','Earth Science','Ecology','Scientific Method']},
   History:{e:'🏛️',c:'var(--orange)',t:['World War I & II','Australian History','Ancient Civilisations','Democracy & Government','Civil Rights Movements']},
   Geography:{e:'🌍',c:'var(--purple)',t:['Climate & Weather','Natural Disasters','Landforms','Population Studies','Sustainability & Environment']},
+  Tamil:{e:'🌺',c:'var(--orange)',t:['Tamil Alphabet & Script','Tamil Numbers','Basic Vocabulary','Family & Daily Life','Tamil Grammar Basics','Classical Tamil Literature','Festivals & Culture','Tamil Proverbs']},
 };
 
 // ── STATE ─────────────────────────────────────────────────────────────────────

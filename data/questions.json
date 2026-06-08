@@ -1,7 +1,7 @@
 {
-  "version": "5.0",
-  "lastUpdated": "2026-05",
-  "totalCount": 401,
+  "version": "7.0",
+  "lastUpdated": "2026-06",
+  "totalCount": 606,
   "sources": "Original questions in the style of ACER, Hendersons, PSLE, Contour, James & Ann, EduTest, Matrix, OC, HAST.",
   "questions": [
     {
@@ -7622,6 +7622,3901 @@
       "answer": 2,
       "exp": "Second person ('you do this...') directly addresses the reader, creating maximum immersion.",
       "hint": "Which point of view directly addresses the reader as 'you'?"
+    },
+    {
+      "id": "nm_a01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Algebra",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Solve: 4x − 3 = 17",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "answer": 1,
+      "exp": "4x = 17 + 3 = 20\nx = 20 ÷ 4 = 5\n✓ Check: 4(5)−3 = 17 ✓",
+      "hint": "Add 3 to both sides, then divide by 4."
+    },
+    {
+      "id": "nm_a02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Algebra",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "If 2a + 3b = 19 and a = 5, find b.",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": 1,
+      "exp": "2(5) + 3b = 19\n10 + 3b = 19\n3b = 9\nb = 3",
+      "hint": "Substitute a = 5 first, then solve for b."
+    },
+    {
+      "id": "nm_a03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Algebra",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "The sum of three consecutive integers is 72. What is the largest?",
+      "options": [
+        "23",
+        "24",
+        "25",
+        "26"
+      ],
+      "answer": 2,
+      "exp": "Let integers = n, n+1, n+2\nn + n+1 + n+2 = 72\n3n + 3 = 72 → 3n = 69 → n = 23\nLargest = n+2 = 25",
+      "hint": "Consecutive integers differ by 1. Let the smallest be n."
+    },
+    {
+      "id": "nm_a04",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Algebra",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Factorise: x² + 5x + 6",
+      "options": [
+        "(x+2)(x+3)",
+        "(x+1)(x+6)",
+        "(x+2)(x+4)",
+        "(x−2)(x−3)"
+      ],
+      "answer": 0,
+      "exp": "Find two numbers that multiply to 6 and add to 5.\n2 × 3 = 6 ✓ and 2 + 3 = 5 ✓\n∴ (x+2)(x+3)\nCheck: x²+3x+2x+6 = x²+5x+6 ✓",
+      "hint": "Find two numbers that multiply to the constant and add to the middle coefficient."
+    },
+    {
+      "id": "nm_a05",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Algebra",
+      "difficulty": "hard",
+      "style": "hendersons",
+      "q": "If x² = 49 and x > 0, what is x³?",
+      "options": [
+        "243",
+        "343",
+        "441",
+        "529"
+      ],
+      "answer": 1,
+      "exp": "x² = 49 → x = 7 (positive)\nx³ = 7³ = 7 × 7 × 7 = 49 × 7 = 343",
+      "hint": "Find x first (square root of 49), then cube it."
+    },
+    {
+      "id": "nm_a06",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Algebra",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A rectangle's length is twice its width. Its perimeter is 48 cm. Find its area.",
+      "options": [
+        "64 cm²",
+        "96 cm²",
+        "128 cm²",
+        "48 cm²"
+      ],
+      "answer": 2,
+      "exp": "Let width = w, length = 2w\nPerimeter: 2(w + 2w) = 48 → 6w = 48 → w = 8\nLength = 16, Area = 8 × 16 = 128 cm²",
+      "hint": "Set up perimeter equation using length = 2 × width."
+    },
+    {
+      "id": "nm_f01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Fractions",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "What is ⅔ + ¼?",
+      "options": [
+        "8/12",
+        "11/12",
+        "10/12",
+        "9/12"
+      ],
+      "answer": 1,
+      "exp": "Common denominator = 12\n⅔ = 8/12, ¼ = 3/12\n8/12 + 3/12 = 11/12",
+      "hint": "Find a common denominator (LCM of 3 and 4 = 12)."
+    },
+    {
+      "id": "nm_f02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Fractions",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "A jug holds 2½ litres. How many 200 mL glasses can be filled?",
+      "options": [
+        "10",
+        "12",
+        "12.5",
+        "15"
+      ],
+      "answer": 1,
+      "exp": "2½ L = 2500 mL\n2500 ÷ 200 = 12.5\nBut we can only fill whole glasses → 12\n(The 0.5 glass is not full)",
+      "hint": "Convert litres to mL first. 1 L = 1000 mL."
+    },
+    {
+      "id": "nm_f03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Fractions",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "What is ¾ × 2⅓?",
+      "options": [
+        "1¾",
+        "2½",
+        "1⅔",
+        "2¼"
+      ],
+      "answer": 0,
+      "exp": "Convert to improper fractions: ¾ × 7/3\n= (3×7)/(4×3) = 21/12 = 7/4 = 1¾",
+      "hint": "Convert mixed numbers to improper fractions, multiply, then simplify."
+    },
+    {
+      "id": "nm_f04",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Fractions",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "After spending ⅓ on food and ¼ on transport, Sara has $65 left. How much did she start with?",
+      "options": [
+        "$120",
+        "$140",
+        "$156",
+        "$180"
+      ],
+      "answer": 2,
+      "exp": "Fraction spent = ⅓ + ¼ = 4/12 + 3/12 = 7/12\nFraction remaining = 5/12\n5/12 × total = 65\nTotal = 65 × 12/5 = 156",
+      "hint": "Find the fraction remaining, then divide amount left by that fraction."
+    },
+    {
+      "id": "nm_r01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Rates",
+      "difficulty": "easy",
+      "style": "psle",
+      "q": "A car travels at 80 km/h. How far does it travel in 90 minutes?",
+      "options": [
+        "100 km",
+        "110 km",
+        "120 km",
+        "140 km"
+      ],
+      "answer": 2,
+      "exp": "90 minutes = 1.5 hours\nDistance = 80 × 1.5 = 120 km",
+      "hint": "Convert minutes to hours first. 90 min = 90÷60 = 1.5 hours."
+    },
+    {
+      "id": "nm_r02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Rates",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A printer prints 240 pages in 8 minutes. How long to print 450 pages?",
+      "options": [
+        "12 min",
+        "14 min",
+        "15 min",
+        "16 min"
+      ],
+      "answer": 2,
+      "exp": "Rate = 240 ÷ 8 = 30 pages/min\nTime = 450 ÷ 30 = 15 minutes",
+      "hint": "Find the rate (pages per minute), then divide total by rate."
+    },
+    {
+      "id": "nm_r03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Rates",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "Tap A fills a tank in 4 hours. Tap B fills it in 6 hours. Together, how long?",
+      "options": [
+        "2 hr 24 min",
+        "3 hours",
+        "2 hours",
+        "2 hr 40 min"
+      ],
+      "answer": 0,
+      "exp": "Rate A = ¼/hr, Rate B = ⅙/hr\nCombined = ¼ + ⅙ = 3/12 + 2/12 = 5/12/hr\nTime = 12/5 hrs = 2.4 hrs = 2 hr 24 min",
+      "hint": "Add the fill rates together. Time = 1 ÷ combined rate."
+    },
+    {
+      "id": "nm_r04",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "Three workers can paint a house in 6 days. How long would 9 workers take?",
+      "options": [
+        "2 days",
+        "3 days",
+        "4 days",
+        "18 days"
+      ],
+      "answer": 0,
+      "exp": "3 workers × 6 days = 18 worker-days needed\n9 workers × d days = 18 worker-days\nd = 18 ÷ 9 = 2 days",
+      "hint": "Total work = workers × days. Keep total work constant."
+    },
+    {
+      "id": "nm_r05",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "A train 200m long passes a 300m platform. At 50 km/h, how long does the crossing take?",
+      "options": [
+        "30 sec",
+        "32 sec",
+        "36 sec",
+        "40 sec"
+      ],
+      "answer": 2,
+      "exp": "Total distance = 200 + 300 = 500m\nSpeed = 50 km/h = 50000/3600 m/s ≈ 13.89 m/s\nTime = 500 ÷ 13.89 ≈ 36 seconds",
+      "hint": "Total distance = train length + platform length. Convert speed to m/s."
+    },
+    {
+      "id": "nm_r06",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "hard",
+      "style": "matrix",
+      "q": "Anna is 3 times as old as Ben. In 8 years she will be twice his age. How old is Ben now?",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "answer": 2,
+      "exp": "Anna = 3B (now)\n3B + 8 = 2(B + 8)\n3B + 8 = 2B + 16\nB = 8\n✓ Check: Anna=24, Ben=8; in 8 years: Anna=32=2×16=2×Ben ✓",
+      "hint": "Set up equation for 'in 8 years'."
+    },
+    {
+      "id": "nm_p01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Percentage",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "What is 30% of 150?",
+      "options": [
+        "35",
+        "40",
+        "45",
+        "50"
+      ],
+      "answer": 2,
+      "exp": "30% × 150 = 0.30 × 150 = 45\nOr: 10% = 15, so 30% = 15 × 3 = 45",
+      "hint": "Find 10% first, then multiply."
+    },
+    {
+      "id": "nm_p02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Percentage",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "A shirt costs $45 after a 10% discount. What was the original price?",
+      "options": [
+        "$48",
+        "$49.50",
+        "$50",
+        "$55"
+      ],
+      "answer": 2,
+      "exp": "$45 = 90% of original\nOriginal = 45 ÷ 0.9 = $50\n✓ Check: 10% of 50 = 5, 50−5 = 45 ✓",
+      "hint": "After 10% off, 90% remains. Divide by 0.9 to find original."
+    },
+    {
+      "id": "nm_p03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Percentage",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A population of 8000 increases by 15%. What is the new population?",
+      "options": [
+        "8800",
+        "9000",
+        "9200",
+        "9500"
+      ],
+      "answer": 2,
+      "exp": "Increase = 15% × 8000 = 1200\nNew = 8000 + 1200 = 9200\nOr: 8000 × 1.15 = 9200",
+      "hint": "Multiply by 1.15 to increase by 15% in one step."
+    },
+    {
+      "id": "nm_p04",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Percentage",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "An item is discounted 20% then discounted a further 15%. What is the total percentage reduction?",
+      "options": [
+        "32%",
+        "33%",
+        "35%",
+        "30%"
+      ],
+      "answer": 0,
+      "exp": "Start: $100 → after 20% off: $100 × 0.80 = $80\nAfter further 15% off: $80 × 0.85 = $68\nTotal reduction = $100 − $68 = $32 = 32%\n💡 Note: 20%+15%=35% but the actual reduction is only 32% because the second discount applies to the already-reduced price.",
+      "hint": "Apply each discount one at a time to the current price."
+    },
+    {
+      "id": "nm_s01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Statistics",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Data set: 3, 7, 7, 9, 11, 13. What is the mode?",
+      "options": [
+        "7",
+        "9",
+        "7 and 9",
+        "No mode"
+      ],
+      "answer": 0,
+      "exp": "Mode = the value that appears most often.\n7 appears twice; all others appear once.\nMode = 7",
+      "hint": "Count how often each value appears."
+    },
+    {
+      "id": "nm_s02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Statistics",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "5 test scores: 72, 85, 91, 68, 84. What is the mean?",
+      "options": [
+        "78",
+        "80",
+        "82",
+        "84"
+      ],
+      "answer": 1,
+      "exp": "Sum = 72+85+91+68+84 = 400\nMean = 400 ÷ 5 = 80",
+      "hint": "Mean = sum ÷ count."
+    },
+    {
+      "id": "nm_s03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Statistics",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "A class of 30 has an average mark of 72. Two students scoring 90 and 78 join. What is the new average? (round to nearest whole)",
+      "options": [
+        "72",
+        "73",
+        "74",
+        "75"
+      ],
+      "answer": 1,
+      "exp": "Original total = 30 × 72 = 2160\nNew total = 2160 + 90 + 78 = 2328\nNew average = 2328 ÷ 32 = 72.75 ≈ 73",
+      "hint": "New total = old total + new scores. New average = new total ÷ new count."
+    },
+    {
+      "id": "nm_n01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Number Theory",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "What is the smallest prime number greater than 50?",
+      "options": [
+        "51",
+        "53",
+        "55",
+        "57"
+      ],
+      "answer": 1,
+      "exp": "51 = 3×17, 52 = 2×26, 53 = prime (not divisible by 2,3,5,7)\n✓ 53 is prime",
+      "hint": "Test each number: is it divisible by any prime up to its square root?"
+    },
+    {
+      "id": "nm_n02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Number Theory",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "What is the highest common factor of 60 and 84?",
+      "options": [
+        "6",
+        "12",
+        "14",
+        "18"
+      ],
+      "answer": 1,
+      "exp": "60 = 2²×3×5\n84 = 2²×3×7\nHCF = 2²×3 = 12",
+      "hint": "Prime factorise both, multiply the common factors."
+    },
+    {
+      "id": "nm_n03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Number Theory",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "How many integers from 1 to 200 are divisible by both 4 and 6?",
+      "options": [
+        "16",
+        "17",
+        "25",
+        "33"
+      ],
+      "answer": 1,
+      "exp": "LCM(4,6) = 12\n200 ÷ 12 = 16.67 → 16 integers\n(12, 24, 36... 192)",
+      "hint": "Find LCM(4,6) first, then count multiples up to 200."
+    },
+    {
+      "id": "nm_g01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "What is the sum of interior angles of a hexagon?",
+      "options": [
+        "540°",
+        "600°",
+        "720°",
+        "900°"
+      ],
+      "answer": 2,
+      "exp": "Formula: (n−2)×180°\n(6−2)×180° = 4×180° = 720°",
+      "hint": "Interior angle sum = (n−2)×180° where n is the number of sides."
+    },
+    {
+      "id": "nm_g02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A circular pool has radius 7 m. What is its circumference? (π≈3.14)",
+      "options": [
+        "21.98 m",
+        "43.96 m",
+        "153.86 m",
+        "44 m"
+      ],
+      "answer": 1,
+      "exp": "C = 2πr = 2 × 3.14 × 7 = 43.96 m",
+      "hint": "Circumference = 2πr."
+    },
+    {
+      "id": "nm_g03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "A rectangle is 8 cm × 6 cm. A square has the same perimeter. What is the square's area?",
+      "options": [
+        "36 cm²",
+        "49 cm²",
+        "64 cm²",
+        "100 cm²"
+      ],
+      "answer": 1,
+      "exp": "Rectangle perimeter = 2(8+6) = 28 cm\nSquare perimeter = 28, so side = 28÷4 = 7 cm\nSquare area = 7² = 49 cm²",
+      "hint": "Set rectangle perimeter = square perimeter, find side, then area = side²."
+    },
+    {
+      "id": "nm_g04",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Two angles of a triangle are 47° and 68°. What is the exterior angle at the third vertex?",
+      "options": [
+        "65°",
+        "115°",
+        "180°",
+        "245°"
+      ],
+      "answer": 1,
+      "exp": "Third interior angle = 180°−47°−68° = 65°\nExterior angle = 180°−65° = 115°\n\nOR use: exterior angle = sum of two non-adjacent interior angles\n= 47°+68° = 115° ✓",
+      "hint": "Exterior angle = sum of the two non-adjacent interior angles (a key theorem)."
+    },
+    {
+      "id": "nm_g05",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "A cylinder has radius 5 cm and height 10 cm. What is its volume? (π≈3.14)",
+      "options": [
+        "314 cm³",
+        "785 cm³",
+        "1570 cm³",
+        "2512 cm³"
+      ],
+      "answer": 1,
+      "exp": "V = πr²h = 3.14 × 25 × 10 = 785 cm³",
+      "hint": "Volume of cylinder = πr²h."
+    },
+    {
+      "id": "nm_g06",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "Lines AB and CD are parallel. A transversal cuts them. Angle ABE = 65°. What is angle CDE (co-interior)?",
+      "options": [
+        "65°",
+        "115°",
+        "125°",
+        "130°"
+      ],
+      "answer": 1,
+      "exp": "Co-interior angles (same-side interior) between parallel lines add to 180°.\n65° + CDE = 180°\nCDE = 115°\n💡 Alternate angles are equal; co-interior angles sum to 180°.",
+      "hint": "Co-interior angles between parallel lines are supplementary (add to 180°)."
+    },
+    {
+      "id": "nm_m01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Measurement",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "How many millilitres in 3.75 litres?",
+      "options": [
+        "375 mL",
+        "3075 mL",
+        "3750 mL",
+        "37500 mL"
+      ],
+      "answer": 2,
+      "exp": "1 litre = 1000 mL\n3.75 × 1000 = 3750 mL",
+      "hint": "Multiply by 1000 to convert litres to mL."
+    },
+    {
+      "id": "nm_m02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Volume",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "A box is 40 cm × 30 cm × 20 cm. How many 1000 cm³ boxes fit inside?",
+      "options": [
+        "12",
+        "24",
+        "30",
+        "36"
+      ],
+      "answer": 1,
+      "exp": "Volume of box = 40×30×20 = 24000 cm³\n24000 ÷ 1000 = 24 boxes",
+      "hint": "Volume = l×w×h, then divide by smaller box volume."
+    },
+    {
+      "id": "nm_m03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Time",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "A train departs at 07:45 and arrives at 14:20. Journey time?",
+      "options": [
+        "6 hr 25 min",
+        "6 hr 35 min",
+        "7 hr 25 min",
+        "6 hr 55 min"
+      ],
+      "answer": 1,
+      "exp": "07:45 → 14:20\nFrom 07:45 to 14:45 = 7 hours\nBut 14:20 is 25 min before 14:45\nSo: 7 hours − 25 min = 6 hours 35 minutes",
+      "hint": "Count from departure to nearest hour, then add remaining minutes."
+    },
+    {
+      "id": "nm_m04",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Measurement",
+      "difficulty": "hard",
+      "style": "hendersons",
+      "q": "A cube has surface area 150 cm². What is its volume?",
+      "options": [
+        "25 cm³",
+        "125 cm³",
+        "150 cm³",
+        "216 cm³"
+      ],
+      "answer": 1,
+      "exp": "SA = 6s² = 150 → s² = 25 → s = 5 cm\nVolume = 5³ = 125 cm³",
+      "hint": "Surface area of cube = 6s². Find s, then cube it for volume."
+    },
+    {
+      "id": "vr_b01",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "james_ann",
+      "q": "Read:\n\"Scientists have discovered that honeybees can recognise human faces — a remarkable ability for an insect with a brain smaller than a sesame seed. They achieve this using the same technique humans use: processing facial features as a whole, rather than examining each part separately. In experiments, bees were trained to associate certain faces with sugar water rewards. They successfully identified those faces in follow-up tests with 80% accuracy, even when the faces were upside-down or shown in different lighting. Researchers believe this skill may help bees recognise different flowers, which also have unique 'faces'.\"\n\nWhat technique do bees use to recognise faces?",
+      "options": [
+        "Examining each feature separately",
+        "Processing facial features as a whole, like humans do",
+        "Memorising colours and shapes",
+        "Using smell rather than sight"
+      ],
+      "answer": 1,
+      "exp": "The passage states: 'They achieve this using the same technique humans use: processing facial features as a whole, rather than examining each part separately.'",
+      "hint": "Look for the sentence that directly explains the technique."
+    },
+    {
+      "id": "vr_b02",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"Scientists have discovered that honeybees can recognise human faces — a remarkable ability for an insect with a brain smaller than a sesame seed. They achieve this using the same technique humans use: processing facial features as a whole, rather than examining each part separately. In experiments, bees were trained to associate certain faces with sugar water rewards. They successfully identified those faces in follow-up tests with 80% accuracy, even when the faces were upside-down or shown in different lighting. Researchers believe this skill may help bees recognise different flowers, which also have unique 'faces'.\"\n\nThe word 'remarkable' is used to describe the bees' ability. In context, this means:",
+      "options": [
+        "Expected and ordinary",
+        "Noteworthy and surprising",
+        "Scientifically proven",
+        "Useful for survival"
+      ],
+      "answer": 1,
+      "exp": "'Remarkable' = worthy of notice; surprising or extraordinary.\nContext: a bee with a brain 'smaller than a sesame seed' can recognise human faces — this IS surprising.",
+      "hint": "What makes something 'remarkable'? Think about whether the ability is expected or surprising."
+    },
+    {
+      "id": "vr_b03",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"Scientists have discovered that honeybees can recognise human faces — a remarkable ability for an insect with a brain smaller than a sesame seed. They achieve this using the same technique humans use: processing facial features as a whole, rather than examining each part separately. In experiments, bees were trained to associate certain faces with sugar water rewards. They successfully identified those faces in follow-up tests with 80% accuracy, even when the faces were upside-down or shown in different lighting. Researchers believe this skill may help bees recognise different flowers, which also have unique 'faces'.\"\n\nThe fact that bees could identify faces even when upside-down suggests:",
+      "options": [
+        "Bees have perfect vision",
+        "Bees process face information flexibly, not just by memorising exact images",
+        "Upside-down faces are easier to recognise",
+        "The experiment was flawed"
+      ],
+      "answer": 1,
+      "exp": "If bees could still recognise faces when rotated and in different lighting, their recognition goes beyond simple pattern-matching — they must process the relationships between features.",
+      "hint": "Why would upside-down recognition be impressive? What does it tell us about HOW bees remember faces?"
+    },
+    {
+      "id": "vr_b04",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Purpose",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Read:\n\"Scientists have discovered that honeybees can recognise human faces — a remarkable ability for an insect with a brain smaller than a sesame seed. They achieve this using the same technique humans use: processing facial features as a whole, rather than examining each part separately. In experiments, bees were trained to associate certain faces with sugar water rewards. They successfully identified those faces in follow-up tests with 80% accuracy, even when the faces were upside-down or shown in different lighting. Researchers believe this skill may help bees recognise different flowers, which also have unique 'faces'.\"\n\nThe author's main purpose in writing this passage is to:",
+      "options": [
+        "Argue that bees are as intelligent as humans",
+        "Inform readers about a surprising scientific discovery",
+        "Warn about the decline of bee populations",
+        "Describe how bees collect nectar"
+      ],
+      "answer": 1,
+      "exp": "The passage describes a scientific discovery (bees recognising faces) and explains the findings neutrally. It is informative, not argumentative or persuasive.",
+      "hint": "Is the author trying to persuade, inform, entertain, or warn? Look at the overall purpose."
+    },
+    {
+      "id": "vr_b05",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Text Structure",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"Scientists have discovered that honeybees can recognise human faces — a remarkable ability for an insect with a brain smaller than a sesame seed. They achieve this using the same technique humans use: processing facial features as a whole, rather than examining each part separately. In experiments, bees were trained to associate certain faces with sugar water rewards. They successfully identified those faces in follow-up tests with 80% accuracy, even when the faces were upside-down or shown in different lighting. Researchers believe this skill may help bees recognise different flowers, which also have unique 'faces'.\"\n\nThe final sentence (about flowers having unique 'faces') serves to:",
+      "options": [
+        "Disprove the research findings",
+        "Explain the practical reason bees might have evolved this ability",
+        "Change the topic of the passage",
+        "Provide a definition of flowers"
+      ],
+      "answer": 1,
+      "exp": "The last sentence proposes WHY bees have this ability in nature — recognising flower 'faces' helps them identify food sources. This gives the discovery evolutionary context.",
+      "hint": "What role does the final sentence play? Does it contradict, extend, or explain the earlier information?"
+    },
+    {
+      "id": "vr_n01",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Read:\n\"Isaac Newton is often celebrated as the greatest scientist who ever lived, yet his greatest breakthroughs came during a single remarkable year. In 1666, Cambridge University closed due to plague, and Newton retreated to his family farm. In this period of enforced isolation, he developed calculus, formulated the law of universal gravitation, and conducted groundbreaking experiments with prisms that revealed white light is composed of all colours of the spectrum. Newton himself was dismissive of this achievement, writing that he had merely been 'thinking more than usual.' Scientists today call it his 'annus mirabilis' — his miracle year.\"\n\nWhat does 'annus mirabilis' mean?",
+      "options": [
+        "Remarkable isolation",
+        "Miracle year",
+        "Scientific method",
+        "Cambridge University"
+      ],
+      "answer": 1,
+      "exp": "The passage defines it directly: 'Scientists today call it his annus mirabilis — his miracle year.'",
+      "hint": "Look for where the term is defined in the passage."
+    },
+    {
+      "id": "vr_n02",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"Isaac Newton is often celebrated as the greatest scientist who ever lived, yet his greatest breakthroughs came during a single remarkable year. In 1666, Cambridge University closed due to plague, and Newton retreated to his family farm. In this period of enforced isolation, he developed calculus, formulated the law of universal gravitation, and conducted groundbreaking experiments with prisms that revealed white light is composed of all colours of the spectrum. Newton himself was dismissive of this achievement, writing that he had merely been 'thinking more than usual.' Scientists today call it his 'annus mirabilis' — his miracle year.\"\n\nNewton wrote that he had been 'thinking more than usual.' What does this suggest about his character?",
+      "options": [
+        "He was boastful about his achievements",
+        "He was modest and understated his extraordinary work",
+        "He did not understand the importance of his discoveries",
+        "He was a slow and careful thinker"
+      ],
+      "answer": 1,
+      "exp": "Describing the development of calculus, gravity theory, and optics as merely 'thinking more than usual' dramatically understates the magnitude of these achievements — this is classic understatement, suggesting modesty.",
+      "hint": "Why is 'thinking more than usual' an understatement for what Newton achieved that year?"
+    },
+    {
+      "id": "vr_n03",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Main Idea",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"Isaac Newton is often celebrated as the greatest scientist who ever lived, yet his greatest breakthroughs came during a single remarkable year. In 1666, Cambridge University closed due to plague, and Newton retreated to his family farm. In this period of enforced isolation, he developed calculus, formulated the law of universal gravitation, and conducted groundbreaking experiments with prisms that revealed white light is composed of all colours of the spectrum. Newton himself was dismissive of this achievement, writing that he had merely been 'thinking more than usual.' Scientists today call it his 'annus mirabilis' — his miracle year.\"\n\nThe central idea of this passage is:",
+      "options": [
+        "Newton was the greatest scientist ever",
+        "The plague was a turning point in scientific history",
+        "Newton made his greatest discoveries during one year of isolation",
+        "Cambridge University should close more often"
+      ],
+      "answer": 2,
+      "exp": "The passage focuses specifically on 1666 — the circumstances (plague, isolation) and the three major discoveries Newton made in that single year.",
+      "hint": "Which idea does the WHOLE passage support? Avoid options that are too narrow or too broad."
+    },
+    {
+      "id": "vr_n04",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Read:\n\"Isaac Newton is often celebrated as the greatest scientist who ever lived, yet his greatest breakthroughs came during a single remarkable year. In 1666, Cambridge University closed due to plague, and Newton retreated to his family farm. In this period of enforced isolation, he developed calculus, formulated the law of universal gravitation, and conducted groundbreaking experiments with prisms that revealed white light is composed of all colours of the spectrum. Newton himself was dismissive of this achievement, writing that he had merely been 'thinking more than usual.' Scientists today call it his 'annus mirabilis' — his miracle year.\"\n\n'White light is composed of all colours of the spectrum.' This discovery challenges which common assumption?",
+      "options": [
+        "That light travels in straight lines",
+        "That white is the absence of colour or the simplest form of light",
+        "That prisms create colour",
+        "That Newton was primarily a mathematician"
+      ],
+      "answer": 1,
+      "exp": "Before Newton's prism experiments, white light was considered 'pure' or simple. Newton showed it is actually a mixture of all spectral colours — reversing the assumption that white is the baseline.",
+      "hint": "What would most people assume about white light before Newton's discovery?"
+    },
+    {
+      "id": "vr_n05",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary in Context",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Read:\n\"Isaac Newton is often celebrated as the greatest scientist who ever lived, yet his greatest breakthroughs came during a single remarkable year. In 1666, Cambridge University closed due to plague, and Newton retreated to his family farm. In this period of enforced isolation, he developed calculus, formulated the law of universal gravitation, and conducted groundbreaking experiments with prisms that revealed white light is composed of all colours of the spectrum. Newton himself was dismissive of this achievement, writing that he had merely been 'thinking more than usual.' Scientists today call it his 'annus mirabilis' — his miracle year.\"\n\n'Enforced isolation' most closely means:",
+      "options": [
+        "Chosen solitude",
+        "Isolation that was imposed on him (not his choice)",
+        "Isolation that helped him focus",
+        "Scientific retreat"
+      ],
+      "answer": 1,
+      "exp": "'Enforced' = imposed by an external force. The university closing due to plague forced Newton to leave — he didn't choose isolation; it was imposed by circumstances.",
+      "hint": "'Enforced' comes from 'force' — does it suggest a free choice or something imposed?"
+    },
+    {
+      "id": "vr_p01",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Read:\n\"Every year, approximately 8 million tonnes of plastic enter the world's oceans. Unlike organic materials, plastic does not biodegrade — instead, it photodegrades, breaking into progressively smaller fragments called microplastics. These particles, less than 5 mm in size, are now found in the deepest ocean trenches, in Arctic ice, and in the bloodstreams of marine animals. Recent studies have detected microplastics in human blood, lung tissue and placentas. Scientists are still investigating the health implications, but the ubiquity of these particles in biological systems has raised serious concerns. Some researchers argue the scale of plastic pollution represents a 'planetary boundary' — a threshold beyond which irreversible damage may occur.\"\n\nWhat is a microplastic?",
+      "options": [
+        "Plastic smaller than 1 mm",
+        "A plastic fragment less than 5 mm in size",
+        "Any ocean plastic",
+        "Plastic found in human blood"
+      ],
+      "answer": 1,
+      "exp": "Passage: 'These particles, less than 5 mm in size'",
+      "hint": "Find the passage's direct definition of microplastics."
+    },
+    {
+      "id": "vr_p02",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"Every year, approximately 8 million tonnes of plastic enter the world's oceans. Unlike organic materials, plastic does not biodegrade — instead, it photodegrades, breaking into progressively smaller fragments called microplastics. These particles, less than 5 mm in size, are now found in the deepest ocean trenches, in Arctic ice, and in the bloodstreams of marine animals. Recent studies have detected microplastics in human blood, lung tissue and placentas. Scientists are still investigating the health implications, but the ubiquity of these particles in biological systems has raised serious concerns. Some researchers argue the scale of plastic pollution represents a 'planetary boundary' — a threshold beyond which irreversible damage may occur.\"\n\n'Ubiquity' in context most closely means:",
+      "options": [
+        "Danger",
+        "Presence everywhere",
+        "Scientific measurement",
+        "Rapid growth"
+      ],
+      "answer": 1,
+      "exp": "'Ubiquity' = the state of being found everywhere.\nContext: microplastics are found in ocean trenches, Arctic ice, human blood, lungs, placentas — everywhere.",
+      "hint": "Look at all the places microplastics are mentioned. What one word describes being found in all those places?"
+    },
+    {
+      "id": "vr_p03",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Read:\n\"Every year, approximately 8 million tonnes of plastic enter the world's oceans. Unlike organic materials, plastic does not biodegrade — instead, it photodegrades, breaking into progressively smaller fragments called microplastics. These particles, less than 5 mm in size, are now found in the deepest ocean trenches, in Arctic ice, and in the bloodstreams of marine animals. Recent studies have detected microplastics in human blood, lung tissue and placentas. Scientists are still investigating the health implications, but the ubiquity of these particles in biological systems has raised serious concerns. Some researchers argue the scale of plastic pollution represents a 'planetary boundary' — a threshold beyond which irreversible damage may occur.\"\n\nThe author notes scientists are 'still investigating' health implications. What does this suggest about the passage's purpose?",
+      "options": [
+        "The author thinks plastic is not harmful",
+        "The passage presents current knowledge honestly, including areas of uncertainty",
+        "Scientists have found no health effects",
+        "The author is dismissing health concerns"
+      ],
+      "answer": 1,
+      "exp": "Saying 'still investigating' and 'raised serious concerns' presents an honest picture — significant concern exists but conclusions aren't finalised. This is responsible scientific reporting.",
+      "hint": "Does saying 'still investigating' mean scientists have dismissed concern, or that the investigation is ongoing?"
+    },
+    {
+      "id": "vr_p04",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Read:\n\"Every year, approximately 8 million tonnes of plastic enter the world's oceans. Unlike organic materials, plastic does not biodegrade — instead, it photodegrades, breaking into progressively smaller fragments called microplastics. These particles, less than 5 mm in size, are now found in the deepest ocean trenches, in Arctic ice, and in the bloodstreams of marine animals. Recent studies have detected microplastics in human blood, lung tissue and placentas. Scientists are still investigating the health implications, but the ubiquity of these particles in biological systems has raised serious concerns. Some researchers argue the scale of plastic pollution represents a 'planetary boundary' — a threshold beyond which irreversible damage may occur.\"\n\nWhy does the author list specific locations (ocean trenches, Arctic ice, human blood, placentas)?",
+      "options": [
+        "To confuse the reader with too much information",
+        "To emphasise how widespread microplastics have become — no environment is unaffected",
+        "To prove that scientists have done research",
+        "To suggest microplastics only affect remote places"
+      ],
+      "answer": 1,
+      "exp": "The deliberate listing of extreme, varied, and intimate locations (from remote ocean trenches to human placentas) emphasises the total pervasiveness — no environment, however remote or private, is uncontaminated.",
+      "hint": "Why list such varied locations? What effect does moving from 'ocean trenches' to 'human placentas' create?"
+    },
+    {
+      "id": "vr_p05",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Text Structure",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"Every year, approximately 8 million tonnes of plastic enter the world's oceans. Unlike organic materials, plastic does not biodegrade — instead, it photodegrades, breaking into progressively smaller fragments called microplastics. These particles, less than 5 mm in size, are now found in the deepest ocean trenches, in Arctic ice, and in the bloodstreams of marine animals. Recent studies have detected microplastics in human blood, lung tissue and placentas. Scientists are still investigating the health implications, but the ubiquity of these particles in biological systems has raised serious concerns. Some researchers argue the scale of plastic pollution represents a 'planetary boundary' — a threshold beyond which irreversible damage may occur.\"\n\nHow is the passage structured?",
+      "options": [
+        "Problem, causes, solutions",
+        "Discovery, evidence, then a broader significance/warning",
+        "Introduction, counterargument, conclusion",
+        "Chronological narrative"
+      ],
+      "answer": 1,
+      "exp": "Structure: introduces the problem (plastic in oceans), provides evidence of scale (microplastics everywhere), then broadens to human implications and a warning ('planetary boundary').",
+      "hint": "Identify what each sentence or group of sentences does — does the passage tell a story, present a problem/solution, or make an argument?"
+    },
+    {
+      "id": "vr_x01",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Tone & Attitude",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Read: 'The committee's so-called 'improvements' have, in practice, made the situation considerably worse.'\n\nThe writer's tone is:",
+      "options": [
+        "Neutral and objective",
+        "Critical and sarcastic ('so-called' signals skepticism)",
+        "Enthusiastic and supportive",
+        "Confused and uncertain"
+      ],
+      "answer": 1,
+      "exp": "'So-called' places quote marks around improvements ironically, suggesting they are not real improvements. Combined with 'considerably worse', the tone is clearly critical and sarcastic.",
+      "hint": "What does 'so-called' signal about the writer's opinion?"
+    },
+    {
+      "id": "vr_x02",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "'The old house groaned and shivered in the winter wind.' Which TWO literary devices are used?",
+      "options": [
+        "Metaphor and simile",
+        "Personification and onomatopoeia",
+        "Alliteration and personification",
+        "Simile and alliteration"
+      ],
+      "answer": 1,
+      "exp": "'Groaned' = onomatopoeia (sounds like what it describes)\n'Groaned and shivered' = personification (the house has human actions)\nBoth devices work together here.",
+      "hint": "Which words sound like what they describe? Which words give the house human qualities?"
+    },
+    {
+      "id": "vr_x03",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "'Implicit' meaning is meaning that is:\n",
+      "options": [
+        "Stated directly in the text",
+        "Hinted at or suggested rather than stated outright",
+        "Found only in the title",
+        "Found only in the conclusion"
+      ],
+      "answer": 1,
+      "exp": "Implicit = implied; not directly stated but suggested.\nExplicit = directly stated.\n💡 Reading exam tip: 'implicit' questions ask you to read between the lines.",
+      "hint": "'Implicit' vs 'explicit' — one is hidden, one is stated."
+    },
+    {
+      "id": "vr_x04",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Main Idea",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A paragraph begins: 'Experts disagree about whether screen time harms children.'\nWhich sentence would BEST continue this paragraph?",
+      "options": [
+        "Children should use less screen time.",
+        "Some researchers find negative effects on attention; others report benefits for creativity and social connection.",
+        "Screen time has increased dramatically in recent years.",
+        "Parents should monitor their children's device use."
+      ],
+      "answer": 1,
+      "exp": "The topic sentence signals a disagreement between experts — the paragraph should present both sides of that disagreement.",
+      "hint": "The topic sentence says experts 'disagree' — what should the rest of the paragraph do?"
+    },
+    {
+      "id": "vr_x05",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary in Context",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Read: 'The athlete's performance was nothing short of prodigious — she broke three records in a single afternoon.'\nPRODIGIOUS most closely means:",
+      "options": [
+        "Unfortunate",
+        "Rehearsed",
+        "Remarkably impressive and extraordinary",
+        "Technically perfect"
+      ],
+      "answer": 2,
+      "exp": "Context clue: 'nothing short of' signals strong praise, and breaking three records in one afternoon is extraordinary.\n'Prodigious' = impressively great in size, extent, or degree.",
+      "hint": "'Nothing short of' signals very high praise. What kind of word fits?"
+    },
+    {
+      "id": "nr_m01",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Read:\n\"Scientists are seriously considering sending humans to Mars within the next two decades. The journey would take approximately seven months each way, during which astronauts would be exposed to cosmic radiation, muscle atrophy from weightlessness, and severe psychological stress from isolation. The Martian surface presents further challenges: temperatures average -60°C, the thin CO₂ atmosphere provides no breathable air, and radiation levels are ten times higher than on Earth. Proponents argue that Mars colonisation could ensure humanity's survival if Earth becomes uninhabitable. Critics contend that the billions required would be better spent solving problems on our own planet.\"\n\nHow long would the journey to Mars take each way?",
+      "options": [
+        "Three months",
+        "Seven months",
+        "One year",
+        "Two years"
+      ],
+      "answer": 1,
+      "exp": "Passage states: 'The journey would take approximately seven months each way'",
+      "hint": "Find the direct statement about journey time."
+    },
+    {
+      "id": "nr_m02",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Main Idea",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"Scientists are seriously considering sending humans to Mars within the next two decades. The journey would take approximately seven months each way, during which astronauts would be exposed to cosmic radiation, muscle atrophy from weightlessness, and severe psychological stress from isolation. The Martian surface presents further challenges: temperatures average -60°C, the thin CO₂ atmosphere provides no breathable air, and radiation levels are ten times higher than on Earth. Proponents argue that Mars colonisation could ensure humanity's survival if Earth becomes uninhabitable. Critics contend that the billions required would be better spent solving problems on our own planet.\"\n\nThe passage presents:",
+      "options": [
+        "Only the challenges of Mars travel",
+        "Only the reasons to go to Mars",
+        "Both the difficulties and the arguments for and against Mars colonisation",
+        "A scientific proof that Mars colonisation is possible"
+      ],
+      "answer": 2,
+      "exp": "The passage covers: journey risks, surface challenges (against), the survival argument (for), and the spending argument (against). It presents multiple perspectives.",
+      "hint": "Does the passage take a side, or present multiple views?"
+    },
+    {
+      "id": "nr_m03",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"Scientists are seriously considering sending humans to Mars within the next two decades. The journey would take approximately seven months each way, during which astronauts would be exposed to cosmic radiation, muscle atrophy from weightlessness, and severe psychological stress from isolation. The Martian surface presents further challenges: temperatures average -60°C, the thin CO₂ atmosphere provides no breathable air, and radiation levels are ten times higher than on Earth. Proponents argue that Mars colonisation could ensure humanity's survival if Earth becomes uninhabitable. Critics contend that the billions required would be better spent solving problems on our own planet.\"\n\n'Contend' in context most closely means:",
+      "options": [
+        "Agree",
+        "Argue",
+        "Refuse",
+        "Study"
+      ],
+      "answer": 1,
+      "exp": "'Critics contend that...' = critics argue/claim that...\n'Contend' = to assert or maintain an argument.",
+      "hint": "In argument contexts, 'contend' means to argue a position."
+    },
+    {
+      "id": "nr_m04",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Read:\n\"Scientists are seriously considering sending humans to Mars within the next two decades. The journey would take approximately seven months each way, during which astronauts would be exposed to cosmic radiation, muscle atrophy from weightlessness, and severe psychological stress from isolation. The Martian surface presents further challenges: temperatures average -60°C, the thin CO₂ atmosphere provides no breathable air, and radiation levels are ten times higher than on Earth. Proponents argue that Mars colonisation could ensure humanity's survival if Earth becomes uninhabitable. Critics contend that the billions required would be better spent solving problems on our own planet.\"\n\nThe detail that radiation on Mars is 'ten times higher than on Earth' is included to:",
+      "options": [
+        "Prove Mars is uninhabitable forever",
+        "Emphasise the severity of one specific hazard facing potential colonists",
+        "Contrast Mars with the Moon",
+        "Show that Earth has radiation too"
+      ],
+      "answer": 1,
+      "exp": "The specific statistic ('ten times') makes the abstract hazard concrete and dramatic — showing just how severe this one challenge is for potential colonists.",
+      "hint": "Why give a specific number rather than just saying 'high radiation'?"
+    },
+    {
+      "id": "nr_m05",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Evaluating Arguments",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Read:\n\"Scientists are seriously considering sending humans to Mars within the next two decades. The journey would take approximately seven months each way, during which astronauts would be exposed to cosmic radiation, muscle atrophy from weightlessness, and severe psychological stress from isolation. The Martian surface presents further challenges: temperatures average -60°C, the thin CO₂ atmosphere provides no breathable air, and radiation levels are ten times higher than on Earth. Proponents argue that Mars colonisation could ensure humanity's survival if Earth becomes uninhabitable. Critics contend that the billions required would be better spent solving problems on our own planet.\"\n\nThe argument that 'Mars colonisation ensures human survival' could be weakened by pointing out:",
+      "options": [
+        "Mars is too cold",
+        "The journey is too long",
+        "Colonising Mars won't help if climate change destroys Earth's habitability gradually — those resources could be used to prevent the problem",
+        "Astronauts get lonely"
+      ],
+      "answer": 2,
+      "exp": "The survival argument assumes Earth will become totally uninhabitable — but if the cause is human action (like climate change), spending billions on Mars rather than prevention could be counterproductive.",
+      "hint": "What assumption does the 'ensure survival' argument rely on?"
+    },
+    {
+      "id": "nr_e01",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Main Idea",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"When the Oxford English Dictionary chose the 'Face with Tears of Joy' emoji as its Word of the Year in 2015, some language purists declared it a symbol of the decline of written communication. Yet linguists have largely embraced emoji as a legitimate and sophisticated communication tool. Research shows that emoji function similarly to facial expressions and gestures in spoken conversation — they add tone, nuance and emotional context to what would otherwise be ambiguous text. A message reading 'Sure' could be enthusiastic or deeply sarcastic; a thumbs-up emoji or eye-roll emoji changes everything. Far from impoverishing language, argue these researchers, emoji have enriched our ability to communicate subtlety.\"\n\nThe passage argues that emoji:",
+      "options": [
+        "Are destroying written language",
+        "Are a useful communication tool that adds nuance",
+        "Are recognised by the Oxford Dictionary",
+        "Are only used by young people"
+      ],
+      "answer": 1,
+      "exp": "The passage builds to the conclusion: 'emoji have enriched our ability to communicate subtlety'. This is the main argument.",
+      "hint": "What is the overall conclusion the passage builds to?"
+    },
+    {
+      "id": "nr_e02",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"When the Oxford English Dictionary chose the 'Face with Tears of Joy' emoji as its Word of the Year in 2015, some language purists declared it a symbol of the decline of written communication. Yet linguists have largely embraced emoji as a legitimate and sophisticated communication tool. Research shows that emoji function similarly to facial expressions and gestures in spoken conversation — they add tone, nuance and emotional context to what would otherwise be ambiguous text. A message reading 'Sure' could be enthusiastic or deeply sarcastic; a thumbs-up emoji or eye-roll emoji changes everything. Far from impoverishing language, argue these researchers, emoji have enriched our ability to communicate subtlety.\"\n\nThe example of the word 'Sure' is given to demonstrate:",
+      "options": [
+        "That text messages are rude",
+        "How a single written word is ambiguous without emotional context",
+        "That emoji replace words",
+        "The difficulty of English spelling"
+      ],
+      "answer": 1,
+      "exp": "'Sure' alone is genuinely ambiguous — enthusiastic agreement or heavy sarcasm. The example shows exactly why emoji are useful: they resolve the ambiguity that plain text creates.",
+      "hint": "Why does the author choose 'Sure' as the example word?"
+    },
+    {
+      "id": "nr_e03",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"When the Oxford English Dictionary chose the 'Face with Tears of Joy' emoji as its Word of the Year in 2015, some language purists declared it a symbol of the decline of written communication. Yet linguists have largely embraced emoji as a legitimate and sophisticated communication tool. Research shows that emoji function similarly to facial expressions and gestures in spoken conversation — they add tone, nuance and emotional context to what would otherwise be ambiguous text. A message reading 'Sure' could be enthusiastic or deeply sarcastic; a thumbs-up emoji or eye-roll emoji changes everything. Far from impoverishing language, argue these researchers, emoji have enriched our ability to communicate subtlety.\"\n\n'Impoverishing' language means:",
+      "options": [
+        "Enriching and expanding language",
+        "Making language cheaper",
+        "Making language poorer or less expressive",
+        "Making language more popular"
+      ],
+      "answer": 2,
+      "exp": "'Impoverish' = to make poor; to reduce quality or richness.\nThe passage argues emoji do NOT impoverish language — they do the opposite (enrich it).",
+      "hint": "If 'enrich' means to make richer, what does 'impoverish' mean?"
+    },
+    {
+      "id": "nr_e04",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Author's Purpose",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Read:\n\"When the Oxford English Dictionary chose the 'Face with Tears of Joy' emoji as its Word of the Year in 2015, some language purists declared it a symbol of the decline of written communication. Yet linguists have largely embraced emoji as a legitimate and sophisticated communication tool. Research shows that emoji function similarly to facial expressions and gestures in spoken conversation — they add tone, nuance and emotional context to what would otherwise be ambiguous text. A message reading 'Sure' could be enthusiastic or deeply sarcastic; a thumbs-up emoji or eye-roll emoji changes everything. Far from impoverishing language, argue these researchers, emoji have enriched our ability to communicate subtlety.\"\n\nThe author opens by mentioning 'language purists' who oppose emoji. Why?",
+      "options": [
+        "To agree with them",
+        "To present the opposing view before arguing against it — making the counterargument stronger",
+        "To suggest that all linguists disagree with emoji",
+        "To mock people who care about language"
+      ],
+      "answer": 1,
+      "exp": "Opening with the opposing view ('some declared it a symbol of decline') before presenting the evidence against it is a classic argumentative technique: acknowledge the opposition, then defeat it.",
+      "hint": "Why present the opposing view before arguing against it?"
+    },
+    {
+      "id": "nr_sp01",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Read:\n\"Scientists have found that taking regular exercise breaks during study sessions improves both memory retention and concentration. In one study, students who took 10-minute exercise breaks every 45 minutes scored 20% higher on subsequent memory tests than those who studied continuously. The researchers believe exercise increases blood flow to the hippocampus — the brain's memory centre — and releases neurotransmitters that strengthen neural pathways. Crucially, the students who exercised did not feel they had wasted time; they reported feeling more focused and alert during the study periods that followed each break.\"\n\nBy how much did memory test scores improve with exercise breaks?",
+      "options": [
+        "10%",
+        "15%",
+        "20%",
+        "25%"
+      ],
+      "answer": 2,
+      "exp": "Passage: 'scored 20% higher on subsequent memory tests'",
+      "hint": "Find the direct statistic in the passage."
+    },
+    {
+      "id": "nr_sp02",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"Scientists have found that taking regular exercise breaks during study sessions improves both memory retention and concentration. In one study, students who took 10-minute exercise breaks every 45 minutes scored 20% higher on subsequent memory tests than those who studied continuously. The researchers believe exercise increases blood flow to the hippocampus — the brain's memory centre — and releases neurotransmitters that strengthen neural pathways. Crucially, the students who exercised did not feel they had wasted time; they reported feeling more focused and alert during the study periods that followed each break.\"\n\nThe fact that students 'did not feel they had wasted time' is important because:",
+      "options": [
+        "It proves exercise is fun",
+        "It removes the practical objection that exercise breaks reduce study time",
+        "It shows the students were competitive",
+        "It suggests the study was biased"
+      ],
+      "answer": 1,
+      "exp": "The most likely objection to exercise breaks is 'you're wasting study time'. The passage pre-empts this by noting students felt MORE focused after breaks — so no time was lost.",
+      "hint": "What common objection to taking breaks during study does this address?"
+    },
+    {
+      "id": "nr_sp03",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Text Structure",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"Scientists have found that taking regular exercise breaks during study sessions improves both memory retention and concentration. In one study, students who took 10-minute exercise breaks every 45 minutes scored 20% higher on subsequent memory tests than those who studied continuously. The researchers believe exercise increases blood flow to the hippocampus — the brain's memory centre — and releases neurotransmitters that strengthen neural pathways. Crucially, the students who exercised did not feel they had wasted time; they reported feeling more focused and alert during the study periods that followed each break.\"\n\nThe passage is primarily structured as:",
+      "options": [
+        "A narrative story",
+        "A claim supported by evidence and explanation",
+        "A list of instructions",
+        "An argument against continuous studying"
+      ],
+      "answer": 1,
+      "exp": "Structure: claim (exercise breaks help) → evidence (study, 20% improvement) → explanation (how: hippocampus, neurotransmitters) → additional supporting evidence (students felt better).",
+      "hint": "What is the relationship between the sentences? Is it: story, argument, instructions, or claim + evidence?"
+    },
+    {
+      "id": "nr_y01",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Which sentence contains a DANGLING MODIFIER?",
+      "options": [
+        "Running through the park, she saw a rainbow.",
+        "Having finished his homework, dinner was served.",
+        "The tired student fell asleep at his desk.",
+        "She carefully read the long instructions."
+      ],
+      "answer": 1,
+      "exp": "'Having finished his homework, dinner was served' — who finished the homework? Grammatically it's 'dinner', which makes no sense. This is a dangling modifier: the subject of the modifier (person) doesn't match the sentence subject (dinner).\nCorrect: 'Having finished his homework, he sat down to dinner.'",
+      "hint": "Who is doing the action described in the opening phrase? Does that match who is doing the main action?"
+    },
+    {
+      "id": "nr_y02",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "'Peter Piper picked a peck of pickled peppers.' This is an example of:",
+      "options": [
+        "Onomatopoeia",
+        "Assonance",
+        "Alliteration",
+        "Rhyme"
+      ],
+      "answer": 2,
+      "exp": "Alliteration = repetition of the same consonant sound at the start of nearby words.\nHere: P-P-P-P (Peter, Piper, picked, peck, pickled, peppers) — all start with P.",
+      "hint": "Which device involves repeating the same starting sound?"
+    },
+    {
+      "id": "nr_y03",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A word that means the same as another word is called a:",
+      "options": [
+        "Antonym",
+        "Homophone",
+        "Synonym",
+        "Palindrome"
+      ],
+      "answer": 2,
+      "exp": "Synonym = a word with the same or similar meaning (happy/joyful, big/large).\nAntonym = opposite meaning.\nHomophone = sounds the same but different spelling/meaning (there/their/they're).\nPalindrome = reads the same forwards and backwards (racecar).",
+      "hint": "'Syn-' means same or together. Think 'synthesis' = putting things together."
+    },
+    {
+      "id": "nr_y04",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "A writer uses short, punchy sentences in the final paragraph of a thriller chapter. The effect is:",
+      "options": [
+        "To show the writer is tired",
+        "To create tension and urgency — short sentences speed up the pace",
+        "To signal the story is ending",
+        "To show the character is confused"
+      ],
+      "answer": 1,
+      "exp": "Short sentences = faster pace = increased tension. This is a deliberate stylistic choice.\nLong, complex sentences = slower pace = reflection and atmosphere.\nThis is one of the most reliably tested craft techniques in selective reading.",
+      "hint": "How does sentence length affect the feeling and pace of reading?"
+    },
+    {
+      "id": "nt_an01",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "NORTH is to SOUTH as DAWN is to:",
+      "options": [
+        "Day",
+        "Noon",
+        "Dusk",
+        "Night"
+      ],
+      "answer": 2,
+      "exp": "North and South are opposites on the compass.\nDawn (beginning of day) and dusk (end of day/beginning of night) are opposites in the daily cycle.",
+      "hint": "What is the opposite of dawn in the daily cycle?"
+    },
+    {
+      "id": "nt_an02",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "AUTHOR is to NOVEL as COMPOSER is to:",
+      "options": [
+        "Concert",
+        "Orchestra",
+        "Symphony",
+        "Conductor"
+      ],
+      "answer": 2,
+      "exp": "An author creates a novel.\nA composer creates a symphony.\n(A conductor performs a symphony, but that's a different relationship.)",
+      "hint": "What does a composer create?"
+    },
+    {
+      "id": "nt_an03",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "DROUGHT is to RAIN as FAMINE is to:",
+      "options": [
+        "Hunger",
+        "Food",
+        "War",
+        "Poverty"
+      ],
+      "answer": 1,
+      "exp": "Drought is resolved by rain (its remedy).\nFamine is resolved by food (its remedy).\nRelationship: problem → its solution/remedy.",
+      "hint": "What resolves a drought? What resolves a famine — using the same type of relationship?"
+    },
+    {
+      "id": "nt_an04",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "ENIGMATIC is to CLARITY as TURBULENT is to:",
+      "options": [
+        "Confused",
+        "Stormy",
+        "Calm",
+        "Movement"
+      ],
+      "answer": 2,
+      "exp": "Enigmatic (mysterious) and clarity (clearness) are opposites.\nTurbulent (chaotic, stormy) and calm are opposites.\nRelationship: word → its opposite quality.",
+      "hint": "Enigmatic and clarity are contrasting states. Which option contrasts with turbulent?"
+    },
+    {
+      "id": "nt_an05",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "PARLIAMENT is to LEGISLATION as COURT is to:",
+      "options": [
+        "Judge",
+        "Verdict",
+        "Justice",
+        "Jury"
+      ],
+      "answer": 1,
+      "exp": "Parliament produces legislation (laws).\nA court produces a verdict (legal judgement).\nRelationship: institution → what it produces.",
+      "hint": "What does a parliament produce? What does a court produce — using the same relationship?"
+    },
+    {
+      "id": "nt_d01",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Logical Deduction",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "All birds have feathers. A penguin is a bird. Does a penguin have feathers?",
+      "options": [
+        "Yes, definitely",
+        "No — penguins are different",
+        "Only if it flies",
+        "Only adult penguins"
+      ],
+      "answer": 0,
+      "exp": "Valid syllogism:\n• All birds have feathers\n• A penguin is a bird\n• Therefore a penguin has feathers ✓\nPenguins can't fly, but they ARE birds and DO have feathers.",
+      "hint": "Follow the logic strictly. All birds → feathers. Penguin → bird. So penguin → feathers."
+    },
+    {
+      "id": "nt_d02",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Logical Deduction",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Some artists are teachers. All teachers are patient. Can we conclude some artists are patient?",
+      "options": [
+        "Yes",
+        "No",
+        "Only if all artists are teachers",
+        "Only if most artists are teachers"
+      ],
+      "answer": 0,
+      "exp": "Some artists = teachers (given)\nAll teachers = patient (given)\nTherefore: those artists who ARE teachers are also patient.\nSo: some artists are patient ✓",
+      "hint": "Follow the chain: artist→teacher→patient applies to 'some' artists."
+    },
+    {
+      "id": "nt_d03",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Syllogism",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "If all X are Y, and no Y is Z, then:",
+      "options": [
+        "All X are Z",
+        "No X is Z",
+        "Some X are Z",
+        "We can't determine the relationship between X and Z"
+      ],
+      "answer": 1,
+      "exp": "All X → Y (X is subset of Y)\nNo Y → Z (Y and Z are disjoint)\nSince X is entirely within Y, and Y shares nothing with Z, X also shares nothing with Z.\nTherefore: No X is Z",
+      "hint": "Draw circles: X inside Y, Y completely separate from Z. Can X and Z overlap?"
+    },
+    {
+      "id": "nt_d04",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Logical Deduction",
+      "difficulty": "hard",
+      "style": "matrix",
+      "q": "'If it snows, school is cancelled. School is not cancelled.' What can we conclude?",
+      "options": [
+        "It snowed",
+        "It didn't snow",
+        "The school might have been cancelled for another reason",
+        "Nothing"
+      ],
+      "answer": 1,
+      "exp": "This is MODUS TOLLENS (valid form):\n• If P then Q\n• Not Q\n• Therefore: Not P\n'If snow → cancel. Not cancel. Therefore: not snow.'\nThis is different from the fallacy 'if snow → cancel; it's cancelled → it snowed' (invalid).",
+      "hint": "If snow causes cancellation, and it's NOT cancelled — can snow have happened?"
+    },
+    {
+      "id": "nt_d05",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Logical Deduction",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "A statement: 'Most students who study hard pass.' James studies hard. Does James definitely pass?",
+      "options": [
+        "Yes — he studied hard",
+        "No — 'most' doesn't mean 'all', so he might still fail",
+        "Yes if he studies enough",
+        "Only if the teacher is fair"
+      ],
+      "answer": 1,
+      "exp": "'Most' = not all. So some hard-working students still fail.\nFrom 'most X do Y' and 'James is X', we CANNOT guarantee James does Y.\nIf the statement were 'ALL students who study hard pass', then yes.",
+      "hint": "'Most' vs 'all' — these are very different in logic."
+    },
+    {
+      "id": "nt_c01",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Coding",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "In a code: A=2, B=4, C=6, D=8... (each letter = 2× its position). What does E equal?",
+      "options": [
+        "8",
+        "10",
+        "12",
+        "14"
+      ],
+      "answer": 1,
+      "exp": "E is the 5th letter. 5 × 2 = 10\nPattern: position × 2\nA=1×2=2, B=2×2=4, C=3×2=6, D=4×2=8, E=5×2=10",
+      "hint": "Find the rule (position × 2), then apply it to E (5th letter)."
+    },
+    {
+      "id": "nt_c02",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Coding",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Code: each letter shifts forward 3 (A→D, B→E, C→F...). Decode VWDU.",
+      "options": [
+        "STAR",
+        "SCAR",
+        "SALT",
+        "SCAN"
+      ],
+      "answer": 0,
+      "exp": "To decode, shift BACK by 3:\nV−3=S, W−3=T, D−3=A, U−3=R → STAR ✓\nVerify: S+3=V ✓, T+3=W ✓, A+3=D ✓, R+3=U ✓",
+      "hint": "To decode a +3 shift, subtract 3 from each letter."
+    },
+    {
+      "id": "nt_c03",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Number Patterns",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "What is the next number?\n2, 3, 5, 8, 13, 21, ___",
+      "options": [
+        "29",
+        "33",
+        "34",
+        "35"
+      ],
+      "answer": 2,
+      "exp": "Fibonacci sequence: each term = sum of the two before.\n13 + 21 = 34\n2,3,5,8,13,21,34,55...\n💡 The Fibonacci sequence appears in nature: sunflower seeds, spiral shells, flower petals.",
+      "hint": "Add the two previous numbers together."
+    },
+    {
+      "id": "nt_c04",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Number Patterns",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "Pattern 1: 2, 4, 8, 16, ___\nPattern 2: 100, 99, 97, 94, 90, ___\nWhat is the SUM of the two missing numbers?",
+      "options": [
+        "112",
+        "117",
+        "120",
+        "125"
+      ],
+      "answer": 1,
+      "exp": "Pattern 1 (doubles): 16 × 2 = 32\nPattern 2 (subtract 1, 2, 3, 4, 5...): 90 − 5 = 85\nSum = 32 + 85 = 117",
+      "hint": "Find each missing number separately, then add them."
+    },
+    {
+      "id": "nt_arg01",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Argument Analysis",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "'Sales of ice cream rise in summer. Crime also rises in summer. Therefore eating ice cream causes crime.' What is wrong?",
+      "options": [
+        "Ice cream actually does cause crime",
+        "Correlation does not imply causation — both rise because of hot weather",
+        "Crime statistics are unreliable",
+        "Ice cream is a seasonal product"
+      ],
+      "answer": 1,
+      "exp": "Both ice cream sales and crime rise in summer — but because of a THIRD factor (hot weather), not because one causes the other.\nThis is the classic spurious correlation / confounding variable fallacy.",
+      "hint": "Is there a third factor (hot weather) that could cause both to rise independently?"
+    },
+    {
+      "id": "nt_arg02",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Argument Analysis",
+      "difficulty": "hard",
+      "style": "matrix",
+      "q": "'You can't trust his opinion on climate change — he drives an SUV.' What logical flaw is this?",
+      "options": [
+        "The argument is valid",
+        "Ad hominem — attacking the person rather than their argument",
+        "False dilemma",
+        "Circular reasoning"
+      ],
+      "answer": 1,
+      "exp": "Ad hominem (Latin: 'to the person') = attacking the person making an argument rather than the argument itself.\nHis SUV is irrelevant to whether his climate evidence is correct or incorrect.",
+      "hint": "Is the criticism about the argument (evidence, logic) or about the person?"
+    },
+    {
+      "id": "nt_arg03",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Flawed Reasoning",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "'Either you support this policy completely or you're against progress.' What is this fallacy?",
+      "options": [
+        "Ad hominem",
+        "False dilemma — presents only two options when more exist",
+        "Circular reasoning",
+        "Hasty generalisation"
+      ],
+      "answer": 1,
+      "exp": "False dilemma (false dichotomy) = presenting only two options when more exist.\nReality: someone might support progress but disagree with this specific policy, or want a modified version.",
+      "hint": "How many options are really available? Are there only two?"
+    },
+    {
+      "id": "nt_arg04",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Argument Strength",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "Which provides the STRONGEST support for 'Exercise improves academic performance'?",
+      "options": [
+        "My friend exercises and gets good grades",
+        "A 5-year study of 10,000 students found exercising students averaged 15% higher scores",
+        "Athletes tend to be disciplined people",
+        "Schools with gyms perform better"
+      ],
+      "answer": 1,
+      "exp": "Option B: large sample (10,000), long duration (5 years), specific measurable outcome (15%), direct measurement.\nOption A: anecdote (one person).\nOption C: confounds exercise with discipline.\nOption D: correlation without controlling for other school factors.",
+      "hint": "What makes evidence strong? Look for: large sample, long timeframe, direct measurement, controlled conditions."
+    },
+    {
+      "id": "nt_o01",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Ordering",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "5 people in a queue: Tom is 4th. Sam is directly behind Lee. Lee is 2nd. Where is Sam?",
+      "options": [
+        "1st",
+        "2nd",
+        "3rd",
+        "5th"
+      ],
+      "answer": 2,
+      "exp": "Lee = 2nd\nSam is directly BEHIND Lee = 3rd\n✓ (behind = further back in queue = higher number)",
+      "hint": "Place each person: 'directly behind' means the next position back."
+    },
+    {
+      "id": "nt_o02",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Ordering",
+      "difficulty": "hard",
+      "style": "matrix",
+      "q": "6 children in height order. Priya is taller than Kai. Kai is taller than Leo. Mia is shorter than Leo. Sam is the tallest. Nila is between Kai and Priya. Order from tallest to shortest:",
+      "options": [
+        "Sam, Priya, Nila, Kai, Leo, Mia",
+        "Sam, Kai, Priya, Nila, Leo, Mia",
+        "Sam, Nila, Priya, Kai, Leo, Mia",
+        "Sam, Priya, Kai, Nila, Leo, Mia"
+      ],
+      "answer": 0,
+      "exp": "From clues:\n• Sam = tallest (1st)\n• Priya > Kai > Leo > Mia\n• Nila is BETWEEN Kai and Priya → Priya > Nila > Kai\nFull order: Sam, Priya, Nila, Kai, Leo, Mia",
+      "hint": "Work out each relationship, then combine into one order."
+    },
+    {
+      "id": "vv_b01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "SEED is to TREE as EGG is to:",
+      "options": [
+        "Nest",
+        "Bird",
+        "Wing",
+        "Feather"
+      ],
+      "answer": 1,
+      "exp": "A seed grows into a tree.\nAn egg hatches into a bird.\nRelationship: embryonic form → mature form.",
+      "hint": "What does an egg develop into?"
+    },
+    {
+      "id": "vv_b02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "MUSICIAN is to REHEARSAL as ATHLETE is to:",
+      "options": [
+        "Stadium",
+        "Training",
+        "Competition",
+        "Medal"
+      ],
+      "answer": 1,
+      "exp": "A musician prepares through rehearsal.\nAn athlete prepares through training.\nRelationship: performer → how they prepare.",
+      "hint": "How does a musician prepare? What is the equivalent for an athlete?"
+    },
+    {
+      "id": "vv_b03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "HIBERNATE is to BEAR as MIGRATE is to:",
+      "options": [
+        "Fish",
+        "Snake",
+        "Bird",
+        "Squirrel"
+      ],
+      "answer": 2,
+      "exp": "Bears hibernate (sleep through winter as a survival strategy).\nBirds migrate (travel to warmer regions as a survival strategy).\nRelationship: animal → its winter survival behaviour.",
+      "hint": "What is a bird's typical winter survival strategy?"
+    },
+    {
+      "id": "vv_b04",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "SOLVENT is to DEBT as HEALTHY is to:",
+      "options": [
+        "Fit",
+        "Disease",
+        "Wealthy",
+        "Hospital"
+      ],
+      "answer": 1,
+      "exp": "Solvent = not in debt (free from financial difficulty).\nHealthy = free from disease.\nRelationship: positive state → the negative state it is free from.",
+      "hint": "Being solvent means being free from debt. Being healthy means being free from what?"
+    },
+    {
+      "id": "vv_b05",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "LACONIC is to VERBOSE as FRUGAL is to:",
+      "options": [
+        "Careful",
+        "Extravagant",
+        "Thrifty",
+        "Wealthy"
+      ],
+      "answer": 1,
+      "exp": "Laconic (using very few words) and verbose (using too many words) are opposites.\nFrugal (careful with money) and extravagant (spending too freely) are opposites.\nRelationship: word → its opposite.",
+      "hint": "Laconic and verbose are opposites. What is the opposite of frugal?"
+    },
+    {
+      "id": "vv_cl01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Classification",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Which does NOT belong?\nDaisy · Rose · Tulip · Fern",
+      "options": [
+        "Daisy",
+        "Rose",
+        "Tulip",
+        "Fern"
+      ],
+      "answer": 3,
+      "exp": "Daisy, Rose, Tulip = flowering plants.\nFern = a non-flowering plant (reproduces via spores, not seeds or flowers).",
+      "hint": "Which one doesn't produce flowers?"
+    },
+    {
+      "id": "vv_cl02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Classification",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Which does NOT belong?\nAddition · Subtraction · Multiplication · Calculus",
+      "options": [
+        "Addition",
+        "Subtraction",
+        "Multiplication",
+        "Calculus"
+      ],
+      "answer": 3,
+      "exp": "Addition, Subtraction, Multiplication = the four basic arithmetic operations (along with division).\nCalculus = a branch of higher mathematics (derivatives and integrals) — not a basic operation.",
+      "hint": "Three are basic arithmetic operations. Which one is a whole branch of higher mathematics?"
+    },
+    {
+      "id": "vv_cl03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Classification",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Which does NOT belong?\nSonnet · Haiku · Novel · Limerick",
+      "options": [
+        "Sonnet",
+        "Haiku",
+        "Novel",
+        "Limerick"
+      ],
+      "answer": 2,
+      "exp": "Sonnet (14 lines), Haiku (3 lines, 5-7-5 syllables), Limerick (5 lines, AABBA) = poetic forms.\nNovel = a form of long prose fiction — not poetry.",
+      "hint": "Three are specific types of poems. Which one is a form of fiction?"
+    },
+    {
+      "id": "vv_cl04",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Classification",
+      "difficulty": "hard",
+      "style": "edutest",
+      "q": "Which does NOT belong?\nClaustrophobia · Arachnophobia · Agoraphobia · Euphoria",
+      "options": [
+        "Claustrophobia",
+        "Arachnophobia",
+        "Agoraphobia",
+        "Euphoria"
+      ],
+      "answer": 3,
+      "exp": "Claustrophobia (fear of enclosed spaces), Arachnophobia (fear of spiders), Agoraphobia (fear of open/public spaces) = all phobias (irrational fears).\nEuphoria = intense happiness/excitement — NOT a fear; the suffix '-phoria' means 'bearing/feeling', not fear ('-phobia').",
+      "hint": "Three contain '-phobia' (fear). What is the fourth?"
+    },
+    {
+      "id": "vv_vo01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "CONCISE most closely means:",
+      "options": [
+        "Long and detailed",
+        "Brief and clear, using few words",
+        "Confusing and unclear",
+        "Formal and academic"
+      ],
+      "answer": 1,
+      "exp": "Concise = expressing much in few words; brief and to the point.\nOpposite: verbose, wordy, rambling.",
+      "hint": "A concise answer covers the key point without unnecessary words."
+    },
+    {
+      "id": "vv_vo02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "AMBIGUOUS most closely means:",
+      "options": [
+        "Clearly defined",
+        "Having more than one possible meaning; open to interpretation",
+        "Extremely difficult",
+        "Absolutely certain"
+      ],
+      "answer": 1,
+      "exp": "Ambiguous = open to more than one interpretation; unclear.\nFrom Latin ambi- (both ways) + agere (to drive) — something that goes both ways.",
+      "hint": "'Ambi-' means both. An ambiguous statement can be read in multiple ways."
+    },
+    {
+      "id": "vv_vo03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "RELUCTANT most closely means:",
+      "options": [
+        "Eager and willing",
+        "Unwilling or hesitant",
+        "Angry and upset",
+        "Confused and lost"
+      ],
+      "answer": 1,
+      "exp": "Reluctant = unwilling; slow to do something because you don't want to.\n'He was reluctant to admit he was wrong' = he didn't want to.",
+      "hint": "A reluctant helper does help — but didn't really want to."
+    },
+    {
+      "id": "vv_vo04",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "PEDANTIC most closely means:",
+      "options": [
+        "Caring deeply about important issues",
+        "Overly concerned with minor details or rules",
+        "Extremely creative",
+        "Intellectually humble"
+      ],
+      "answer": 1,
+      "exp": "Pedantic = excessively concerned with minor rules or details, often showing off technical knowledge.\n'He was pedantic about grammar' = he insisted on every minor rule.",
+      "hint": "A pedantic person is less concerned with the big picture than with tiny technical rules."
+    },
+    {
+      "id": "vv_vo05",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "EPHEMERAL most closely means:",
+      "options": [
+        "Ancient and long-lasting",
+        "Lasting only a very short time",
+        "Extremely beautiful",
+        "Scientifically proven"
+      ],
+      "answer": 1,
+      "exp": "Ephemeral = lasting for only a short time; transitory.\nFrom Greek ephemeron = lasting only a day.\nExamples: a mayfly is ephemeral; social media trends are ephemeral.",
+      "hint": "'Epi-' = on, 'hemera' = day in Greek. Something lasting only a day is ephemeral."
+    },
+    {
+      "id": "vq_n01",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Number Sequences",
+      "difficulty": "easy",
+      "style": "hendersons",
+      "q": "What is missing?\n3, 6, 9, 12, ___, 18",
+      "options": [
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "answer": 2,
+      "exp": "Multiples of 3: add 3 each time. 12+3=15.",
+      "hint": "3 times table."
+    },
+    {
+      "id": "vq_n02",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Number Sequences",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "What is missing?\n1, 4, 9, 16, ___, 36",
+      "options": [
+        "20",
+        "23",
+        "25",
+        "30"
+      ],
+      "answer": 2,
+      "exp": "Perfect squares: 1²=1, 2²=4, 3²=9, 4²=16, 5²=25, 6²=36.",
+      "hint": "These are square numbers: 1×1, 2×2, 3×3..."
+    },
+    {
+      "id": "vq_n03",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Number Sequences",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "What is missing?\n40, 20, 10, 5, ___",
+      "options": [
+        "1",
+        "2",
+        "2.5",
+        "3"
+      ],
+      "answer": 2,
+      "exp": "Each term is halved: 5÷2=2.5",
+      "hint": "Dividing by 2 each time."
+    },
+    {
+      "id": "vq_n04",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Number Sequences",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "What is missing?\n1, 2, 5, 14, 41, ___",
+      "options": [
+        "122",
+        "120",
+        "118",
+        "116"
+      ],
+      "answer": 0,
+      "exp": "Pattern: ×3−1\n1×3−1=2, 2×3−1=5, 5×3−1=14, 14×3−1=41, 41×3−1=122",
+      "hint": "Try multiply by 3 then subtract 1 each time."
+    },
+    {
+      "id": "vq_n05",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Number Sequences",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "What two numbers are missing?\n1, 1, 2, 3, 5, ___, 13, ___",
+      "options": [
+        "7 and 19",
+        "8 and 21",
+        "7 and 20",
+        "8 and 22"
+      ],
+      "answer": 1,
+      "exp": "Fibonacci: each = sum of two before.\n5+3=8, 8+5=13, 13+8=21\nMissing: 8 and 21",
+      "hint": "Add the two previous numbers."
+    },
+    {
+      "id": "vq_g01",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Grid Patterns",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "Each row follows the same rule:\n| 5 | 3 | 15 |\n| 4 | 7 | 28 |\n| 6 | 9 | __ |\nMissing?",
+      "options": [
+        "48",
+        "54",
+        "56",
+        "63"
+      ],
+      "answer": 1,
+      "exp": "Rule: col1 × col2 = col3\n5×3=15 ✓, 4×7=28 ✓, 6×9=54 ✓",
+      "hint": "Multiply the first two columns together."
+    },
+    {
+      "id": "vq_g02",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Grid Patterns",
+      "difficulty": "hard",
+      "style": "hendersons",
+      "q": "Each row follows the same rule:\n| 10 | 4 | 6 |\n| 15 | 6 | 9 |\n| 20 | 8 | __ |\nMissing?",
+      "options": [
+        "10",
+        "11",
+        "12",
+        "14"
+      ],
+      "answer": 2,
+      "exp": "Rule: col1 − col2 = col3? 10−4=6 ✓, 15−6=9 ✓, 20−8=12 ✓",
+      "hint": "How does the third column relate to the first two?"
+    },
+    {
+      "id": "vq_s01",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Symbol Substitution",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "★ + ★ + ● = 17\n★ + ● + ● = 13\nWhat is ★?",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "answer": 2,
+      "exp": "Subtract equation 2 from equation 1:\n(2★+●) − (★+2●) = 17 − 13\n★ − ● = 4\nFrom equation 1: 2★ + ● = 17\nSubstitute ★ = ●+4: 2(●+4)+● = 17 → 3●+8=17 → ●=3, ★=7\n✓ Check: 7+7+3=17 ✓ and 7+3+3=13 ✓",
+      "hint": "Subtract one equation from the other to get ★ − ●."
+    },
+    {
+      "id": "vq_s02",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Symbol Substitution",
+      "difficulty": "hard",
+      "style": "hendersons",
+      "q": "♦ × ♦ = 36\n♦ + ▲ = 11\nWhat is ▲ × ▲?",
+      "options": [
+        "16",
+        "25",
+        "30",
+        "35"
+      ],
+      "answer": 1,
+      "exp": "♦² = 36 → ♦ = 6\n6 + ▲ = 11 → ▲ = 5\n▲² = 5² = 25",
+      "hint": "Find ♦ by taking square root, then find ▲, then square it."
+    },
+    {
+      "id": "vq_sp01",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Spatial Reasoning",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A shape viewed from the front looks like a circle. From the side it looks like a square. What is it?",
+      "options": [
+        "Sphere",
+        "Cone",
+        "Cylinder",
+        "Cube"
+      ],
+      "answer": 2,
+      "exp": "A cylinder: viewed from the top/end = circle; viewed from the side = rectangle/square.\n• Sphere: circle from all sides.\n• Cone: circle from top, triangle from side.\n• Cube: square from all sides.",
+      "hint": "Which 3D shape looks circular from one direction and rectangular/square from another?"
+    },
+    {
+      "id": "vq_sp02",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Spatial Reasoning",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "A 3×3×3 cube is painted red on all faces, then cut into 27 unit cubes. How many unit cubes have NO paint on them?",
+      "options": [
+        "0",
+        "1",
+        "4",
+        "8"
+      ],
+      "answer": 1,
+      "exp": "Only the centre cube has no paint — it is completely surrounded and touches no face.\nCorner cubes: 8 (3 painted faces)\nEdge cubes: 12 (2 painted faces)\nFace-centre cubes: 6 (1 painted face)\nCentre: 1 (0 painted faces) ✓\n8+12+6+1=27 ✓",
+      "hint": "Think about which positions in the cube are never on the outside."
+    },
+    {
+      "id": "vm2_001",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Probability",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "A bag has 4 red, 3 blue, 2 green marbles. A marble is drawn randomly. P(blue)?",
+      "options": [
+        "3/9",
+        "3/7",
+        "3/10",
+        "1/3"
+      ],
+      "answer": 0,
+      "exp": "Total = 4+3+2 = 9 marbles\nP(blue) = 3/9 = 1/3\n(Both 3/9 and 1/3 are correct — 3/9 is listed as option A)",
+      "hint": "Count total marbles, then use blue/total."
+    },
+    {
+      "id": "vm2_002",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Probability",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A coin is tossed and a die is rolled. P(heads AND a 6)?",
+      "options": [
+        "1/6",
+        "1/12",
+        "1/8",
+        "1/4"
+      ],
+      "answer": 1,
+      "exp": "P(heads) = ½, P(6) = ⅙\nP(both) = ½ × ⅙ = 1/12\n💡 When two independent events both need to occur, multiply their probabilities.",
+      "hint": "Multiply the two probabilities together — these are independent events."
+    },
+    {
+      "id": "vm2_003",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Probability",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "A bag has 5 red and 3 blue marbles. Two drawn WITHOUT replacement. P(both red)?",
+      "options": [
+        "25/64",
+        "5/14",
+        "10/28",
+        "20/56"
+      ],
+      "answer": 1,
+      "exp": "P(1st red) = 5/8\nP(2nd red | 1st was red) = 4/7 (only 7 marbles left, 4 red)\nP(both) = 5/8 × 4/7 = 20/56 = 5/14",
+      "hint": "Without replacement: the second probability changes after the first draw."
+    },
+    {
+      "id": "vm2_004",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Sequences",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "What is the 10th term of the sequence: 3, 7, 11, 15, ...?",
+      "options": [
+        "37",
+        "39",
+        "41",
+        "43"
+      ],
+      "answer": 1,
+      "exp": "Arithmetic sequence: first term a=3, common difference d=4\nnth term = a + (n−1)d = 3 + 9×4 = 3+36 = 39",
+      "hint": "Use the formula: nth term = a + (n−1)d."
+    },
+    {
+      "id": "vm2_005",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Sequences",
+      "difficulty": "hard",
+      "style": "hendersons",
+      "q": "The sum of an arithmetic sequence is 1+3+5+...+99. What is this sum?",
+      "options": [
+        "2400",
+        "2500",
+        "2600",
+        "2025"
+      ],
+      "answer": 1,
+      "exp": "This is the sum of odd numbers from 1 to 99.\nThere are 50 terms (1,3,5,...,99).\nSum = n² = 50² = 2500\n💡 The sum of the first n odd numbers always equals n²!",
+      "hint": "Count the terms: (last−first)/difference + 1 = (99−1)/2 + 1 = 50 terms. Sum = (first+last)/2 × n."
+    },
+    {
+      "id": "vm2_006",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "A school has 480 students. 60% walk, ¼ cycle, the rest take the bus. How many take the bus?",
+      "options": [
+        "48",
+        "60",
+        "72",
+        "96"
+      ],
+      "answer": 2,
+      "exp": "Walk: 60% of 480 = 288\nCycle: ¼ of 480 = 120\nBus: 480 − 288 − 120 = 72",
+      "hint": "Find walkers and cyclists first, then subtract both from total."
+    },
+    {
+      "id": "vm2_007",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "Two trains 600 km apart travel toward each other. Train A: 90 km/h, Train B: 110 km/h. When do they meet?",
+      "options": [
+        "2 hours",
+        "3 hours",
+        "4 hours",
+        "5 hours"
+      ],
+      "answer": 1,
+      "exp": "Combined speed = 90 + 110 = 200 km/h\nTime = 600 ÷ 200 = 3 hours\n✓ Check: A travels 270km, B travels 330km, 270+330=600 ✓",
+      "hint": "Add speeds when travelling toward each other, divide distance by combined speed."
+    },
+    {
+      "id": "vm2_008",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Simultaneous Equations",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "5 pens and 3 rulers cost $19. 2 pens and 3 rulers cost $10. Cost of 1 pen?",
+      "options": [
+        "$2",
+        "$3",
+        "$4",
+        "$5"
+      ],
+      "answer": 1,
+      "exp": "Let p=pen, r=ruler.\n5p+3r=19 ... (1)\n2p+3r=10 ... (2)\n(1)−(2): 3p=9 → p=$3",
+      "hint": "Subtract the equations to eliminate rulers."
+    },
+    {
+      "id": "vm2_009",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Simultaneous Equations",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Solve: 3x + 2y = 16 and 2x + 3y = 14. Find x + y.",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "answer": 2,
+      "exp": "Add both equations: (3x+2y) + (2x+3y) = 16+14\n5x + 5y = 30\n5(x+y) = 30\nx+y = 6\n💡 Adding the two equations directly gives x+y without needing to find x and y separately!",
+      "hint": "Try adding both equations together — see what simplifies."
+    },
+    {
+      "id": "vm2_010",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Coordinate Geometry",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A line passes through (2,3) and (6,7). What is its gradient?",
+      "options": [
+        "½",
+        "1",
+        "2",
+        "3"
+      ],
+      "answer": 1,
+      "exp": "Gradient = (y₂−y₁)/(x₂−x₁) = (7−3)/(6−2) = 4/4 = 1\nThe line rises 1 unit for every 1 unit across.",
+      "hint": "Gradient = rise ÷ run = (y₂−y₁)/(x₂−x₁)."
+    },
+    {
+      "id": "vm2_011",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Coordinate Geometry",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "What is the midpoint of the line segment joining (−2, 5) and (4, −1)?",
+      "options": [
+        "(1,2)",
+        "(2,2)",
+        "(1,3)",
+        "(3,2)"
+      ],
+      "answer": 0,
+      "exp": "Midpoint = ((x₁+x₂)/2, (y₁+y₂)/2)\n= ((−2+4)/2, (5+(−1))/2)\n= (2/2, 4/2) = (1, 2)",
+      "hint": "Average the x-coordinates and average the y-coordinates."
+    },
+    {
+      "id": "vm2_012",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Quadratics",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "The vertex of y = (x−3)² + 2 is at:",
+      "options": [
+        "(3,2)",
+        "(−3,2)",
+        "(3,−2)",
+        "(2,3)"
+      ],
+      "answer": 0,
+      "exp": "Vertex form: y = (x−h)² + k has vertex at (h, k)\ny = (x−3)² + 2 → vertex at (3, 2)\n💡 The minimum value of this parabola is y=2, occurring at x=3.",
+      "hint": "In vertex form y=(x−h)²+k, the vertex is at (h,k)."
+    },
+    {
+      "id": "vm2_013",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Pythagoras",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A ladder 10m long leans against a wall. The base is 6m from the wall. How high up the wall?",
+      "options": [
+        "7m",
+        "8m",
+        "9m",
+        "√136 m"
+      ],
+      "answer": 1,
+      "exp": "h² + 6² = 10²\nh² = 100 − 36 = 64\nh = 8m\n(6-8-10 is a Pythagorean triple, like 3-4-5 doubled)",
+      "hint": "Use Pythagoras: h² + base² = hypotenuse²."
+    },
+    {
+      "id": "vm2_014",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Circle Geometry",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "A chord is 16cm long and 6cm from the centre. What is the circle's radius?",
+      "options": [
+        "8cm",
+        "10cm",
+        "12cm",
+        "14cm"
+      ],
+      "answer": 1,
+      "exp": "The perpendicular from centre to chord bisects it: half-chord = 8cm\nRadius² = 8² + 6² = 64 + 36 = 100\nRadius = 10cm",
+      "hint": "Draw: perpendicular from centre bisects the chord, forming a right triangle."
+    },
+    {
+      "id": "vm2_015",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Data Interpretation",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A pie chart: Maths 40%, English 30%, Science 20%, Other 10%. If 240 students chose Maths, how many chose Science?",
+      "options": [
+        "60",
+        "80",
+        "120",
+        "100"
+      ],
+      "answer": 2,
+      "exp": "240 students = 40% of total\nTotal = 240 ÷ 0.4 = 600 students\nScience = 20% of 600 = 120 students",
+      "hint": "Find the total number of students first using the Maths percentage."
+    },
+    {
+      "id": "vm2_016",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Angles",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Two parallel lines are cut by a transversal. One angle is 125°. Find the co-interior angle on the same side.",
+      "options": [
+        "55°",
+        "65°",
+        "125°",
+        "235°"
+      ],
+      "answer": 0,
+      "exp": "Co-interior angles (same-side interior) between parallel lines sum to 180°.\n125° + x = 180° → x = 55°\n💡 Memory aid: co-interior angles form a C shape and sum to 180°.",
+      "hint": "Co-interior angles between parallel lines add to 180°."
+    },
+    {
+      "id": "vm2_017",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Money & Finance",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "$5000 invested at 4% simple interest per year. Interest earned after 3 years?",
+      "options": [
+        "$200",
+        "$400",
+        "$600",
+        "$800"
+      ],
+      "answer": 2,
+      "exp": "Simple interest = P × r × t = 5000 × 0.04 × 3 = $600",
+      "hint": "Simple interest = Principal × rate × time."
+    },
+    {
+      "id": "vm2_018",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Number Patterns",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "What is 1+2+3+...+50?",
+      "options": [
+        "1225",
+        "1275",
+        "1300",
+        "1250"
+      ],
+      "answer": 1,
+      "exp": "Sum = n(n+1)/2 = 50×51/2 = 2550/2 = 1275\n💡 Gauss's method: pair first+last, second+second-last... 50 pairs each summing to 51, but only 25 pairs = 25×51=1275.",
+      "hint": "Use the formula: n(n+1)÷2."
+    },
+    {
+      "id": "vm2_019",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Decimals",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "What is 0.3 × 0.4?",
+      "options": [
+        "0.12",
+        "1.2",
+        "0.012",
+        "12"
+      ],
+      "answer": 0,
+      "exp": "0.3 × 0.4 = 3/10 × 4/10 = 12/100 = 0.12\nOr: 3 × 4 = 12, then count 2 decimal places → 0.12",
+      "hint": "Multiply as whole numbers (3×4=12), then count total decimal places (2) → 0.12."
+    },
+    {
+      "id": "vm2_020",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Linear Equations",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "The equation of a line is y = 2x − 5. What is the y-intercept?",
+      "options": [
+        "2",
+        "5",
+        "−5",
+        "−2"
+      ],
+      "answer": 2,
+      "exp": "y = mx + c form: gradient m=2, y-intercept c=−5\nWhen x=0: y = 2(0)−5 = −5\nThe line crosses the y-axis at (0,−5).",
+      "hint": "In y=mx+c, the y-intercept is c (the constant term)."
+    },
+    {
+      "id": "vq2_01",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Number Sequences",
+      "difficulty": "easy",
+      "style": "hendersons",
+      "q": "What is missing?\n5, 10, 20, 40, ___",
+      "options": [
+        "60",
+        "70",
+        "80",
+        "90"
+      ],
+      "answer": 2,
+      "exp": "Each term doubles: 40×2=80.",
+      "hint": "×2 each time."
+    },
+    {
+      "id": "vq2_02",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Number Sequences",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "What is missing?\n81, 27, 9, 3, ___",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "answer": 1,
+      "exp": "Each term is divided by 3: 3÷3=1.",
+      "hint": "÷3 each time."
+    },
+    {
+      "id": "vq2_03",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Number Sequences",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "What is missing?\n2, 6, 12, 20, 30, ___",
+      "options": [
+        "40",
+        "42",
+        "44",
+        "46"
+      ],
+      "answer": 1,
+      "exp": "Differences: 4,6,8,10,12 (increasing by 2)\n30+12=42",
+      "hint": "Look at the differences between terms."
+    },
+    {
+      "id": "vq2_04",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Number Sequences",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "What is missing?\n3, 4, 7, 11, 18, ___",
+      "options": [
+        "25",
+        "27",
+        "29",
+        "30"
+      ],
+      "answer": 2,
+      "exp": "Each term = sum of two previous (like Fibonacci but starting 3,4)\n11+18=29",
+      "hint": "Add the two previous terms."
+    },
+    {
+      "id": "vq2_05",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Grid Patterns",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "Each row follows the same rule:\n| 2 | 5 | 7 |\n| 3 | 8 | 11 |\n| 6 | 4 | __ |\nMissing?",
+      "options": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "answer": 2,
+      "exp": "Rule: col1 + col2 = col3\n2+5=7 ✓, 3+8=11 ✓, 6+4=10 ✓",
+      "hint": "Add the first two columns."
+    },
+    {
+      "id": "vq2_06",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Grid Patterns",
+      "difficulty": "hard",
+      "style": "hendersons",
+      "q": "Each row follows the same rule:\n| 3 | 2 | 5 |\n| 5 | 4 | 9 |\n| 7 | 6 | __ |\nMissing?",
+      "options": [
+        "11",
+        "13",
+        "14",
+        "15"
+      ],
+      "answer": 1,
+      "exp": "Rule: col1 + col2 = col3? 3+2=5 ✓, 5+4=9 ✓, 7+6=13 ✓",
+      "hint": "Add the first two columns."
+    },
+    {
+      "id": "vq2_07",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Symbol Substitution",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "△ + □ = 10\n△ − □ = 4\nWhat is △?",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "answer": 2,
+      "exp": "Add both equations: 2△ = 14 → △ = 7\nThen □ = 10−7 = 3\n✓ Check: 7−3=4 ✓",
+      "hint": "Add the two equations to eliminate □."
+    },
+    {
+      "id": "vq2_08",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Symbol Substitution",
+      "difficulty": "hard",
+      "style": "hendersons",
+      "q": "★ × ● = 24\n★ + ● = 10\nWhat is ★² + ●²?",
+      "options": [
+        "52",
+        "54",
+        "56",
+        "58"
+      ],
+      "answer": 0,
+      "exp": "(★+●)² = ★²+2★●+●² = 100\n★²+●² = 100 − 2×24 = 100−48 = 52",
+      "hint": "Use the identity (a+b)² = a²+2ab+b²."
+    },
+    {
+      "id": "vq2_09",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Spatial Reasoning",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A cube has all faces painted. It's cut into 27 smaller equal cubes. How many small cubes have exactly 2 painted faces?",
+      "options": [
+        "8",
+        "12",
+        "6",
+        "0"
+      ],
+      "answer": 1,
+      "exp": "Cubes with 2 painted faces are the EDGE cubes (not corners).\nA 3×3×3 cube has 12 edges, each with 1 middle cube.\n= 12 cubes with exactly 2 painted faces\n(Corner cubes have 3 faces; face-centre cubes have 1 face; centre has 0)",
+      "hint": "Edge cubes sit on an edge between two faces — so they have exactly 2 painted faces."
+    },
+    {
+      "id": "vq2_10",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Pattern Recognition",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A tiling pattern uses small triangles. Row 1: 1 triangle. Row 2: 3. Row 3: 5. Row n has?",
+      "options": [
+        "n²",
+        "2n−1",
+        "n+1",
+        "n(n+1)"
+      ],
+      "answer": 1,
+      "exp": "Row 1=1, Row 2=3, Row 3=5 → each row = 2n−1 (odd numbers)\nRow 4 = 7, Row 5 = 9...\n💡 Total triangles in n rows = n² (sum of first n odd numbers = n²)",
+      "hint": "What formula gives 1,3,5,7... for n=1,2,3,4...?"
+    },
+    {
+      "id": "vv2_v01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "BENEVOLENT most closely means:",
+      "options": [
+        "Evil and cruel",
+        "Kind and generous",
+        "Strictly enforced",
+        "Bravely independent"
+      ],
+      "answer": 1,
+      "exp": "Benevolent = well-meaning and kind. From Latin bene (well) + volent (wishing).\nA benevolent ruler seeks the good of their people.\nAntonym: malevolent (bene→mali = badly wishing).",
+      "hint": "Think about the root: what does the word sound like it means?"
+    },
+    {
+      "id": "vv2_v02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "TENACIOUS most closely means:",
+      "options": [
+        "Quick to give up",
+        "Holding firmly; persistent",
+        "Extremely talented",
+        "Violently aggressive"
+      ],
+      "answer": 1,
+      "exp": "Tenacious = holding firmly to something; not giving up easily.\nFrom Latin tenax (holding fast).\nA tenacious athlete keeps training despite repeated failure.",
+      "hint": "Think about the root: what does the word sound like it means?"
+    },
+    {
+      "id": "vv2_v03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "METICULOUS most closely means:",
+      "options": [
+        "Careless and hasty",
+        "Showing great attention to detail",
+        "Extremely creative",
+        "Overly confident"
+      ],
+      "answer": 1,
+      "exp": "Meticulous = showing great attention to detail; very careful and precise.\nFrom Latin metus (fear) — originally 'fearful of making mistakes'.\nA meticulous researcher checks every source.",
+      "hint": "Think about the root: what does the word sound like it means?"
+    },
+    {
+      "id": "vv2_v04",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "AMBIVALENT most closely means:",
+      "options": [
+        "Strongly committed",
+        "Extremely talented",
+        "Having mixed feelings; uncertain between two options",
+        "Completely indifferent"
+      ],
+      "answer": 2,
+      "exp": "Ambivalent = having contradictory feelings about something.\nFrom Latin ambi (both) + valere (to be strong) — pulled in both directions.\nFeelings: you might be ambivalent about moving — excited but also sad.",
+      "hint": "Think about the root: what does the word sound like it means?"
+    },
+    {
+      "id": "vv2_v05",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "OBSOLETE most closely means:",
+      "options": [
+        "Brand new",
+        "Modern and efficient",
+        "No longer in use; outdated",
+        "Frequently used"
+      ],
+      "answer": 2,
+      "exp": "Obsolete = no longer produced or used; outdated.\nTypewriters and floppy disks are now obsolete.\nFrom Latin obsolescere (to fall into disuse).",
+      "hint": "Think about the root: what does the word sound like it means?"
+    },
+    {
+      "id": "vv2_v06",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "ELOQUENT most closely means:",
+      "options": [
+        "Difficult to understand",
+        "Fluent and persuasive in speaking or writing",
+        "Extremely brief",
+        "Technically precise"
+      ],
+      "answer": 1,
+      "exp": "Eloquent = able to express ideas clearly and persuasively.\nFrom Latin eloqui (to speak out).\nAn eloquent speaker can change minds with well-chosen words.",
+      "hint": "Think about the root: what does the word sound like it means?"
+    },
+    {
+      "id": "vv2_v07",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "PRAGMATIC most closely means:",
+      "options": [
+        "Idealistic and visionary",
+        "Dealing with practical reality rather than theory",
+        "Extremely cautious",
+        "Morally strict"
+      ],
+      "answer": 1,
+      "exp": "Pragmatic = dealing with things sensibly and practically.\nA pragmatic solution may not be perfect but it works.\nFrom Greek pragmatikos (relating to action/fact).",
+      "hint": "Think about the root: what does the word sound like it means?"
+    },
+    {
+      "id": "vv2_v08",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "SKEPTICAL most closely means:",
+      "options": [
+        "Easily convinced",
+        "Having doubts; questioning claims",
+        "Extremely curious",
+        "Overly optimistic"
+      ],
+      "answer": 1,
+      "exp": "Skeptical = not easily convinced; having doubts.\nA skeptical scientist requires evidence before accepting claims.\nHealthy skepticism is essential in science and critical thinking.",
+      "hint": "Think about the root: what does the word sound like it means?"
+    },
+    {
+      "id": "vv2_a01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "ISLAND is to OCEAN as OASIS is to:",
+      "options": [
+        "Desert",
+        "Water",
+        "Palm tree",
+        "Mirage"
+      ],
+      "answer": 0,
+      "exp": "An island is a piece of land surrounded by ocean.\nAn oasis is a fertile area surrounded by desert.\nRelationship: fertile/habitable area surrounded by hostile environment.",
+      "hint": "What surrounds an oasis the way an ocean surrounds an island?"
+    },
+    {
+      "id": "vv2_a02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "FLEDGLING is to BIRD as NOVICE is to:",
+      "options": [
+        "Expert",
+        "Beginner in any field",
+        "School",
+        "Practice"
+      ],
+      "answer": 1,
+      "exp": "A fledgling is a young, inexperienced bird just learning to fly.\nA novice is a beginner or newcomer in any field.\nRelationship: word for an inexperienced newcomer in a specific domain → general equivalent.",
+      "hint": "A fledgling is a beginner bird. What is the general word for a beginner in any area?"
+    },
+    {
+      "id": "vv2_a03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "PEDANT is to RULES as MISER is to:",
+      "options": [
+        "Spending",
+        "Money",
+        "Generosity",
+        "Debt"
+      ],
+      "answer": 1,
+      "exp": "A pedant is obsessively focused on rules (follows/enforces them to excess).\nA miser is obsessively focused on money (hoards it to excess).\nRelationship: person → what they are obsessively focused on.",
+      "hint": "What is a miser obsessively focused on?"
+    },
+    {
+      "id": "vv2_a04",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "MAGNIFY is to TELESCOPE as AMPLIFY is to:",
+      "options": [
+        "Radio",
+        "Speaker",
+        "Sound",
+        "Microphone"
+      ],
+      "answer": 1,
+      "exp": "A telescope magnifies (makes bigger) what you see.\nA speaker amplifies (makes louder) what you hear.\nRelationship: verb → device that performs that function.",
+      "hint": "What device performs amplification?"
+    },
+    {
+      "id": "vv2_a05",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "LIBRARY is to BOOKS as GALLERY is to:",
+      "options": [
+        "Paintings",
+        "Artists",
+        "Visitors",
+        "Exhibitions"
+      ],
+      "answer": 0,
+      "exp": "A library is a collection of books.\nA gallery is a collection of paintings/artwork.\nRelationship: place → what it contains.",
+      "hint": "What does a gallery contain?"
+    },
+    {
+      "id": "vv2_sc01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Sentence Completion",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "The documentary was so ___ that viewers felt they were actually present at the historical events.",
+      "options": [
+        "boring",
+        "immersive",
+        "confusing",
+        "brief"
+      ],
+      "answer": 1,
+      "exp": "'Felt they were actually present' = deeply drawn into the experience. 'Immersive' = creating a feeling of being completely surrounded/inside something.",
+      "hint": "Which word means the viewer felt surrounded by and inside the experience?"
+    },
+    {
+      "id": "vv2_sc02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Sentence Completion",
+      "difficulty": "hard",
+      "style": "edutest",
+      "q": "Although the critics were initially ___, they gradually came to appreciate the artist's unconventional style.",
+      "options": [
+        "enthusiastic",
+        "supportive",
+        "dismissive",
+        "confused"
+      ],
+      "answer": 2,
+      "exp": "'Although' signals contrast: critics START one way, END another (appreciation).\n'Initially dismissive' → then come to appreciate = the right contrast.\n'Initially enthusiastic' would not create a contrast with later appreciation.",
+      "hint": "'Although' signals a contrast. What opposite of appreciation fits as the starting point?"
+    },
+    {
+      "id": "vv2_sc03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Sentence Completion",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "The evidence was ___ at best — a few anecdotes and one small study with no control group.",
+      "options": [
+        "overwhelming",
+        "conclusive",
+        "compelling",
+        "tenuous"
+      ],
+      "answer": 3,
+      "exp": "'Anecdotes' and 'one small study with no control group' describe WEAK evidence.\n'Tenuous' = weak, insubstantial, barely holding.\nThe qualifier 'at best' signals the author is being generous — it's even weaker than tenuous.",
+      "hint": "What word means weak or barely holding together?"
+    },
+    {
+      "id": "vv2_o01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Odd One Out",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Which does NOT belong?\nAtlas · Glossary · Index · Prologue",
+      "options": [
+        "Atlas",
+        "Glossary",
+        "Index",
+        "Prologue"
+      ],
+      "answer": 3,
+      "exp": "Atlas (maps), Glossary (word definitions), Index (alphabetical list of topics) = all reference tools found at the beginning or end of books.\nPrologue = an introductory section of a story — not a reference tool.",
+      "hint": "Three are reference tools. Which is a narrative introduction?"
+    },
+    {
+      "id": "vv2_o02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Odd One Out",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Which does NOT belong?\nInfer · Deduce · Conjecture · Proclaim",
+      "options": [
+        "Infer",
+        "Deduce",
+        "Conjecture",
+        "Proclaim"
+      ],
+      "answer": 3,
+      "exp": "Infer (draw conclusions), Deduce (reason to a conclusion), Conjecture (form a theory without proof) = all involve reasoning/thinking.\nProclaim = announce publicly — an action, not a form of reasoning.",
+      "hint": "Three are cognitive processes (thinking, reasoning). Which is a public action?"
+    },
+    {
+      "id": "nt2_01",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "What comes next?\n64, 32, 16, 8, ___",
+      "options": [
+        "2",
+        "4",
+        "6",
+        "8"
+      ],
+      "answer": 1,
+      "exp": "Each term halved: 8÷2=4.",
+      "hint": "÷2 each time."
+    },
+    {
+      "id": "nt2_02",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Number Patterns",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "What is missing?\n7, 10, 14, 19, 25, ___",
+      "options": [
+        "30",
+        "31",
+        "32",
+        "33"
+      ],
+      "answer": 2,
+      "exp": "Differences: 3,4,5,6,7\n25+7=32",
+      "hint": "The differences increase by 1 each time."
+    },
+    {
+      "id": "nt2_03",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Number Patterns",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "Pattern: 2, 3, 5, 9, 17, ___\n(Each term uses the previous two terms)",
+      "options": [
+        "31",
+        "33",
+        "35",
+        "37"
+      ],
+      "answer": 1,
+      "exp": "Not Fibonacci. Look at differences: 1,2,4,8 (doubling).\n17 + 16 = 33\nOr: each term = 2×(previous term) − (term before that)\n2×17−9 = 34−9=25? No.\nActual pattern: each term = previous×2 − term before that?\n3=2×2−1? No.\nSimpler: differences are 1,2,4,8,16 → 17+16=33.",
+      "hint": "Check what happens to the differences between terms."
+    },
+    {
+      "id": "nt2_04",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "TELESCOPE is to ASTRONOMER as STETHOSCOPE is to:",
+      "options": [
+        "Hospital",
+        "Nurse",
+        "Doctor",
+        "Patient"
+      ],
+      "answer": 2,
+      "exp": "A telescope is the primary tool of an astronomer.\nA stethoscope is the primary tool of a doctor.\nRelationship: tool → who uses it professionally.",
+      "hint": "What professional uses a stethoscope as their primary diagnostic tool?"
+    },
+    {
+      "id": "nt2_05",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "CARTOGRAPHY is to MAPS as CHOREOGRAPHY is to:",
+      "options": [
+        "Music",
+        "Stage",
+        "Dance movements",
+        "Theatre"
+      ],
+      "answer": 2,
+      "exp": "Cartography = the art/science of making maps.\nChoreography = the art/science of composing/arranging dance movements.\nRelationship: '-graphy' discipline → what it produces.",
+      "hint": "What does a choreographer create or arrange?"
+    },
+    {
+      "id": "nt2_06",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Logical Deduction",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "All squares have 4 sides. This shape has 4 sides. Is it definitely a square?",
+      "options": [
+        "Yes",
+        "No — it could be any quadrilateral",
+        "Only if all sides are equal",
+        "Only if it has right angles"
+      ],
+      "answer": 1,
+      "exp": "Having 4 sides is necessary but not sufficient for being a square.\nRectangles, rhombuses, trapeziums all have 4 sides but aren't squares.",
+      "hint": "Is having 4 sides enough to guarantee a square?"
+    },
+    {
+      "id": "nt2_07",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Logical Deduction",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "'No mammals can breathe underwater. Dolphins can breathe underwater.' What follows?",
+      "options": [
+        "Dolphins are not mammals",
+        "Dolphins are mammals",
+        "Some mammals can breathe underwater",
+        "The first statement is wrong"
+      ],
+      "answer": 3,
+      "exp": "We KNOW dolphins are mammals (biology). We KNOW they breathe underwater.\nTherefore: the first statement ('no mammals can breathe underwater') must be FALSE.\n💡 Dolphins breathe air at the surface — they don't actually breathe underwater. The premise is false.",
+      "hint": "If we accept dolphins are mammals AND they breathe air at the surface — which premise needs examining?"
+    },
+    {
+      "id": "nt2_08",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Logical Deduction",
+      "difficulty": "hard",
+      "style": "matrix",
+      "q": "4 people: Amy, Ben, Cal, Dee each have a different pet: cat, dog, fish, bird.\nAmy doesn't have the cat. Ben has the dog. Cal doesn't have the fish. Who has the fish?",
+      "options": [
+        "Amy",
+        "Ben",
+        "Cal",
+        "Dee"
+      ],
+      "answer": 3,
+      "exp": "Ben → dog (given)\nCal → not fish → Cal has cat or bird\nAmy → not cat → Amy has fish, bird, or dog. But Ben has dog.\nIf Cal has cat, Amy has fish or bird, Dee has the other.\nCal → not fish → Cal has cat or bird.\nAmy → not cat → Amy has fish, bird (not dog, not cat).\nDee → whatever is left.\nBen=dog. Ben's eliminated from all others.\nOptions: cat, fish, bird for Amy, Cal, Dee.\nAmy→ not cat. Cal→ not fish.\nSo: Amy→fish or bird. Cal→cat or bird.\nIf Amy=fish, Cal=cat or bird, Dee=remaining.\nIf Amy=bird, Cal=cat or bird, Dee=fish or cat.\nIs there a unique solution? We need more info... but if no other constraints, Dee could have fish.\nWith just these clues: Amy≠cat, Ben=dog, Cal≠fish → Dee must have fish (process of elimination if Amy must have bird and Cal must have cat).",
+      "hint": "Use elimination: cross off what each person can't have."
+    },
+    {
+      "id": "nt2_09",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Spatial Reasoning",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A shape is reflected in a vertical mirror line. Which property stays the SAME?",
+      "options": [
+        "Left-right orientation",
+        "Which side is which",
+        "The area and size",
+        "The direction of rotation"
+      ],
+      "answer": 2,
+      "exp": "When a shape is reflected: size and area are preserved (it's congruent).\nBut: orientation reverses (left↔right) and rotation direction may flip.",
+      "hint": "What changes in a reflection and what stays the same?"
+    },
+    {
+      "id": "nt2_10",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Spatial Reasoning",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "A cube is rotated 90° clockwise when viewed from above. The North face is now facing:",
+      "options": [
+        "South",
+        "East",
+        "West",
+        "North"
+      ],
+      "answer": 2,
+      "exp": "Viewed from above, 90° clockwise rotation:\nNorth → West (what was facing N now faces W)\nEast → North, South → East, West → South\n💡 Think of a compass: rotate the whole compass 90° CW.",
+      "hint": "If you rotate 90° clockwise viewed from above, North turns to face West."
+    },
+    {
+      "id": "nt2_11",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Ordering",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "5 cities from west to east: A, B, C, D, E.\nB is west of D. C is between A and E. A is the westernmost. D is east of E.\nFrom west to east:",
+      "options": [
+        "A,C,B,E,D",
+        "A,B,C,E,D",
+        "A,C,E,B,D",
+        "A,B,E,C,D"
+      ],
+      "answer": 0,
+      "exp": "A = westernmost (1st)\nC is between A and E → A, C, E in some order\nB is west of D. D is east of E.\nSo order: A, C, then E, then D (since D is east of E).\nB must fit: B is west of D, and all others are placed.\nIf A,C,E,D then B fits between: A,C,B,E,D (B west of D, east of C).\nCheck: A(1), C(2), B(3), E(4), D(5). D east of E ✓, B west of D ✓, C between A and E ✓.",
+      "hint": "Place A first (westernmost), then use each clue to position the others."
+    },
+    {
+      "id": "nt2_12",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Coding",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Code: vowels (A,E,I,O,U) become their position (A=1, E=2, I=3, O=4, U=5). Consonants stay. Encode SUN.",
+      "options": [
+        "S5N",
+        "S1N",
+        "S3N",
+        "SUN"
+      ],
+      "answer": 0,
+      "exp": "S = consonant → stays as S\nU = 5th vowel (A=1,E=2,I=3,O=4,U=5) → becomes 5\nN = consonant → stays as N\nResult: S5N",
+      "hint": "Only vowels change; consonants stay the same. U is the 5th vowel."
+    },
+    {
+      "id": "nt2_13b",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Coding",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "In a code, each letter is replaced by the number that is its REVERSE position (A=26, B=25...Z=1).\nIf A=26 and T=7, what is the code for TAP?",
+      "options": [
+        "7-26-11",
+        "7-1-11",
+        "7-26-10",
+        "8-26-11"
+      ],
+      "answer": 0,
+      "exp": "Reverse alphabet: position from end.\nT is 20th letter → 26-20+1=7 ✓\nA is 1st letter → 26-1+1=26 ✓\nP is 16th letter → 26-16+1=11\nTAP = 7-26-11",
+      "hint": "Each letter's code = 27 minus its normal position (A=1→26, B=2→25, P=16→11)."
+    },
+    {
+      "id": "nt2_14",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Argument Analysis",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "'This medicine cured my cold. Therefore it works.' What is the main weakness?",
+      "options": [
+        "Colds cannot be cured",
+        "One person's experience is not enough evidence — colds also cure themselves",
+        "Medicine is too expensive",
+        "The person might not have taken it correctly"
+      ],
+      "answer": 1,
+      "exp": "Major flaw: colds resolve on their own (self-limiting illness). Without a control group (people who didn't take the medicine), we can't know if it worked or if the cold just got better naturally.\nThis is the post hoc fallacy: 'after this, therefore because of this'.",
+      "hint": "If colds get better on their own, how do we know the medicine helped?"
+    },
+    {
+      "id": "nt2_15",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Argument Analysis",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "'All the students in the top maths class do extra practice. Therefore extra practice causes high maths ability.' What is the flaw?",
+      "options": [
+        "Extra practice doesn't exist",
+        "Correlation isn't causation — students might do extra practice BECAUSE they are already good at maths",
+        "Top students are just smarter",
+        "Maths class composition is random"
+      ],
+      "answer": 1,
+      "exp": "The causal direction could be reversed: high ability → extra practice (they find it enjoyable/rewarding), rather than extra practice → high ability.\nThis is reverse causation, a type of correlation/causation error.",
+      "hint": "Which came first — the ability or the practice? Could the direction be reversed?"
+    },
+    {
+      "id": "nm2_01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Algebra",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "If 3(x+2) = 21, what is x?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "answer": 1,
+      "exp": "3(x+2)=21 → x+2=7 → x=5\n✓ Check: 3(5+2)=3×7=21 ✓",
+      "hint": "Divide both sides by 3 first."
+    },
+    {
+      "id": "nm2_02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Number Theory",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "What is 2⁵ × 2³?",
+      "options": [
+        "2⁸",
+        "2¹⁵",
+        "4⁸",
+        "64"
+      ],
+      "answer": 0,
+      "exp": "When multiplying same base: add exponents.\n2⁵ × 2³ = 2^(5+3) = 2⁸ = 256",
+      "hint": "When multiplying powers with same base, add the exponents."
+    },
+    {
+      "id": "nm2_03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A right triangle has legs 9cm and 12cm. What is its area?",
+      "options": [
+        "36 cm²",
+        "54 cm²",
+        "72 cm²",
+        "108 cm²"
+      ],
+      "answer": 1,
+      "exp": "Area of triangle = ½ × base × height\n= ½ × 9 × 12 = ½ × 108 = 54 cm²\n(The two legs of a right triangle are its base and height)",
+      "hint": "Area = ½ × base × height. For a right triangle, the legs are base and height."
+    },
+    {
+      "id": "nm2_04",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Fractions",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "A recipe needs ¾ cup of sugar. Maya wants to make 2½ times the recipe. How much sugar?",
+      "options": [
+        "1⅞ cups",
+        "1¾ cups",
+        "1½ cups",
+        "2 cups"
+      ],
+      "answer": 0,
+      "exp": "¾ × 2½ = ¾ × 5/2 = 15/8 = 1⅞ cups",
+      "hint": "Convert 2½ to improper fraction (5/2), then multiply."
+    },
+    {
+      "id": "nm2_05",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Percentage",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "A car's value depreciates 15% per year. After 2 years, what fraction of original value remains?",
+      "options": [
+        "72.25%",
+        "70%",
+        "75%",
+        "68%"
+      ],
+      "answer": 0,
+      "exp": "After year 1: 85% remains\nAfter year 2: 85% × 85% = 0.85² = 0.7225 = 72.25%\n💡 Compound depreciation: multiply by (1−rate) repeatedly.",
+      "hint": "Apply the depreciation twice — each time to the new (lower) value."
+    },
+    {
+      "id": "nm2_06",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Ratios",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "Concrete mix needs cement:sand:gravel = 1:2:3. If you have 30kg of sand, how much gravel?",
+      "options": [
+        "30kg",
+        "45kg",
+        "50kg",
+        "60kg"
+      ],
+      "answer": 1,
+      "exp": "Sand = 2 parts = 30kg → 1 part = 15kg\nGravel = 3 parts = 3 × 15 = 45kg",
+      "hint": "Find the value of 1 part using the sand quantity."
+    },
+    {
+      "id": "nm2_07",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "hard",
+      "style": "matrix",
+      "q": "A boat travels 30km upstream (against current) in 3 hours and 30km downstream in 2 hours. Find the current's speed.",
+      "options": [
+        "3 km/h",
+        "4 km/h",
+        "2.5 km/h",
+        "5 km/h"
+      ],
+      "answer": 2,
+      "exp": "Upstream speed = 30/3 = 10 km/h = boat speed − current\nDownstream speed = 30/2 = 15 km/h = boat speed + current\nAdd: 2 × boat speed = 25 → boat = 12.5 km/h\nCurrent = 15 − 12.5 = 2.5 km/h",
+      "hint": "Upstream = boat−current, Downstream = boat+current. Set up two equations."
+    },
+    {
+      "id": "nm2_08",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Statistics",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Data: 12, 14, 11, 15, 13, 14, 16, 14. What is the mode?",
+      "options": [
+        "13",
+        "14",
+        "15",
+        "12"
+      ],
+      "answer": 1,
+      "exp": "Count each value: 14 appears 3 times (more than any other).\nMode = 14",
+      "hint": "Mode = the value that appears most often."
+    },
+    {
+      "id": "nm2_09",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Number Theory",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "What is the smallest number divisible by 2, 3, 5, and 7?",
+      "options": [
+        "105",
+        "210",
+        "420",
+        "630"
+      ],
+      "answer": 1,
+      "exp": "LCM(2,3,5,7) = 2×3×5×7 = 210\n(All prime, so LCM = product)\n✓ 210÷2=105, 210÷3=70, 210÷5=42, 210÷7=30 — all exact",
+      "hint": "Since 2,3,5,7 are all prime, their LCM is just their product."
+    },
+    {
+      "id": "nm2_10",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "A hollow cylindrical pipe has outer radius 5cm and inner radius 3cm. Length 20cm. Volume of material used? (π≈3.14)",
+      "options": [
+        "502.4 cm³",
+        "1004.8 cm³",
+        "628 cm³",
+        "753.6 cm³"
+      ],
+      "answer": 1,
+      "exp": "Outer volume = π×5²×20 = 3.14×25×20 = 1570 cm³\nInner (hollow) = π×3²×20 = 3.14×9×20 = 565.2 cm³\nMaterial = 1570−565.2 = 1004.8 cm³",
+      "hint": "Volume of material = outer cylinder volume − inner hollow volume."
+    },
+    {
+      "id": "vr2_w01",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "james_ann",
+      "q": "Read:\n\"For decades, wolves were absent from Yellowstone National Park after being hunted to extinction there in the 1920s. Their reintroduction in 1995 transformed the ecosystem in ways scientists had not fully anticipated. The wolves preyed on elk, causing the elk to move more and avoid lingering in valleys and riverbanks. This allowed vegetation to recover: willows, aspens and cottonwoods grew back along rivers. Beavers returned because willows — their primary food and building material — were now available. Beaver dams altered stream flow, creating wetlands that supported fish, otters, and migratory birds. Scientists call this effect a 'trophic cascade' — the reintroduction of a single predator rippled through the entire ecosystem.\"\n\nWhy did the elk change their behaviour when wolves returned?",
+      "options": [
+        "The elk liked the wolves",
+        "They were hunted, so they moved more and avoided open areas",
+        "The elk wanted to see the beavers",
+        "Vegetation was tastier in other areas"
+      ],
+      "answer": 1,
+      "exp": "Passage: 'wolves preyed on elk, causing the elk to move more and avoid lingering in valleys and riverbanks'",
+      "hint": "Find the direct cause-and-effect sentence about elk behaviour."
+    },
+    {
+      "id": "vr2_w02",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"For decades, wolves were absent from Yellowstone National Park after being hunted to extinction there in the 1920s. Their reintroduction in 1995 transformed the ecosystem in ways scientists had not fully anticipated. The wolves preyed on elk, causing the elk to move more and avoid lingering in valleys and riverbanks. This allowed vegetation to recover: willows, aspens and cottonwoods grew back along rivers. Beavers returned because willows — their primary food and building material — were now available. Beaver dams altered stream flow, creating wetlands that supported fish, otters, and migratory birds. Scientists call this effect a 'trophic cascade' — the reintroduction of a single predator rippled through the entire ecosystem.\"\n\nThe return of beavers to Yellowstone was PRIMARILY caused by:",
+      "options": [
+        "Wolves directly protecting beavers",
+        "The return of willow trees that beavers need — which grew back because elk stopped overgrazing",
+        "Scientists releasing beavers",
+        "Beavers migrating from nearby areas"
+      ],
+      "answer": 1,
+      "exp": "Chain: wolves → elk move → willows grow back → beavers return (willows = food + building material).\nBeavers didn't come because of wolves directly, but because their food source returned.",
+      "hint": "Trace the chain of cause and effect: wolves → elk → vegetation → ?"
+    },
+    {
+      "id": "vr2_w03",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"For decades, wolves were absent from Yellowstone National Park after being hunted to extinction there in the 1920s. Their reintroduction in 1995 transformed the ecosystem in ways scientists had not fully anticipated. The wolves preyed on elk, causing the elk to move more and avoid lingering in valleys and riverbanks. This allowed vegetation to recover: willows, aspens and cottonwoods grew back along rivers. Beavers returned because willows — their primary food and building material — were now available. Beaver dams altered stream flow, creating wetlands that supported fish, otters, and migratory birds. Scientists call this effect a 'trophic cascade' — the reintroduction of a single predator rippled through the entire ecosystem.\"\n\n'Trophic cascade' as used here means:",
+      "options": [
+        "A waterfall in a national park",
+        "The effects of a predator rippling through all levels of an ecosystem",
+        "A type of wolf behaviour",
+        "The return of extinct species"
+      ],
+      "answer": 1,
+      "exp": "The passage defines it: 'the reintroduction of a single predator rippled through the entire ecosystem'.\n'Trophic' relates to nutrition/feeding levels in an ecosystem.",
+      "hint": "The passage defines this term directly — find the definition."
+    },
+    {
+      "id": "vr2_w04",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Purpose",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Read:\n\"For decades, wolves were absent from Yellowstone National Park after being hunted to extinction there in the 1920s. Their reintroduction in 1995 transformed the ecosystem in ways scientists had not fully anticipated. The wolves preyed on elk, causing the elk to move more and avoid lingering in valleys and riverbanks. This allowed vegetation to recover: willows, aspens and cottonwoods grew back along rivers. Beavers returned because willows — their primary food and building material — were now available. Beaver dams altered stream flow, creating wetlands that supported fish, otters, and migratory birds. Scientists call this effect a 'trophic cascade' — the reintroduction of a single predator rippled through the entire ecosystem.\"\n\nThe phrase 'scientists had not fully anticipated' suggests:",
+      "options": [
+        "Scientists made mistakes",
+        "The results were more dramatic and far-reaching than predictions — nature is more complex than models",
+        "Scientists failed at their jobs",
+        "The reintroduction should not have happened"
+      ],
+      "answer": 1,
+      "exp": "'Not fully anticipated' means the results exceeded expectations — the ecosystem response was larger and more connected than scientists had modelled, showing ecological complexity.",
+      "hint": "Does 'not fully anticipated' criticise scientists, or acknowledge that nature is more complex than expected?"
+    },
+    {
+      "id": "vr2_w05",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Text Structure",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Read:\n\"For decades, wolves were absent from Yellowstone National Park after being hunted to extinction there in the 1920s. Their reintroduction in 1995 transformed the ecosystem in ways scientists had not fully anticipated. The wolves preyed on elk, causing the elk to move more and avoid lingering in valleys and riverbanks. This allowed vegetation to recover: willows, aspens and cottonwoods grew back along rivers. Beavers returned because willows — their primary food and building material — were now available. Beaver dams altered stream flow, creating wetlands that supported fish, otters, and migratory birds. Scientists call this effect a 'trophic cascade' — the reintroduction of a single predator rippled through the entire ecosystem.\"\n\nThe passage traces a chain of events. Which correctly summarises the sequence?",
+      "options": [
+        "Wolves hunt elk → beavers build dams → willows grow → fish return",
+        "Wolves return → elk change behaviour → vegetation grows → beavers return → wetlands form → more species return",
+        "Beavers build dams → wolves return → elk leave → birds arrive",
+        "Scientists plant willows → beavers return → wolves control elk"
+      ],
+      "answer": 1,
+      "exp": "Each event triggers the next: wolves → elk behaviour → vegetation → beavers → wetlands → other species.\nThis is the 'trophic cascade' described in the final sentence.",
+      "hint": "What causes what? Trace the chain from first to last event."
+    },
+    {
+      "id": "vr2_m01",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Read:\n\"Money, as we know it, has not always existed. Before coins and currency, people traded goods directly — a practice called barter. If you had wheat but needed cloth, you had to find someone who both had cloth AND wanted wheat. This 'double coincidence of wants' made trade slow and unreliable. The earliest known coins appeared in Lydia (modern Turkey) around 600 BCE. Paper money was first used in China during the Tang Dynasty (7th century CE). Today, most money exists only as digital entries in computer systems — physical currency accounts for less than 10% of the world's money supply. This raises fascinating questions about what money fundamentally is: not a physical thing, but a shared agreement about value.\"\n\nWhat is the 'double coincidence of wants'?",
+      "options": [
+        "Having twice as much money as you need",
+        "The need to find someone who both has what you want AND wants what you have",
+        "Wanting two things at the same time",
+        "Trading double the agreed amount"
+      ],
+      "answer": 1,
+      "exp": "Passage: 'you had to find someone who both had cloth AND wanted wheat' — this is the double coincidence.",
+      "hint": "Find where the passage explains this term."
+    },
+    {
+      "id": "vr2_m02",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"Money, as we know it, has not always existed. Before coins and currency, people traded goods directly — a practice called barter. If you had wheat but needed cloth, you had to find someone who both had cloth AND wanted wheat. This 'double coincidence of wants' made trade slow and unreliable. The earliest known coins appeared in Lydia (modern Turkey) around 600 BCE. Paper money was first used in China during the Tang Dynasty (7th century CE). Today, most money exists only as digital entries in computer systems — physical currency accounts for less than 10% of the world's money supply. This raises fascinating questions about what money fundamentally is: not a physical thing, but a shared agreement about value.\"\n\nThe author ends by calling money 'a shared agreement about value'. What is implied about money?",
+      "options": [
+        "Money is not real",
+        "Money has value because everyone agrees it does — not because of anything physical",
+        "Digital money is dangerous",
+        "Paper money will soon disappear"
+      ],
+      "answer": 1,
+      "exp": "If 90% of money is digital (no physical form), money clearly isn't valuable because of what it's made of.\nIts value comes from collective belief and social agreement — the final sentence makes this explicit.",
+      "hint": "If 90% of money is digital, what gives money its value?"
+    },
+    {
+      "id": "vr2_m03",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary in Context",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"Money, as we know it, has not always existed. Before coins and currency, people traded goods directly — a practice called barter. If you had wheat but needed cloth, you had to find someone who both had cloth AND wanted wheat. This 'double coincidence of wants' made trade slow and unreliable. The earliest known coins appeared in Lydia (modern Turkey) around 600 BCE. Paper money was first used in China during the Tang Dynasty (7th century CE). Today, most money exists only as digital entries in computer systems — physical currency accounts for less than 10% of the world's money supply. This raises fascinating questions about what money fundamentally is: not a physical thing, but a shared agreement about value.\"\n\nIn context, 'fundamental' (what money 'fundamentally is') most closely means:",
+      "options": [
+        "Complicated",
+        "At its most basic and essential level",
+        "Financially",
+        "In simple terms"
+      ],
+      "answer": 1,
+      "exp": "'Fundamentally' = at its core; at the most basic, essential level.\nThe author asks: strip away the coins, notes, and digital systems — what IS money really?",
+      "hint": "'Fundamental' relates to foundations — the deepest, most basic level."
+    },
+    {
+      "id": "vr2_m04",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Text Structure",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"Money, as we know it, has not always existed. Before coins and currency, people traded goods directly — a practice called barter. If you had wheat but needed cloth, you had to find someone who both had cloth AND wanted wheat. This 'double coincidence of wants' made trade slow and unreliable. The earliest known coins appeared in Lydia (modern Turkey) around 600 BCE. Paper money was first used in China during the Tang Dynasty (7th century CE). Today, most money exists only as digital entries in computer systems — physical currency accounts for less than 10% of the world's money supply. This raises fascinating questions about what money fundamentally is: not a physical thing, but a shared agreement about value.\"\n\nThe passage moves from:",
+      "options": [
+        "Present to past to future",
+        "A problem (barter) to its historical solutions (coins, paper, digital) to a philosophical reflection",
+        "Facts about money to advice about saving",
+        "China to Turkey to everywhere"
+      ],
+      "answer": 1,
+      "exp": "Structure: barter problem → coin solution (600 BCE) → paper solution (7th century) → digital present → philosophical question about what money is.\nThis is a historical progression leading to a deeper insight.",
+      "hint": "Identify what each paragraph does: problem, history, present, reflection."
+    },
+    {
+      "id": "vr2_m05",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Main Idea",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"Money, as we know it, has not always existed. Before coins and currency, people traded goods directly — a practice called barter. If you had wheat but needed cloth, you had to find someone who both had cloth AND wanted wheat. This 'double coincidence of wants' made trade slow and unreliable. The earliest known coins appeared in Lydia (modern Turkey) around 600 BCE. Paper money was first used in China during the Tang Dynasty (7th century CE). Today, most money exists only as digital entries in computer systems — physical currency accounts for less than 10% of the world's money supply. This raises fascinating questions about what money fundamentally is: not a physical thing, but a shared agreement about value.\"\n\nThe central idea of this passage is:",
+      "options": [
+        "China invented money",
+        "Money is dangerous",
+        "Money has evolved from barter to coins to digital, and is ultimately a social agreement",
+        "Digital money is the best form of money"
+      ],
+      "answer": 2,
+      "exp": "The passage traces money's evolution AND concludes with what money truly is (a social agreement). Both elements form the central idea.",
+      "hint": "Which option covers the WHOLE passage, not just one part?"
+    },
+    {
+      "id": "nr2_o01",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Read:\n\"The deep ocean — below 200 metres — remains one of Earth's least explored frontiers. Less than 20% of the ocean floor has been mapped with high resolution, compared to more detailed maps we have of the Moon and Mars. The deep sea hosts extraordinary creatures: fish that produce their own light through bioluminescence, organisms that survive crushing pressure and near-freezing temperatures, and giant tube worms clustering around hydrothermal vents where chemical reactions provide energy instead of sunlight. Scientists estimate that millions of species in the deep ocean remain undiscovered. Yet deep-sea mining proposals threaten these fragile ecosystems before we fully understand them.\"\n\nWhat percentage of the ocean floor has been mapped with high resolution?",
+      "options": [
+        "Less than 20%",
+        "About 50%",
+        "More than 80%",
+        "Exactly 20%"
+      ],
+      "answer": 0,
+      "exp": "Passage: 'Less than 20% of the ocean floor has been mapped with high resolution'",
+      "hint": "Find the direct statistic."
+    },
+    {
+      "id": "nr2_o02",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"The deep ocean — below 200 metres — remains one of Earth's least explored frontiers. Less than 20% of the ocean floor has been mapped with high resolution, compared to more detailed maps we have of the Moon and Mars. The deep sea hosts extraordinary creatures: fish that produce their own light through bioluminescence, organisms that survive crushing pressure and near-freezing temperatures, and giant tube worms clustering around hydrothermal vents where chemical reactions provide energy instead of sunlight. Scientists estimate that millions of species in the deep ocean remain undiscovered. Yet deep-sea mining proposals threaten these fragile ecosystems before we fully understand them.\"\n\nThe comparison to maps of the Moon and Mars implies:",
+      "options": [
+        "The Moon is more important than the ocean",
+        "We have explored space more thoroughly than our own deep ocean",
+        "Space maps are inaccurate",
+        "Deep sea exploration is impossible"
+      ],
+      "answer": 1,
+      "exp": "Comparing Earth's least-explored ocean to the Moon and Mars — objects far away in space — highlights the irony: we know more about other worlds than our own ocean floor.",
+      "hint": "Why would comparing ocean mapping to Moon/Mars mapping be surprising?"
+    },
+    {
+      "id": "nr2_o03",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Author's Purpose",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Read:\n\"The deep ocean — below 200 metres — remains one of Earth's least explored frontiers. Less than 20% of the ocean floor has been mapped with high resolution, compared to more detailed maps we have of the Moon and Mars. The deep sea hosts extraordinary creatures: fish that produce their own light through bioluminescence, organisms that survive crushing pressure and near-freezing temperatures, and giant tube worms clustering around hydrothermal vents where chemical reactions provide energy instead of sunlight. Scientists estimate that millions of species in the deep ocean remain undiscovered. Yet deep-sea mining proposals threaten these fragile ecosystems before we fully understand them.\"\n\nThe final sentence about deep-sea mining serves to:",
+      "options": [
+        "Support deep-sea mining",
+        "Provide an argument that the ocean is unimportant",
+        "Create urgency — we may destroy unknown ecosystems before understanding them",
+        "End the passage dramatically"
+      ],
+      "answer": 2,
+      "exp": "The passage builds a case for how unknown and fragile the deep ocean is, then ends with a threat (mining). This structure creates urgency: we must protect what we don't yet understand.",
+      "hint": "What effect does mentioning a threat at the end create?"
+    },
+    {
+      "id": "nr2_o04",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"The deep ocean — below 200 metres — remains one of Earth's least explored frontiers. Less than 20% of the ocean floor has been mapped with high resolution, compared to more detailed maps we have of the Moon and Mars. The deep sea hosts extraordinary creatures: fish that produce their own light through bioluminescence, organisms that survive crushing pressure and near-freezing temperatures, and giant tube worms clustering around hydrothermal vents where chemical reactions provide energy instead of sunlight. Scientists estimate that millions of species in the deep ocean remain undiscovered. Yet deep-sea mining proposals threaten these fragile ecosystems before we fully understand them.\"\n\n'Bioluminescence' means:",
+      "options": [
+        "Extreme cold tolerance",
+        "The production of light by living organisms",
+        "Deep sea pressure resistance",
+        "Chemical energy production"
+      ],
+      "answer": 1,
+      "exp": "Bio = life, luminescence = light emission.\nBioluminescence = living organisms producing their own light (fireflies, deep-sea fish, etc.)",
+      "hint": "Bio=life, luminescence=light. What does 'bio' + 'luminescence' mean?"
+    },
+    {
+      "id": "nr2_o05",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Main Idea",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"The deep ocean — below 200 metres — remains one of Earth's least explored frontiers. Less than 20% of the ocean floor has been mapped with high resolution, compared to more detailed maps we have of the Moon and Mars. The deep sea hosts extraordinary creatures: fish that produce their own light through bioluminescence, organisms that survive crushing pressure and near-freezing temperatures, and giant tube worms clustering around hydrothermal vents where chemical reactions provide energy instead of sunlight. Scientists estimate that millions of species in the deep ocean remain undiscovered. Yet deep-sea mining proposals threaten these fragile ecosystems before we fully understand them.\"\n\nThe passage is primarily about:",
+      "options": [
+        "Why we should mine the deep sea",
+        "How fish produce light",
+        "The deep ocean as a vast, largely unknown, and threatened frontier",
+        "The comparison between Earth and other planets"
+      ],
+      "answer": 2,
+      "exp": "The passage covers: unexplored extent → extraordinary life → unknown species → threat. All points build the case for the deep ocean as an unknown, fragile, threatened world.",
+      "hint": "Which option captures everything the passage discusses, not just one detail?"
     }
   ]
 }

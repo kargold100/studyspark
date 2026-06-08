@@ -563,3 +563,58 @@ const LANGUAGES = {
     ]
   }
 };
+
+// ── TAMIL EXTENDED QUIZ SECTION ───────────────────────────────────────────────
+// Additional quiz questions for Tamil — attached to the existing Tamil language data
+// These are used in the Languages page "Quiz" tab
+
+if (typeof LANGUAGES !== 'undefined') {
+  LANGUAGES.tamil.sections.push({
+    id: 'ta_quiz',
+    title: 'Tamil Quick Quiz',
+    emoji: '🏆',
+    description: 'Test your Tamil knowledge with this mixed quiz covering script, numbers, vocabulary and culture.',
+    activities: [
+      {id:'tq_01',xp:15,title:'Tamil Script — Vowels',
+       q:'How many vowels (உயிர் எழுத்துக்கள்) does the Tamil alphabet have?',
+       options:['5','8','12','18'],answer:2,
+       exp:'Tamil has 12 vowels: அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ\nThey come in short/long pairs (except ஐ and ஔ):\n• Short: அ இ உ எ ஒ\n• Long: ஆ ஈ ஊ ஏ ஓ\n• Diphthongs: ஐ ஔ\n💡 The full Tamil alphabet = 12 vowels + 18 consonants + 1 special character (ஃ) = 31 letters.'},
+      {id:'tq_02',xp:15,title:'Tamil Script — Consonants',
+       q:'How many consonants (மெய் எழுத்துக்கள்) does the Tamil alphabet have?',
+       options:['12','16','18','24'],answer:2,
+       exp:'Tamil has 18 consonants: க ங ச ஞ ட ண த ந ப ம ய ர ல வ ழ ள ற ன\nThey are grouped into 3 types:\n• Vallinam (hard): க ச ட த ப ற\n• Mellinam (soft/nasal): ங ஞ ண ந ம ன\n• Idaiyinam (medium): ய ர ல வ ழ ள\n💡 The unique ழ (retroflex lateral) is found only in Tamil and Malayalam.'},
+      {id:'tq_03',xp:15,title:'Counting in Tamil',
+       q:'What are the Tamil words for 6, 7, 8?',
+       options:['ஆறு, ஏழு, எட்டு','ஆறு, எட்டு, ஏழு','அறு, ஏழு, எட்டு','ஆறு, ஏழு, ஒன்பது'],answer:0,
+       exp:'Tamil numbers 6–8:\n6 = ஆறு (aaru)\n7 = ஏழு (ezhu)\n8 = எட்டு (ettu)\nFull 1–10:\n1=ஒன்று 2=இரண்டு 3=மூன்று 4=நான்கு 5=ஐந்து\n6=ஆறு 7=ஏழு 8=எட்டு 9=ஒன்பது 10=பத்து'},
+      {id:'tq_04',xp:15,title:'Tamil Grammar — Cases',
+       q:'Tamil has a rich case system. The word "வீட்டில்" (viittil) means "in the house". The suffix -இல் indicates which case?',
+       options:['Accusative (object)','Locative (place/position)','Dative (to/for)','Genitive (of/belonging to)'],answer:1,
+       exp:'-இல் (-il) = locative case — indicating location\nவீடு (viidu) = house\nவீட்டில் (viittil) = in the house\nTamil case suffixes:\n• -ஐ (-ai) = accusative (direct object)\n• -ஐ/-க்கு (-ku) = dative (to/for)\n• -இன் (-in) = genitive (of)\n• -இல் (-il) = locative (in/at)\n• -இலிருந்து (-ilirundhu) = ablative (from)\n💡 Tamil has 8 cases, allowing very precise expression without needing word order to convey meaning.'},
+      {id:'tq_05',xp:15,title:'Thirukkural',
+       q:'The Thirukkural is divided into three books (அதிகாரங்கள்). What are they?',
+       options:['Religion, Society, Literature','Virtue (அறம்), Wealth (பொருள்), Love (காமம்)','God, King, People','Past, Present, Future'],answer:1,
+       exp:'The Thirukkural\'s three books:\n1. அறம் (Aram) = Virtue/Dharma — ethical and moral conduct\n2. பொருள் (Porul) = Wealth/Polity — governance, economics, society\n3. காமம் (Kaamam) = Love — romantic and personal relationships\nEach book contains chapters, each chapter has 10 couplets = 1,330 total.\n💡 This three-part structure (ethics, material world, love) mirrors the ancient Indian purusharthas (goals of life): dharma, artha, kama.'},
+      {id:'tq_06',xp:20,title:'Tamil Vocabulary — Body Parts',
+       q:'Match: கண் = Eye. What does "காது" (Kaadhu) mean?',
+       options:['Nose','Ear','Mouth','Hand'],answer:1,
+       exp:'Tamil body parts:\n• கண் (Kan) = Eye 👁\n• காது (Kaadhu) = Ear 👂\n• வாய் (Vaai) = Mouth 👄\n• மூக்கு (Muukku) = Nose 👃\n• கை (Kai) = Hand ✋\n• கால் (Kaal) = Leg/Foot 🦵\n💡 "கண்" (eye) appears in many Tamil expressions: "கண்ணே" (my eye) = term of endearment!'},
+      {id:'tq_07',xp:20,title:'Tamil Sentence Structure',
+       q:'Tamil is a SOV language. What does this mean for the sentence "அவள் பழம் சாப்பிட்டாள்" (She fruit ate)?',
+       options:['It is wrong Tamil','Subject-Object-Verb order — the verb always comes last in Tamil','It means something different','Tamil has no fixed word order'],answer:1,
+       exp:'Tamil follows SOV (Subject-Object-Verb) word order:\n• Subject: அவள் (avall) = She\n• Object: பழம் (pazham) = fruit\n• Verb: சாப்பிட்டாள் (saappittaal) = ate\n💡 Compare English SVO: "She ate fruit" (verb middle)\nTamil verb comes LAST — this affects how sentences are built and understood.\nOther SOV languages: Japanese, Korean, Hindi, Turkish.'},
+      {id:'tq_08',xp:20,title:'Tamil Literature — Sangam',
+       q:'Sangam literature (சங்க இலக்கியம்) refers to:',
+       options:['Modern Tamil cinema songs','Ancient Tamil poetry compiled 2,000+ years ago, one of the oldest literary traditions in the world','Tamil sacred religious texts only','Tamil grammar textbooks'],answer:1,
+       exp:'Sangam literature = ancient Tamil poetry compiled roughly 300 BCE – 300 CE.\nKey features:\n• Named after "Sangam" (academic assembly) of poets\n• ~2,381 poems by 473 poets across 18 major anthologies\n• Two themes: Akam (love/inner world) and Puram (war/outer world)\n• Rich nature imagery using specific landscapes (tinai) to symbolise emotional states\n💡 The landscape-emotion system: mountains = waiting/union, forests = unfaithfulness, pastoral = patience, seaside = separation, desert = endurance.'},
+      {id:'tq_09',xp:20,title:'Tamil Verb — Present Tense',
+       q:'In Tamil, "படிக்கிறேன்" (padikkireen) means "I am studying/read." Which part means "I"?',
+       options:['படி- (padi-)','க்கிற- (-kkira-)','ஏன் (-een)','The whole word'],answer:2,
+       exp:'Tamil verb structure: root + tense marker + personal suffix\n"படிக்கிறேன்" = படி (study) + க்கிற (present tense marker) + ஏன் (I/first person singular)\nPersonal suffixes:\n• ஏன் / -een = I\n• ஆய் / -aai = You (informal)\n• ஆன் / -aan = He\n• ஆள் / -aal = She\n• ஓம் / -oom = We\n💡 Tamil agglutinates (glues together) roots + tense + person in one word — like a building block system.'},
+      {id:'tq_10',xp:25,title:'Tamil Influence on English',
+       q:'The English word "curry" comes from Tamil. What is the original Tamil word and what does it mean?',
+       options:['கூரை (kurai) = cooking','கறி (kari) = sauce/seasoned vegetables/meat','குழம்பு (kuzhambu) = gravy','மசாலா (masala) = spices'],answer:1,
+       exp:'"கறி" (kari) = a sauce or relish made with vegetables or meat, with or without spices.\nThe word entered English through Portuguese traders who had contact with Tamil-speaking merchants in South India.\nOther Tamil words in English:\n• Cash = from "காசு" (kaasu) = coin/small currency\n• Catamaran = from "கட்டுமரம்" (kattumaram) = tied/bound logs (a type of raft)\n• Mango = from "மாங்காய்" (maangaai) via Portuguese "manga"\n💡 Tamil has one of the largest influences on English vocabulary through the spice trade route.'},
+    ]
+  });
+}
