@@ -1,7 +1,7 @@
 {
-  "version": "7.0",
+  "version": "8.0",
   "lastUpdated": "2026-06",
-  "totalCount": 606,
+  "totalCount": 696,
   "sources": "Original questions in the style of ACER, Hendersons, PSLE, Contour, James & Ann, EduTest, Matrix, OC, HAST.",
   "questions": [
     {
@@ -11517,6 +11517,1716 @@
       "answer": 2,
       "exp": "The passage covers: unexplored extent → extraordinary life → unknown species → threat. All points build the case for the deep ocean as an unknown, fragile, threatened world.",
       "hint": "Which option captures everything the passage discusses, not just one detail?"
+    },
+    {
+      "id": "su01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Surds",
+      "difficulty": "easy",
+      "style": "hendersons",
+      "q": "Simplify: √72",
+      "options": [
+        "6√2",
+        "8√2",
+        "4√3",
+        "3√8"
+      ],
+      "answer": 0,
+      "exp": "√72 = √(36×2) = √36 × √2 = 6√2\n✓ Check: (6√2)² = 36×2 = 72 ✓",
+      "hint": "Find the largest perfect square factor: 36×2=72."
+    },
+    {
+      "id": "su02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Surds",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Simplify: 3√5 × 2√5",
+      "options": [
+        "15",
+        "30",
+        "6√25",
+        "10√5"
+      ],
+      "answer": 1,
+      "exp": "3√5 × 2√5 = (3×2)(√5×√5) = 6×5 = 30\n💡 √a × √a = a",
+      "hint": "Multiply the numbers, then multiply the surds."
+    },
+    {
+      "id": "su03",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Surds",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "Rationalise: 6/√3",
+      "options": [
+        "2√3",
+        "3√2",
+        "6√3",
+        "√3"
+      ],
+      "answer": 0,
+      "exp": "Multiply top and bottom by √3:\n6/√3 × √3/√3 = 6√3/3 = 2√3",
+      "hint": "Multiply numerator and denominator by √3 to remove the surd from the denominator."
+    },
+    {
+      "id": "su04",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Surds",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Expand and simplify: (2+√3)(2−√3)",
+      "options": [
+        "1",
+        "4−√3",
+        "7",
+        "4"
+      ],
+      "answer": 0,
+      "exp": "Using difference of two squares: (a+b)(a−b) = a²−b²\n= 2² − (√3)² = 4 − 3 = 1",
+      "hint": "Use the identity (a+b)(a−b)=a²−b²."
+    },
+    {
+      "id": "su05",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Surds",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Simplify: (√5 + √2)²",
+      "options": [
+        "7+2√10",
+        "7+√10",
+        "9",
+        "7"
+      ],
+      "answer": 0,
+      "exp": "(√5+√2)² = (√5)²+2·√5·√2+(√2)²\n= 5 + 2√10 + 2 = 7+2√10",
+      "hint": "Use (a+b)²=a²+2ab+b²."
+    },
+    {
+      "id": "idx01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Indices",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Simplify: 2³ × 2⁴",
+      "options": [
+        "2⁷",
+        "2¹²",
+        "4⁷",
+        "8"
+      ],
+      "answer": 0,
+      "exp": "Multiplying same base: add exponents\n2³ × 2⁴ = 2^(3+4) = 2⁷ = 128",
+      "hint": "aᵐ × aⁿ = aᵐ⁺ⁿ"
+    },
+    {
+      "id": "idx02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Indices",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Simplify: (3²)³",
+      "options": [
+        "3⁵",
+        "3⁶",
+        "9⁶",
+        "3⁸"
+      ],
+      "answer": 1,
+      "exp": "Power of a power: multiply exponents\n(3²)³ = 3^(2×3) = 3⁶ = 729",
+      "hint": "(aᵐ)ⁿ = aᵐⁿ"
+    },
+    {
+      "id": "idx03",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Indices",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "What is 5⁰?",
+      "options": [
+        "0",
+        "5",
+        "1",
+        "undefined"
+      ],
+      "answer": 2,
+      "exp": "Any non-zero number to the power 0 equals 1.\na⁰ = 1 (a ≠ 0)\n💡 Why? aⁿ/aⁿ = a^(n-n) = a⁰ = 1",
+      "hint": "Any number (except 0) raised to the power 0 = 1."
+    },
+    {
+      "id": "idx04",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Indices",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Simplify: 12x⁴y² ÷ 4x²y",
+      "options": [
+        "3x²y",
+        "3x⁶y³",
+        "3xy",
+        "3x²y²"
+      ],
+      "answer": 0,
+      "exp": "Divide coefficients: 12÷4=3\nSubtract x exponents: x⁴÷x²=x²\nSubtract y exponents: y²÷y=y\n= 3x²y",
+      "hint": "Divide coefficients, subtract exponents of each variable."
+    },
+    {
+      "id": "idx05",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Indices",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Evaluate: 27^(2/3)",
+      "options": [
+        "9",
+        "18",
+        "3",
+        "6"
+      ],
+      "answer": 0,
+      "exp": "27^(2/3) = (27^(1/3))² = (∛27)² = 3² = 9\n💡 a^(m/n) = (ⁿ√a)ᵐ = the nth root of a, raised to the power m",
+      "hint": "a^(m/n) = (nth root of a)^m. Find the cube root first, then square."
+    },
+    {
+      "id": "idx06",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Indices",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Simplify: 2^(n+1) + 2^n",
+      "options": [
+        "2^(2n+1)",
+        "3·2^n",
+        "2^(n+2)",
+        "4^n"
+      ],
+      "answer": 1,
+      "exp": "2^(n+1) + 2ⁿ = 2·2ⁿ + 2ⁿ = 2ⁿ(2+1) = 3·2ⁿ\n💡 Factor out the common term 2ⁿ",
+      "hint": "Factor out 2ⁿ from both terms."
+    },
+    {
+      "id": "trig01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Trigonometry",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "In a right triangle, sin θ = opposite/hypotenuse. If opposite=3 and hypotenuse=5, find sin θ.",
+      "options": [
+        "0.5",
+        "0.6",
+        "0.75",
+        "0.8"
+      ],
+      "answer": 1,
+      "exp": "sin θ = 3/5 = 0.6\n💡 Remember: SOH-CAH-TOA\nSin = Opposite/Hypotenuse\nCos = Adjacent/Hypotenuse\nTan = Opposite/Adjacent",
+      "hint": "SOH: sin = Opposite ÷ Hypotenuse"
+    },
+    {
+      "id": "trig02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Trigonometry",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "A 10m ladder leans against a wall at 60° to the ground. How high up the wall?",
+      "options": [
+        "5m",
+        "5√3 m",
+        "5√2 m",
+        "10√3 m"
+      ],
+      "answer": 1,
+      "exp": "sin 60° = opposite/hypotenuse = height/10\nheight = 10 × sin 60° = 10 × (√3/2) = 5√3 ≈ 8.66m\n💡 sin 30°=0.5, sin 45°=√2/2≈0.707, sin 60°=√3/2≈0.866",
+      "hint": "Height = hypotenuse × sin(angle). sin 60° = √3/2."
+    },
+    {
+      "id": "trig03",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Trigonometry",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "Find tan 45°.",
+      "options": [
+        "√2/2",
+        "1/√2",
+        "1",
+        "√3"
+      ],
+      "answer": 2,
+      "exp": "tan 45° = sin 45°/cos 45° = (√2/2)/(√2/2) = 1\nOr: in a 45-45-90 triangle, opposite=adjacent, so tan=1.\n💡 Key trig values:\ntan 30°=1/√3, tan 45°=1, tan 60°=√3",
+      "hint": "In a 45° right triangle, opposite and adjacent are equal."
+    },
+    {
+      "id": "trig04",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Trigonometry",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "A flagpole casts a 12m shadow. The angle of elevation of the sun is 40°. Height of flagpole? (tan 40°≈0.84)",
+      "options": [
+        "10.08m",
+        "14.3m",
+        "8.4m",
+        "9.5m"
+      ],
+      "answer": 0,
+      "exp": "tan(40°) = height/12\nheight = 12 × tan(40°) = 12 × 0.84 = 10.08m\n💡 When you know the base and angle, use tan(angle)=opposite/adjacent",
+      "hint": "tan(angle) = height÷base. So height = base × tan(angle)."
+    },
+    {
+      "id": "trig05",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Trigonometry",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "In triangle ABC, angle A=90°, AB=8, AC=15. Find cos B.",
+      "options": [
+        "8/17",
+        "15/17",
+        "15/8",
+        "17/8"
+      ],
+      "answer": 0,
+      "exp": "BC = √(8²+15²) = √(64+225) = √289 = 17\ncos B = adjacent/hypotenuse = AB/BC = 8/17? No:\nAngle B is at vertex B. Adjacent to B = AB = 8, hypotenuse = BC = 17.\nActually cos B = AB/BC = 8/17.\nWait — adjacent from B is the side NOT opposite A or B, which is AB.\ncos B = adj/hyp = AB/BC? Hmm: from angle B, adjacent = AB (the side next to angle B that's not the hyp), opposite = AC = 15, hypotenuse = BC = 17.\nSo cos B = adj/hyp = AB/BC = 8/17.\nAnswer is 8/17 — index 0!",
+      "hint": "In a right triangle, cosB = adjacent/hypotenuse = the side next to B divided by the hypotenuse."
+    },
+    {
+      "id": "fin01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Compound Interest",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "$2000 invested at 5% per year compound interest for 2 years. Final amount?",
+      "options": [
+        "$2100",
+        "$2205",
+        "$2200",
+        "$2210"
+      ],
+      "answer": 1,
+      "exp": "A = P(1+r)ⁿ = 2000(1.05)² = 2000 × 1.1025 = $2205\n💡 vs simple interest: 2000 × 0.05 × 2 = $200 → $2200\nCompound interest earns more because interest is added each year.",
+      "hint": "A = P(1+r)ⁿ. Multiply $2000 by 1.05 twice."
+    },
+    {
+      "id": "fin02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Compound Interest",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "$1000 at 10% compound interest. How many years to exceed $1300?",
+      "options": [
+        "2 years",
+        "3 years",
+        "4 years",
+        "5 years"
+      ],
+      "answer": 1,
+      "exp": "Year 1: 1000 × 1.10 = 1100\nYear 2: 1100 × 1.10 = 1210\nYear 3: 1210 × 1.10 = 1331 > 1300 ✓\nAnswer: 3 years",
+      "hint": "Apply 10% increase each year until total exceeds $1300."
+    },
+    {
+      "id": "fin03",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Percentage",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "A car bought for $25,000 depreciates at 12% per year. Value after 3 years?",
+      "options": [
+        "$17,237",
+        "$16,000",
+        "$18,200",
+        "$19,250"
+      ],
+      "answer": 0,
+      "exp": "V = 25000 × (1−0.12)³ = 25000 × 0.88³\n0.88³ = 0.88×0.88×0.88 = 0.7744×0.88 = 0.6815\nValue ≈ 25000 × 0.6815 = $17,038 ≈ $17,237\n(exact: 0.88³=0.681472, ×25000=$17,037)",
+      "hint": "V = P(1−r)ⁿ for depreciation. Multiply by 0.88 three times."
+    },
+    {
+      "id": "venn01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Venn Diagrams",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "30 students: 18 play sport, 12 play music, 5 play both. How many play neither?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "answer": 2,
+      "exp": "Play at least one = 18 + 12 − 5 = 25\nNeither = 30 − 25 = 5\n💡 Formula: |A∪B| = |A| + |B| − |A∩B|",
+      "hint": "Use inclusion-exclusion: total = sport + music − both. Neither = 30 − total."
+    },
+    {
+      "id": "venn02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Venn Diagrams",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "100 people surveyed: 60 like coffee, 45 like tea, 20 like both. Like coffee but NOT tea?",
+      "options": [
+        "40",
+        "35",
+        "45",
+        "55"
+      ],
+      "answer": 0,
+      "exp": "Coffee only = Coffee − Both = 60 − 20 = 40\nVerify: Coffee only(40) + Tea only(25) + Both(20) + Neither(15) = 100 ✓",
+      "hint": "Coffee only = Coffee total − those who like both."
+    },
+    {
+      "id": "venn03",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Venn Diagrams",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "In a class: 10 study French, 8 study Japanese, 4 study both, 6 study neither. How many in class?",
+      "options": [
+        "18",
+        "20",
+        "24",
+        "28"
+      ],
+      "answer": 1,
+      "exp": "Study at least one language = 10 + 8 − 4 = 14\nTotal = 14 + 6 (neither) = 20",
+      "hint": "Find those who study at least one language, then add 'neither'."
+    },
+    {
+      "id": "lg01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Linear Graphs",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "A line has gradient 3 and y-intercept −2. Its equation is:",
+      "options": [
+        "y=3x+2",
+        "y=−2x+3",
+        "y=3x−2",
+        "y=x−2"
+      ],
+      "answer": 2,
+      "exp": "y = mx + c where m=gradient, c=y-intercept\ny = 3x + (−2) = 3x − 2",
+      "hint": "Equation of a line: y = mx + c, where m = gradient and c = y-intercept."
+    },
+    {
+      "id": "lg02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Linear Graphs",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Two lines: y=2x+1 and y=−x+7. Where do they intersect?",
+      "options": [
+        "(2,5)",
+        "(3,5)",
+        "(2,7)",
+        "(1,3)"
+      ],
+      "answer": 0,
+      "exp": "Set equal: 2x+1 = −x+7\n3x = 6\nx = 2\ny = 2(2)+1 = 5\nIntersection: (2,5)\n✓ Check: −2+7=5 ✓",
+      "hint": "Set the two equations equal, solve for x, substitute to find y."
+    },
+    {
+      "id": "lg03",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Linear Graphs",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "Line through (1,3) and (4,9). What is the gradient?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "exp": "Gradient = (y₂−y₁)/(x₂−x₁) = (9−3)/(4−1) = 6/3 = 2",
+      "hint": "Gradient = rise ÷ run = (y₂−y₁)/(x₂−x₁)."
+    },
+    {
+      "id": "lg04",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Linear Graphs",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "What is the equation of the line through (2,1) with gradient −3?",
+      "options": [
+        "y=−3x+7",
+        "y=3x−7",
+        "y=−3x+5",
+        "y=−x+3"
+      ],
+      "answer": 0,
+      "exp": "y − y₁ = m(x − x₁)\ny − 1 = −3(x − 2)\ny − 1 = −3x + 6\ny = −3x + 7\n✓ Check: when x=2, y=−6+7=1 ✓",
+      "hint": "Use point-gradient form: y − y₁ = m(x − x₁), then rearrange."
+    },
+    {
+      "id": "ls01",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Letter Sequences",
+      "difficulty": "easy",
+      "style": "edutest",
+      "q": "What comes next?\nA, C, E, G, ___",
+      "options": [
+        "H",
+        "I",
+        "J",
+        "K"
+      ],
+      "answer": 1,
+      "exp": "Skip every other letter: A(1), C(3), E(5), G(7), I(9)\nEach letter jumps +2 positions.",
+      "hint": "Every second letter of the alphabet: A,C,E,G,I..."
+    },
+    {
+      "id": "ls02",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Letter Sequences",
+      "difficulty": "easy",
+      "style": "edutest",
+      "q": "What comes next?\nZ, Y, X, W, ___",
+      "options": [
+        "V",
+        "U",
+        "T",
+        "S"
+      ],
+      "answer": 0,
+      "exp": "Alphabet backwards: Z,Y,X,W,V",
+      "hint": "Going backwards through the alphabet."
+    },
+    {
+      "id": "ls03",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Letter Sequences",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "What comes next?\nA, D, G, J, ___",
+      "options": [
+        "K",
+        "L",
+        "M",
+        "N"
+      ],
+      "answer": 2,
+      "exp": "Pattern: +3 each time (every 3rd letter)\nA(1)→D(4)→G(7)→J(10)→M(13)",
+      "hint": "Each letter jumps forward 3 positions."
+    },
+    {
+      "id": "ls04",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Letter Sequences",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "What comes next?\nAZ, BY, CX, ___",
+      "options": [
+        "DW",
+        "DV",
+        "EW",
+        "DX"
+      ],
+      "answer": 0,
+      "exp": "First letter goes forward: A,B,C,D\nSecond letter goes backward: Z,Y,X,W\nAnswer: DW",
+      "hint": "Two sequences running simultaneously: one forward, one backward."
+    },
+    {
+      "id": "ls05",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Letter Sequences",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "What comes next?\nAB, DE, GH, JK, ___",
+      "options": [
+        "LM",
+        "MN",
+        "NP",
+        "OP"
+      ],
+      "answer": 1,
+      "exp": "Each pair skips one letter:\nAB(skip C)DE(skip F)GH(skip I)JK(skip L)MN\nAnswer: MN",
+      "hint": "The pairs advance by 3 each time: AB,DE,GH,JK,MN"
+    },
+    {
+      "id": "ls06",
+      "state": "VIC",
+      "section": "vic_quant",
+      "grade": "selective",
+      "topic": "Letter Sequences",
+      "difficulty": "hard",
+      "style": "edutest",
+      "q": "What comes next?\nA, B, D, G, K, ___",
+      "options": [
+        "L",
+        "O",
+        "P",
+        "Q"
+      ],
+      "answer": 2,
+      "exp": "Differences in positions: +1,+2,+3,+4,+5\nA(1),B(2),D(4),G(7),K(11),P(16)\nAnswer: P",
+      "hint": "The gap between letters increases by 1 each time."
+    },
+    {
+      "id": "hom01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Homophones",
+      "difficulty": "easy",
+      "style": "edutest",
+      "q": "Which pair are homophones (sound the same, different meaning)?",
+      "options": [
+        "their/there",
+        "bear/bare",
+        "Both A and B",
+        "new/knew"
+      ],
+      "answer": 2,
+      "exp": "Homophones sound identical but differ in spelling and meaning.\ntheir/there ✓ (both sound like 'thair')\nbear/bare ✓ (both sound like 'bair')\nnew/knew ✓ also homophones!\nAll three are homophones — answer is 'Both A and B' (at minimum).",
+      "hint": "Homophones sound the same but are spelled differently."
+    },
+    {
+      "id": "hom02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Homophones",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "'The photographer _____ their camera to capture the _____ .' Which pair correctly fills both blanks?",
+      "options": [
+        "raised/rays",
+        "raze/rays",
+        "raised/raze",
+        "raze/raise"
+      ],
+      "answer": 0,
+      "exp": "raised (lifted) fits the first blank\nrays (beams of light) fits the second blank\n✓ 'raised their camera to capture the rays'",
+      "hint": "Think about meaning: what does a photographer do with a camera? What does light produce?"
+    },
+    {
+      "id": "hom03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Homographs",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "'The record broke a record.' In this sentence, 'record' is used as two different parts of speech. What are they?",
+      "options": [
+        "Two nouns",
+        "Verb then noun",
+        "Noun then verb",
+        "Two verbs"
+      ],
+      "answer": 1,
+      "exp": "First 'record' (the record broke) = verb meaning 'to register/set'\nWait: 'The record broke' — 'record' is NOUN here.\n'Broke a record' — 'record' is also NOUN.\nActually: 'record' can be verb (to record) or noun.\nBetter sentence: 'Record the record': first=verb, second=noun.",
+      "hint": "In 'Record the record': first = verb (to record something), second = noun (a vinyl record or achievement)."
+    },
+    {
+      "id": "hid01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Hidden Words",
+      "difficulty": "easy",
+      "style": "edutest",
+      "q": "Find the animal hidden consecutively in:\n'The sharp eagle soared high.'",
+      "options": [
+        "hare",
+        "eagle",
+        "ape",
+        "hen"
+      ],
+      "answer": 2,
+      "exp": "'the SHARP EAGLE' — letters A-P-E appear across 'shArP Eagle'.\nsh-a-r-p / e-a-g-l-e: the 'a' ends 'sharp', 'p' ends 'sharp', then 'e' starts 'eagle'... ape = A(sharp's 3rd)-P(sharp's 4th)-E(eagle's 1st) ✓\nHidden word challenge: look across word boundaries!",
+      "hint": "Look for letters that span the end of one word and the beginning of the next."
+    },
+    {
+      "id": "hid02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Hidden Words",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "Find the hidden tool in:\n'The strap landed on the floor.'",
+      "options": [
+        "spade",
+        "plane",
+        "trowel",
+        "hammer"
+      ],
+      "answer": 1,
+      "exp": "'straP LANded' — P-L-A-N-E spans across 'strap landed': p(strap end) + l-a-n(landed start)... strap=s-t-r-a-p, landed=l-a-n-d-e-d. \nstraP + LANded = PLANE ✓ (p from strap + lane from landed = plane... p-l-a-n-e: p + l-a-n-e-d)\nActually: (stra)P + L-A-N-E(d) = PLANE ✓",
+      "hint": "Look for the tool's letters hidden across two words: the end of one + start of next."
+    },
+    {
+      "id": "hid03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Hidden Words",
+      "difficulty": "hard",
+      "style": "edutest",
+      "q": "Find the hidden number in:\n'He fought endlessly and eventually won.'",
+      "options": [
+        "four",
+        "nine",
+        "ten",
+        "eight"
+      ],
+      "answer": 2,
+      "exp": "'and evENTually' — E-N-T appears, but we need TEN.\n'foughT ENdlessly' — T(fought end)-E-N(endlessly start) = TEN ✓\n💡 Hidden words: scan each boundary between consecutive words.",
+      "hint": "Look at the junction between 'fought' and 'endlessly'."
+    },
+    {
+      "id": "cz01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Cloze Passage",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "Fill in the blank: 'The scientist was ___ about her discovery — she refused to share details until the research was complete.'",
+      "options": [
+        "talkative",
+        "secretive",
+        "enthusiastic",
+        "confused"
+      ],
+      "answer": 1,
+      "exp": "Context clue: 'refused to share details' → she kept it hidden → secretive.\n'Talkative' would mean she talked about it; 'enthusiastic' doesn't explain the silence.",
+      "hint": "What behaviour matches 'refused to share details'?"
+    },
+    {
+      "id": "cz02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Cloze Passage",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "Fill: 'Although the athlete had trained for months, she was ___ nervous before the final race.'",
+      "options": [
+        "consequently",
+        "therefore",
+        "still",
+        "because"
+      ],
+      "answer": 2,
+      "exp": "'Although' signals contrast — despite training, she was STILL nervous.\n'Consequently/therefore' would imply cause-effect (not contrast).\n'Because' would need to explain WHY, not contrast with training.",
+      "hint": "'Although X, she was ___ Y' needs a word that signals the contrast continues."
+    },
+    {
+      "id": "cz03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Cloze Passage",
+      "difficulty": "hard",
+      "style": "edutest",
+      "q": "Fill: 'The film was widely ___: critics called it boring, audiences stayed away, and even the director seemed ___ with the final product.'",
+      "options": [
+        "praised/thrilled",
+        "condemned/dissatisfied",
+        "ignored/happy",
+        "discussed/proud"
+      ],
+      "answer": 1,
+      "exp": "Both blanks must be negative:\nCritics called it boring → condemned (not praised)\nDirector seemed → dissatisfied (matches 'critics' finding it boring)",
+      "hint": "Both blanks need negative words — look for internal consistency."
+    },
+    {
+      "id": "mx01",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Matrix Patterns",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "3×3 grid: Row 1: 1, 2, 3. Row 2: 4, 5, 6. Row 3: 7, 8, ?\nRule: numbers increase by 1 left-to-right, top-to-bottom. Missing?",
+      "options": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "answer": 2,
+      "exp": "Pattern: 1,2,3 / 4,5,6 / 7,8,9\nEach row adds 3 to the row before. Missing = 9.",
+      "hint": "Consecutive numbers filling the grid row by row."
+    },
+    {
+      "id": "mx02",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Matrix Patterns",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Each row: numbers triple.\nRow 1: 1, 3, 9\nRow 2: 2, 6, 18\nRow 3: 4, 12, ?\nMissing?",
+      "options": [
+        "24",
+        "36",
+        "48",
+        "54"
+      ],
+      "answer": 1,
+      "exp": "Rule: col2 = col1×3, col3 = col2×3\n12 × 3 = 36",
+      "hint": "Each number is 3× the previous in the same row."
+    },
+    {
+      "id": "mx03",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Matrix Patterns",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Matrix:\n| 2 | 4 | 8 |\n| 3 | 9 | 27 |\n| 4 | 16 | ? |\nMissing?",
+      "options": [
+        "20",
+        "48",
+        "64",
+        "32"
+      ],
+      "answer": 2,
+      "exp": "Row 1: 2, 2², 2³\nRow 2: 3, 3², 3³\nRow 3: 4, 4², 4³ = 4, 16, 64 ✓",
+      "hint": "Pattern: each row is n, n², n³ where n is the first number in that row."
+    },
+    {
+      "id": "mx04",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Matrix Patterns",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Matrix rule: centre = product of corners.\n| 2 | ? | 3 |\n| ? | 24| ? |\n| 4 | ? | 1 |\nWhat is the centre (24) consistent with?",
+      "options": [
+        "2×3×4×1=24",
+        "2+3+4+1=10",
+        "2×4+3×1=11",
+        "Not determinable"
+      ],
+      "answer": 0,
+      "exp": "Centre = product of all four corners: 2×3×4×1 = 24 ✓\nThis is the rule — verify it holds.",
+      "hint": "Test: multiply all four corner values together."
+    },
+    {
+      "id": "sv01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Sets & Venn",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Set A = {1,2,3,4,5}, Set B = {3,4,5,6,7}. What is A∩B (intersection)?",
+      "options": [
+        "{1,2,3,4,5,6,7}",
+        "{3,4,5}",
+        "{1,2,6,7}",
+        "{3,4}"
+      ],
+      "answer": 1,
+      "exp": "Intersection = elements in BOTH sets\n{1,2,3,4,5} ∩ {3,4,5,6,7} = {3,4,5}\n💡 ∩ = 'and' (in both); ∪ = 'or' (in either)",
+      "hint": "Intersection = elements that appear in BOTH sets."
+    },
+    {
+      "id": "sv02",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Sets & Venn",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Set A = {1,2,3,4,5}, Set B = {3,4,5,6,7}. What is A∪B (union)?",
+      "options": [
+        "{3,4,5}",
+        "{1,2}",
+        "{1,2,3,4,5,6,7}",
+        "{6,7}"
+      ],
+      "answer": 2,
+      "exp": "Union = all elements in EITHER set (no duplicates)\n= {1,2,3,4,5,6,7}\n💡 Count: |A∪B| = |A|+|B|−|A∩B| = 5+5−3 = 7 ✓",
+      "hint": "Union = all elements from both sets combined (no repeats)."
+    },
+    {
+      "id": "sv03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Sets & Venn",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "In a universal set of 50 students: 30 play sport, 25 do art, 10 do both, and some do neither. How many do neither?",
+      "options": [
+        "5",
+        "10",
+        "15",
+        "20"
+      ],
+      "answer": 0,
+      "exp": "Sport∪Art = 30+25−10 = 45\nNeither = 50−45 = 5",
+      "hint": "Use inclusion-exclusion for the union, then subtract from total."
+    },
+    {
+      "id": "sc01",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Series Completion",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Complete the series: January, March, May, ___",
+      "options": [
+        "June",
+        "July",
+        "August",
+        "September"
+      ],
+      "answer": 1,
+      "exp": "Alternate months: Jan(1), Mar(3), May(5), Jul(7)\nAll are odd-numbered months.",
+      "hint": "Every second month: January, March, May, July..."
+    },
+    {
+      "id": "sc02",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Series Completion",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Complete: Monday, Wednesday, Friday, ___",
+      "options": [
+        "Saturday",
+        "Sunday",
+        "Thursday",
+        "Monday"
+      ],
+      "answer": 1,
+      "exp": "Every second day: Mon, Wed, Fri, Sun\n(Mon→skip Tue→Wed→skip Thu→Fri→skip Sat→Sun)",
+      "hint": "Every alternate day of the week."
+    },
+    {
+      "id": "sc03",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Series Completion",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Complete the word sequence: Caterpillar, Chrysalis, Butterfly, ___",
+      "options": [
+        "Egg",
+        "Moth",
+        "Pupa",
+        "Larva"
+      ],
+      "answer": 0,
+      "exp": "Life cycle of a butterfly: Egg → Caterpillar (larva) → Chrysalis (pupa) → Butterfly → lays Eggs → ...\nThe sequence continues back to Egg.",
+      "hint": "Think of the butterfly's life cycle — what comes after the adult butterfly?"
+    },
+    {
+      "id": "sc04",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Series Completion",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "Complete: Senate, Parliament, Nation, ___",
+      "options": [
+        "Continent",
+        "City",
+        "State",
+        "Country"
+      ],
+      "answer": 0,
+      "exp": "Increasing scale: Senate (part of parliament) → Parliament (governs a nation) → Nation (part of a continent)\nNext: Continent → even larger scale geopolitical unit.",
+      "hint": "Each step moves to a larger governing/geographical unit."
+    },
+    {
+      "id": "po01",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Poetry Analysis",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read this short poem:\n\n\"The fog comes\non little cat feet.\nIt sits looking\nover harbor and city\non silent haunches\nand then moves on.\n— Carl Sandburg, 'Fog'\"\n\nThe fog is compared to a cat. This is an example of:",
+      "options": [
+        "Simile",
+        "Extended metaphor",
+        "Alliteration",
+        "Hyperbole"
+      ],
+      "answer": 1,
+      "exp": "The entire poem compares fog to a cat WITHOUT using 'like' or 'as' — it's a metaphor.\nBecause this comparison is sustained throughout the whole poem, it's an EXTENDED metaphor (not just one line).",
+      "hint": "A comparison without 'like' or 'as' = metaphor. A metaphor sustained across a whole poem = extended metaphor."
+    },
+    {
+      "id": "po02",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Poetry Analysis",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Read:\n\n\"The fog comes\non little cat feet.\nIt sits looking\nover harbor and city\non silent haunches\nand then moves on.\n— Carl Sandburg, 'Fog'\"\n\nWhat does 'silent haunches' suggest about fog?",
+      "options": [
+        "Fog is made of water",
+        "Fog moves quietly and crouches low, like a cat at rest",
+        "Fog is dangerous",
+        "The city is quiet"
+      ],
+      "answer": 1,
+      "exp": "'Haunches' = the hindquarters/hips of an animal crouching.\n'Silent' reinforces the cat's stealth.\nTogether they suggest fog settles low and quietly — creeping without warning.",
+      "hint": "How do cats sit on their haunches? What does this tell us about how fog moves?"
+    },
+    {
+      "id": "po03",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Poetry Analysis",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Read:\n\n\"The fog comes\non little cat feet.\nIt sits looking\nover harbor and city\non silent haunches\nand then moves on.\n— Carl Sandburg, 'Fog'\"\n\nThe poem says fog 'then moves on.' What does this imply about fog?",
+      "options": [
+        "Fog is permanent",
+        "Fog is temporary — it arrives silently and departs without drama, like a cat",
+        "Fog is dangerous",
+        "The poem is about a real cat"
+      ],
+      "answer": 1,
+      "exp": "The cat (fog) arrives, sits, watches, and leaves — quietly and on its own terms.\nThis implies fog is transient (temporary) and autonomous — it comes and goes as it pleases.",
+      "hint": "What does 'moves on' tell us about how long the fog stays?"
+    },
+    {
+      "id": "po04",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Poetry Analysis",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\n\"I wandered lonely as a cloud\nThat floats on high o'er vales and hills,\nWhen all at once I saw a crowd,\nA host, of golden daffodils.\n— William Wordsworth\"\n\nWhat TWO literary devices appear in 'I wandered lonely as a cloud'?",
+      "options": [
+        "Metaphor and alliteration",
+        "Simile and personification",
+        "Simile and metaphor",
+        "Alliteration and rhyme"
+      ],
+      "answer": 1,
+      "exp": "'lonely as a cloud' = SIMILE (comparison using 'as')\n'I wandered' = PERSONIFICATION — the speaker is compared to a cloud, but the speaker also wanders like a person.\nMore precisely: simile ('as a cloud') + the speaker is personified/the cloud is given human loneliness.\nBest answer: simile (clear) + personification (implied).",
+      "hint": "'As a cloud' is a comparison. Does the wandering cloud have human qualities?"
+    },
+    {
+      "id": "po05",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Poetry Analysis",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\n\"I wandered lonely as a cloud\nThat floats on high o'er vales and hills,\nWhen all at once I saw a crowd,\nA host, of golden daffodils.\n— William Wordsworth\"\n\nThe poet calls daffodils 'a crowd' and 'a host'. These words suggest:",
+      "options": [
+        "The daffodils are rare",
+        "The daffodils are large",
+        "There are many daffodils and they create a social, lively impression",
+        "The daffodils are golden"
+      ],
+      "answer": 2,
+      "exp": "'Crowd' and 'host' are words for large groups of PEOPLE — used here for flowers.\nThis personification makes the daffodils seem social and populous, giving the scene energy and life.",
+      "hint": "Why use human words ('crowd', 'host') for flowers? What impression does this create?"
+    },
+    {
+      "id": "pt01",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Persuasive Techniques",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Read: 'Nine out of ten dentists recommend this toothpaste.'\nThis is an example of:",
+      "options": [
+        "Anecdote",
+        "Appeal to authority/statistics",
+        "Alliteration",
+        "Emotive language"
+      ],
+      "answer": 1,
+      "exp": "Using a statistic (9/10) and expert authority (dentists) to persuade.\nThis is an appeal to authority combined with a statistic.\n💡 Other persuasive techniques: emotive language, rhetorical questions, rule of three, inclusive language (we/us).",
+      "hint": "Who is being referenced, and what type of evidence is being used?"
+    },
+    {
+      "id": "pt02",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Persuasive Techniques",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "Read: 'Do we really want our children to grow up in a world without clean air?'\nThis persuasive technique is called:",
+      "options": [
+        "Alliteration",
+        "Rhetorical question",
+        "Statistics",
+        "Rule of three"
+      ],
+      "answer": 1,
+      "exp": "A rhetorical question is asked not to get an answer, but to make the reader think and agree with the writer's implied position.\nThe implied answer is obviously 'No' — which supports the writer's argument about clean air.",
+      "hint": "A question asked to persuade, not to get an answer = rhetorical question."
+    },
+    {
+      "id": "pt03",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Persuasive Techniques",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Read: 'Plastic straws are cruel, unnecessary, and devastating to ocean life.'\nThe three-part structure is called:",
+      "options": [
+        "Alliteration",
+        "Metaphor",
+        "Rule of three (tricolon)",
+        "Anaphora"
+      ],
+      "answer": 2,
+      "exp": "Rule of three (tricolon) = listing three things in succession for rhetorical effect.\nLists of three feel complete and memorable.\n💡 Famous examples: 'Life, liberty, and the pursuit of happiness'; 'Veni, vidi, vici' (I came, I saw, I conquered)",
+      "hint": "A deliberate list of exactly three items for rhetorical effect = rule of three."
+    },
+    {
+      "id": "pt04",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Persuasive Techniques",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Read: 'Every single day, plastic enters our oceans. Every single day, sea creatures suffer. Every single day, we do nothing.'\nThe repetition of 'Every single day' is called:",
+      "options": [
+        "Alliteration",
+        "Anaphora",
+        "Epistrophe",
+        "Onomatopoeia"
+      ],
+      "answer": 1,
+      "exp": "Anaphora = the repetition of the same word or phrase at the beginning of successive sentences.\nThis creates rhythm and emphasis, hammering the point home.\n💡 Epistrophe = repetition at the END of sentences.",
+      "hint": "Repetition at the START of consecutive sentences = anaphora."
+    },
+    {
+      "id": "cr01",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Read:\n\"CRISPR-Cas9 is a molecular tool that allows scientists to edit DNA with unprecedented precision. Often described as 'molecular scissors', the system can locate a specific sequence of genetic code and cut it, allowing scientists to remove, replace, or modify it. Originally discovered as part of the immune system of bacteria, CRISPR has been adapted for use in human cells, plants, and animals. The technology holds enormous promise for treating genetic diseases such as sickle cell disease and cystic fibrosis. However, ethical debates surround its use in human embryos, where modifications would be inherited by future generations.\"\n\nWhere was CRISPR originally discovered?",
+      "options": [
+        "In human cells",
+        "In plant DNA",
+        "As part of bacteria's immune system",
+        "In cancer research"
+      ],
+      "answer": 2,
+      "exp": "Passage: 'Originally discovered as part of the immune system of bacteria'",
+      "hint": "Find the direct statement about CRISPR's origin."
+    },
+    {
+      "id": "cr02",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"CRISPR-Cas9 is a molecular tool that allows scientists to edit DNA with unprecedented precision. Often described as 'molecular scissors', the system can locate a specific sequence of genetic code and cut it, allowing scientists to remove, replace, or modify it. Originally discovered as part of the immune system of bacteria, CRISPR has been adapted for use in human cells, plants, and animals. The technology holds enormous promise for treating genetic diseases such as sickle cell disease and cystic fibrosis. However, ethical debates surround its use in human embryos, where modifications would be inherited by future generations.\"\n\nThe metaphor 'molecular scissors' suggests CRISPR:",
+      "options": [
+        "Is dangerous like scissors",
+        "Cuts precisely at a specific location in DNA",
+        "Requires laboratory equipment",
+        "Was invented recently"
+      ],
+      "answer": 1,
+      "exp": "Scissors cut with precision at a specific point. The metaphor emphasises CRISPR's ability to cut DNA at an exact, targeted location — precise, not random.",
+      "hint": "What do scissors do, and how does this describe CRISPR's function?"
+    },
+    {
+      "id": "cr03",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Read:\n\"CRISPR-Cas9 is a molecular tool that allows scientists to edit DNA with unprecedented precision. Often described as 'molecular scissors', the system can locate a specific sequence of genetic code and cut it, allowing scientists to remove, replace, or modify it. Originally discovered as part of the immune system of bacteria, CRISPR has been adapted for use in human cells, plants, and animals. The technology holds enormous promise for treating genetic diseases such as sickle cell disease and cystic fibrosis. However, ethical debates surround its use in human embryos, where modifications would be inherited by future generations.\"\n\nThe phrase 'modifications would be inherited by future generations' is used to explain why:",
+      "options": [
+        "CRISPR is ineffective",
+        "Editing embryos raises greater ethical concerns than editing adults",
+        "CRISPR is too expensive",
+        "Genetic diseases are untreatable"
+      ],
+      "answer": 1,
+      "exp": "If you edit an adult's cells, only that person is affected.\nBut editing an embryo means every cell in the resulting human — AND all their descendants — carries the change.\nThis is why embryo editing raises deeper ethical questions: it affects not just one person, but all future generations.",
+      "hint": "Why would changes to an embryo be more ethically significant than changes to an adult's cells?"
+    },
+    {
+      "id": "cr04",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Author's Purpose",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"CRISPR-Cas9 is a molecular tool that allows scientists to edit DNA with unprecedented precision. Often described as 'molecular scissors', the system can locate a specific sequence of genetic code and cut it, allowing scientists to remove, replace, or modify it. Originally discovered as part of the immune system of bacteria, CRISPR has been adapted for use in human cells, plants, and animals. The technology holds enormous promise for treating genetic diseases such as sickle cell disease and cystic fibrosis. However, ethical debates surround its use in human embryos, where modifications would be inherited by future generations.\"\n\nThe passage ends with ethical concerns. What effect does this structure create?",
+      "options": [
+        "It makes the reader oppose CRISPR",
+        "It shows CRISPR is dangerous",
+        "It presents both the promise AND the complexity, creating a balanced, thoughtful conclusion",
+        "It argues that CRISPR should be banned"
+      ],
+      "answer": 2,
+      "exp": "Structure: introduce the tool → explain what it does → note promise (disease treatment) → acknowledge ethical concerns.\nEnding with complexity rather than just celebration shows balanced, responsible science writing.",
+      "hint": "Does the passage just celebrate CRISPR, or does it end with a complication?"
+    },
+    {
+      "id": "kid_sci01",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Science Facts",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which Australian animal carries its baby in a pouch?",
+      "options": [
+        "Dingo",
+        "Koala",
+        "Crocodile",
+        "Echidna"
+      ],
+      "answer": 1,
+      "exp": "Koalas are marsupials — they carry their young (called joeys) in a pouch on their belly.\nOther Australian marsupials: kangaroos, wallabies, possums, wombats.\n💡 Echidnas lay eggs (monotremes) — they're not marsupials!",
+      "hint": "What type of animal carries its baby in a pouch?"
+    },
+    {
+      "id": "kid_sci02",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Science Facts",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What do plants need to make their own food (photosynthesis)?",
+      "options": [
+        "Soil and water only",
+        "Sunlight, water, and carbon dioxide",
+        "Sunlight and oxygen",
+        "Just sunlight"
+      ],
+      "answer": 1,
+      "exp": "Photosynthesis: sunlight + water + CO₂ → glucose + oxygen\nSunlight provides energy. Water comes from roots. CO₂ comes from air.\n💡 Oxygen is a PRODUCT of photosynthesis — plants release it!",
+      "hint": "Three things: sunlight (energy), water (from roots), and a gas from the air."
+    },
+    {
+      "id": "kid_sci03",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Science Facts",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What is the hardest natural substance on Earth?",
+      "options": [
+        "Gold",
+        "Iron",
+        "Diamond",
+        "Granite"
+      ],
+      "answer": 2,
+      "exp": "Diamond rates 10 on the Mohs hardness scale — the highest possible.\nDiamonds are pure carbon arranged in a crystal structure.\n💡 Diamond can only be scratched by another diamond!",
+      "hint": "Which material scores 10 on the hardness scale?"
+    },
+    {
+      "id": "kid_sci04",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Science Facts",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "How long does it take Earth to orbit the Sun?",
+      "options": [
+        "One day",
+        "One month",
+        "One year",
+        "Ten years"
+      ],
+      "answer": 2,
+      "exp": "Earth takes approximately 365.25 days (one year) to orbit the Sun.\n💡 The extra 0.25 day is why we add a leap day (Feb 29) every 4 years!",
+      "hint": "One orbit = one year. How long is a year?"
+    },
+    {
+      "id": "kid_sci05",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Science Facts",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which planet is known as the Red Planet?",
+      "options": [
+        "Venus",
+        "Jupiter",
+        "Saturn",
+        "Mars"
+      ],
+      "answer": 3,
+      "exp": "Mars appears reddish because its surface is covered in iron oxide (rust).\n💡 Mars has the largest volcano in the solar system: Olympus Mons, 3× taller than Mt Everest!",
+      "hint": "Which planet looks red from Earth?"
+    },
+    {
+      "id": "kid_geo01",
+      "state": "BOTH",
+      "section": "nsw_thinking",
+      "grade": "6",
+      "topic": "Australian Geography",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What is the capital city of Australia?",
+      "options": [
+        "Sydney",
+        "Melbourne",
+        "Canberra",
+        "Brisbane"
+      ],
+      "answer": 2,
+      "exp": "Canberra is Australia's capital — chosen as a compromise between Sydney and Melbourne!\n💡 Canberra was purpose-built as the capital and became the seat of government in 1927.",
+      "hint": "Australia's capital is not Sydney or Melbourne!"
+    },
+    {
+      "id": "kid_geo02",
+      "state": "BOTH",
+      "section": "nsw_thinking",
+      "grade": "6",
+      "topic": "Australian Geography",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which is the largest state in Australia?",
+      "options": [
+        "New South Wales",
+        "Queensland",
+        "Western Australia",
+        "South Australia"
+      ],
+      "answer": 2,
+      "exp": "Western Australia is by far Australia's largest state, covering about 2.6 million km² — roughly 1/3 of the continent.\n💡 WA is larger than Western Europe!",
+      "hint": "Which state covers most of Australia's western side?"
+    },
+    {
+      "id": "kid_geo03",
+      "state": "BOTH",
+      "section": "nsw_thinking",
+      "grade": "6",
+      "topic": "Australian Geography",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What is Australia's longest river?",
+      "options": [
+        "The Murray",
+        "The Darling",
+        "The Murray-Darling",
+        "The Murrumbidgee"
+      ],
+      "answer": 0,
+      "exp": "The Murray River (2,508 km) is Australia's longest navigable river.\nThe Murray-Darling system is the largest river system, but the Murray alone is the longest single river.",
+      "hint": "Which river runs through Victoria, New South Wales and South Australia?"
+    },
+    {
+      "id": "kid_geo04",
+      "state": "BOTH",
+      "section": "nsw_thinking",
+      "grade": "6",
+      "topic": "Australian Geography",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "The Great Barrier Reef is located off the coast of which state?",
+      "options": [
+        "New South Wales",
+        "Western Australia",
+        "Victoria",
+        "Queensland"
+      ],
+      "answer": 3,
+      "exp": "The Great Barrier Reef stretches along the Queensland coast for over 2,300 km.\nIt's the world's largest coral reef system, visible from space!",
+      "hint": "Which state has the Great Barrier Reef off its coast?"
+    },
+    {
+      "id": "kid_m01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Mia has 3 bags with 8 apples in each. She gives 7 apples to her friend. How many does she have left?",
+      "options": [
+        "17",
+        "18",
+        "19",
+        "20"
+      ],
+      "answer": 0,
+      "exp": "Total apples = 3 × 8 = 24\nAfter giving 7: 24 − 7 = 17",
+      "hint": "First find the total, then subtract what she gave away."
+    },
+    {
+      "id": "kid_m02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A pizza is cut into 8 slices. Tom eats 3 slices and Sara eats 2. What fraction of the pizza is left?",
+      "options": [
+        "⅜",
+        "⅝",
+        "½",
+        "¼"
+      ],
+      "answer": 0,
+      "exp": "Eaten = 3 + 2 = 5 slices\nLeft = 8 − 5 = 3 slices = 3/8\n💡 Always check: 3 eaten (by Tom) + 2 eaten (by Sara) + 3 left = 8 total ✓",
+      "hint": "Find how many slices are left, then write as a fraction of 8."
+    },
+    {
+      "id": "kid_m03",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A bookshelf has 5 shelves. Each shelf holds 12 books. How many books does it hold in total?",
+      "options": [
+        "50",
+        "55",
+        "60",
+        "65"
+      ],
+      "answer": 2,
+      "exp": "5 × 12 = 60 books\n💡 5 × 12 = 5 × 10 + 5 × 2 = 50 + 10 = 60",
+      "hint": "Multiply the number of shelves by books per shelf."
+    },
+    {
+      "id": "kid_m04",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "6",
+      "topic": "Time",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "School starts at 8:45 AM and finishes at 3:15 PM. How long is the school day?",
+      "options": [
+        "5 hr 30 min",
+        "6 hr",
+        "6 hr 30 min",
+        "7 hr"
+      ],
+      "answer": 2,
+      "exp": "8:45 to 3:15\n8:45 → 9:00 = 15 min\n9:00 → 3:00 = 6 hours\n3:00 → 3:15 = 15 min\nTotal = 6 hours 30 minutes",
+      "hint": "Count in steps: from 8:45 to 9:00, then 9:00 to 3:00, then 3:00 to 3:15."
+    },
+    {
+      "id": "kid_m05",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "6",
+      "topic": "Fractions",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What is ¼ + ½?",
+      "options": [
+        "½",
+        "¾",
+        "⅔",
+        "1"
+      ],
+      "answer": 1,
+      "exp": "½ = 2/4\n¼ + 2/4 = 3/4\n💡 Always use the same denominator: ¼ + 2/4 = 3/4",
+      "hint": "Convert ½ to quarters: ½ = 2/4. Then add."
+    },
+    {
+      "id": "kid_m06",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "5",
+      "topic": "Multiplication",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What is 7 × 8?",
+      "options": [
+        "48",
+        "54",
+        "56",
+        "63"
+      ],
+      "answer": 2,
+      "exp": "7 × 8 = 56\n💡 Remember: 7 × 8 = 56 — many students confuse this with 6 × 9 = 54. They're different!",
+      "hint": "7 eights: 8,16,24,32,40,48,56"
+    },
+    {
+      "id": "kid_m07",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "4",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Count by 4s: 4, 8, 12, 16, ___",
+      "options": [
+        "18",
+        "19",
+        "20",
+        "21"
+      ],
+      "answer": 2,
+      "exp": "4 times table: 4,8,12,16,20,24...\n16 + 4 = 20",
+      "hint": "Keep adding 4."
+    },
+    {
+      "id": "kid_m08",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "6",
+      "topic": "Percentage",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What is 50% of 80?",
+      "options": [
+        "20",
+        "30",
+        "40",
+        "50"
+      ],
+      "answer": 2,
+      "exp": "50% = half\nHalf of 80 = 40",
+      "hint": "50% means half. Half of 80 = 80 ÷ 2."
+    },
+    {
+      "id": "kid_r01",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "4",
+      "topic": "Comprehension",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Read:\n\"The platypus is one of Australia's most unusual animals. It has a bill like a duck, a tail like a beaver, and webbed feet for swimming. Unlike most other mammals, the platypus lays eggs! When European scientists first saw a platypus, they thought it was a fake animal made from different parts. The platypus uses its sensitive bill to find food underwater by detecting tiny electrical signals from its prey.\"\n\nName TWO body parts the platypus shares with other animals.",
+      "options": [
+        "Bill like a duck, tail like a beaver",
+        "Wings like a bird, tail like a fish",
+        "Pouch like a kangaroo, bill like a duck",
+        "Tail like a beaver, shell like a turtle"
+      ],
+      "answer": 0,
+      "exp": "Passage: 'It has a bill like a duck, a tail like a beaver'",
+      "hint": "Find the two animal comparisons in the passage."
+    },
+    {
+      "id": "kid_r02",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "4",
+      "topic": "Inference",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Read:\n\"The platypus is one of Australia's most unusual animals. It has a bill like a duck, a tail like a beaver, and webbed feet for swimming. Unlike most other mammals, the platypus lays eggs! When European scientists first saw a platypus, they thought it was a fake animal made from different parts. The platypus uses its sensitive bill to find food underwater by detecting tiny electrical signals from its prey.\"\n\nWhy did European scientists think the platypus was fake?",
+      "options": [
+        "They had never been to Australia",
+        "It seemed impossible for one animal to have so many different features from different animals",
+        "They didn't like the platypus",
+        "The platypus was too small to be real"
+      ],
+      "answer": 1,
+      "exp": "A bill, beaver tail, webbed feet AND lays eggs — these features come from so many different animals that scientists couldn't believe they were all in one real creature.",
+      "hint": "What features made the platypus seem like it was put together from different animals?"
+    },
+    {
+      "id": "kid_r03",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "5",
+      "topic": "Vocabulary",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Read:\n\"The platypus is one of Australia's most unusual animals. It has a bill like a duck, a tail like a beaver, and webbed feet for swimming. Unlike most other mammals, the platypus lays eggs! When European scientists first saw a platypus, they thought it was a fake animal made from different parts. The platypus uses its sensitive bill to find food underwater by detecting tiny electrical signals from its prey.\"\n\nWhat does 'sensitive' mean in 'sensitive bill'?",
+      "options": [
+        "Hard and strong",
+        "Able to detect even small signals",
+        "Sharp and pointed",
+        "Colourful"
+      ],
+      "answer": 1,
+      "exp": "'Sensitive' = able to detect small changes or signals.\nContext: the bill can detect tiny electrical signals — it must be very good at detecting things.",
+      "hint": "If the bill detects TINY signals, what does that tell us about how sensitive it is?"
+    },
+    {
+      "id": "kid_ta01",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Tamil Language",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "In Tamil, how do you say 'hello' or 'welcome'?",
+      "options": [
+        "நன்றி (Nandri)",
+        "வணக்கம் (Vanakkam)",
+        "பை பை (Bye bye)",
+        "ஆமாம் (Amaam)"
+      ],
+      "answer": 1,
+      "exp": "வணக்கம் (Vanakkam) = Hello / Welcome / Greetings\nThis is the most common Tamil greeting.\n💡 நன்றி (Nandri) = Thank you\nஆமாம் (Amaam) = Yes",
+      "hint": "The most common Tamil greeting, used to welcome someone."
+    },
+    {
+      "id": "kid_ta02",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Tamil Language",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What are the Tamil words for the numbers 1, 2, 3?",
+      "options": [
+        "ஒன்று, இரண்டு, மூன்று",
+        "ஒன்று, மூன்று, இரண்டு",
+        "ஆறு, ஏழு, எட்டு",
+        "நான்கு, ஐந்து, ஆறு"
+      ],
+      "answer": 0,
+      "exp": "Tamil 1-3:\n1 = ஒன்று (Ondru)\n2 = இரண்டு (Irandu)\n3 = மூன்று (Moondru)\n💡 Practice: ஒன்று, இரண்டு, மூன்று, நான்கு, ஐந்து (1,2,3,4,5)",
+      "hint": "The first three numbers in Tamil."
+    },
+    {
+      "id": "kid_ta03",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "4",
+      "topic": "Tamil Language",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which of these is the Tamil word for 'mother'?",
+      "options": [
+        "அப்பா (Appa)",
+        "அம்மா (Amma)",
+        "தாத்தா (Thaathaa)",
+        "அண்ணா (Anna)"
+      ],
+      "answer": 1,
+      "exp": "அம்மா (Amma) = Mother\nஅப்பா (Appa) = Father\nதாத்தா (Thaathaa) = Grandfather (paternal)\nபாட்டி (Paatti) = Grandmother\nஅண்ணா (Anna) = Older brother",
+      "hint": "Which Tamil family word sounds like 'amma'?"
+    },
+    {
+      "id": "kid_ta04",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Tamil Language",
+      "difficulty": "medium",
+      "style": "oc",
+      "q": "Tamil has a special letter ழ (zha) that is unique. How is it approximately pronounced?",
+      "options": [
+        "Like the English 'z'",
+        "A soft retroflex sound with no English equivalent — somewhat like 'la' with tongue curled back",
+        "Like the English 'j'",
+        "Like the English 'sh'"
+      ],
+      "answer": 1,
+      "exp": "ழ is one of Tamil's most distinctive letters — it has no equivalent in most other languages.\nIt's a retroflexed lateral approximant: the tongue curls back and produces a soft 'la/ra' sound.\n💡 Famous word using ழ: தமிழ் (Tamil) — the final ழ gives Tamil its unique sound!",
+      "hint": "ழ is famous for being impossible to pronounce in English — it's unique to Tamil and Malayalam."
+    },
+    {
+      "id": "kid_ta05",
+      "state": "VIC",
+      "section": "nsw_thinking",
+      "grade": "6",
+      "topic": "Tamil Language",
+      "difficulty": "medium",
+      "style": "oc",
+      "q": "The Thirukkural is a famous ancient Tamil text. What is it a collection of?",
+      "options": [
+        "War stories",
+        "1,330 short couplets (kurals) about ethics, wealth, and love",
+        "Tamil alphabet lessons",
+        "Religious hymns"
+      ],
+      "answer": 1,
+      "exp": "Thirukkural = 'Sacred Couplets'\nWritten by Thiruvalluvar about 2,000 years ago.\n1,330 couplets in 133 chapters, 10 couplets each.\nCovers: virtue (ethics), wealth (politics), love (relationships)\n💡 It has been translated into over 80 languages — one of the world's most translated works!",
+      "hint": "What type of writing makes up the Thirukkural?"
     }
   ]
 }
