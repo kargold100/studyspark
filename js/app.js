@@ -936,6 +936,16 @@ function renderTutor(){
     'What are main types of EduTest verbal reasoning questions?',
     'Explain necessary vs sufficient conditions with examples',
     'How do I manage time pressure in selective exams?',
+    'Explain common logical fallacies with everyday examples',
+    'Give me 5 hard vocabulary words with memory tricks',
+    'How to find the nth term of a sequence — step by step',
+    'Explain probability with dice and card examples',
+    'What is the difference between simile, metaphor and personification?',
+    'Give me a practice reading passage with questions and answers',
+    'How do I solve simultaneous equations? Show me 2 methods',
+    'Tips for writing a creative narrative in exam conditions',
+    'Explain Venn diagrams and inclusion-exclusion principle',
+    'What are the key geometry formulas I need to memorise?',
   ];
   return `<div class="page"><div style="max-width:700px;margin:0 auto">
     <div class="tc mb24">
@@ -1283,7 +1293,7 @@ function renderHome(){
 
   return `<div class="page">
     ${profileBar()}
-    ${noKey?`<div class="card mb14" style="border-color:rgba(247,144,79,.5);background:rgba(247,144,79,.06);padding:14px 18px"><div class="fc gap10 wrap" style="align-items:center"><span style="font-size:20px">⚠️</span><div style="flex:1"><strong>AI features need an API key</strong><p class="sm mt" style="margin-top:3px">Study Notes, AI Tutor, Writing Feedback and AI Coaching all need a free Anthropic API key.</p></div><button class="btn bo bsm" onclick="showApiKeyPrompt('render()')">🔑 Set API Key</button></div></div>`:''}
+    ${!hasApiKey()?`<div class="card mb14" style="border-color:rgba(247,144,79,.5);background:rgba(247,144,79,.06);padding:14px 18px"><div class="fc gap10 wrap" style="align-items:center"><span style="font-size:20px">⚠️</span><div style="flex:1"><strong>AI features need an API key</strong><p class="sm mt" style="margin-top:3px">Study Notes, AI Tutor, Writing Feedback and AI Coaching all need a free Anthropic API key.</p></div><button class="btn bo bsm" onclick="showApiKeyPrompt('render()')">🔑 Set API Key</button></div></div>`:''}
     <div class="hero">
       <div class="mb8"><span class="tag ta">FREE · GRADES 4–10 · VIC & NSW · ${QUESTIONS.length} QUESTIONS · 9 STYLES</span></div>
       <h1>Welcome back${d?`, <span class="grad">${d.nickname}</span>`:''}! 🎓</h1>
