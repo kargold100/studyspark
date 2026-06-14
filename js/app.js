@@ -923,6 +923,58 @@ async function doLoadNotes(){
   studyLoading=false;render();
 }
 
+
+function renderTutor(){
+  const QUICK_PROMPTS=[
+    'How do I solve number sequence questions quickly?',
+    'Explain verbal analogies with 3 worked examples',
+    'How to structure a persuasive essay for selective exams?',
+    'Key difference between VIC ACER and NSW Selective tests?',
+    'Give me 3 PSLE-style maths word problems with solutions',
+    'Explain the Pythagorean theorem with examples',
+    'Best reading comprehension strategies for inference?',
+    'What are main types of EduTest verbal reasoning questions?',
+    'Explain necessary vs sufficient conditions with examples',
+    'How do I manage time pressure in selective exams?',
+  ];
+  return `<div class="page"><div style="max-width:700px;margin:0 auto">
+    <div class="tc mb24">
+      <div style="font-size:52px;margin-bottom:10px">🤖</div>
+      <h1>AI Study Tutor</h1>
+      <p class="mt">Ask anything about school, selective prep, exam strategy, or any subject.</p>
+    </div>
+    <div class="mb14">
+      <p class="xs mt mb8" style="opacity:.6;text-transform:uppercase;letter-spacing:.05em">Quick questions:</p>
+      <div class="fc wrap gap8">
+        ${QUICK_PROMPTS.map(q=>`<button class="btn bm bsm" style="text-align:left;max-width:280px" onclick="tutorQ='${q.replace(/'/g,"\'")}';doAsk()">${q.length>55?q.slice(0,52)+'...':q}</button>`).join('')}
+      </div>
+    </div>
+    <div class="fc gap8 mb20">
+      <input type="text" id="tutor-input" placeholder="Ask your tutor anything..." value="${tutorQ.replace(/"/g,'&quot;')}"
+        onkeydown="if(event.key==='Enter'){tutorQ=this.value;doAsk()}"
+        oninput="tutorQ=this.value"/>
+      <button class="btn ba" onclick="tutorQ=document.getElementById('tutor-input').value;doAsk()" ${tutorLoading?'disabled':''}>
+        ${tutorLoading?'<span class="spin">⏳</span>':'Ask →'}
+      </button>
+    </div>
+    ${tutorLoading?`<div class="loading"><span class="spin">⏳</span> Thinking...</div>`:''}
+    ${tutorR&&!tutorLoading?`<div class="card" style="border-color:rgba(79,142,247,.4);padding:22px">
+      <div style="font-weight:800;color:var(--accent);margin-bottom:12px">🤖 Tutor Response</div>
+      <div style="line-height:1.85;font-size:14px;white-space:pre-wrap">${tutorR}</div>
+      <div class="fc gap8 mt14 wrap">
+        <button class="btn bm bsm" onclick="tutorQ='Can you give me another example of that?';doAsk()">Another example</button>
+        <button class="btn bm bsm" onclick="tutorQ='Now give me 3 practice questions on that topic with answers';doAsk()">Quiz me</button>
+        <button class="btn bm bsm" onclick="tutorQ='';tutorR='';render()">Clear</button>
+      </div>
+    </div>`
+    :!tutorR&&!tutorLoading?`<div class="card tc" style="padding:44px;opacity:.5">
+      <div style="font-size:38px;margin-bottom:10px">💬</div>
+      <div class="mt">Ask me anything — I'm here to help!</div>
+    </div>`:''
+    }
+  </div></div>`;
+}
+
 async function doAsk(){
   const inp=document.getElementById('tutor-input');if(inp)tutorQ=inp.value;
   if(!tutorQ.trim())return;
