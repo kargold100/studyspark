@@ -62,12 +62,51 @@ const NSW_SECS=[
   {id:'nsw_writing',e:'✍️',l:'Writing',m:30,d:'Creative or persuasive from a stimulus.'},
 ];
 const SUBJECTS={
-  Mathematics:{e:'🔢',c:'var(--accent)',t:['Algebra','Geometry','Fractions & Decimals','Statistics','Probability','Number Theory','Ratios & Percentages','Measurement','Word Problems']},
-  English:{e:'📖',c:'var(--pink)',t:['Reading Comprehension','Grammar & Punctuation','Vocabulary','Persuasive Writing','Creative Writing','Poetry & Literary Devices','Author\'s Purpose']},
-  Science:{e:'🔬',c:'var(--green)',t:['Cells & Biology','Elements & Chemistry','Forces & Physics','Earth Science','Ecology','Scientific Method']},
-  History:{e:'🏛️',c:'var(--orange)',t:['World War I & II','Australian History','Ancient Civilisations','Democracy & Government','Civil Rights Movements']},
-  Geography:{e:'🌍',c:'var(--purple)',t:['Climate & Weather','Natural Disasters','Landforms','Population Studies','Sustainability & Environment']},
-  Tamil:{e:'🌺',c:'var(--orange)',t:['Tamil Alphabet & Script','Tamil Numbers','Basic Vocabulary','Family & Daily Life','Tamil Grammar Basics','Classical Tamil Literature','Festivals & Culture','Tamil Proverbs']},
+  Mathematics:{e:'🔢',c:'var(--accent)',t:[
+    'Algebra — Equations & Inequalities','Algebra — Simultaneous Equations','Algebra — Quadratics & Factorising',
+    'Geometry — Angles & Lines','Geometry — Circles & Arcs','Geometry — Pythagoras & Trigonometry',
+    'Geometry — 3D Shapes & Volume','Fractions, Decimals & Percentages','Ratios & Proportions',
+    'Number Theory — Primes, HCF, LCM','Indices & Surds','Statistics & Data Analysis',
+    'Probability — Basic to Advanced','Sequences & Series','Coordinate Geometry & Linear Graphs',
+    'Measurement — Area & Perimeter','Compound Interest & Financial Maths','Venn Diagrams & Sets',
+    'Combinatorics — Counting & Arrangements','Word Problems & Problem Solving'
+  ]},
+  English:{e:'📖',c:'var(--pink)',t:[
+    'Reading Comprehension — Inference','Reading Comprehension — Main Idea','Vocabulary in Context',
+    'Grammar — Parts of Speech','Grammar — Punctuation & Apostrophes','Grammar — Sentence Types',
+    'Persuasive Writing — Techniques','Persuasive Writing — Structure','Creative Writing — Narrative',
+    'Poetry — Literary Devices','Poetry — Analysis & Interpretation','Author\'s Purpose & Tone',
+    'Text Structure & Organisation','Figurative Language — Metaphor & Simile','Figurative Language — Personification & Onomatopoeia',
+    'Critical Analysis — Evaluating Arguments','Essay Writing — Introduction & Conclusion','Spelling & Word Formation'
+  ]},
+  Science:{e:'🔬',c:'var(--green)',t:[
+    'Cells — Structure & Function','Genetics & Heredity','Human Body Systems','Plant Biology & Photosynthesis',
+    'Ecosystems & Food Webs','Periodic Table & Elements','Chemical Reactions & Equations','Acids, Bases & pH',
+    'Forces — Newton\'s Laws','Energy — Types & Transformation','Electricity & Circuits','Waves — Light & Sound',
+    'Earth Science — Rocks & Plate Tectonics','Weather & Climate Systems','Space — Solar System & Universe',
+    'Scientific Method & Experimental Design','Environmental Science & Sustainability'
+  ]},
+  History:{e:'🏛️',c:'var(--orange)',t:[
+    'Australian History — First Nations People','Australian History — Federation & Federation Era','Australian History — World War I',
+    'Australian History — World War II','Australian History — Post-War Immigration','Cold War & Superpower Rivalry',
+    'Ancient Egypt — Society & Culture','Ancient Greece — Democracy & Philosophy','Ancient Rome — Republic & Empire',
+    'Democracy & Government Systems','Civil Rights Movements — Global','Industrial Revolution',
+    'French Revolution','Human Rights & The UN','Significant Historical Figures'
+  ]},
+  Geography:{e:'🌍',c:'var(--purple)',t:[
+    'Australian Geography — States & Capitals','Australian Geography — Physical Features','Climate Zones & Biomes',
+    'Natural Disasters — Earthquakes & Volcanoes','Natural Disasters — Cyclones & Floods','Landforms — Mountains, Rivers, Coasts',
+    'Population — Distribution & Growth','Urbanisation & Cities','Sustainability & Environmental Issues',
+    'Global Trade & Economic Geography','Maps, Scale & Grid References','Human Impact on the Environment'
+  ]},
+  Tamil:{e:'🌺',c:'var(--orange)',t:[
+    'Tamil Alphabet — Vowels (உயிர் எழுத்துக்கள்)','Tamil Alphabet — Consonants (மெய் எழுத்துக்கள்)',
+    'Tamil Numbers 1–100','Basic Vocabulary — Home & Family','Basic Vocabulary — Food & Colours',
+    'Tamil Grammar — Cases (வேற்றுமை)','Tamil Grammar — Verb Tenses','Tamil Grammar — SOV Sentence Structure',
+    'Classical Tamil Literature — Thirukkural','Classical Tamil Literature — Sangam Poetry',
+    'Tamil Festivals — Pongal & Diwali','Tamil Culture — Music & Dance (Bharatanatyam)',
+    'Tamil Proverbs & Idioms','Tamil Writing Practice','Tamil in Australia & the World'
+  ]},
 };
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
@@ -133,7 +172,7 @@ async function callClaude(system,user,maxTok=400,model='fast'){
   if(!key) return '__NO_KEY__';
   // Use Haiku for speed on feedback/tutor, Sonnet only for writing marking
   const modelId = model==='smart'
-    ? 'claude-sonnet-4-5'
+    ? 'claude-sonnet-4-6'
     : 'claude-haiku-4-5-20251001';
   const controller = new AbortController();
   const timeout = setTimeout(()=>controller.abort(), 25000); // 25s timeout
@@ -213,9 +252,19 @@ const App={home:()=>nav('home')};
 
 function render(){
   const el=document.getElementById('app');
+  try{
   if(!currentUser&&screen!=='profile'){el.innerHTML=renderProfilePicker();return;}
   const R={home:renderHome,browse:renderBrowse,practice:renderPractice,exams:renderExams,examrun:renderExamRun,selective:renderSelective,tips:renderTips,study:renderStudy,tutor:renderTutor,funzone:renderFunZone,languages:renderLanguages,profile:renderProfile};
   el.innerHTML=(R[screen]||renderHome)();
+  }catch(err){
+    console.error('render error:',err);
+    el.innerHTML=`<div class="page"><div class="card" style="border-color:rgba(247,79,79,.4);padding:24px;text-align:center">
+      <div style="font-size:32px;margin-bottom:12px">⚠️</div>
+      <h3 style="color:var(--red);margin-bottom:8px">Something went wrong</h3>
+      <p class="mt sm mb16">${err.message||'Unexpected error'}</p>
+      <button class="btn ba" onclick="screen='home';render()">🏠 Go Home</button>
+    </div></div>`;
+  }
 }
 
 // ── PROFILE BAR (shown at top of every page) ──────────────────────────────────
@@ -843,31 +892,37 @@ function renderStudy(){
   if(!studyTopic){const info=SUBJECTS[studySub];return `<div class="page">${profileBar()}<button class="btn bm bsm mb14" onclick="studySub=null;render()">← Subjects</button><h1>${info.e} ${studySub}</h1><p class="mt mb18">Select a topic for instant notes.</p><div class="g2">${info.t.map(t=>`<div class="card hov" style="border-color:${info.c}44" onclick="studyTopic='${t}';doLoadNotes()"><h3 style="margin-bottom:4px">${t}</h3><p class="mt xs">Tap to generate ⚡</p></div>`).join('')}</div></div>`;}
   return `<div class="page">${profileBar()}<button class="btn bm bsm mb14" onclick="studyTopic=null;studyNotes='';render()">← ${studySub}</button><h1>${studyTopic}</h1>
     ${studyLoading?`<div class="loading"><span class="spin" style="font-size:28px">⏳</span><div style="margin-top:10px">Generating...</div></div>`
-    :`<div class="card mb14" style="padding:22px 26px;line-height:1.9;font-size:14px">${studyNotes.replace(/^## (.+)$/gm,'<h3 style="color:var(--accent);margin:16px 0 8px;font-size:15px">$1</h3>').replace(/\n/g,'<br>')}</div>
+    :studyNotes==='__ERROR__'
+    ?`<div class="card mb14" style="border-color:rgba(247,79,79,.4);padding:24px;text-align:center">
+      <div style="font-size:28px;margin-bottom:8px">⚠️</div>
+      <h3 style="color:var(--red);margin-bottom:8px">Could not generate notes</h3>
+      <p class="mt sm mb16">Please set a valid Anthropic API key to use AI features.</p>
+      <div class="fc gap8 wrap" style="justify-content:center">
+        <button class="btn bo" onclick="showApiKeyPrompt('doLoadNotes()')">🔑 Set API Key</button>
+        <button class="btn bm" onclick="doLoadNotes()">🔄 Try Again</button>
+      </div>
+    </div>`
+    :`<div class="card mb14" style="padding:22px 26px;line-height:1.9;font-size:14px">${studyNotes.replace(/^## (.+)$/gm,'<h3 style="color:var(--accent);margin:16px 0 8px;font-size:15px">$1</h3>').replace(/^• (.+)$/gm,'<div style="padding-left:12px">• $1</div>').replace(/\n/g,'<br>')}</div>
     <div class="fc gap8 wrap"><button class="btn ba" onclick="startPractice({topic:'${studyTopic}'},'oneByOne',8)">✏️ Practice</button><button class="btn bog" onclick="doLoadNotes()">🔄 Regenerate</button><button class="btn bm" onclick="tutorQ='Give me 3 practice questions about ${studyTopic} with full solutions';nav('tutor')">🤖 Ask Tutor</button></div>`}
   </div>`;
 }
 async function doLoadNotes(){
   if(!hasApiKey()){showApiKeyPrompt('doLoadNotes()');return;}
-  studyLoading=true;studyNotes='';render();
-  const t=await callClaudeUI('Year 8-9 Australia tutor. Study notes with ## headings. Key concepts, 1 formula, 1 worked example. Under 200 words. Plain text only.',`Topic: ${studyTopic} (${studySub}).`);
-  if(t===null){studyLoading=false;render();return;}
-  studyNotes=t||'Could not load notes. Please check your API key in the 👤 Profile page and try again.';
-  studyLoading=false;if(currentUser)Profiles.recordStudy(currentUser);render();
+  studyNotes='';studyLoading=true;render();
+  try{
+    const t=await callClaudeUI(
+      'Australian selective school tutor, Grades 4-10. Write clear study notes:\n## Key Concepts\n• 3-5 concise bullet points covering the core ideas\n## Formula / Rule\n[The key formula or rule to remember]\n## Worked Example\n[One step-by-step example]\n## Exam Tips\n• 2-3 tips specific to selective exams\nUnder 300 words. Plain text, use ## headings and bullet points.',
+      `Topic: ${studyTopic} | Subject: ${studySub} | Australian curriculum, selective exam focus.`
+    );
+    if(t===null){studyLoading=false;return;}  // user shown API key prompt
+    studyNotes=t||'__ERROR__';
+  }catch(e){
+    console.error('Study notes error:',e);
+    studyNotes='__ERROR__';
+  }
+  studyLoading=false;render();
 }
 
-// ── TUTOR ─────────────────────────────────────────────────────────────────────
-const QUICK_PROMPTS=['How do I solve number sequence questions quickly?','Explain verbal analogies with examples','How to structure a persuasive essay for selective?','Key difference between VIC ACER and NSW tests?','Give me 3 PSLE-style maths problems with solutions','Explain the Pythagorean theorem with examples','Best reading comprehension strategies for inference?','What are EduTest verbal reasoning question types?','Explain necessary vs sufficient conditions','How do I manage time pressure in exams?'];
-function renderTutor(){
-  return `<div class="page"><div style="max-width:700px;margin:0 auto">${profileBar()}
-    <div class="tc mb20"><div style="font-size:48px;margin-bottom:8px">🤖</div><h1>AI Study Tutor</h1><p class="mt">Ask anything about school, exams, or any subject.</p></div>
-    <div class="mb14"><p class="xs mt mb8">QUICK QUESTIONS:</p><div class="fc wrap gap8">${QUICK_PROMPTS.map(q=>`<button class="btn bm bsm" onclick="tutorQ='${q.replace(/'/g,"\\'")}';doAsk()">${q.length>55?q.slice(0,52)+'...':q}</button>`).join('')}</div></div>
-    <div class="fc gap8 mb20"><input type="text" id="tutor-input" placeholder="Ask your tutor anything..." value="${tutorQ.replace(/"/g,'&quot;')}" onkeydown="if(event.key==='Enter'){tutorQ=this.value;doAsk()}" oninput="tutorQ=this.value"/>
-      <button class="btn ba" onclick="tutorQ=document.getElementById('tutor-input').value;doAsk()" ${tutorLoading?'disabled':''}>${tutorLoading?'<span class="spin">⏳</span>':'Ask →'}</button></div>
-    ${tutorLoading?`<div class="loading"><span class="spin">⏳</span> Thinking...</div>`:''}
-    ${tutorR&&!tutorLoading?`<div class="card" style="border-color:rgba(79,142,247,.4);padding:22px"><div style="font-weight:800;color:var(--accent);margin-bottom:12px">🤖 Answer</div><div style="line-height:1.85;font-size:14px;white-space:pre-wrap">${tutorR}</div><div class="fc gap8 mt14 wrap"><button class="btn bm bsm" onclick="tutorQ='Give me another example';doAsk()">Another example</button><button class="btn bm bsm" onclick="tutorQ='Quiz me on this — 3 questions with answers';doAsk()">Quiz me</button><button class="btn bm bsm" onclick="tutorQ='';tutorR='';render()">Clear</button></div></div>`
-    :!tutorR&&!tutorLoading?`<div class="card tc" style="padding:40px;opacity:.5"><div style="font-size:36px;margin-bottom:10px">💬</div><div class="mt">Ask me anything!</div></div>`:''}</div></div>`;
-}
 async function doAsk(){
   const inp=document.getElementById('tutor-input');if(inp)tutorQ=inp.value;
   if(!tutorQ.trim())return;
@@ -875,7 +930,7 @@ async function doAsk(){
   tutorLoading=true;tutorR='';render();
   const t=await callClaudeUI('Australian selective exam tutor, Grades 4-10. Clear explanation, show full working for maths. Under 200 words. Plain text only.',tutorQ,400);
   if(t===null){tutorLoading=false;render();return;}
-  tutorR=t||'Sorry, something went wrong. Please check your API key in the 👤 Profile page and try again.';
+  tutorR=t||'__TUTOR_ERROR__';
   tutorLoading=false;if(currentUser)Profiles.recordTutor(currentUser);render();
 }
 

@@ -1,8 +1,8 @@
 {
-  "version": "9.0",
+  "version": "10.0",
   "lastUpdated": "2026-06",
-  "totalCount": 905,
-  "sources": "Original. Styles: ACER, Hendersons, PSLE, Contour, James & Ann, EduTest, Matrix, OC, HAST.",
+  "totalCount": 953,
+  "sources": "Original. ACER, Hendersons, PSLE, Contour, James & Ann, EduTest, Matrix, OC, HAST.",
   "questions": [
     {
       "id": "q001",
@@ -17198,6 +17198,918 @@
       "answer": 0,
       "exp": "Two long walls: 2×(8×3)=48m²\nTwo short walls: 2×(6×3)=36m²\nTotal walls only = 48+36 = 84m²",
       "hint": "Four walls: 2 pairs. Don't include floor or ceiling."
+    },
+    {
+      "id": "r2_01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Ratios",
+      "difficulty": "easy",
+      "style": "acer",
+      "q": "Orange juice and water in ratio 2:3. Total 500mL. How much OJ?",
+      "options": [
+        "150mL",
+        "200mL",
+        "250mL",
+        "300mL"
+      ],
+      "answer": 1,
+      "exp": "2 parts of 5 total. 500×2/5=200mL",
+      "hint": "2 parts out of 5 total."
+    },
+    {
+      "id": "r2_02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Ratios",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "A:B=3:4, B:C=2:5. Find A:B:C.",
+      "options": [
+        "6:8:20",
+        "3:4:10",
+        "6:8:10",
+        "3:8:20"
+      ],
+      "answer": 0,
+      "exp": "Scale so B matches: A:B=3:4=6:8, B:C=2:5=8:20. A:B:C=6:8:20",
+      "hint": "Make B the same value in both ratios."
+    },
+    {
+      "id": "wp01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "Cyclist: 60km at 20km/h, then 40km at 10km/h. Average speed?",
+      "options": [
+        "15 km/h",
+        "14.3 km/h",
+        "12 km/h",
+        "16 km/h"
+      ],
+      "answer": 1,
+      "exp": "Time1=60÷20=3h, Time2=40÷10=4h. Total=100km÷7h≈14.3 km/h.\n💡 Average speed ≠ average of speeds! Use total distance÷total time.",
+      "hint": "Average speed = total distance ÷ total time."
+    },
+    {
+      "id": "wp02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "hard",
+      "style": "hendersons",
+      "q": "A and B together do a job in 2h24min. A alone takes 4h. How long does B alone take?",
+      "options": [
+        "6h",
+        "8h",
+        "5h",
+        "10h"
+      ],
+      "answer": 0,
+      "exp": "Together rate=1/2.4=5/12/h. A rate=1/4=3/12. B=5/12-3/12=2/12=1/6. B takes 6h.",
+      "hint": "Rate together minus rate of A = rate of B."
+    },
+    {
+      "id": "wp03",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "medium",
+      "style": "psle",
+      "q": "Peter earns $18/hr normal and $27/hr overtime. He worked 45hrs and earned $882. How many overtime hours?",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "answer": 0,
+      "exp": "First 40hrs: 40×18=$720. Remaining: $882-$720=$162. OT hours: 162÷27=6.",
+      "hint": "Assume first 40 are normal rate, then solve for overtime."
+    },
+    {
+      "id": "st01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Statistics",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Data: 2,3,3,4,5,5,5,7,8. Find the IQR.",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": 1,
+      "exp": "Median=5(5th). Lower half 2,3,3,4→Q1=3. Upper half 5,5,7,8→Q3=6. IQR=6-3=3",
+      "hint": "IQR=Q3-Q1. Find medians of lower and upper halves."
+    },
+    {
+      "id": "geo01",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Regular pentagon: sum of interior angles?",
+      "options": [
+        "540°",
+        "600°",
+        "720°",
+        "900°"
+      ],
+      "answer": 0,
+      "exp": "(5-2)×180=540°",
+      "hint": "(n-2)×180°"
+    },
+    {
+      "id": "geo02",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "medium",
+      "style": "hendersons",
+      "q": "Two angles of a quadrilateral are 85° and 110°. The other two are equal. What are they?",
+      "options": [
+        "80°",
+        "82.5°",
+        "85°",
+        "90°"
+      ],
+      "answer": 1,
+      "exp": "360-85-110=165. 165÷2=82.5°",
+      "hint": "Quadrilateral angles sum to 360°."
+    },
+    {
+      "id": "geo03",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Chord 24cm, distance from centre 5cm. Find radius.",
+      "options": [
+        "13cm",
+        "12cm",
+        "14cm",
+        "15cm"
+      ],
+      "answer": 0,
+      "exp": "Half chord=12. r²=12²+5²=144+25=169. r=13cm.",
+      "hint": "Right triangle: half-chord, distance, radius. Use Pythagoras."
+    },
+    {
+      "id": "lg05",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Linear Graphs",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Are y=2x+3 and y=2x-5 parallel, perpendicular, or intersecting?",
+      "options": [
+        "Parallel",
+        "Perpendicular",
+        "Intersecting",
+        "Same line"
+      ],
+      "answer": 0,
+      "exp": "Same gradient m=2, different intercepts → parallel.",
+      "hint": "Same gradient = parallel."
+    },
+    {
+      "id": "lg06",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Linear Graphs",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Line through (-2,5) and (4,2). Equation?",
+      "options": [
+        "y=-x/2+4",
+        "y=x/2+4",
+        "y=-2x+1",
+        "y=-x+3"
+      ],
+      "answer": 0,
+      "exp": "Gradient=(2-5)/(4+2)=-3/6=-1/2. y-5=-1/2(x+2) → y=-x/2+4.",
+      "hint": "gradient=rise/run, then y-y₁=m(x-x₁)"
+    },
+    {
+      "id": "idx07",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Indices",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Simplify: (2x²y)³",
+      "options": [
+        "6x⁶y³",
+        "8x⁶y³",
+        "8x⁵y³",
+        "2x⁶y³"
+      ],
+      "answer": 1,
+      "exp": "(2)³(x²)³(y)³=8x⁶y³",
+      "hint": "(abc)ⁿ=aⁿbⁿcⁿ"
+    },
+    {
+      "id": "idx08",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Indices",
+      "difficulty": "hard",
+      "style": "hendersons",
+      "q": "Solve: 4^x = 8",
+      "options": [
+        "1",
+        "1.5",
+        "2",
+        "2.5"
+      ],
+      "answer": 1,
+      "exp": "2^(2x)=2³ → 2x=3 → x=1.5",
+      "hint": "Write both as powers of 2."
+    },
+    {
+      "id": "prob01n",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Probability",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "P(A)=0.4, P(B)=0.3, independent. P(A∩B)?",
+      "options": [
+        "0.7",
+        "0.12",
+        "0.1",
+        "0.58"
+      ],
+      "answer": 1,
+      "exp": "Independent: P(A∩B)=P(A)×P(B)=0.4×0.3=0.12",
+      "hint": "For independent events, P(A and B)=P(A)×P(B)."
+    },
+    {
+      "id": "ap01n",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Area & Perimeter",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Trapezium: parallel sides 8cm and 14cm, height 6cm. Area?",
+      "options": [
+        "66cm²",
+        "60cm²",
+        "72cm²",
+        "84cm²"
+      ],
+      "answer": 0,
+      "exp": "½(8+14)×6=½×22×6=66cm²",
+      "hint": "Area=½×(sum of parallel sides)×height"
+    },
+    {
+      "id": "ci01n",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Compound Interest",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "$5000 at 8% pa compound for 2 years. Interest earned?",
+      "options": [
+        "$800",
+        "$832",
+        "$880",
+        "$740"
+      ],
+      "answer": 1,
+      "exp": "A=5000×1.08²=5000×1.1664=$5832. Interest=$832.",
+      "hint": "A=P(1+r)ⁿ, then subtract P."
+    },
+    {
+      "id": "geo05",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Geometry",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "Triangle sides 7,8,9. Area by Heron's formula?",
+      "options": [
+        "≈26.83cm²",
+        "≈24cm²",
+        "≈28cm²",
+        "≈22cm²"
+      ],
+      "answer": 0,
+      "exp": "s=12. Area=√(12×5×4×3)=√720=12√5≈26.83cm²",
+      "hint": "s=(a+b+c)/2, Area=√(s(s-a)(s-b)(s-c))"
+    },
+    {
+      "id": "quad03",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Quadratics",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Solve x²-x-6=0",
+      "options": [
+        "x=3,x=-2",
+        "x=-3,x=2",
+        "x=2,x=3",
+        "x=-2,x=-3"
+      ],
+      "answer": 0,
+      "exp": "Find factors: (x-3)(x+2)=0 → x=3 or x=-2. Check: product=-6✓ sum=-1✓",
+      "hint": "Find two numbers: product=-6, sum=-1."
+    },
+    {
+      "id": "stat02n",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Statistics",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Mean=20, median=18, mode=15. Distribution is:",
+      "options": [
+        "Symmetric",
+        "Positively skewed",
+        "Negatively skewed",
+        "Bimodal"
+      ],
+      "answer": 1,
+      "exp": "Mean>median>mode → right/positive skew. High outliers pull mean up.",
+      "hint": "When mean>median, distribution skews right (positive)."
+    },
+    {
+      "id": "nt_01n",
+      "state": "VIC",
+      "section": "vic_maths",
+      "grade": "selective",
+      "topic": "Number Theory",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Remainder when 2^100 ÷ 3?",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "4"
+      ],
+      "answer": 1,
+      "exp": "2^1 mod3=2, 2^2 mod3=1, pattern period 2. 100 is even → remainder 1.",
+      "hint": "Find the cycle of remainders. Even powers give remainder 1."
+    },
+    {
+      "id": "psle01",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "selective",
+      "topic": "Word Problems",
+      "difficulty": "hard",
+      "style": "psle",
+      "q": "Cyclist A and B start 180km apart heading toward each other. A: 30km/h, B: 60km/h. When do they meet?",
+      "options": [
+        "2h",
+        "3h",
+        "4h",
+        "1.5h"
+      ],
+      "answer": 0,
+      "exp": "Combined speed=90km/h. Time=180÷90=2h.",
+      "hint": "Combined speed when approaching = sum of speeds."
+    },
+    {
+      "id": "nth01n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Logical Deduction",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "All A→B. All B→C. Some C→D. Must 'all A→C' be true?",
+      "options": [
+        "Yes",
+        "No",
+        "Only if D",
+        "Sometimes"
+      ],
+      "answer": 0,
+      "exp": "All A are B, all B are C → all A are C. ✓",
+      "hint": "Chain: A→B→C, so A→C"
+    },
+    {
+      "id": "nth02n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Argument Analysis",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "'Students with pets do better in school. Therefore pets improve academic performance.' Flaw?",
+      "options": [
+        "Too few students",
+        "Correlation not causation",
+        "Pets are expensive",
+        "Small sample"
+      ],
+      "answer": 1,
+      "exp": "Higher performers may choose pets (reverse causation), or a third factor causes both.",
+      "hint": "Which direction does causality run? Could it be reversed?"
+    },
+    {
+      "id": "nth05n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Number Patterns",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "1²-2²+3²-4²+...+99²-100²=?",
+      "options": [
+        "−5050",
+        "−100",
+        "5050",
+        "−4950"
+      ],
+      "answer": 0,
+      "exp": "Group pairs: (1²-2²)+(3²-4²)+...=(-1)(3)+(-1)(7)+...=-3-7-11...-199.\n50 pairs. Sum=−50/2×(3+199)=−25×202=−5050",
+      "hint": "Group into pairs (n²-(n+1)²)=-（2n+1), then sum."
+    },
+    {
+      "id": "nth06n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Analogy",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "CIRCUMFERENCE:CIRCLE as PERIMETER:___ ",
+      "options": [
+        "Volume",
+        "Polygon",
+        "Area",
+        "Diameter"
+      ],
+      "answer": 1,
+      "exp": "Circumference=distance around a circle. Perimeter=distance around a polygon.",
+      "hint": "Circumference is the boundary measurement of a circle. Perimeter is the boundary measurement of a ___."
+    },
+    {
+      "id": "nth07n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Spatial Reasoning",
+      "difficulty": "hard",
+      "style": "acer",
+      "q": "Square perimeter 40cm, folded diagonally. Hypotenuse of resulting triangle?",
+      "options": [
+        "10√2 cm",
+        "20cm",
+        "15cm",
+        "8√2 cm"
+      ],
+      "answer": 0,
+      "exp": "Side=10cm. Diagonal=10√2≈14.14cm.",
+      "hint": "Diagonal of square=side×√2"
+    },
+    {
+      "id": "nth08n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Ordering",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "6 runners A-F. B is 3rd. A before B. D directly after B. E is last. C between A and B. Where is F?",
+      "options": [
+        "1st",
+        "2nd",
+        "5th",
+        "6th"
+      ],
+      "answer": 2,
+      "exp": "E=6th,B=3rd,D=4th. A&C before B: A=1st,C=2nd. F=5th.",
+      "hint": "Place definite positions first."
+    },
+    {
+      "id": "nth09n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Argument Analysis",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "'Olympic athletes endorse this supplement!' This is:",
+      "options": [
+        "Scientific evidence",
+        "Appeal to celebrity/authority",
+        "Controlled study",
+        "Statistical proof"
+      ],
+      "answer": 1,
+      "exp": "Athlete endorsement ≠ scientific proof of effectiveness.",
+      "hint": "Is an athlete's endorsement the same as a scientific study?"
+    },
+    {
+      "id": "nth10n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Number Patterns",
+      "difficulty": "medium",
+      "style": "hast",
+      "q": "Sequence: 1,3,7,15,31,___",
+      "options": [
+        "51",
+        "63",
+        "55",
+        "65"
+      ],
+      "answer": 1,
+      "exp": "Each term: 2×prev+1. 31×2+1=63.",
+      "hint": "Rule: 2×(previous term)+1"
+    },
+    {
+      "id": "nth11n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Visual Patterns",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "△ △△ △△△△ △△△△△△△△ (1,2,4,8). Next?",
+      "options": [
+        "12",
+        "16",
+        "32",
+        "24"
+      ],
+      "answer": 1,
+      "exp": "Doubles: 1,2,4,8,16",
+      "hint": "Pattern doubles each time."
+    },
+    {
+      "id": "nth12n",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "selective",
+      "topic": "Logical Deduction",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "'Only members can vote. Priya voted.' Therefore:",
+      "options": [
+        "Priya is a member",
+        "Priya might be a member",
+        "Priya is not a member",
+        "We cannot determine"
+      ],
+      "answer": 0,
+      "exp": "Contrapositive of 'non-member cannot vote' = 'voted → is member'. Definite conclusion.",
+      "hint": "Contrapositive: if she voted, she must be a member."
+    },
+    {
+      "id": "vv3_03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "edutest",
+      "q": "AUDACIOUS most closely means:",
+      "options": [
+        "Fearful",
+        "Bold and daring",
+        "Generous",
+        "Secretive"
+      ],
+      "answer": 1,
+      "exp": "Audacious=showing bold willingness to take risks. From Latin audax (bold).",
+      "hint": "Audacity=boldness. Audacious=?"
+    },
+    {
+      "id": "vv3_04",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "easy",
+      "style": "edutest",
+      "q": "VERBOSE most closely means:",
+      "options": [
+        "Brief",
+        "Using few words",
+        "Using too many words",
+        "Clearly expressed"
+      ],
+      "answer": 2,
+      "exp": "Verbose=using more words than necessary. From Latin verbum (word).",
+      "hint": "Verbose comes from 'verbum' (word) + excess."
+    },
+    {
+      "id": "vv3_05",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Word Meanings",
+      "difficulty": "medium",
+      "style": "contour",
+      "q": "MALEVOLENT most closely means:",
+      "options": [
+        "Wishing harm to others",
+        "Kind and generous",
+        "Medically unwell",
+        "Extremely talented"
+      ],
+      "answer": 0,
+      "exp": "Malevolent=having evil intentions. Latin: male(badly)+volent(wishing). Opposite: benevolent.",
+      "hint": "Male=badly, volent=wishing. Compare benevolent (bene=well)."
+    },
+    {
+      "id": "vv3_a01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "NOCTURNAL:NIGHT as DIURNAL:___",
+      "options": [
+        "Day",
+        "Animals",
+        "Sleep",
+        "Light"
+      ],
+      "answer": 0,
+      "exp": "Nocturnal=active at night. Diurnal=active during the day.",
+      "hint": "Nocturnal→night. Diurnal→?"
+    },
+    {
+      "id": "vv3_a02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "TAUTOLOGY:REDUNDANCY as OXYMORON:___",
+      "options": [
+        "Contradiction",
+        "Repetition",
+        "Clarity",
+        "Agreement"
+      ],
+      "answer": 0,
+      "exp": "Tautology=redundant repetition. Oxymoron=contradiction (e.g. 'deafening silence').",
+      "hint": "Tautology creates redundancy. Oxymoron creates what?"
+    },
+    {
+      "id": "vv3_a03",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "FELINE:CAT as BOVINE:___",
+      "options": [
+        "Horse",
+        "Sheep",
+        "Cow",
+        "Pig"
+      ],
+      "answer": 2,
+      "exp": "Feline=relating to cats. Bovine=relating to cows.\nMore: canine(dog), ovine(sheep), porcine(pig), equine(horse)",
+      "hint": "Feline relates to cats. Bovine relates to?"
+    },
+    {
+      "id": "vv3_a04",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Analogies",
+      "difficulty": "hard",
+      "style": "edutest",
+      "q": "BIBLIOGRAPHY:SOURCES as GLOSSARY:___",
+      "options": [
+        "Index",
+        "Words & definitions",
+        "Chapters",
+        "Contents"
+      ],
+      "answer": 1,
+      "exp": "Bibliography=list of sources. Glossary=list of terms and their definitions.",
+      "hint": "What does a glossary contain?"
+    },
+    {
+      "id": "vv3_o01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Odd One Out",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "EPITAPH · ELEGY · EULOGY · DIRGE · DIATRIBE — which does NOT belong?",
+      "options": [
+        "Epitaph",
+        "Elegy",
+        "Eulogy",
+        "Diatribe"
+      ],
+      "answer": 3,
+      "exp": "Epitaph(grave inscription), Elegy(mournful poem), Eulogy(memorial speech), Dirge(funeral song) all relate to death/mourning.\nDiatribe=bitter verbal attack — unrelated to death.",
+      "hint": "Four associate with death/mourning. Which is an angry verbal attack?"
+    },
+    {
+      "id": "vv3_o02",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Odd One Out",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "SATIRE · PARODY · CARICATURE · IRONY — which does NOT belong?",
+      "options": [
+        "Satire",
+        "Parody",
+        "Caricature",
+        "Irony"
+      ],
+      "answer": 3,
+      "exp": "Satire, Parody, Caricature all use exaggeration to mock or critique.\nIrony=saying opposite of what you mean — no exaggeration required.",
+      "hint": "Three mock through exaggeration. Which works through saying the opposite?"
+    },
+    {
+      "id": "vv3_cl01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Classification",
+      "difficulty": "hard",
+      "style": "hast",
+      "q": "Which does NOT belong?\nMoratorium · Hiatus · Interlude · Interim · Abolition",
+      "options": [
+        "Moratorium",
+        "Hiatus",
+        "Interlude",
+        "Abolition"
+      ],
+      "answer": 3,
+      "exp": "Moratorium(temporary halt), Hiatus(pause/break), Interlude(pause between parts), Interim(meantime/temporary) all refer to temporary pauses.\nAbolition=permanently ending something — not temporary.",
+      "hint": "Four mean 'temporary pause'. Which means 'permanent end'?"
+    },
+    {
+      "id": "vv3_sc01",
+      "state": "VIC",
+      "section": "vic_verbal",
+      "grade": "selective",
+      "topic": "Sentence Completion",
+      "difficulty": "hard",
+      "style": "edutest",
+      "q": "The historian's account was so ___ that it included a 20-page appendix on the colour of Napoleon's boots.",
+      "options": [
+        "terse",
+        "meticulous",
+        "pedantic",
+        "circumspect"
+      ],
+      "answer": 2,
+      "exp": "Pedantic=obsessively focused on minor/trivial details. The boot colour is trivial but gets 20 pages.",
+      "hint": "'Pedantic' means overemphasising trivial details specifically."
+    },
+    {
+      "id": "vrm01",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Main Idea",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"For most of human history, what we knew about the universe was limited to what our eyes could detect — a sliver of the electromagnetic spectrum we call visible light. Then, in the twentieth century, we learned to 'see' in radio waves, X-rays, infrared, and gamma rays. Each wavelength revealed a different universe. Radio astronomy showed us pulsars. X-ray telescopes revealed black holes. Infrared penetrated the dust clouds that obscure new star formation. The James Webb Space Telescope, launched in 2021, detects infrared radiation from the early universe, letting us peer back nearly 13.8 billion years to see the first galaxies forming just after the Big Bang. Each new instrument, in a very real sense, creates a new universe to explore.\"\n\nThe central idea is:",
+      "options": [
+        "JWST is the best telescope",
+        "Each new detection method reveals new aspects of the universe",
+        "The universe is 13.8 billion years old",
+        "Radio astronomy is best"
+      ],
+      "answer": 1,
+      "exp": "Each example (radio→pulsars, X-ray→black holes, infrared→star formation, JWST→early galaxies) shows: new detection = new discovery. That's the pattern.",
+      "hint": "What does EVERY example in the passage show?"
+    },
+    {
+      "id": "vrm02",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"For most of human history, what we knew about the universe was limited to what our eyes could detect — a sliver of the electromagnetic spectrum we call visible light. Then, in the twentieth century, we learned to 'see' in radio waves, X-rays, infrared, and gamma rays. Each wavelength revealed a different universe. Radio astronomy showed us pulsars. X-ray telescopes revealed black holes. Infrared penetrated the dust clouds that obscure new star formation. The James Webb Space Telescope, launched in 2021, detects infrared radiation from the early universe, letting us peer back nearly 13.8 billion years to see the first galaxies forming just after the Big Bang. Each new instrument, in a very real sense, creates a new universe to explore.\"\n\n'Obscure' as used here means:",
+      "options": [
+        "Make famous",
+        "Hide or block from view",
+        "Photograph",
+        "Accelerate"
+      ],
+      "answer": 1,
+      "exp": "Dust clouds 'obscure' star formation = they block/hide it from view.",
+      "hint": "If dust 'obscures' star formation, what are the clouds doing to it?"
+    },
+    {
+      "id": "vrm03",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "hard",
+      "style": "contour",
+      "q": "Read:\n\"For most of human history, what we knew about the universe was limited to what our eyes could detect — a sliver of the electromagnetic spectrum we call visible light. Then, in the twentieth century, we learned to 'see' in radio waves, X-rays, infrared, and gamma rays. Each wavelength revealed a different universe. Radio astronomy showed us pulsars. X-ray telescopes revealed black holes. Infrared penetrated the dust clouds that obscure new star formation. The James Webb Space Telescope, launched in 2021, detects infrared radiation from the early universe, letting us peer back nearly 13.8 billion years to see the first galaxies forming just after the Big Bang. Each new instrument, in a very real sense, creates a new universe to explore.\"\n\n'Each new instrument creates a new universe' is:",
+      "options": [
+        "Literally true",
+        "A metaphor — each reveals a previously invisible aspect of the same universe",
+        "An exaggeration weakening the argument",
+        "A direct quote"
+      ],
+      "answer": 1,
+      "exp": "Can't literally create universes. Metaphor: instrument reveals a universe WE couldn't previously see — so in terms of our knowledge, it is new.",
+      "hint": "Can a telescope create a universe? What does 'creates' mean here?"
+    },
+    {
+      "id": "vrm04",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Read:\n\"When European settlers arrived in Australia, they carried with them not just tools and ambitions but species. Rabbits, foxes, cats, and cane toads were all deliberately or accidentally introduced. Without natural predators, these invasive species multiplied catastrophically. By the 1900s, rabbits had devastated native vegetation across millions of hectares, triggering the extinction of several native species. Cats, meanwhile, are responsible for the extinction of at least 20 native mammal species in Australia — making Australia home to one of the worst extinction records in the world. The lesson is now well understood: ecosystems are exquisitely balanced, and even a single introduction can unravel them.\"\n\n'Exquisitely balanced' suggests:",
+      "options": [
+        "Ecosystems are beautiful",
+        "Small changes can cause large disruptions due to precise interdependence",
+        "Balance is easy to restore",
+        "Australia is unique"
+      ],
+      "answer": 1,
+      "exp": "'Exquisitely'=with extreme precision. Precisely balanced system → any disruption cascades through everything.",
+      "hint": "'Exquisitely' means with extreme precision. What does that imply about the balance?"
+    },
+    {
+      "id": "vrm05",
+      "state": "NSW",
+      "section": "nsw_reading",
+      "grade": "selective",
+      "topic": "Author's Purpose",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"When European settlers arrived in Australia, they carried with them not just tools and ambitions but species. Rabbits, foxes, cats, and cane toads were all deliberately or accidentally introduced. Without natural predators, these invasive species multiplied catastrophically. By the 1900s, rabbits had devastated native vegetation across millions of hectares, triggering the extinction of several native species. Cats, meanwhile, are responsible for the extinction of at least 20 native mammal species in Australia — making Australia home to one of the worst extinction records in the world. The lesson is now well understood: ecosystems are exquisitely balanced, and even a single introduction can unravel them.\"\n\nThe statistic 'at least 20 extinctions' is included to:",
+      "options": [
+        "Show cats are dangerous",
+        "Make the argument concrete and hard to dispute",
+        "Shock readers",
+        "Prove Australia is unique"
+      ],
+      "answer": 1,
+      "exp": "Specific, verifiable numbers make the claim measurable and credible — harder to dismiss than vague language.",
+      "hint": "Why '20' rather than just saying 'many'?"
+    },
+    {
+      "id": "vrm06",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Text Structure",
+      "difficulty": "medium",
+      "style": "acer",
+      "q": "Read:\n\"When European settlers arrived in Australia, they carried with them not just tools and ambitions but species. Rabbits, foxes, cats, and cane toads were all deliberately or accidentally introduced. Without natural predators, these invasive species multiplied catastrophically. By the 1900s, rabbits had devastated native vegetation across millions of hectares, triggering the extinction of several native species. Cats, meanwhile, are responsible for the extinction of at least 20 native mammal species in Australia — making Australia home to one of the worst extinction records in the world. The lesson is now well understood: ecosystems are exquisitely balanced, and even a single introduction can unravel them.\"\n\nThe final sentence ('ecosystems are exquisitely balanced') functions as:",
+      "options": [
+        "A new topic",
+        "A summary lesson drawn from all the examples",
+        "An exaggeration",
+        "A counterargument"
+      ],
+      "answer": 1,
+      "exp": "After listing examples of catastrophic introductions, the final sentence extracts the principle those examples demonstrate — a classic inductive structure.",
+      "hint": "What is the relationship between the examples and the final sentence?"
     }
   ]
 }
