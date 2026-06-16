@@ -1,8 +1,8 @@
 {
-  "version": "80.0",
+  "version": "95.0",
   "lastUpdated": "2026-06",
-  "totalCount": 8452,
-  "sources": "Hendersons, Contour, Melbourne Tutorials, ACER, PSLE, James & Ann, EduTest, Matrix, OC, HAST, Tamil Hub, Brightminds + 10 Indian Languages.",
+  "totalCount": 8751,
+  "sources": "Hendersons, Contour, Melbourne Tutorials, ACER, PSLE, James & Ann, EduTest, Matrix, OC, HAST, Tamil Hub, Brightminds + Indian Languages.",
   "questions": [
     {
       "id": "q001",
@@ -160590,6 +160590,5687 @@
       ],
       "answer": 1,
       "exp": "12×12=144",
+      "hint": ""
+    },
+    {
+      "id": "ex00000",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "2×4=?",
+      "options": [
+        "6",
+        "8",
+        "10",
+        "12"
+      ],
+      "answer": 1,
+      "exp": "8",
+      "hint": ""
+    },
+    {
+      "id": "ex00001",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "2×6=?",
+      "options": [
+        "10",
+        "12",
+        "14",
+        "18"
+      ],
+      "answer": 1,
+      "exp": "12",
+      "hint": ""
+    },
+    {
+      "id": "ex00002",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "2×7=?",
+      "options": [
+        "12",
+        "14",
+        "16",
+        "21"
+      ],
+      "answer": 1,
+      "exp": "14",
+      "hint": ""
+    },
+    {
+      "id": "ex00003",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "2×8=?",
+      "options": [
+        "14",
+        "16",
+        "18",
+        "24"
+      ],
+      "answer": 1,
+      "exp": "16",
+      "hint": ""
+    },
+    {
+      "id": "ex00004",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "2×9=?",
+      "options": [
+        "16",
+        "18",
+        "20",
+        "27"
+      ],
+      "answer": 1,
+      "exp": "18",
+      "hint": ""
+    },
+    {
+      "id": "ex00005",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "2×11=?",
+      "options": [
+        "20",
+        "22",
+        "24",
+        "33"
+      ],
+      "answer": 1,
+      "exp": "22",
+      "hint": ""
+    },
+    {
+      "id": "ex00006",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "3×5=?",
+      "options": [
+        "12",
+        "15",
+        "18",
+        "20"
+      ],
+      "answer": 1,
+      "exp": "15",
+      "hint": ""
+    },
+    {
+      "id": "ex00007",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "4×7=?",
+      "options": [
+        "24",
+        "28",
+        "32",
+        "35"
+      ],
+      "answer": 1,
+      "exp": "28",
+      "hint": ""
+    },
+    {
+      "id": "ex00008",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "4×12=?",
+      "options": [
+        "44",
+        "48",
+        "52",
+        "60"
+      ],
+      "answer": 1,
+      "exp": "48",
+      "hint": ""
+    },
+    {
+      "id": "ex00009",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "5×6=?",
+      "options": [
+        "25",
+        "30",
+        "35",
+        "36"
+      ],
+      "answer": 1,
+      "exp": "30",
+      "hint": ""
+    },
+    {
+      "id": "ex00010",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "6×4=?",
+      "options": [
+        "18",
+        "24",
+        "30",
+        "28"
+      ],
+      "answer": 1,
+      "exp": "24",
+      "hint": ""
+    },
+    {
+      "id": "ex00011",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "7×9=?",
+      "options": [
+        "56",
+        "63",
+        "70",
+        "72"
+      ],
+      "answer": 1,
+      "exp": "63",
+      "hint": ""
+    },
+    {
+      "id": "ex00012",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "7×10=?",
+      "options": [
+        "63",
+        "70",
+        "77",
+        "80"
+      ],
+      "answer": 1,
+      "exp": "70",
+      "hint": ""
+    },
+    {
+      "id": "ex00013",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "7×11=?",
+      "options": [
+        "70",
+        "77",
+        "84",
+        "88"
+      ],
+      "answer": 1,
+      "exp": "77",
+      "hint": ""
+    },
+    {
+      "id": "ex00014",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "8×9=?",
+      "options": [
+        "64",
+        "72",
+        "80",
+        "81"
+      ],
+      "answer": 1,
+      "exp": "72",
+      "hint": ""
+    },
+    {
+      "id": "ex00015",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "8×10=?",
+      "options": [
+        "72",
+        "80",
+        "88",
+        "90"
+      ],
+      "answer": 1,
+      "exp": "80",
+      "hint": ""
+    },
+    {
+      "id": "ex00016",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "8×12=?",
+      "options": [
+        "88",
+        "96",
+        "104",
+        "108"
+      ],
+      "answer": 1,
+      "exp": "96",
+      "hint": ""
+    },
+    {
+      "id": "ex00017",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "9×2=?",
+      "options": [
+        "9",
+        "18",
+        "27",
+        "20"
+      ],
+      "answer": 1,
+      "exp": "18",
+      "hint": ""
+    },
+    {
+      "id": "ex00018",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "9×5=?",
+      "options": [
+        "36",
+        "45",
+        "54",
+        "50"
+      ],
+      "answer": 1,
+      "exp": "45",
+      "hint": ""
+    },
+    {
+      "id": "ex00019",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "9×8=?",
+      "options": [
+        "63",
+        "72",
+        "81",
+        "80"
+      ],
+      "answer": 1,
+      "exp": "72",
+      "hint": ""
+    },
+    {
+      "id": "ex00020",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "10×2=?",
+      "options": [
+        "10",
+        "20",
+        "30",
+        "22"
+      ],
+      "answer": 1,
+      "exp": "20",
+      "hint": ""
+    },
+    {
+      "id": "ex00021",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "10×3=?",
+      "options": [
+        "20",
+        "30",
+        "40",
+        "33"
+      ],
+      "answer": 1,
+      "exp": "30",
+      "hint": ""
+    },
+    {
+      "id": "ex00022",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "10×9=?",
+      "options": [
+        "80",
+        "90",
+        "100",
+        "99"
+      ],
+      "answer": 1,
+      "exp": "90",
+      "hint": ""
+    },
+    {
+      "id": "ex00023",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "10×10=?",
+      "options": [
+        "90",
+        "100",
+        "110",
+        "110"
+      ],
+      "answer": 1,
+      "exp": "100",
+      "hint": ""
+    },
+    {
+      "id": "ex00024",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "11×3=?",
+      "options": [
+        "22",
+        "33",
+        "44",
+        "36"
+      ],
+      "answer": 1,
+      "exp": "33",
+      "hint": ""
+    },
+    {
+      "id": "ex00025",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "11×6=?",
+      "options": [
+        "55",
+        "66",
+        "77",
+        "72"
+      ],
+      "answer": 1,
+      "exp": "66",
+      "hint": ""
+    },
+    {
+      "id": "ex00026",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "11×7=?",
+      "options": [
+        "66",
+        "77",
+        "88",
+        "84"
+      ],
+      "answer": 1,
+      "exp": "77",
+      "hint": ""
+    },
+    {
+      "id": "ex00027",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "11×10=?",
+      "options": [
+        "99",
+        "110",
+        "121",
+        "120"
+      ],
+      "answer": 1,
+      "exp": "110",
+      "hint": ""
+    },
+    {
+      "id": "ex00028",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "11×11=?",
+      "options": [
+        "110",
+        "121",
+        "132",
+        "132"
+      ],
+      "answer": 1,
+      "exp": "121",
+      "hint": ""
+    },
+    {
+      "id": "ex00029",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "12×4=?",
+      "options": [
+        "36",
+        "48",
+        "60",
+        "52"
+      ],
+      "answer": 1,
+      "exp": "48",
+      "hint": ""
+    },
+    {
+      "id": "ex00030",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√4=?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "exp": "2",
+      "hint": ""
+    },
+    {
+      "id": "ex00031",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√9=?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": 1,
+      "exp": "3",
+      "hint": ""
+    },
+    {
+      "id": "ex00032",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√16=?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "answer": 1,
+      "exp": "4",
+      "hint": ""
+    },
+    {
+      "id": "ex00033",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√25=?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "answer": 1,
+      "exp": "5",
+      "hint": ""
+    },
+    {
+      "id": "ex00034",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√36=?",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "answer": 1,
+      "exp": "6",
+      "hint": ""
+    },
+    {
+      "id": "ex00035",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√49=?",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "answer": 1,
+      "exp": "7",
+      "hint": ""
+    },
+    {
+      "id": "ex00036",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√64=?",
+      "options": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "answer": 1,
+      "exp": "8",
+      "hint": ""
+    },
+    {
+      "id": "ex00037",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√81=?",
+      "options": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "answer": 1,
+      "exp": "9",
+      "hint": ""
+    },
+    {
+      "id": "ex00038",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√100=?",
+      "options": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "answer": 1,
+      "exp": "10",
+      "hint": ""
+    },
+    {
+      "id": "ex00039",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√121=?",
+      "options": [
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "answer": 1,
+      "exp": "11",
+      "hint": ""
+    },
+    {
+      "id": "ex00040",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√144=?",
+      "options": [
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "answer": 1,
+      "exp": "12",
+      "hint": ""
+    },
+    {
+      "id": "ex00041",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√169=?",
+      "options": [
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "answer": 1,
+      "exp": "13",
+      "hint": ""
+    },
+    {
+      "id": "ex00042",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√196=?",
+      "options": [
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "answer": 1,
+      "exp": "14",
+      "hint": ""
+    },
+    {
+      "id": "ex00043",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√225=?",
+      "options": [
+        "14",
+        "15",
+        "16",
+        "17"
+      ],
+      "answer": 1,
+      "exp": "15",
+      "hint": ""
+    },
+    {
+      "id": "ex00044",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√256=?",
+      "options": [
+        "15",
+        "16",
+        "17",
+        "18"
+      ],
+      "answer": 1,
+      "exp": "16",
+      "hint": ""
+    },
+    {
+      "id": "ex00045",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√289=?",
+      "options": [
+        "16",
+        "17",
+        "18",
+        "19"
+      ],
+      "answer": 1,
+      "exp": "17",
+      "hint": ""
+    },
+    {
+      "id": "ex00046",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√324=?",
+      "options": [
+        "17",
+        "18",
+        "19",
+        "20"
+      ],
+      "answer": 1,
+      "exp": "18",
+      "hint": ""
+    },
+    {
+      "id": "ex00047",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√361=?",
+      "options": [
+        "18",
+        "19",
+        "20",
+        "21"
+      ],
+      "answer": 1,
+      "exp": "19",
+      "hint": ""
+    },
+    {
+      "id": "ex00048",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√400=?",
+      "options": [
+        "19",
+        "20",
+        "21",
+        "22"
+      ],
+      "answer": 1,
+      "exp": "20",
+      "hint": ""
+    },
+    {
+      "id": "ex00049",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√441=?",
+      "options": [
+        "20",
+        "21",
+        "22",
+        "23"
+      ],
+      "answer": 1,
+      "exp": "21",
+      "hint": ""
+    },
+    {
+      "id": "ex00050",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√484=?",
+      "options": [
+        "21",
+        "22",
+        "23",
+        "24"
+      ],
+      "answer": 1,
+      "exp": "22",
+      "hint": ""
+    },
+    {
+      "id": "ex00051",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√529=?",
+      "options": [
+        "22",
+        "23",
+        "24",
+        "25"
+      ],
+      "answer": 1,
+      "exp": "23",
+      "hint": ""
+    },
+    {
+      "id": "ex00052",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√576=?",
+      "options": [
+        "23",
+        "24",
+        "25",
+        "26"
+      ],
+      "answer": 1,
+      "exp": "24",
+      "hint": ""
+    },
+    {
+      "id": "ex00053",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Number",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "√625=?",
+      "options": [
+        "24",
+        "25",
+        "26",
+        "27"
+      ],
+      "answer": 1,
+      "exp": "25",
+      "hint": ""
+    },
+    {
+      "id": "ex00054",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A box has 24 chocolates shared equally among 6 children. Each gets?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "answer": 1,
+      "exp": "24÷6=4",
+      "hint": ""
+    },
+    {
+      "id": "ex00055",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Sam has 47 marbles. He gives 19 away. Left?",
+      "options": [
+        "26",
+        "28",
+        "30",
+        "32"
+      ],
+      "answer": 1,
+      "exp": "47−19=28",
+      "hint": ""
+    },
+    {
+      "id": "ex00056",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A pencil costs 35c. 4 pencils cost?",
+      "options": [
+        "$1.20",
+        "$1.40",
+        "$1.60",
+        "$1.80"
+      ],
+      "answer": 1,
+      "exp": "35×4=140c=$1.40",
+      "hint": ""
+    },
+    {
+      "id": "ex00057",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Train departs 9:15am, arrives 10:45am. Journey time?",
+      "options": [
+        "1h",
+        "1h 15min",
+        "1h 30min",
+        "1h 45min"
+      ],
+      "answer": 2,
+      "exp": "1h 30min",
+      "hint": ""
+    },
+    {
+      "id": "ex00058",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Rectangle 8cm×5cm. Perimeter?",
+      "options": [
+        "13cm",
+        "20cm",
+        "26cm",
+        "40cm"
+      ],
+      "answer": 2,
+      "exp": "2(8+5)=26cm",
+      "hint": ""
+    },
+    {
+      "id": "ex00059",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "3/4 of 48?",
+      "options": [
+        "12",
+        "24",
+        "36",
+        "42"
+      ],
+      "answer": 2,
+      "exp": "3×48÷4=36",
+      "hint": ""
+    },
+    {
+      "id": "ex00060",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A shop sells 5 apples for $2. Cost of 20 apples?",
+      "options": [
+        "$4",
+        "$6",
+        "$8",
+        "$10"
+      ],
+      "answer": 2,
+      "exp": "20÷5=4 groups. 4×$2=$8",
+      "hint": ""
+    },
+    {
+      "id": "ex00061",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Pattern: 5,10,15,20,___",
+      "options": [
+        "22",
+        "25",
+        "30",
+        "35"
+      ],
+      "answer": 1,
+      "exp": "+5: 25",
+      "hint": ""
+    },
+    {
+      "id": "ex00062",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "If today is Wednesday, what day is it in 10 days?",
+      "options": [
+        "Friday",
+        "Saturday",
+        "Sunday",
+        "Monday"
+      ],
+      "answer": 1,
+      "exp": "10÷7=1r3. Wed+3=Saturday",
+      "hint": ""
+    },
+    {
+      "id": "ex00063",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A square has area 49cm². Side length?",
+      "options": [
+        "6cm",
+        "7cm",
+        "8cm",
+        "9cm"
+      ],
+      "answer": 1,
+      "exp": "√49=7",
+      "hint": ""
+    },
+    {
+      "id": "ex00064",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "How many minutes in 2.5 hours?",
+      "options": [
+        "120",
+        "130",
+        "140",
+        "150"
+      ],
+      "answer": 3,
+      "exp": "2.5×60=150",
+      "hint": ""
+    },
+    {
+      "id": "ex00065",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A pizza is cut into 8 slices. 3 people eat 2 each. Left?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "exp": "8−6=2",
+      "hint": ""
+    },
+    {
+      "id": "ex00066",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which is biggest: 0.5, 0.45, 0.55, 0.4?",
+      "options": [
+        "0.5",
+        "0.45",
+        "0.55",
+        "0.4"
+      ],
+      "answer": 2,
+      "exp": "0.55",
+      "hint": ""
+    },
+    {
+      "id": "ex00067",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "12+8×3=?",
+      "options": [
+        "36",
+        "60",
+        "28",
+        "40"
+      ],
+      "answer": 0,
+      "exp": "BODMAS: 8×3=24, 12+24=36",
+      "hint": ""
+    },
+    {
+      "id": "ex00068",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A bag has 3 red, 5 blue, 2 green. P(blue)?",
+      "options": [
+        "3/10",
+        "5/10",
+        "2/10",
+        "1/2"
+      ],
+      "answer": 1,
+      "exp": "5/10=1/2",
+      "hint": ""
+    },
+    {
+      "id": "ex00069",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Round 3.67 to 1 decimal place.",
+      "options": [
+        "3.6",
+        "3.7",
+        "4.0",
+        "3.5"
+      ],
+      "answer": 1,
+      "exp": "3.67→3.7",
+      "hint": ""
+    },
+    {
+      "id": "ex00070",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What is 15% of 60?",
+      "options": [
+        "6",
+        "9",
+        "12",
+        "15"
+      ],
+      "answer": 1,
+      "exp": "0.15×60=9",
+      "hint": ""
+    },
+    {
+      "id": "ex00071",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Mirror image of 'b'?",
+      "options": [
+        "d",
+        "p",
+        "q",
+        "b"
+      ],
+      "answer": 0,
+      "exp": "b→d",
+      "hint": ""
+    },
+    {
+      "id": "ex00072",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Next: 2,4,8,16,32,___",
+      "options": [
+        "48",
+        "56",
+        "64",
+        "128"
+      ],
+      "answer": 2,
+      "exp": "×2: 64",
+      "hint": ""
+    },
+    {
+      "id": "ex00073",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A cuboid is 4×3×2. Volume?",
+      "options": [
+        "12",
+        "18",
+        "24",
+        "36"
+      ],
+      "answer": 2,
+      "exp": "4×3×2=24",
+      "hint": ""
+    },
+    {
+      "id": "ex00074",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Factors of 18?",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "8"
+      ],
+      "answer": 2,
+      "exp": "1,2,3,6,9,18 = 6 factors",
+      "hint": ""
+    },
+    {
+      "id": "ex00075",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "⅔ + ⅓ =?",
+      "options": [
+        "⅔",
+        "1",
+        "1⅓",
+        "⅚"
+      ],
+      "answer": 1,
+      "exp": "⅔+⅓=1",
+      "hint": ""
+    },
+    {
+      "id": "ex00076",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Angle sum of triangle?",
+      "options": [
+        "90°",
+        "180°",
+        "270°",
+        "360°"
+      ],
+      "answer": 1,
+      "exp": "180°",
+      "hint": ""
+    },
+    {
+      "id": "ex00077",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which fraction is smallest: ½, ⅓, ¼, ⅕?",
+      "options": [
+        "½",
+        "⅓",
+        "¼",
+        "⅕"
+      ],
+      "answer": 3,
+      "exp": "⅕ smallest",
+      "hint": ""
+    },
+    {
+      "id": "ex00078",
+      "state": "NSW",
+      "section": "nsw_maths",
+      "grade": "5",
+      "topic": "Word Problems",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "1.5 × 4 =?",
+      "options": [
+        "4.5",
+        "5",
+        "5.5",
+        "6"
+      ],
+      "answer": 3,
+      "exp": "6",
+      "hint": ""
+    },
+    {
+      "id": "ex00079",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Classification",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which word is the odd one out: CAT, DOG, FISH, TABLE?",
+      "options": [
+        "Cat",
+        "Dog",
+        "Fish",
+        "Table"
+      ],
+      "answer": 3,
+      "exp": "Table isn't an animal",
+      "hint": ""
+    },
+    {
+      "id": "ex00080",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Complete: Monday, Tuesday, ___, Thursday",
+      "options": [
+        "Friday",
+        "Wednesday",
+        "Saturday",
+        "Sunday"
+      ],
+      "answer": 1,
+      "exp": "Wednesday",
+      "hint": ""
+    },
+    {
+      "id": "ex00081",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Relationships",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "TALL is to SHORT as BIG is to ___",
+      "options": [
+        "Large",
+        "Small",
+        "Wide",
+        "Heavy"
+      ],
+      "answer": 1,
+      "exp": "Opposites",
+      "hint": ""
+    },
+    {
+      "id": "ex00082",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which shape has 6 faces?",
+      "options": [
+        "Pyramid",
+        "Cone",
+        "Cube",
+        "Cylinder"
+      ],
+      "answer": 2,
+      "exp": "Cube has 6 faces",
+      "hint": ""
+    },
+    {
+      "id": "ex00083",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "If A=1, B=2, C=3... what is DOG?",
+      "options": [
+        "24",
+        "26",
+        "24",
+        "22"
+      ],
+      "answer": 0,
+      "exp": "D=4+O=15+G=7=26. Actually 26, option B",
+      "hint": ""
+    },
+    {
+      "id": "ex00084",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Next letter: A, C, E, G, ___",
+      "options": [
+        "H",
+        "I",
+        "J",
+        "K"
+      ],
+      "answer": 1,
+      "exp": "Skip one: I",
+      "hint": ""
+    },
+    {
+      "id": "ex00085",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Relationships",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "FLOWER is to PETAL as TREE is to ___",
+      "options": [
+        "Root",
+        "Leaf",
+        "Branch",
+        "Trunk"
+      ],
+      "answer": 1,
+      "exp": "Parts: petal of flower, leaf of tree",
+      "hint": ""
+    },
+    {
+      "id": "ex00086",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which doesn't belong: APPLE, BANANA, CARROT, GRAPE?",
+      "options": [
+        "Apple",
+        "Banana",
+        "Carrot",
+        "Grape"
+      ],
+      "answer": 2,
+      "exp": "Carrot is a vegetable",
+      "hint": ""
+    },
+    {
+      "id": "ex00087",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "7+8=15. 15−7=?",
+      "options": [
+        "7",
+        "8",
+        "9",
+        "15"
+      ],
+      "answer": 1,
+      "exp": "8",
+      "hint": ""
+    },
+    {
+      "id": "ex00088",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Clock shows 3:45. Minute hand points to?",
+      "options": [
+        "3",
+        "6",
+        "9",
+        "12"
+      ],
+      "answer": 2,
+      "exp": "45min = 9 on clock",
+      "hint": ""
+    },
+    {
+      "id": "ex00089",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Relationships",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "DOCTOR is to HOSPITAL as TEACHER is to ___",
+      "options": [
+        "House",
+        "School",
+        "Office",
+        "Library"
+      ],
+      "answer": 1,
+      "exp": "Workplace",
+      "hint": ""
+    },
+    {
+      "id": "ex00090",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "How many legs do 3 spiders have?",
+      "options": [
+        "18",
+        "21",
+        "24",
+        "30"
+      ],
+      "answer": 2,
+      "exp": "3×8=24",
+      "hint": ""
+    },
+    {
+      "id": "ex00091",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Unscramble: KOLCO",
+      "options": [
+        "Clock",
+        "Knock",
+        "Block",
+        "Lock"
+      ],
+      "answer": 0,
+      "exp": "KOLCO→CLOCK",
+      "hint": ""
+    },
+    {
+      "id": "ex00092",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "What comes next: Z, Y, X, W, ___?",
+      "options": [
+        "V",
+        "U",
+        "T",
+        "S"
+      ],
+      "answer": 0,
+      "exp": "Reverse alphabet: V",
+      "hint": ""
+    },
+    {
+      "id": "ex00093",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Relationships",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "HAPPY is to SAD as DAY is to ___?",
+      "options": [
+        "Morning",
+        "Night",
+        "Light",
+        "Sun"
+      ],
+      "answer": 1,
+      "exp": "Opposites",
+      "hint": ""
+    },
+    {
+      "id": "ex00094",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "A square has 4 sides. A hexagon has?",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "answer": 1,
+      "exp": "6 sides",
+      "hint": ""
+    },
+    {
+      "id": "ex00095",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Which word means 'very big'?",
+      "options": [
+        "Tiny",
+        "Enormous",
+        "Fast",
+        "Quiet"
+      ],
+      "answer": 1,
+      "exp": "Enormous",
+      "hint": ""
+    },
+    {
+      "id": "ex00096",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "Pattern: ○●○●○___",
+      "options": [
+        "○",
+        "●",
+        "□",
+        "△"
+      ],
+      "answer": 1,
+      "exp": "Alternating: ●",
+      "hint": ""
+    },
+    {
+      "id": "ex00097",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Number Patterns",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "If you face North and turn right, you face?",
+      "options": [
+        "South",
+        "East",
+        "West",
+        "North"
+      ],
+      "answer": 1,
+      "exp": "East",
+      "hint": ""
+    },
+    {
+      "id": "ex00098",
+      "state": "NSW",
+      "section": "nsw_thinking",
+      "grade": "5",
+      "topic": "Word Relationships",
+      "difficulty": "easy",
+      "style": "oc",
+      "q": "NEPHEW is to UNCLE as NIECE is to ___",
+      "options": [
+        "Aunt",
+        "Sister",
+        "Mother",
+        "Cousin"
+      ],
+      "answer": 0,
+      "exp": "Female equivalent",
+      "hint": ""
+    },
+    {
+      "id": "ex00099",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The politician's rhetoric was deliberately inflammatory.' INFLAMMATORY means:",
+      "options": [
+        "Calming",
+        "Intended to provoke anger",
+        "Related to fire",
+        "Medical"
+      ],
+      "answer": 1,
+      "exp": "Inflammatory=provoking strong feelings",
+      "hint": ""
+    },
+    {
+      "id": "ex00100",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She spoke with unusual candour.' CANDOUR means:",
+      "options": [
+        "Anger",
+        "Honest openness",
+        "Candle-making",
+        "Secrecy"
+      ],
+      "answer": 1,
+      "exp": "Candour=frankness",
+      "hint": ""
+    },
+    {
+      "id": "ex00101",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The news was met with incredulity.' INCREDULITY means:",
+      "options": [
+        "Joy",
+        "Disbelief",
+        "Anger",
+        "Sadness"
+      ],
+      "answer": 1,
+      "exp": "Incredulity=inability to believe",
+      "hint": ""
+    },
+    {
+      "id": "ex00102",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His demeanour was inscrutable.' INSCRUTABLE means:",
+      "options": [
+        "Friendly",
+        "Impossible to read/understand",
+        "Angry",
+        "Tired"
+      ],
+      "answer": 1,
+      "exp": "Inscrutable=mysterious",
+      "hint": ""
+    },
+    {
+      "id": "ex00103",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The evidence was merely circumstantial.' CIRCUMSTANTIAL means:",
+      "options": [
+        "Direct",
+        "Indirect; based on inference",
+        "Circular",
+        "Strong"
+      ],
+      "answer": 1,
+      "exp": "Circumstantial=not conclusive",
+      "hint": ""
+    },
+    {
+      "id": "ex00104",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'Her tenacity impressed everyone.' TENACITY means:",
+      "options": [
+        "Talent",
+        "Persistent determination",
+        "Tenderness",
+        "Speed"
+      ],
+      "answer": 1,
+      "exp": "Tenacity=not giving up",
+      "hint": ""
+    },
+    {
+      "id": "ex00105",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The atmosphere was oppressive.' OPPRESSIVE means:",
+      "options": [
+        "Light",
+        "Overwhelmingly harsh/stifling",
+        "Optimistic",
+        "Loud"
+      ],
+      "answer": 1,
+      "exp": "Oppressive=weighing heavily",
+      "hint": ""
+    },
+    {
+      "id": "ex00106",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'He made a perfunctory apology.' PERFUNCTORY means:",
+      "options": [
+        "Heartfelt",
+        "Done without care; routine",
+        "Perfect",
+        "Thorough"
+      ],
+      "answer": 1,
+      "exp": "Perfunctory=going through the motions",
+      "hint": ""
+    },
+    {
+      "id": "ex00107",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The report was comprehensive.' COMPREHENSIVE means:",
+      "options": [
+        "Short",
+        "Covering all aspects thoroughly",
+        "Simple",
+        "Complicated"
+      ],
+      "answer": 1,
+      "exp": "Comprehensive=complete",
+      "hint": ""
+    },
+    {
+      "id": "ex00108",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She felt a sense of foreboding.' FOREBODING means:",
+      "options": [
+        "Joy",
+        "A feeling something bad will happen",
+        "Forgetting",
+        "Boredom"
+      ],
+      "answer": 1,
+      "exp": "Foreboding=ominous anticipation",
+      "hint": ""
+    },
+    {
+      "id": "ex00109",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The evidence was corroborated.' CORROBORATED means:",
+      "options": [
+        "Denied",
+        "Confirmed by additional evidence",
+        "Collected",
+        "Destroyed"
+      ],
+      "answer": 1,
+      "exp": "Corroborated=supported/verified",
+      "hint": ""
+    },
+    {
+      "id": "ex00110",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His argument was fallacious.' FALLACIOUS means:",
+      "options": [
+        "Strong",
+        "Based on false reasoning",
+        "Falling",
+        "Famous"
+      ],
+      "answer": 1,
+      "exp": "Fallacious=logically flawed",
+      "hint": ""
+    },
+    {
+      "id": "ex00111",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The landscape was desolate.' DESOLATE means:",
+      "options": [
+        "Lush",
+        "Empty and bleak",
+        "Decorated",
+        "Dense"
+      ],
+      "answer": 1,
+      "exp": "Desolate=barren, forsaken",
+      "hint": ""
+    },
+    {
+      "id": "ex00112",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She showed remarkable composure.' COMPOSURE means:",
+      "options": [
+        "Anger",
+        "Calm self-control",
+        "Composition",
+        "Speed"
+      ],
+      "answer": 1,
+      "exp": "Composure=calmness under pressure",
+      "hint": ""
+    },
+    {
+      "id": "ex00113",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The decision was unprecedented.' UNPRECEDENTED means:",
+      "options": [
+        "Expected",
+        "Having no previous example",
+        "Unprepared",
+        "Unimportant"
+      ],
+      "answer": 1,
+      "exp": "Unprecedented=never done before",
+      "hint": ""
+    },
+    {
+      "id": "ex00114",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His comments were disparaging.' DISPARAGING means:",
+      "options": [
+        "Praising",
+        "Expressing contempt; belittling",
+        "Desperate",
+        "Disappearing"
+      ],
+      "answer": 1,
+      "exp": "Disparaging=disrespectful",
+      "hint": ""
+    },
+    {
+      "id": "ex00115",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The agreement was ratified.' RATIFIED means:",
+      "options": [
+        "Rejected",
+        "Formally approved",
+        "Revised",
+        "Removed"
+      ],
+      "answer": 1,
+      "exp": "Ratified=officially confirmed",
+      "hint": ""
+    },
+    {
+      "id": "ex00116",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She was a consummate professional.' CONSUMMATE means:",
+      "options": [
+        "Average",
+        "Supremely skilled; complete",
+        "Consuming",
+        "Costly"
+      ],
+      "answer": 1,
+      "exp": "Consummate=of the highest degree",
+      "hint": ""
+    },
+    {
+      "id": "ex00117",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The plan was feasible.' FEASIBLE means:",
+      "options": [
+        "Impossible",
+        "Possible and practical",
+        "Fearful",
+        "Fast"
+      ],
+      "answer": 1,
+      "exp": "Feasible=achievable",
+      "hint": ""
+    },
+    {
+      "id": "ex00118",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His tone was condescending.' CONDESCENDING means:",
+      "options": [
+        "Respectful",
+        "Patronizingly superior",
+        "Condensed",
+        "Confident"
+      ],
+      "answer": 1,
+      "exp": "Condescending=talking down to someone",
+      "hint": ""
+    },
+    {
+      "id": "ex00119",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Which sentence is grammatically correct?",
+      "options": [
+        "Me and him went.",
+        "Him and I went.",
+        "He and I went.",
+        "I and he went."
+      ],
+      "answer": 2,
+      "exp": "He and I went (subject pronouns)",
+      "hint": ""
+    },
+    {
+      "id": "ex00120",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Identify the ADVERB: 'She sang beautifully.'",
+      "options": [
+        "She",
+        "sang",
+        "beautifully",
+        "(no adverb)"
+      ],
+      "answer": 2,
+      "exp": "Beautifully modifies the verb 'sang'",
+      "hint": ""
+    },
+    {
+      "id": "ex00121",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Which is a COMPOUND sentence?",
+      "options": [
+        "The cat sat.",
+        "The cat sat and the dog barked.",
+        "Although tired, she worked.",
+        "Running fast, he tripped."
+      ],
+      "answer": 1,
+      "exp": "Two independent clauses joined by 'and'",
+      "hint": ""
+    },
+    {
+      "id": "ex00122",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "The SUBJUNCTIVE mood: 'If I ___ you, I'd go.'",
+      "options": [
+        "was",
+        "were",
+        "am",
+        "be"
+      ],
+      "answer": 1,
+      "exp": "Subjunctive uses 'were' for hypotheticals",
+      "hint": ""
+    },
+    {
+      "id": "ex00123",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Which uses the PASSIVE voice?",
+      "options": [
+        "The cat ate the fish.",
+        "The fish was eaten.",
+        "She is eating.",
+        "Eat now!"
+      ],
+      "answer": 1,
+      "exp": "Subject receives the action",
+      "hint": ""
+    },
+    {
+      "id": "ex00124",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Identify the PREPOSITION: 'The book is on the table.'",
+      "options": [
+        "book",
+        "is",
+        "on",
+        "table"
+      ],
+      "answer": 2,
+      "exp": "'On' shows position",
+      "hint": ""
+    },
+    {
+      "id": "ex00125",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Which is correct? 'There are ___ people.'",
+      "options": [
+        "less",
+        "fewer",
+        "lesser",
+        "least"
+      ],
+      "answer": 1,
+      "exp": "Fewer for countable nouns",
+      "hint": ""
+    },
+    {
+      "id": "ex00126",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "'Who/Whom did you call?' Correct form?",
+      "options": [
+        "Who",
+        "Whom",
+        "Whose",
+        "Which"
+      ],
+      "answer": 1,
+      "exp": "Whom=object. You called WHOM",
+      "hint": ""
+    },
+    {
+      "id": "ex00127",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Identify the CONJUNCTION: 'I'll go if you come.'",
+      "options": [
+        "I'll",
+        "go",
+        "if",
+        "come"
+      ],
+      "answer": 2,
+      "exp": "'If' connects clauses",
+      "hint": ""
+    },
+    {
+      "id": "ex00128",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Which sentence uses a SEMICOLON correctly?",
+      "options": [
+        "She left; he stayed.",
+        "She left; and he stayed.",
+        "She; left he stayed.",
+        "She left, he; stayed."
+      ],
+      "answer": 0,
+      "exp": "Semicolon joins related independent clauses",
+      "hint": ""
+    },
+    {
+      "id": "ex00129",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "A character 'drummed her fingers and kept checking the door.' She is likely:",
+      "options": [
+        "Relaxed",
+        "Anxious/Expecting someone",
+        "Tired",
+        "Happy"
+      ],
+      "answer": 1,
+      "exp": "Restless behaviour=waiting anxiously",
+      "hint": ""
+    },
+    {
+      "id": "ex00130",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "'The streets were empty; shutters closed; not a sound.' The mood is:",
+      "options": [
+        "Festive",
+        "Eerie/Abandoned",
+        "Busy",
+        "Cheerful"
+      ],
+      "answer": 1,
+      "exp": "Emptiness+silence=eerie atmosphere",
+      "hint": ""
+    },
+    {
+      "id": "ex00131",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "An author writes 'the so-called experts.' The quotation marks suggest:",
+      "options": [
+        "Respect",
+        "Sarcasm/Doubt about expertise",
+        "Direct quote",
+        "Emphasis"
+      ],
+      "answer": 1,
+      "exp": "Scare quotes=scepticism",
+      "hint": ""
+    },
+    {
+      "id": "ex00132",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "'She smiled, but her eyes remained cold.' This shows:",
+      "options": [
+        "Happiness",
+        "Insincerity; the smile is fake",
+        "Sadness",
+        "Confusion"
+      ],
+      "answer": 1,
+      "exp": "Contradicting body language=fake emotion",
+      "hint": ""
+    },
+    {
+      "id": "ex00133",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "First person narration ('I') is limited because:",
+      "options": [
+        "It's boring",
+        "We only see one perspective",
+        "It's informal",
+        "It uses pronouns"
+      ],
+      "answer": 1,
+      "exp": "Can't know others' thoughts",
+      "hint": ""
+    },
+    {
+      "id": "ex00134",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "'Dark clouds gathered. The wind picked up.' This FORESHADOWS:",
+      "options": [
+        "Good weather",
+        "A storm or trouble ahead",
+        "Nighttime",
+        "A picnic"
+      ],
+      "answer": 1,
+      "exp": "Weather imagery signals coming trouble",
+      "hint": ""
+    },
+    {
+      "id": "ex00135",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "An author uses short, sharp sentences during a chase. Effect?",
+      "options": [
+        "Slows pace",
+        "Creates urgency and tension",
+        "Shows boredom",
+        "Adds detail"
+      ],
+      "answer": 1,
+      "exp": "Short sentences=fast pace=tension",
+      "hint": ""
+    },
+    {
+      "id": "ex00136",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "'Not the worst performance I've seen' is an example of:",
+      "options": [
+        "Hyperbole",
+        "Litotes (understatement)",
+        "Metaphor",
+        "Simile"
+      ],
+      "answer": 1,
+      "exp": "Double negative understatement=litotes",
+      "hint": ""
+    },
+    {
+      "id": "ex00137",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "The phrase 'crocodile tears' means:",
+      "options": [
+        "Real crying",
+        "Fake/Insincere tears",
+        "Animal tears",
+        "Happy tears"
+      ],
+      "answer": 1,
+      "exp": "Idiom: pretending to be sad",
+      "hint": ""
+    },
+    {
+      "id": "ex00138",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "'Actions speak louder than words' is a/an:",
+      "options": [
+        "Metaphor",
+        "Proverb/Adage",
+        "Simile",
+        "Hyperbole"
+      ],
+      "answer": 1,
+      "exp": "A well-known saying expressing a truth",
+      "hint": ""
+    },
+    {
+      "id": "ex00139",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "The PROTAGONIST of a story is:",
+      "options": [
+        "The villain",
+        "The main character",
+        "The narrator",
+        "The author"
+      ],
+      "answer": 1,
+      "exp": "Protagonist=central character",
+      "hint": ""
+    },
+    {
+      "id": "ex00140",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "The ANTAGONIST creates:",
+      "options": [
+        "Peace",
+        "Conflict/Opposition for the protagonist",
+        "Setting",
+        "Mood"
+      ],
+      "answer": 1,
+      "exp": "Antagonist opposes the protagonist",
+      "hint": ""
+    },
+    {
+      "id": "ex00141",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "SETTING in fiction includes:",
+      "options": [
+        "Only location",
+        "Time and place",
+        "Only time",
+        "Only characters"
+      ],
+      "answer": 1,
+      "exp": "Setting=when and where",
+      "hint": ""
+    },
+    {
+      "id": "ex00142",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "EXPOSITION in a plot is:",
+      "options": [
+        "The climax",
+        "The introduction/setup",
+        "The ending",
+        "The conflict"
+      ],
+      "answer": 1,
+      "exp": "Exposition=background information",
+      "hint": ""
+    },
+    {
+      "id": "ex00143",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "A CLIFFHANGER at a chapter end creates:",
+      "options": [
+        "Resolution",
+        "Suspense; reader wants to continue",
+        "Boredom",
+        "Comedy"
+      ],
+      "answer": 1,
+      "exp": "Leaves reader wanting more",
+      "hint": ""
+    },
+    {
+      "id": "ex00144",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "THEME differs from PLOT because theme is:",
+      "options": [
+        "Events that happen",
+        "The underlying message/idea",
+        "The setting",
+        "The characters"
+      ],
+      "answer": 1,
+      "exp": "Theme=abstract idea; plot=events",
+      "hint": ""
+    },
+    {
+      "id": "ex00145",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "THIRD PERSON OMNISCIENT narration means:",
+      "options": [
+        "'I' narrator",
+        "Narrator knows ALL characters' thoughts",
+        "Only one character's view",
+        "Second person"
+      ],
+      "answer": 1,
+      "exp": "Omniscient=all-knowing narrator",
+      "hint": ""
+    },
+    {
+      "id": "ex00146",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "A TRAGIC FLAW (hamartia) leads to the hero's:",
+      "options": [
+        "Success",
+        "Downfall",
+        "Marriage",
+        "Comedy"
+      ],
+      "answer": 1,
+      "exp": "Fatal flaw causes tragedy",
+      "hint": ""
+    },
+    {
+      "id": "ex00147",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "SYMBOLISM means objects represent:",
+      "options": [
+        "Themselves only",
+        "Abstract ideas or concepts",
+        "Other objects",
+        "Sounds"
+      ],
+      "answer": 1,
+      "exp": "E.g., dove=peace, darkness=evil",
+      "hint": ""
+    },
+    {
+      "id": "ex00148",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "Point of view affects a story by:",
+      "options": [
+        "Changing the plot",
+        "Controlling what information the reader receives",
+        "Adding characters",
+        "Changing the theme"
+      ],
+      "answer": 1,
+      "exp": "POV determines reader's access to information",
+      "hint": ""
+    },
+    {
+      "id": "ex00149",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "ETHOS in persuasion appeals to:",
+      "options": [
+        "Emotions",
+        "Credibility/Character",
+        "Logic",
+        "Fear"
+      ],
+      "answer": 1,
+      "exp": "Ethos=establishing trust",
+      "hint": ""
+    },
+    {
+      "id": "ex00150",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "PATHOS in persuasion appeals to:",
+      "options": [
+        "Logic",
+        "Emotions",
+        "Authority",
+        "Statistics"
+      ],
+      "answer": 1,
+      "exp": "Pathos=emotional appeal",
+      "hint": ""
+    },
+    {
+      "id": "ex00151",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "LOGOS in persuasion appeals to:",
+      "options": [
+        "Emotions",
+        "Logic and evidence",
+        "Character",
+        "Fear"
+      ],
+      "answer": 1,
+      "exp": "Logos=rational argument",
+      "hint": ""
+    },
+    {
+      "id": "ex00152",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "A RHETORICAL QUESTION is asked to:",
+      "options": [
+        "Get an answer",
+        "Make a point, not expecting an answer",
+        "Start a conversation",
+        "Be polite"
+      ],
+      "answer": 1,
+      "exp": "Used for effect, not information",
+      "hint": ""
+    },
+    {
+      "id": "ex00153",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "EMOTIVE LANGUAGE is used to:",
+      "options": [
+        "Inform objectively",
+        "Evoke strong feelings in the reader",
+        "Describe setting",
+        "Explain facts"
+      ],
+      "answer": 1,
+      "exp": "Emotive=deliberately emotional words",
+      "hint": ""
+    },
+    {
+      "id": "ex00154",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "INCLUSIVE LANGUAGE ('we', 'our') is used to:",
+      "options": [
+        "Exclude the reader",
+        "Create unity between writer and reader",
+        "Be formal",
+        "Avoid responsibility"
+      ],
+      "answer": 1,
+      "exp": "Makes reader feel included",
+      "hint": ""
+    },
+    {
+      "id": "ex00155",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "A FACT differs from an OPINION because facts are:",
+      "options": [
+        "Interesting",
+        "Verifiable and provable",
+        "Always correct",
+        "Long"
+      ],
+      "answer": 1,
+      "exp": "Facts can be checked; opinions are personal",
+      "hint": ""
+    },
+    {
+      "id": "ex00156",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "BIAS in writing means the author:",
+      "options": [
+        "Is balanced",
+        "Favours one side unfairly",
+        "Is boring",
+        "Uses facts"
+      ],
+      "answer": 1,
+      "exp": "Bias=prejudice toward one view",
+      "hint": ""
+    },
+    {
+      "id": "ex00157",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "JUXTAPOSITION in writing places contrasting ideas:",
+      "options": [
+        "Far apart",
+        "Side by side for effect",
+        "In footnotes",
+        "In the title only"
+      ],
+      "answer": 1,
+      "exp": "Highlighting contrast through proximity",
+      "hint": ""
+    },
+    {
+      "id": "ex00158",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Author's Craft",
+      "difficulty": "medium",
+      "style": "james_ann",
+      "q": "A CLICHÉ is:",
+      "options": [
+        "A fresh metaphor",
+        "An overused expression",
+        "A technical term",
+        "A proper noun"
+      ],
+      "answer": 1,
+      "exp": "'At the end of the day'=cliché",
+      "hint": ""
+    },
+    {
+      "id": "ja00000",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The judge showed great leniency.' LENIENCY means:",
+      "options": [
+        "Strictness",
+        "Mercy; mildness in punishment",
+        "Length",
+        "Laziness"
+      ],
+      "answer": 1,
+      "exp": "Leniency=merciful treatment",
+      "hint": ""
+    },
+    {
+      "id": "ja00001",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'Her prose was lucid and elegant.' LUCID means:",
+      "options": [
+        "Confusing",
+        "Clear and easy to understand",
+        "Lucky",
+        "Loud"
+      ],
+      "answer": 1,
+      "exp": "Lucid=crystal clear",
+      "hint": ""
+    },
+    {
+      "id": "ja00002",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The policy had deleterious effects.' DELETERIOUS means:",
+      "options": [
+        "Beneficial",
+        "Harmful",
+        "Deliberate",
+        "Delayed"
+      ],
+      "answer": 1,
+      "exp": "Deleterious=causing harm",
+      "hint": ""
+    },
+    {
+      "id": "ja00003",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'He was a gregarious host.' GREGARIOUS means:",
+      "options": [
+        "Shy",
+        "Sociable and outgoing",
+        "Greedy",
+        "Grumpy"
+      ],
+      "answer": 1,
+      "exp": "Gregarious=loves company",
+      "hint": ""
+    },
+    {
+      "id": "ja00004",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The idea was deemed untenable.' UNTENABLE means:",
+      "options": [
+        "Strong",
+        "Impossible to defend",
+        "Untidy",
+        "Unknown"
+      ],
+      "answer": 1,
+      "exp": "Untenable=cannot be maintained",
+      "hint": ""
+    },
+    {
+      "id": "ja00005",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She made an astute observation.' ASTUTE means:",
+      "options": [
+        "Foolish",
+        "Shrewd and perceptive",
+        "Astonishing",
+        "Artistic"
+      ],
+      "answer": 1,
+      "exp": "Astute=clever and insightful",
+      "hint": ""
+    },
+    {
+      "id": "ja00006",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The criticism was unwarranted.' UNWARRANTED means:",
+      "options": [
+        "Deserved",
+        "Not justified",
+        "Unwanted",
+        "Unlimited"
+      ],
+      "answer": 1,
+      "exp": "Unwarranted=without good reason",
+      "hint": ""
+    },
+    {
+      "id": "ja00007",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His account was embellished.' EMBELLISHED means:",
+      "options": [
+        "Shortened",
+        "Made more interesting by adding details",
+        "Embarrassed",
+        "Embedded"
+      ],
+      "answer": 1,
+      "exp": "Embellished=decorated/exaggerated",
+      "hint": ""
+    },
+    {
+      "id": "ja00008",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The report was meticulous.' METICULOUS means:",
+      "options": [
+        "Careless",
+        "Showing great attention to detail",
+        "Medical",
+        "Metallic"
+      ],
+      "answer": 1,
+      "exp": "Meticulous=very careful",
+      "hint": ""
+    },
+    {
+      "id": "ja00009",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She spoke with eloquence.' ELOQUENCE means:",
+      "options": [
+        "Silence",
+        "Fluent and persuasive speaking",
+        "Electricity",
+        "Elegance"
+      ],
+      "answer": 1,
+      "exp": "Eloquence=powerful expression",
+      "hint": ""
+    },
+    {
+      "id": "ja00010",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The landscape was austere.' AUSTERE means:",
+      "options": [
+        "Lush",
+        "Severe and plain; without decoration",
+        "Australian",
+        "Awesome"
+      ],
+      "answer": 1,
+      "exp": "Austere=stark simplicity",
+      "hint": ""
+    },
+    {
+      "id": "ja00011",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'He showed great fortitude.' FORTITUDE means:",
+      "options": [
+        "Weakness",
+        "Courage in pain or adversity",
+        "Fortune",
+        "Speed"
+      ],
+      "answer": 1,
+      "exp": "Fortitude=mental strength",
+      "hint": ""
+    },
+    {
+      "id": "ja00012",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The argument was cogent.' COGENT means:",
+      "options": [
+        "Weak",
+        "Clear, logical, convincing",
+        "Coughing",
+        "Cognitive"
+      ],
+      "answer": 1,
+      "exp": "Cogent=compelling",
+      "hint": ""
+    },
+    {
+      "id": "ja00013",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'Her demeanour was placid.' PLACID means:",
+      "options": [
+        "Agitated",
+        "Calm and peaceful",
+        "Placed",
+        "Plastic"
+      ],
+      "answer": 1,
+      "exp": "Placid=serene",
+      "hint": ""
+    },
+    {
+      "id": "ja00014",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The project was arduous.' ARDUOUS means:",
+      "options": [
+        "Easy",
+        "Extremely difficult and tiring",
+        "Artistic",
+        "Aromatic"
+      ],
+      "answer": 1,
+      "exp": "Arduous=demanding great effort",
+      "hint": ""
+    },
+    {
+      "id": "ja00015",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'He was notorious for his temper.' NOTORIOUS means:",
+      "options": [
+        "Unknown",
+        "Famous for something bad",
+        "Notable",
+        "Nutritious"
+      ],
+      "answer": 1,
+      "exp": "Notorious=well-known negatively",
+      "hint": ""
+    },
+    {
+      "id": "ja00016",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The solution was ingenious.' INGENIOUS means:",
+      "options": [
+        "Simple",
+        "Cleverly inventive",
+        "Genuine",
+        "Innocent"
+      ],
+      "answer": 1,
+      "exp": "Ingenious=brilliantly creative",
+      "hint": ""
+    },
+    {
+      "id": "ja00017",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She remained impartial.' IMPARTIAL means:",
+      "options": [
+        "Biased",
+        "Fair and unbiased",
+        "Impatient",
+        "Important"
+      ],
+      "answer": 1,
+      "exp": "Impartial=neutral",
+      "hint": ""
+    },
+    {
+      "id": "ja00018",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The evidence was irrefutable.' IRREFUTABLE means:",
+      "options": [
+        "Weak",
+        "Impossible to deny",
+        "Irrelevant",
+        "Irregular"
+      ],
+      "answer": 1,
+      "exp": "Irrefutable=undeniable",
+      "hint": ""
+    },
+    {
+      "id": "ja00019",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His remarks were sardonic.' SARDONIC means:",
+      "options": [
+        "Kind",
+        "Grimly mocking",
+        "Sad",
+        "Sarcastic only"
+      ],
+      "answer": 1,
+      "exp": "Sardonic=cynically humorous",
+      "hint": ""
+    },
+    {
+      "id": "ja00020",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The treaty was pivotal.' PIVOTAL means:",
+      "options": [
+        "Minor",
+        "Of crucial importance",
+        "Revolving",
+        "Private"
+      ],
+      "answer": 1,
+      "exp": "Pivotal=centrally important",
+      "hint": ""
+    },
+    {
+      "id": "ja00021",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She felt a profound sadness.' PROFOUND means:",
+      "options": [
+        "Shallow",
+        "Very great; deeply felt",
+        "Professional",
+        "Profitable"
+      ],
+      "answer": 1,
+      "exp": "Profound=deep/intense",
+      "hint": ""
+    },
+    {
+      "id": "ja00022",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The new law was contentious.' CONTENTIOUS means:",
+      "options": [
+        "Agreed upon",
+        "Causing disagreement",
+        "Content",
+        "Continuous"
+      ],
+      "answer": 1,
+      "exp": "Contentious=controversial",
+      "hint": ""
+    },
+    {
+      "id": "ja00023",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His behaviour was reprehensible.' REPREHENSIBLE means:",
+      "options": [
+        "Praiseworthy",
+        "Deserving condemnation",
+        "Understandable",
+        "Repetitive"
+      ],
+      "answer": 1,
+      "exp": "Reprehensible=morally wrong",
+      "hint": ""
+    },
+    {
+      "id": "ja00024",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The discovery was serendipitous.' SERENDIPITOUS means:",
+      "options": [
+        "Planned",
+        "Occurring by happy chance",
+        "Serious",
+        "Sequential"
+      ],
+      "answer": 1,
+      "exp": "Serendipitous=fortunately accidental",
+      "hint": ""
+    },
+    {
+      "id": "ja00025",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Which sentence has a DANGLING MODIFIER?",
+      "options": [
+        "Walking to school, the rain started.",
+        "While I walked, the rain started.",
+        "The rain started as I walked.",
+        "I walked in the rain."
+      ],
+      "answer": 0,
+      "exp": "Walking modifies 'rain' incorrectly",
+      "hint": ""
+    },
+    {
+      "id": "ja00026",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Identify the RELATIVE CLAUSE: 'The book, which was old, fell.'",
+      "options": [
+        "The book",
+        "which was old",
+        "fell",
+        "The book fell"
+      ],
+      "answer": 1,
+      "exp": "'Which was old'=relative clause",
+      "hint": ""
+    },
+    {
+      "id": "ja00027",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "PARALLEL STRUCTURE: 'She likes reading, writing, and ___.'",
+      "options": [
+        "to swim",
+        "swimming",
+        "she swims",
+        "swim"
+      ],
+      "answer": 1,
+      "exp": "Gerund form matches reading, writing",
+      "hint": ""
+    },
+    {
+      "id": "ja00028",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Which uses an OXFORD COMMA?",
+      "options": [
+        "Red, white and blue",
+        "Red, white, and blue",
+        "Red white and blue",
+        "Red and white and blue"
+      ],
+      "answer": 1,
+      "exp": "Comma before 'and' in a list",
+      "hint": ""
+    },
+    {
+      "id": "ja00029",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'AFFECT' vs 'EFFECT': The rain will ___ the game.",
+      "options": [
+        "effect",
+        "affect",
+        "affection",
+        "effective"
+      ],
+      "answer": 1,
+      "exp": "Affect=verb. Effect=noun",
+      "hint": ""
+    },
+    {
+      "id": "ja00030",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Which is a COMPLEX sentence?",
+      "options": [
+        "The cat sat.",
+        "The cat sat and slept.",
+        "Although tired, the cat sat.",
+        "Cats sit. Dogs stand."
+      ],
+      "answer": 2,
+      "exp": "Independent + dependent clause",
+      "hint": ""
+    },
+    {
+      "id": "ja00031",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Correct: 'Each student must bring ___ book.'",
+      "options": [
+        "their",
+        "his or her",
+        "there",
+        "its"
+      ],
+      "answer": 1,
+      "exp": "'Each'=singular, formal='his or her'",
+      "hint": ""
+    },
+    {
+      "id": "ja00032",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Which sentence uses ACTIVE voice?",
+      "options": [
+        "The ball was kicked.",
+        "The cake was eaten.",
+        "She wrote the essay.",
+        "The song was sung."
+      ],
+      "answer": 2,
+      "exp": "Subject performs action",
+      "hint": ""
+    },
+    {
+      "id": "ja00033",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Identify the SUBORDINATE CLAUSE: 'When it rained, we stayed in.'",
+      "options": [
+        "we stayed in",
+        "When it rained",
+        "in",
+        "we"
+      ],
+      "answer": 1,
+      "exp": "'When it rained'=subordinate",
+      "hint": ""
+    },
+    {
+      "id": "ja00034",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'ITS' vs 'IT'S': ___ a lovely day.",
+      "options": [
+        "Its",
+        "It's",
+        "Its'",
+        "Itss"
+      ],
+      "answer": 1,
+      "exp": "It's=it is. Its=possessive",
+      "hint": ""
+    },
+    {
+      "id": "ja00035",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Author uses 'unfortunately, predictably, inevitably.' Tone?",
+      "options": [
+        "Optimistic",
+        "Resigned/Fatalistic",
+        "Angry",
+        "Excited"
+      ],
+      "answer": 1,
+      "exp": "Escalating negative adverbs=resignation",
+      "hint": ""
+    },
+    {
+      "id": "ja00036",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The door creaked. Shadows danced. Silence pressed in.' Genre likely?",
+      "options": [
+        "Comedy",
+        "Horror/Gothic",
+        "Romance",
+        "Sports"
+      ],
+      "answer": 1,
+      "exp": "Creepy imagery=horror/gothic",
+      "hint": ""
+    },
+    {
+      "id": "ja00037",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "A story begins with weather description. This establishes:",
+      "options": [
+        "Character",
+        "Setting and mood",
+        "Theme",
+        "Plot"
+      ],
+      "answer": 1,
+      "exp": "Weather=atmosphere/setting",
+      "hint": ""
+    },
+    {
+      "id": "ja00038",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Dialogue tags: 'she whispered' vs 'she said.' 'Whispered' adds:",
+      "options": [
+        "Nothing",
+        "Information about volume, tone, secrecy",
+        "Length",
+        "Confusion"
+      ],
+      "answer": 1,
+      "exp": "Specific verbs convey more meaning",
+      "hint": ""
+    },
+    {
+      "id": "ja00039",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "An author ends a chapter with a question. Purpose?",
+      "options": [
+        "To confuse",
+        "To create suspense and encourage reading on",
+        "To be polite",
+        "To summarise"
+      ],
+      "answer": 1,
+      "exp": "Question=cliffhanger technique",
+      "hint": ""
+    },
+    {
+      "id": "ja00040",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "TEXT TYPE: headings, subheadings, diagrams, facts. This is:",
+      "options": [
+        "Fiction",
+        "Non-fiction/Informational",
+        "Poetry",
+        "Drama"
+      ],
+      "answer": 1,
+      "exp": "Features of informational text",
+      "hint": ""
+    },
+    {
+      "id": "ja00041",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The government claims...' vs 'The government states...' Difference?",
+      "options": [
+        "None",
+        "'Claims' implies doubt; 'states' is neutral",
+        "'States' is informal",
+        "'Claims' is positive"
+      ],
+      "answer": 1,
+      "exp": "Word choice reveals author's stance",
+      "hint": ""
+    },
+    {
+      "id": "ja00042",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "A MEMOIR differs from an AUTOBIOGRAPHY because memoir:",
+      "options": [
+        "Covers whole life",
+        "Focuses on specific themes/periods",
+        "Is fiction",
+        "Is shorter"
+      ],
+      "answer": 1,
+      "exp": "Memoir=selective; autobiography=comprehensive",
+      "hint": ""
+    },
+    {
+      "id": "ja00043",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "SATIRE uses humour to:",
+      "options": [
+        "Entertain only",
+        "Criticise and expose flaws",
+        "Describe events",
+        "Tell stories"
+      ],
+      "answer": 1,
+      "exp": "Satire=humour with a critical purpose",
+      "hint": ""
+    },
+    {
+      "id": "ja00044",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Literary Devices",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "When an author says 'some might argue...' they are:",
+      "options": [
+        "Agreeing",
+        "Acknowledging counterarguments",
+        "Confused",
+        "Quoting"
+      ],
+      "answer": 1,
+      "exp": "Concession before rebuttal",
+      "hint": ""
+    },
+    {
+      "id": "jb00000",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The proposal was pragmatic.' PRAGMATIC means:",
+      "options": [
+        "Idealistic",
+        "Practical and realistic",
+        "Dramatic",
+        "Precious"
+      ],
+      "answer": 1,
+      "exp": "Pragmatic=sensible",
+      "hint": ""
+    },
+    {
+      "id": "jb00001",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'Her response was terse.' TERSE means:",
+      "options": [
+        "Lengthy",
+        "Brief and curt",
+        "Tender",
+        "Terrible"
+      ],
+      "answer": 1,
+      "exp": "Terse=using few words",
+      "hint": ""
+    },
+    {
+      "id": "jb00002",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The plan was viable.' VIABLE means:",
+      "options": [
+        "Impossible",
+        "Capable of working",
+        "Vibrant",
+        "Visible"
+      ],
+      "answer": 1,
+      "exp": "Viable=feasible",
+      "hint": ""
+    },
+    {
+      "id": "jb00003",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'He was a prolific writer.' PROLIFIC means:",
+      "options": [
+        "Lazy",
+        "Producing much work",
+        "Professional",
+        "Profitable"
+      ],
+      "answer": 1,
+      "exp": "Prolific=highly productive",
+      "hint": ""
+    },
+    {
+      "id": "jb00004",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The evidence was compelling.' COMPELLING means:",
+      "options": [
+        "Weak",
+        "Powerfully convincing",
+        "Complex",
+        "Compulsory"
+      ],
+      "answer": 1,
+      "exp": "Compelling=irresistibly convincing",
+      "hint": ""
+    },
+    {
+      "id": "jb00005",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She showed great resilience.' RESILIENCE means:",
+      "options": [
+        "Fragility",
+        "Ability to recover from difficulties",
+        "Resistance",
+        "Resemblance"
+      ],
+      "answer": 1,
+      "exp": "Resilience=bouncing back",
+      "hint": ""
+    },
+    {
+      "id": "jb00006",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The criticism was scathing.' SCATHING means:",
+      "options": [
+        "Mild",
+        "Severely critical",
+        "Scattered",
+        "Scary"
+      ],
+      "answer": 1,
+      "exp": "Scathing=harshly damning",
+      "hint": ""
+    },
+    {
+      "id": "jb00007",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His influence was pervasive.' PERVASIVE means:",
+      "options": [
+        "Limited",
+        "Spreading widely throughout",
+        "Persuasive",
+        "Perverse"
+      ],
+      "answer": 1,
+      "exp": "Pervasive=everywhere",
+      "hint": ""
+    },
+    {
+      "id": "jb00008",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The atmosphere was convivial.' CONVIVIAL means:",
+      "options": [
+        "Hostile",
+        "Warm and friendly",
+        "Conventional",
+        "Convicted"
+      ],
+      "answer": 1,
+      "exp": "Convivial=sociable",
+      "hint": ""
+    },
+    {
+      "id": "jb00009",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She spoke with gravitas.' GRAVITAS means:",
+      "options": [
+        "Humour",
+        "Dignity and seriousness",
+        "Gravity",
+        "Grace"
+      ],
+      "answer": 1,
+      "exp": "Gravitas=weight of manner",
+      "hint": ""
+    },
+    {
+      "id": "jb00010",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The change was incremental.' INCREMENTAL means:",
+      "options": [
+        "Sudden",
+        "Gradual, step by step",
+        "Incredible",
+        "Incorrect"
+      ],
+      "answer": 1,
+      "exp": "Incremental=by small degrees",
+      "hint": ""
+    },
+    {
+      "id": "jb00011",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His motives were altruistic.' ALTRUISTIC means:",
+      "options": [
+        "Selfish",
+        "Selflessly concerned for others",
+        "Alternative",
+        "Artistic"
+      ],
+      "answer": 1,
+      "exp": "Altruistic=unselfish",
+      "hint": ""
+    },
+    {
+      "id": "jb00012",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The document was redacted.' REDACTED means:",
+      "options": [
+        "Published",
+        "Had parts censored/removed",
+        "Rewritten",
+        "Reduced"
+      ],
+      "answer": 1,
+      "exp": "Redacted=blacked out",
+      "hint": ""
+    },
+    {
+      "id": "jb00013",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'Her argument was specious.' SPECIOUS means:",
+      "options": [
+        "Strong",
+        "Plausible but actually wrong",
+        "Special",
+        "Specific"
+      ],
+      "answer": 1,
+      "exp": "Specious=superficially correct",
+      "hint": ""
+    },
+    {
+      "id": "jb00014",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The atmosphere was palpable.' PALPABLE means:",
+      "options": [
+        "Invisible",
+        "So intense it could almost be felt",
+        "Pale",
+        "Painful"
+      ],
+      "answer": 1,
+      "exp": "Palpable=tangible",
+      "hint": ""
+    },
+    {
+      "id": "jb00015",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'He showed remarkable prescience.' PRESCIENCE means:",
+      "options": [
+        "Ignorance",
+        "Knowledge of future events",
+        "Presence",
+        "Pressure"
+      ],
+      "answer": 1,
+      "exp": "Prescience=foresight",
+      "hint": ""
+    },
+    {
+      "id": "jb00016",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The decision was judicious.' JUDICIOUS means:",
+      "options": [
+        "Foolish",
+        "Showing good judgement",
+        "Judicial",
+        "Justified"
+      ],
+      "answer": 1,
+      "exp": "Judicious=wise",
+      "hint": ""
+    },
+    {
+      "id": "jb00017",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'Her writing was evocative.' EVOCATIVE means:",
+      "options": [
+        "Dull",
+        "Bringing strong images/feelings to mind",
+        "Evil",
+        "Evolving"
+      ],
+      "answer": 1,
+      "exp": "Evocative=powerfully suggestive",
+      "hint": ""
+    },
+    {
+      "id": "jb00018",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The debate was acrimonious.' ACRIMONIOUS means:",
+      "options": [
+        "Friendly",
+        "Angry and bitter",
+        "Accurate",
+        "Academic"
+      ],
+      "answer": 1,
+      "exp": "Acrimonious=hostile",
+      "hint": ""
+    },
+    {
+      "id": "jb00019",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'His testimony was damning.' DAMNING means:",
+      "options": [
+        "Supportive",
+        "Strongly suggesting guilt",
+        "Damaged",
+        "Dark"
+      ],
+      "answer": 1,
+      "exp": "Damning=very harmful to case",
+      "hint": ""
+    },
+    {
+      "id": "jb00020",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Which uses PARALLEL STRUCTURE correctly?",
+      "options": [
+        "She likes to run, swimming, and bikes.",
+        "She likes running, swimming, and cycling.",
+        "She likes run, swim, cycle.",
+        "Running, to swim, cycling."
+      ],
+      "answer": 1,
+      "exp": "All gerunds=parallel",
+      "hint": ""
+    },
+    {
+      "id": "jb00021",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "SEMICOLON use: which is correct?",
+      "options": [
+        "I ran; quickly.",
+        "I ran; she walked.",
+        "I; ran.",
+        "I ran, she; walked."
+      ],
+      "answer": 1,
+      "exp": "Joins two related independent clauses",
+      "hint": ""
+    },
+    {
+      "id": "jb00022",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Which is a RUN-ON sentence?",
+      "options": [
+        "I went home.",
+        "I went home I was tired.",
+        "I went home, and I was tired.",
+        "Although tired, I went home."
+      ],
+      "answer": 1,
+      "exp": "Two sentences without proper conjunction",
+      "hint": ""
+    },
+    {
+      "id": "jb00023",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "ELLIPSIS (...) in fiction suggests:",
+      "options": [
+        "The end",
+        "Trailing off, hesitation, or omission",
+        "Excitement",
+        "A new paragraph"
+      ],
+      "answer": 1,
+      "exp": "... =pause, uncertainty, or continuation",
+      "hint": ""
+    },
+    {
+      "id": "jb00024",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Grammar",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'LESS' vs 'FEWER': correct usage?",
+      "options": [
+        "Less students",
+        "Fewer water",
+        "Fewer students",
+        "Less people"
+      ],
+      "answer": 2,
+      "exp": "Fewer=countable (students)",
+      "hint": ""
+    },
+    {
+      "id": "jb00025",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Which demonstrates IRONY?",
+      "options": [
+        "A fire station burns down",
+        "A house is big",
+        "The sun shines",
+        "A book is long"
+      ],
+      "answer": 0,
+      "exp": "Opposite of what you'd expect",
+      "hint": ""
+    },
+    {
+      "id": "jb00026",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "What is a PORTMANTEAU word?",
+      "options": [
+        "A suitcase",
+        "A blend of two words (e.g., brunch)",
+        "A French word",
+        "An old word"
+      ],
+      "answer": 1,
+      "exp": "brunch=breakfast+lunch",
+      "hint": ""
+    },
+    {
+      "id": "jb00027",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "An OXYMORON is:",
+      "options": [
+        "A clever person",
+        "Contradictory terms together (e.g., 'deafening silence')",
+        "A type of oxygen",
+        "A large moron"
+      ],
+      "answer": 1,
+      "exp": "Contradictory pair",
+      "hint": ""
+    },
+    {
+      "id": "jb00028",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "EUPHEMISM: 'passed away' replaces:",
+      "options": [
+        "Left",
+        "Died",
+        "Moved",
+        "Changed"
+      ],
+      "answer": 1,
+      "exp": "Softer way to say 'died'",
+      "hint": ""
+    },
+    {
+      "id": "jb00029",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "HYPERBOLE: 'I've told you a million times' means:",
+      "options": [
+        "Exactly a million",
+        "Many times (exaggeration)",
+        "Once",
+        "Never"
+      ],
+      "answer": 1,
+      "exp": "Extreme exaggeration for effect",
+      "hint": ""
+    },
+    {
+      "id": "jb00030",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Author writes only in short sentences. Possible reason?",
+      "options": [
+        "Laziness",
+        "To create tension or reflect a character's panic",
+        "Poor vocabulary",
+        "To save space"
+      ],
+      "answer": 1,
+      "exp": "Short sentences=urgency",
+      "hint": ""
+    },
+    {
+      "id": "jb00031",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "A story opens: 'It was a day like any other—or so I thought.' Effect?",
+      "options": [
+        "Boredom",
+        "Creates anticipation that something unusual will happen",
+        "Confusion",
+        "Historical setting"
+      ],
+      "answer": 1,
+      "exp": "'Or so I thought'=foreshadowing change",
+      "hint": ""
+    },
+    {
+      "id": "jb00032",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'The old house watched them approach.' This is:",
+      "options": [
+        "A fact",
+        "Personification",
+        "A simile",
+        "Alliteration"
+      ],
+      "answer": 1,
+      "exp": "House 'watching'=human quality",
+      "hint": ""
+    },
+    {
+      "id": "jb00033",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "An author describes a character's room in detail. Purpose?",
+      "options": [
+        "Filler",
+        "Reveals character personality and values",
+        "To bore the reader",
+        "Word count"
+      ],
+      "answer": 1,
+      "exp": "Room=extension of character",
+      "hint": ""
+    },
+    {
+      "id": "jb00034",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'She said nothing, but her silence spoke volumes.' Meaning?",
+      "options": [
+        "She was quiet",
+        "Her silence communicated a strong message",
+        "She was asleep",
+        "She agreed"
+      ],
+      "answer": 1,
+      "exp": "Silence can be as expressive as words",
+      "hint": ""
+    },
+    {
+      "id": "jb00035",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "Repetition of 'never' in a speech creates:",
+      "options": [
+        "Boredom",
+        "Emphasis and emotional intensity",
+        "Confusion",
+        "Rhythm only"
+      ],
+      "answer": 1,
+      "exp": "Anaphora=powerful emphasis",
+      "hint": ""
+    },
+    {
+      "id": "jb00036",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "A narrator says 'I might be wrong, but...' This shows:",
+      "options": [
+        "Confidence",
+        "Self-awareness or unreliability",
+        "Stupidity",
+        "Expertise"
+      ],
+      "answer": 1,
+      "exp": "Hedging=acknowledging subjectivity",
+      "hint": ""
+    },
+    {
+      "id": "jb00037",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "TEXT STRUCTURE: problem→solution. Purpose?",
+      "options": [
+        "To entertain",
+        "To present an issue and propose answers",
+        "To describe",
+        "To narrate"
+      ],
+      "answer": 1,
+      "exp": "Common in persuasive/informational texts",
+      "hint": ""
+    },
+    {
+      "id": "jb00038",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "A character described through others' reactions. Technique?",
+      "options": [
+        "First person",
+        "Indirect characterisation",
+        "Setting description",
+        "Flashback"
+      ],
+      "answer": 1,
+      "exp": "We learn about character from others' responses",
+      "hint": ""
+    },
+    {
+      "id": "jb00039",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "An author uses ANECDOTES in an essay to:",
+      "options": [
+        "Fill space",
+        "Support arguments with personal stories",
+        "Confuse",
+        "Be informal only"
+      ],
+      "answer": 1,
+      "exp": "Anecdotes=illustrative examples",
+      "hint": ""
+    },
+    {
+      "id": "jb00040",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "REGISTER in language refers to:",
+      "options": [
+        "A cash register",
+        "Level of formality used",
+        "Volume",
+        "Speed"
+      ],
+      "answer": 1,
+      "exp": "Formal vs informal language",
+      "hint": ""
+    },
+    {
+      "id": "jb00041",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "CODE-SWITCHING means:",
+      "options": [
+        "Computer programming",
+        "Shifting between languages or registers",
+        "Swapping books",
+        "Changing channels"
+      ],
+      "answer": 1,
+      "exp": "Adjusting language for context",
+      "hint": ""
+    },
+    {
+      "id": "jb00042",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "A TEXT'S AUDIENCE affects:",
+      "options": [
+        "Nothing",
+        "Word choice, tone, complexity, and structure",
+        "Only length",
+        "Only topic"
+      ],
+      "answer": 1,
+      "exp": "Writers adapt to their audience",
+      "hint": ""
+    },
+    {
+      "id": "jb00043",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "PRIMARY SOURCE vs SECONDARY: a diary is?",
+      "options": [
+        "Secondary",
+        "Primary (first-hand)",
+        "Neither",
+        "Both"
+      ],
+      "answer": 1,
+      "exp": "Diary=direct, personal account",
+      "hint": ""
+    },
+    {
+      "id": "jb00044",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Inference",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "CONNOTATION vs DENOTATION: 'home' connotes?",
+      "options": [
+        "A building",
+        "Warmth, safety, belonging",
+        "An address",
+        "Bricks"
+      ],
+      "answer": 1,
+      "exp": "Connotation=emotional associations beyond literal meaning",
+      "hint": ""
+    },
+    {
+      "id": "jc00000",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'SYCOPHANTIC' means:",
+      "options": [
+        "Honest",
+        "Insincerely flattering",
+        "Sick",
+        "Sympathetic"
+      ],
+      "answer": 1,
+      "exp": "Fawning for advantage",
+      "hint": ""
+    },
+    {
+      "id": "jc00001",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'OBDURATE' means:",
+      "options": [
+        "Flexible",
+        "Stubbornly unyielding",
+        "Obvious",
+        "Obedient"
+      ],
+      "answer": 1,
+      "exp": "Unmovable",
+      "hint": ""
+    },
+    {
+      "id": "jc00002",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'SUPINE' means:",
+      "options": [
+        "Active",
+        "Lying face up; passive",
+        "Superior",
+        "Superstitious"
+      ],
+      "answer": 1,
+      "exp": "Inactive/passive",
+      "hint": ""
+    },
+    {
+      "id": "jc00003",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'VITRIOLIC' means:",
+      "options": [
+        "Sweet",
+        "Cruelly bitter criticism",
+        "Vital",
+        "Vibrant"
+      ],
+      "answer": 1,
+      "exp": "Caustic",
+      "hint": ""
+    },
+    {
+      "id": "jc00004",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'PROPITIOUS' means:",
+      "options": [
+        "Unlucky",
+        "Favourable; auspicious",
+        "Proper",
+        "Proportional"
+      ],
+      "answer": 1,
+      "exp": "Boding well",
+      "hint": ""
+    },
+    {
+      "id": "jc00005",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'MAGNILOQUENT' means:",
+      "options": [
+        "Quiet",
+        "Using grand, pompous language",
+        "Magnificent",
+        "Magnetic"
+      ],
+      "answer": 1,
+      "exp": "Bombastic speech",
+      "hint": ""
+    },
+    {
+      "id": "jc00006",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'QUIXOTIC' means:",
+      "options": [
+        "Realistic",
+        "Impractically idealistic",
+        "Quick",
+        "Quiet"
+      ],
+      "answer": 1,
+      "exp": "From Don Quixote",
+      "hint": ""
+    },
+    {
+      "id": "jc00007",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'EPHEMERAL' means:",
+      "options": [
+        "Permanent",
+        "Lasting a very short time",
+        "Enormous",
+        "Ethical"
+      ],
+      "answer": 1,
+      "exp": "Fleeting",
+      "hint": ""
+    },
+    {
+      "id": "jc00008",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'LACHRYMOSE' means:",
+      "options": [
+        "Happy",
+        "Tearful; given to weeping",
+        "Lazy",
+        "Loud"
+      ],
+      "answer": 1,
+      "exp": "Weepy",
+      "hint": ""
+    },
+    {
+      "id": "jc00009",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'MENDACIOUS' means:",
+      "options": [
+        "Honest",
+        "Lying; untruthful",
+        "Medical",
+        "Mental"
+      ],
+      "answer": 1,
+      "exp": "Dishonest",
+      "hint": ""
+    },
+    {
+      "id": "jc00010",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'OBSTREPEROUS' means:",
+      "options": [
+        "Quiet",
+        "Noisy and hard to control",
+        "Observant",
+        "Obvious"
+      ],
+      "answer": 1,
+      "exp": "Rowdy",
+      "hint": ""
+    },
+    {
+      "id": "jc00011",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'PERSPICACIOUS' means:",
+      "options": [
+        "Confused",
+        "Having keen insight",
+        "Sweating",
+        "Persistent"
+      ],
+      "answer": 1,
+      "exp": "Shrewd",
+      "hint": ""
+    },
+    {
+      "id": "jc00012",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'RECALCITRANT' means:",
+      "options": [
+        "Cooperative",
+        "Stubbornly resistant",
+        "Calculating",
+        "Recalling"
+      ],
+      "answer": 1,
+      "exp": "Defiant",
+      "hint": ""
+    },
+    {
+      "id": "jc00013",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'SURREPTITIOUS' means:",
+      "options": [
+        "Open",
+        "Done in secret",
+        "Surplus",
+        "Surprising"
+      ],
+      "answer": 1,
+      "exp": "Covert",
+      "hint": ""
+    },
+    {
+      "id": "jc00014",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'TRUCULENT' means:",
+      "options": [
+        "Gentle",
+        "Aggressively hostile",
+        "Honest",
+        "Careful"
+      ],
+      "answer": 1,
+      "exp": "Fierce",
+      "hint": ""
+    },
+    {
+      "id": "jc00015",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'VERISIMILITUDE' means:",
+      "options": [
+        "Similarity",
+        "Appearance of being true",
+        "Verse",
+        "Versatility"
+      ],
+      "answer": 1,
+      "exp": "Seeming real",
+      "hint": ""
+    },
+    {
+      "id": "jc00016",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'ACERBIC' means:",
+      "options": [
+        "Sweet",
+        "Sharp and harsh",
+        "Accurate",
+        "Acidic only"
+      ],
+      "answer": 1,
+      "exp": "Biting",
+      "hint": ""
+    },
+    {
+      "id": "jc00017",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'BUCOLIC' means:",
+      "options": [
+        "Urban",
+        "Relating to pleasant countryside",
+        "Busy",
+        "Brutal"
+      ],
+      "answer": 1,
+      "exp": "Pastoral",
+      "hint": ""
+    },
+    {
+      "id": "jc00018",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'CACOPHONY' means:",
+      "options": [
+        "Harmony",
+        "Harsh discordant sounds",
+        "Quiet",
+        "Music"
+      ],
+      "answer": 1,
+      "exp": "Noise",
+      "hint": ""
+    },
+    {
+      "id": "jc00019",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'DIFFIDENT' means:",
+      "options": [
+        "Confident",
+        "Modest and shy",
+        "Different",
+        "Difficult"
+      ],
+      "answer": 1,
+      "exp": "Self-effacing",
+      "hint": ""
+    },
+    {
+      "id": "jc00020",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'EBULLIENT' means:",
+      "options": [
+        "Sad",
+        "Enthusiastic and lively",
+        "Evil",
+        "Calm"
+      ],
+      "answer": 1,
+      "exp": "Bubbly",
+      "hint": ""
+    },
+    {
+      "id": "jc00021",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'FECKLESS' means:",
+      "options": [
+        "Strong",
+        "Lacking initiative; irresponsible",
+        "Fast",
+        "Fierce"
+      ],
+      "answer": 1,
+      "exp": "Useless",
+      "hint": ""
+    },
+    {
+      "id": "jc00022",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'GARRULOUS' means:",
+      "options": [
+        "Silent",
+        "Excessively talkative",
+        "Generous",
+        "Gorgeous"
+      ],
+      "answer": 1,
+      "exp": "Chatty",
+      "hint": ""
+    },
+    {
+      "id": "jc00023",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'HARANGUE' means:",
+      "options": [
+        "Praise",
+        "A lengthy aggressive speech",
+        "Harassment",
+        "Harmony"
+      ],
+      "answer": 1,
+      "exp": "Rant",
+      "hint": ""
+    },
+    {
+      "id": "jc00024",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'IGNOMINIOUS' means:",
+      "options": [
+        "Glorious",
+        "Deserving of shame",
+        "Ignorant",
+        "Ignited"
+      ],
+      "answer": 1,
+      "exp": "Shameful",
+      "hint": ""
+    },
+    {
+      "id": "jc00025",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'JUXTAPOSE' means:",
+      "options": [
+        "Separate",
+        "Place side by side for contrast",
+        "Jump",
+        "Judge"
+      ],
+      "answer": 1,
+      "exp": "Compare by proximity",
+      "hint": ""
+    },
+    {
+      "id": "jc00026",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'KOWTOW' means:",
+      "options": [
+        "Stand tall",
+        "Show excessive obedience",
+        "Kick",
+        "Know"
+      ],
+      "answer": 1,
+      "exp": "Submit servilely",
+      "hint": ""
+    },
+    {
+      "id": "jc00027",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'LABYRINTHINE' means:",
+      "options": [
+        "Simple",
+        "Extremely complex",
+        "Laborious",
+        "Large"
+      ],
+      "answer": 1,
+      "exp": "Maze-like",
+      "hint": ""
+    },
+    {
+      "id": "jc00028",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'MACHIAVELLIAN' means:",
+      "options": [
+        "Mechanical",
+        "Cunningly unscrupulous",
+        "Magical",
+        "Machined"
+      ],
+      "answer": 1,
+      "exp": "Deviously scheming",
+      "hint": ""
+    },
+    {
+      "id": "jc00029",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'NONCHALANT' means:",
+      "options": [
+        "Excited",
+        "Casually calm; unconcerned",
+        "Nervous",
+        "Notable"
+      ],
+      "answer": 1,
+      "exp": "Cool indifference",
+      "hint": ""
+    },
+    {
+      "id": "jc00030",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'OSTENTATIOUS' means:",
+      "options": [
+        "Modest",
+        "Showy; designed to impress",
+        "Bony",
+        "Ostrich-like"
+      ],
+      "answer": 1,
+      "exp": "Flashy",
+      "hint": ""
+    },
+    {
+      "id": "jc00031",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'PARSIMONIOUS' means:",
+      "options": [
+        "Generous",
+        "Extremely stingy",
+        "Partial",
+        "Passionate"
+      ],
+      "answer": 1,
+      "exp": "Miserly",
+      "hint": ""
+    },
+    {
+      "id": "jc00032",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'QUERULOUS' means:",
+      "options": [
+        "Happy",
+        "Habitually complaining",
+        "Questioning",
+        "Quiet"
+      ],
+      "answer": 1,
+      "exp": "Whiny",
+      "hint": ""
+    },
+    {
+      "id": "jc00033",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'REDOLENT' means:",
+      "options": [
+        "Forgotten",
+        "Strongly reminiscent; fragrant",
+        "Red",
+        "Reluctant"
+      ],
+      "answer": 1,
+      "exp": "Evocative",
+      "hint": ""
+    },
+    {
+      "id": "jc00034",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'SAGACIOUS' means:",
+      "options": [
+        "Foolish",
+        "Wise and shrewd",
+        "Savage",
+        "Sad"
+      ],
+      "answer": 1,
+      "exp": "Discerning",
+      "hint": ""
+    },
+    {
+      "id": "jc00035",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'TREPIDATION' means:",
+      "options": [
+        "Confidence",
+        "Fearful anxiety",
+        "Repetition",
+        "Trend"
+      ],
+      "answer": 1,
+      "exp": "Nervousness",
+      "hint": ""
+    },
+    {
+      "id": "jc00036",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'UBIQUITOUS' means:",
+      "options": [
+        "Rare",
+        "Found everywhere",
+        "Unique",
+        "Ugly"
+      ],
+      "answer": 1,
+      "exp": "Omnipresent",
+      "hint": ""
+    },
+    {
+      "id": "jc00037",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'VEHEMENT' means:",
+      "options": [
+        "Calm",
+        "Showing strong feeling; forceful",
+        "Vehicle",
+        "Vague"
+      ],
+      "answer": 1,
+      "exp": "Passionate/intense",
+      "hint": ""
+    },
+    {
+      "id": "jc00038",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'WISTFUL' means:",
+      "options": [
+        "Happy",
+        "Yearning with gentle sadness",
+        "Wise",
+        "Witty"
+      ],
+      "answer": 1,
+      "exp": "Nostalgic longing",
+      "hint": ""
+    },
+    {
+      "id": "jc00039",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'ZEALOUS' means:",
+      "options": [
+        "Lazy",
+        "Full of passionate enthusiasm",
+        "Zero",
+        "Zigzagging"
+      ],
+      "answer": 1,
+      "exp": "Fervently committed",
+      "hint": ""
+    },
+    {
+      "id": "jc00040",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'AMBIVALENT' means:",
+      "options": [
+        "Certain",
+        "Having mixed contradictory feelings",
+        "Ambitious",
+        "Ambulance"
+      ],
+      "answer": 1,
+      "exp": "Torn",
+      "hint": ""
+    },
+    {
+      "id": "jc00041",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'BELLIGERENT' means:",
+      "options": [
+        "Peaceful",
+        "Hostile and aggressive",
+        "Beautiful",
+        "Believing"
+      ],
+      "answer": 1,
+      "exp": "Warlike",
+      "hint": ""
+    },
+    {
+      "id": "jc00042",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'CAPRICIOUS' means:",
+      "options": [
+        "Steady",
+        "Given to sudden unpredictable changes",
+        "Capable",
+        "Captured"
+      ],
+      "answer": 1,
+      "exp": "Fickle",
+      "hint": ""
+    },
+    {
+      "id": "jc00043",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'DESULTORY' means:",
+      "options": [
+        "Purposeful",
+        "Lacking plan; random",
+        "Deserted",
+        "Desired"
+      ],
+      "answer": 1,
+      "exp": "Aimless",
+      "hint": ""
+    },
+    {
+      "id": "jc00044",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'EQUANIMITY' means:",
+      "options": [
+        "Panic",
+        "Mental calmness under stress",
+        "Equality",
+        "Equator"
+      ],
+      "answer": 1,
+      "exp": "Composure",
+      "hint": ""
+    },
+    {
+      "id": "jc00045",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'FASTIDIOUS' means:",
+      "options": [
+        "Careless",
+        "Extremely attentive to detail",
+        "Fast",
+        "Faithful"
+      ],
+      "answer": 1,
+      "exp": "Finicky",
+      "hint": ""
+    },
+    {
+      "id": "jc00046",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'GRANDILOQUENT' means:",
+      "options": [
+        "Simple",
+        "Pompous in speech",
+        "Grand",
+        "Grateful"
+      ],
+      "answer": 1,
+      "exp": "Bombastic",
+      "hint": ""
+    },
+    {
+      "id": "jc00047",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'HARBINGER' means:",
+      "options": [
+        "Port",
+        "A forerunner of what's to come",
+        "Harbour",
+        "Danger"
+      ],
+      "answer": 1,
+      "exp": "Herald",
+      "hint": ""
+    },
+    {
+      "id": "jc00048",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'INEFFABLE' means:",
+      "options": [
+        "Effective",
+        "Too great for words",
+        "Useless",
+        "Inflexible"
+      ],
+      "answer": 1,
+      "exp": "Beyond expression",
+      "hint": ""
+    },
+    {
+      "id": "jc00049",
+      "state": "VIC",
+      "section": "vic_reading",
+      "grade": "selective",
+      "topic": "Vocabulary",
+      "difficulty": "hard",
+      "style": "james_ann",
+      "q": "'JINGOISTIC' means:",
+      "options": [
+        "Musical",
+        "Excessively patriotic",
+        "Joking",
+        "Jinxed"
+      ],
+      "answer": 1,
+      "exp": "Chauvinistic nationalism",
       "hint": ""
     }
   ]
