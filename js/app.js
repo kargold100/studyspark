@@ -40,6 +40,11 @@ const EXAM_DEFS = [
   {id:'e23',title:'Indian Languages Quiz',section:'vic_verbal',duration:10,count:15,color:'var(--orange)'},
   {id:'e24',title:'VIC Maths (Hard Only)',section:'vic_maths',difficulty:'hard',duration:30,count:25,color:'var(--red)'},
   {id:'e25',title:'NSW Thinking (Hard Only)',section:'nsw_thinking',difficulty:'hard',duration:30,count:25,color:'var(--red)'},
+  {id:'e26',title:'SEAL – Maths (Grade 7)',section:'vic_maths',style:'seal',duration:30,count:30,color:'var(--green)'},
+  {id:'e27',title:'SEAL – Verbal (Grade 7)',section:'vic_verbal',style:'seal',duration:30,count:25,color:'var(--purple)'},
+  {id:'e28',title:'SEAL – Reading (Grade 7)',section:'vic_reading',style:'seal',duration:25,count:20,color:'var(--accent)'},
+  {id:'e29',title:'SEAL – Quantitative (Grade 7)',section:'vic_quant',style:'seal',duration:25,count:20,color:'var(--orange)'},
+  {id:'e30',title:'SEAL Full Mixed (Grade 7)',section:'ALL',style:'seal',duration:60,count:50,color:'var(--red)'},
 ];
 
 const WRITING_PROMPTS = [
