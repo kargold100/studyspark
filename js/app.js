@@ -4,7 +4,7 @@
 const SL  = {vic_reading:'📖 VIC Reading',vic_maths:'🔢 VIC Maths',vic_verbal:'🧠 VIC Verbal',vic_quant:'📐 VIC Quant',nsw_reading:'📖 NSW Reading',nsw_maths:'🔢 NSW Maths',nsw_thinking:'🧩 NSW Thinking'};
 const SC  = {vic_reading:'ta',vic_maths:'tg',vic_verbal:'tpu',vic_quant:'to',nsw_reading:'ta',nsw_maths:'tg',nsw_thinking:'tpu'};
 const DC  = {easy:'tg',medium:'to',hard:'tp'};
-const STL = {acer:'ACER',hendersons:'Hendersons',psle:'PSLE',contour:'Contour',james_ann:'James & Ann',edutest:'EduTest',matrix:'Matrix',oc:'OC Test',hast:'HAST'};
+const STL = {standard:'Standard',eshs:'E/SHS',singapore:'Singapore',logic:'Logic',reading:'Reading',assessment:'Assessment',advanced:'Advanced',opportunity:'OC',scholarship:'Scholarship',seal:'SEAL',language:'Language',academic:'Academic',tutorial:'Tutorial'};
 
 const NAV_ITEMS = [
   {id:'home',l:'🏠 Home'},{id:'browse',l:'📋 Questions'},
@@ -24,17 +24,17 @@ const EXAM_DEFS = [
   {id:'e7',title:'NSW – Reading',section:'nsw_reading',duration:30,count:25,color:'var(--accent)',state:'NSW'},
   {id:'e8',title:'VIC Full Selective (Mixed)',section:'ALL',duration:60,count:60,color:'var(--accent)',state:'VIC'},
   {id:'e9',title:'NSW Full Selective (Mixed)',section:'ALL',duration:50,count:50,color:'var(--yellow)',state:'NSW'},
-  {id:'e10',title:'Hendersons E/SHS Style',section:'ALL',style:'hendersons',duration:30,count:30,color:'var(--green)'},
-  {id:'e11',title:'PSLE Singapore Maths',section:'vic_maths',style:'psle',duration:30,count:25,color:'var(--orange)'},
-  {id:'e12',title:'Contour Logic & Reasoning',section:'ALL',style:'contour',duration:30,count:25,color:'var(--purple)'},
-  {id:'e13',title:'EduTest Full Practice',section:'ALL',style:'edutest',duration:30,count:25,color:'var(--teal)'},
-  {id:'e14',title:'Matrix Education Style',section:'ALL',style:'matrix',duration:30,count:25,color:'var(--yellow)'},
-  {id:'e15',title:'HAST Academic Scholarship',section:'ALL',style:'hast',duration:30,count:25,color:'var(--red)'},
-  {id:'e16',title:'OC Opportunity Class (Yr4-5)',section:'ALL',style:'oc',duration:25,count:25,color:'var(--green)'},
-  {id:'e17',title:'James & Ann Reading Comp',section:'vic_reading',style:'james_ann',duration:30,count:25,color:'var(--pink)'},
+  {id:'e10',title:'E/SHS Practice Test',section:'ALL',style:'eshs',duration:30,count:30,color:'var(--green)'},
+  {id:'e11',title:'Singapore Maths Style',section:'vic_maths',style:'singapore',duration:30,count:25,color:'var(--orange)'},
+  {id:'e12',title:'Logic & Reasoning Test',section:'ALL',style:'logic',duration:30,count:25,color:'var(--purple)'},
+  {id:'e13',title:'Assessment Practice',section:'ALL',style:'assessment',duration:30,count:25,color:'var(--teal)'},
+  {id:'e14',title:'Advanced Practice Test',section:'ALL',style:'advanced',duration:30,count:25,color:'var(--yellow)'},
+  {id:'e15',title:'Scholarship Test',section:'ALL',style:'scholarship',duration:30,count:25,color:'var(--red)'},
+  {id:'e16',title:'Opportunity Class (Yr4-5)',section:'ALL',style:'opportunity',duration:25,count:25,color:'var(--green)'},
+  {id:'e17',title:'Reading Comprehension',section:'vic_reading',style:'reading',duration:30,count:25,color:'var(--pink)'},
   {id:'e18',title:'Easy Confidence Builder',section:'ALL',difficulty:'easy',duration:15,count:20,color:'var(--teal)'},
-  {id:'e19',title:'Tamil Hub – Language & Culture',section:'vic_verbal',style:'tamil_hub',duration:20,count:20,color:'var(--orange)'},
-  {id:'e20',title:'Brightminds Academy',section:'ALL',style:'brightminds',duration:30,count:25,color:'var(--purple)'},
+  {id:'e19',title:'Language & Culture Quiz',section:'vic_verbal',style:'language',duration:20,count:20,color:'var(--orange)'},
+  {id:'e20',title:'Academic Practice Test',section:'ALL',style:'academic',duration:30,count:25,color:'var(--purple)'},
   {id:'e21',title:'Maths Sprint (Quick 10)',section:'vic_maths',duration:5,count:10,color:'var(--green)'},
   {id:'e22',title:'Vocab Challenge (Hard)',section:'vic_verbal',difficulty:'hard',duration:15,count:20,color:'var(--pink)'},
   {id:'e23',title:'Indian Languages Quiz',section:'vic_verbal',duration:10,count:15,color:'var(--orange)'},
@@ -520,7 +520,7 @@ function qCard(q,idx,mode,userAns,submitted,revealed,showHint){
     }
   }
   const browseActs=mode==='browse'?`<div class="fc gap8 mt14 wrap"><button class="btn bm bsm" onclick="toggleReveal('${q.id}')">${revealed?'🙈 Hide':'👁 Show'}</button>${!revealed?`<button class="btn bm bsm" onclick="toggleHint('${q.id}')">💡 Hint</button>`:''}<button class="btn ba bsm" onclick="practiceOne('${q.id}')">✏️ Practice</button></div>`:'';
-  return `<div class="${cls}"><div class="mb8 fc gap8 wrap">${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''} ${q.topic?`<span class="tag tm">${q.topic}</span>`:''} ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''} ${q.style?`<span class="tag tm xs">${STL[q.style]||q.style}</span>`:''}</div><div class="qtxt">Q${idx+1}. ${q.q}</div>${hintHtml}${opts}${expHtml}${aiFb}${browseActs}</div>`;
+  return `<div class="${cls}"><div class="mb8 fc gap8 wrap">${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''} ${q.topic?`<span class="tag tm">${q.topic}</span>`:''} ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''} </div><div class="qtxt">Q${idx+1}. ${q.q}</div>${hintHtml}${opts}${expHtml}${aiFb}${browseActs}</div>`;
 }
 
 // ── HANDLERS ──────────────────────────────────────────────────────────────────
@@ -591,7 +591,7 @@ function renderPractice(){if(!pQs.length)return renderPracticeMenu();return pMod
 
 function renderPracticeMenu(){
   const rows=[{s:'vic_maths',l:'🔢 VIC Maths',c:'var(--green)'},{s:'vic_verbal',l:'🧠 VIC Verbal',c:'var(--purple)'},{s:'vic_quant',l:'📐 VIC Quant',c:'var(--orange)'},{s:'vic_reading',l:'📖 VIC Reading',c:'var(--accent)'},{s:'nsw_thinking',l:'🧩 NSW Thinking',c:'var(--purple)'},{s:'nsw_maths',l:'🔢 NSW Maths',c:'var(--green)'},{s:'nsw_reading',l:'📖 NSW Reading',c:'var(--accent)'}];
-  const styles=['acer','hendersons','psle','contour','james_ann','edutest','matrix','hast','oc'];
+  const styles=['standard','eshs','singapore','logic','reading','assessment','advanced','scholarship','opportunity'];
   return `<div class="page">${profileBar()}<h1>✏️ Practice Mode</h1><p class="mt mb20">Every correct answer earns XP and counts toward achievements.</p>
     <div class="g2 mb24">
       <div class="card" style="border-color:rgba(79,142,247,.4)">
@@ -820,7 +820,7 @@ function renderBrowse(){
               ${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''}
               ${q.topic?`<span class="tag tm">${q.topic}</span>`:''}
               ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''}
-              ${q.style?`<span class="tag tm xs">${STL[q.style]||q.style}</span>`:''}
+              
             </div>
             <div class="qtxt">Q${startIdx+i+1}. ${q.q}</div>
             ${opts}${hint}${result}${exp}
@@ -850,7 +850,7 @@ function submitExam(){
 }
 function renderExams(){
   return `<div class="page">${profileBar()}<h1>📝 Mock Exams</h1><p class="mt mb20">Timed exams. Stars awarded for accuracy. AI coaching after submission. ${EXAM_DEFS.length} exams available.</p>
-    <div class="g2">${EXAM_DEFS.map((def,i)=>{const stTag=def.state?`<span class="tag ${def.state==='NSW'?'ty':'ta'} xs">${def.state}</span>`:'';const stlTag=def.style?`<span class="tag tm xs">${STL[def.style]||def.style}</span>`:'';const dTag=def.difficulty?`<span class="tag tg xs">${def.difficulty}</span>`:'';
+    <div class="g2">${EXAM_DEFS.map((def,i)=>{const stTag=def.state?`<span class="tag ${def.state==='NSW'?'ty':'ta'} xs">${def.state}</span>`:'';const stlTag='';const dTag=def.difficulty?`<span class="tag tg xs">${def.difficulty}</span>`:'';
       return `<div class="card hov" style="border-color:${def.color}44"><div class="fc gap8 mb8 wrap">${stTag}${stlTag}${dTag}</div><h3 style="margin-bottom:5px">${def.title}</h3><p class="mt sm mb14">⏱ ${def.duration} min · 📋 ${def.count} Qs · ⭐ Up to 3 stars</p><button class="btn bsm" style="background:${def.color};color:${def.color.includes('yellow')?'#1a1200':'#fff'}" onclick="startExam(${i})">Start →</button></div>`;
     }).join('')}</div></div>`;
 }
@@ -1348,7 +1348,7 @@ function renderHome(){
   const lv=d?Profiles.getLevel(d.xp||0):null;
   const stats=d?Profiles.getStats(currentUser):null;
   const weakSpots=stats?.weakTopics?.slice(0,3)||[];
-  const PROVIDERS=[{s:'acer',l:'ACER',e:'🏛️',c:'var(--accent)'},{s:'hendersons',l:'Hendersons',e:'📐',c:'var(--green)'},{s:'psle',l:'PSLE',e:'🇸🇬',c:'var(--orange)'},{s:'contour',l:'Contour',e:'🎯',c:'var(--purple)'},{s:'james_ann',l:'James & Ann',e:'📖',c:'var(--pink)'},{s:'edutest',l:'EduTest',e:'🧪',c:'var(--teal)'},{s:'matrix',l:'Matrix',e:'📊',c:'var(--yellow)'},{s:'hast',l:'HAST',e:'⚡',c:'var(--red)'},{s:'oc',l:'OC Test',e:'🌟',c:'var(--green)'}];
+  const PROVIDERS=[{s:'standard',l:'Standard',e:'🏛️',c:'var(--accent)'},{s:'eshs',l:'E/SHS Style',e:'📐',c:'var(--green)'},{s:'singapore',l:'Singapore',e:'🇸🇬',c:'var(--orange)'},{s:'logic',l:'Logic',e:'🎯',c:'var(--purple)'},{s:'reading',l:'Reading',e:'📖',c:'var(--pink)'},{s:'assessment',l:'Assessment',e:'🧪',c:'var(--teal)'},{s:'advanced',l:'Advanced',e:'📊',c:'var(--yellow)'},{s:'scholarship',l:'Scholarship',e:'⚡',c:'var(--red)'},{s:'opportunity',l:'OC Style',e:'🌟',c:'var(--green)'}];
 
   return `<div class="page">
     ${profileBar()}
@@ -1379,7 +1379,7 @@ function renderHome(){
         return `<div class="card" style="${ans!==null?`border-color:${correct?'var(--green)':'var(--red)'}44`:''}">
           <div class="tag ${k==='m'?'tg':k==='e'?'tp':'tpu'} mb8" style="display:inline-block">${k==='m'?'🔢 Maths':k==='e'?'📖 English':'🧠 Brain'}</div>
           <div class="sm mb10" style="font-weight:700;margin-top:6px;line-height:1.5">${item.q}</div>
-          ${ans===null?`<div style="display:flex;flex-direction:column;gap:5px">${item.options.map((o,oi)=>`<button class="btn bm bsm" style="justify-content:flex-start;font-size:12px;text-align:left;padding:5px 10px" onclick="dailyAnswers['${k}']=${oi};${oi===item.answer&&currentUser?`Profiles.recordAnswer('${currentUser}',{id:'daily_${k}',topic:'Daily',section:'nsw_thinking',difficulty:'medium',style:'acer'},true);`:''}render()">${'ABCD'[oi]}. ${o}</button>`).join('')}</div>`
+          ${ans===null?`<div style="display:flex;flex-direction:column;gap:5px">${item.options.map((o,oi)=>`<button class="btn bm bsm" style="justify-content:flex-start;font-size:12px;text-align:left;padding:5px 10px" onclick="dailyAnswers['${k}']=${oi};${oi===item.answer&&currentUser?`Profiles.recordAnswer('${currentUser}',{id:'daily_${k}',topic:'Daily',section:'nsw_thinking',difficulty:'medium',style:'standard'},true);`:''}render()">${'ABCD'[oi]}. ${o}</button>`).join('')}</div>`
           :`<div class="${correct?'':'mt'} sm">${correct?'✅ Correct! +15 XP':'❌ Not quite.'}</div><div class="exp" style="margin-top:8px;font-size:12px">${item.exp}</div>`}
         </div>`;}).join('')}
       </div>
