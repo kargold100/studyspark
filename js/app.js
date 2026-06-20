@@ -128,6 +128,8 @@ let revealedIds=new Set(), hintVisible={};
 let pQs=[],pAns=[],pSub=false,pMode='oneByOne',pScore=0,pIdx=0,pResult=null;
 let pPageSize=10,pPagePool=[],pPageFilters={},pTotalDone=0,pTotalCorrect=0; // pagination
 let exam=null,examSub=false,examTL=0,examTimer=null,examStart=null,examResult=null;
+let browsePage=0,examReviewPage=0;
+const PAGE_SIZE=20;
 let selState='VIC',selSec=null,selPQs=[],selPAns=[],selPSub=false;
 let selWritingPrompt=null,selWritingText='',selWritingFeedback='',selWritingLoading=false;
 let studySub=null,studyTopic=null,studyNotes='',studyLoading=false;
@@ -147,6 +149,21 @@ function uniq(a){return[...new Set(a)];}
 function pctColor(p){return p>=75?'var(--green)':p>=50?'var(--orange)':'var(--red)';}
 function starsHtml(n,max=3){return Array.from({length:max},(_,i)=>`<span class="star ${i<n?'earned':'empty'}">${i<n?'⭐':'☆'}</span>`).join('');}
 function filterQs(f={}){return QUESTIONS.filter(q=>{if(f.section&&f.section!=='ALL'&&q.section!==f.section)return false;if(f.grade&&f.grade!=='ALL'&&q.grade!==f.grade)return false;if(f.topic&&f.topic!=='ALL'&&q.topic!==f.topic)return false;if(f.difficulty&&f.difficulty!=='ALL'&&q.difficulty!==f.difficulty)return false;if(f.style&&f.style!=='ALL'&&q.style!==f.style)return false;return true;});}
+function paginationBar(page,totalPages,onPageFn){
+  if(totalPages<=1)return '';
+  const btns=[];
+  btns.push(`<button class="btn bsm ${page===0?'bo':'bm'}" onclick="${onPageFn}(0)" ${page===0?'disabled':''}>«</button>`);
+  btns.push(`<button class="btn bsm ${page===0?'bo':'bm'}" onclick="${onPageFn}(${page-1})" ${page===0?'disabled':''}>‹</button>`);
+  const start=Math.max(0,page-3),end=Math.min(totalPages-1,page+3);
+  if(start>0)btns.push(`<span class="sm mt">...</span>`);
+  for(let i=start;i<=end;i++){btns.push(`<button class="btn bsm ${i===page?'ba':'bm'}" onclick="${onPageFn}(${i})">${i+1}</button>`);}
+  if(end<totalPages-1)btns.push(`<span class="sm mt">...</span>`);
+  btns.push(`<button class="btn bsm ${page>=totalPages-1?'bo':'bm'}" onclick="${onPageFn}(${page+1})" ${page>=totalPages-1?'disabled':''}>›</button>`);
+  btns.push(`<button class="btn bsm ${page>=totalPages-1?'bo':'bm'}" onclick="${onPageFn}(${totalPages-1})" ${page>=totalPages-1?'disabled':''}>»</button>`);
+  return `<div class="fc gap4 wrap jc mt14 mb14">${btns.join('')}<span class="sm mt" style="margin-left:8px">Page ${page+1} of ${totalPages}</span></div>`;
+}
+function setBrowsePage(p){browsePage=Math.max(0,p);render();}
+function setExamReviewPage(p){examReviewPage=Math.max(0,p);render();}
 
 // ── API KEY MANAGEMENT ───────────────────────────────────────────────────────
 function getApiKey(){return localStorage.getItem('ss_apikey')||'';}
@@ -753,7 +770,7 @@ function renderBrowse(){
   const filtered=filterQs(browseFilters);
   const selEl=(k,lbl,opts)=>`<div>
     <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px">${lbl}</label>
-    <select onchange="browseFilters['${k}']=this.value;browseAnswered={};browseShowExp={};render()" style="width:auto;min-width:110px;padding:6px 9px;font-size:12px">
+    <select onchange="browseFilters['${k}']=this.value;browseAnswered={};browseShowExp={};browsePage=0;render()" style="width:auto;min-width:110px;padding:6px 9px;font-size:12px">
       ${opts.map(v=>`<option value="${v}"${browseFilters[k]===v?' selected':''}>${v==='ALL'?'All':v}</option>`).join('')}
     </select>
   </div>`;
@@ -775,7 +792,13 @@ function renderBrowse(){
     </div>
     ${filtered.length===0
       ? `<div class="loading">🔍 No questions match. Try clearing some filters.</div>`
-      : filtered.map((q,i)=>{
+      : (()=>{
+          const totalPages=Math.ceil(filtered.length/PAGE_SIZE);
+          if(browsePage>=totalPages)browsePage=Math.max(0,totalPages-1);
+          const pageQs=filtered.slice(browsePage*PAGE_SIZE,(browsePage+1)*PAGE_SIZE);
+          const startIdx=browsePage*PAGE_SIZE;
+          return paginationBar(browsePage,totalPages,'setBrowsePage')+
+          pageQs.map((q,i)=>{
           const bKey='br_'+q.id;
           const bAns=browseAnswered[bKey];
           const bSub=bAns!==undefined;
@@ -799,10 +822,10 @@ function renderBrowse(){
               ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''}
               ${q.style?`<span class="tag tm xs">${STL[q.style]||q.style}</span>`:''}
             </div>
-            <div class="qtxt">Q${i+1}. ${q.q}</div>
+            <div class="qtxt">Q${startIdx+i+1}. ${q.q}</div>
             ${opts}${hint}${result}${exp}
           </div>`;
-        }).join('')
+        }).join('')+paginationBar(browsePage,totalPages,'setBrowsePage');})()
     }
   </div>`;
 }
@@ -835,11 +858,35 @@ function renderExamRun(){
   if(!exam)return renderExams();
   const {def,questions,answers}=exam;const m=Math.floor(examTL/60),s=(examTL%60).toString().padStart(2,'0');
   const c=answers.filter((a,i)=>a===questions[i]?.answer).length;const pct=examSub?Math.round(c/questions.length*100):0;const answered=answers.filter(a=>a!==null).length;
+  const totalPages=examSub?Math.ceil(questions.length/PAGE_SIZE):1;
+  if(examReviewPage>=totalPages)examReviewPage=Math.max(0,totalPages-1);
+  const sIdx=examSub?examReviewPage*PAGE_SIZE:0;
+  const eIdx=examSub?Math.min((examReviewPage+1)*PAGE_SIZE,questions.length):questions.length;
+  const pageQs=questions.slice(sIdx,eIdx);
   return `<div class="page"><div class="fc jsb mb14 wrap gap8"><div><h1>${def.title}</h1><p class="mt sm">${questions.length} questions</p></div>
-    <div class="fc gap12">${!examSub?`<span id="exam-timer" class="timer">⏱ ${m}:${s}</span><button class="btn bo" onclick="if(confirm('Submit?'))submitExam()">Submit</button>`:`<button class="btn bm" onclick="exam=null;nav('exams')">← Exams</button>`}</div></div>
-    ${examSub?`${sessionResultBlock(pct,c,questions.length,examResult)}`:''}
+    <div class="fc gap12">${!examSub?`<span id="exam-timer" class="timer">⏱ ${m}:${s}</span><button class="btn bo" onclick="if(confirm('Submit?'))submitExam()">Submit</button>`:`<button class="btn bm" onclick="exam=null;examReviewPage=0;nav('exams')">← Exams</button>`}</div></div>
+    ${examSub?`${sessionResultBlock(pct,c,questions.length,examResult)}
+    <div class="card mb14" style="padding:12px 16px;border-color:var(--accent)33"><h3 style="margin-bottom:8px">📋 Answer Review</h3><p class="sm mt mb8">Your answer, correct answer, and explanation for each question.</p>
+    <div class="fc gap4 wrap">${questions.map((_,i)=>{const ok=answers[i]===questions[i]?.answer;const bg=answers[i]===null?'var(--border)':ok?'var(--green)':'var(--orange)';return `<div style="width:24px;height:24px;border-radius:4px;background:${bg};cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700" onclick="examReviewPage=${Math.floor(i/PAGE_SIZE)};render();setTimeout(()=>document.getElementById('erq_${i}')?.scrollIntoView({behavior:'smooth'}),100)" title="Q${i+1}">${i+1}</div>`;}).join('')}</div></div>
+    ${paginationBar(examReviewPage,totalPages,'setExamReviewPage')}`:''}
     ${!examSub?`<div class="card mb14" style="padding:10px 14px"><div class="fc jsb sm"><span>${answered}/${questions.length} answered</span><div style="display:flex;gap:4px;flex-wrap:wrap">${questions.map((_,i)=>`<div style="width:20px;height:20px;border-radius:4px;background:${answers[i]!==null?'var(--accent)':'var(--border)'};cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700" onclick="document.getElementById('qc_${questions[i].id||i}')?.scrollIntoView({behavior:'smooth'})">${i+1}</div>`).join('')}</div></div></div>`:''}
-    ${questions.map((q,i)=>qCard(q,i,'exam',answers[i],examSub,false,false)).join('')}
+    ${pageQs.map((q,pi)=>{const gi=sIdx+pi;const ua=answers[gi];
+      if(!examSub)return qCard(q,gi,'exam',ua,false,false,false);
+      const ok=ua===q.answer;const uTxt=ua!==null&&ua!==undefined?q.options[ua]:'(Not answered)';const cTxt=q.options[q.answer];
+      return `<div id="erq_${gi}" class="qcard ${ua!==null?(ok?'correct':'wrong'):''}" style="margin-bottom:16px">
+        <div class="mb8 fc gap8 wrap">${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''} ${q.topic?`<span class="tag tm">${q.topic}</span>`:''} ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''}</div>
+        <div class="qtxt">Q${gi+1}. ${q.q}</div>
+        ${q.options.map((opt,oi)=>{let cl='opt dis';if(oi===q.answer)cl+=' cor';else if(ua===oi)cl+=' wrg';
+          const tick=oi===q.answer?'<span class="otick">✓</span>':(ua===oi&&oi!==q.answer?'<span class="otick">✗</span>':'');
+          const lbl=oi===q.answer&&ua===oi?'<span style="font-size:11px;color:var(--green);margin-left:6px">✅ Your answer (Correct!)</span>':oi===q.answer?'<span style="font-size:11px;color:var(--green);margin-left:6px">✅ Correct answer</span>':ua===oi?'<span style="font-size:11px;color:var(--orange);margin-left:6px">❌ Your answer</span>':'';
+          return `<div class="${cl}"><span class="oltr">${'ABCD'[oi]}.</span><span style="flex:1">${opt}${lbl}</span>${tick}</div>`;}).join('')}
+        <div style="margin-top:12px;padding:12px;border-radius:8px;background:${ok?'rgba(34,197,94,0.08)':'rgba(249,115,22,0.08)'}">
+          <div style="font-weight:700;margin-bottom:6px;color:var(--${ok?'green':'orange'})">${ok?'✅ Correct!':'❌ Incorrect'}</div>
+          ${ua===null?'<div class="sm" style="color:var(--muted)">You did not answer this question.</div>':!ok?`<div class="sm mb8"><strong>Your answer:</strong> ${'ABCD'[ua]}. ${uTxt}</div><div class="sm mb8"><strong>Correct answer:</strong> ${'ABCD'[q.answer]}. ${cTxt}</div>`:`<div class="sm mb8"><strong>Answer:</strong> ${'ABCD'[q.answer]}. ${cTxt}</div>`}
+          ${q.exp?`<div style="margin-top:8px;padding:10px;border-radius:6px;background:var(--bg);border:1px solid var(--border)"><strong style="color:var(--accent)">📖 Explanation:</strong><br>${q.exp.replace(/\n/g,'<br>')}</div>`:''}
+        </div>
+      </div>`;}).join('')}
+    ${examSub?paginationBar(examReviewPage,totalPages,'setExamReviewPage'):''}
     ${!examSub?`<button class="btn bo bfull mt20" style="padding:13px" onclick="if(confirm('Submit?'))submitExam()">Submit (${answered}/${questions.length})</button>`:''}
   </div>`;
 }
