@@ -237,6 +237,30 @@ const EXAM_DEFS = [
   {id:'e220',title:'Grade 6 Digital Tech – Paper 6',section:'gen_digitech',grade:'6',paper:'G6-D6',duration:20,count:25,color:'var(--purple)'},
   {id:'e221',title:'Grade 6 Logic Puzzles – Paper 3',section:'gen_puzzles',grade:'6',paper:'G6-P3',duration:20,count:25,color:'var(--yellow)'},
   {id:'e222',title:'Grade 6 Logic Puzzles – Paper 4',section:'gen_puzzles',grade:'6',paper:'G6-P4',duration:20,count:25,color:'var(--yellow)'},
+  {id:'e223',title:'Grade 1 Science – Paper 7',section:'gen_science',grade:'1',paper:'G1-S7',duration:20,count:25,color:'var(--orange)'},
+  {id:'e224',title:'Grade 2 Science – Paper 7',section:'gen_science',grade:'2',paper:'G2-S7',duration:20,count:25,color:'var(--orange)'},
+  {id:'e225',title:'Grade 3 Science – Paper 7',section:'gen_science',grade:'3',paper:'G3-S7',duration:20,count:25,color:'var(--orange)'},
+  {id:'e226',title:'Grade 4 Science – Paper 7',section:'gen_science',grade:'4',paper:'G4-S7',duration:20,count:25,color:'var(--orange)'},
+  {id:'e227',title:'Grade 5 Science – Paper 7',section:'gen_science',grade:'5',paper:'G5-S7',duration:20,count:25,color:'var(--orange)'},
+  {id:'e228',title:'Grade 6 Science – Paper 7',section:'gen_science',grade:'6',paper:'G6-S7',duration:20,count:25,color:'var(--orange)'},
+  {id:'e229',title:'Grade 1 English Reading – Paper 9',section:'gen_english',grade:'1',paper:'G1-E9',duration:20,count:25,color:'var(--accent)'},
+  {id:'e230',title:'Grade 2 English Reading – Paper 9',section:'gen_english',grade:'2',paper:'G2-E9',duration:20,count:25,color:'var(--accent)'},
+  {id:'e231',title:'Grade 3 English Reading – Paper 9',section:'gen_english',grade:'3',paper:'G3-E9',duration:20,count:25,color:'var(--accent)'},
+  {id:'e232',title:'Grade 4 English Reading – Paper 9',section:'gen_english',grade:'4',paper:'G4-E9',duration:20,count:25,color:'var(--accent)'},
+  {id:'e233',title:'Grade 5 English Reading – Paper 9',section:'gen_english',grade:'5',paper:'G5-E9',duration:20,count:25,color:'var(--accent)'},
+  {id:'e234',title:'Grade 6 English Reading – Paper 9',section:'gen_english',grade:'6',paper:'G6-E9',duration:20,count:25,color:'var(--accent)'},
+  {id:'e235',title:'Grade 1 Spelling & Vocabulary – Paper 10',section:'gen_english',grade:'1',paper:'G1-E10',duration:20,count:25,color:'var(--accent)'},
+  {id:'e236',title:'Grade 2 Spelling & Vocabulary – Paper 10',section:'gen_english',grade:'2',paper:'G2-E10',duration:20,count:25,color:'var(--accent)'},
+  {id:'e237',title:'Grade 3 Spelling & Vocabulary – Paper 10',section:'gen_english',grade:'3',paper:'G3-E10',duration:20,count:25,color:'var(--accent)'},
+  {id:'e238',title:'Grade 4 Spelling & Vocabulary – Paper 10',section:'gen_english',grade:'4',paper:'G4-E10',duration:20,count:25,color:'var(--accent)'},
+  {id:'e239',title:'Grade 5 Spelling & Vocabulary – Paper 10',section:'gen_english',grade:'5',paper:'G5-E10',duration:20,count:25,color:'var(--accent)'},
+  {id:'e240',title:'Grade 6 Spelling & Vocabulary – Paper 10',section:'gen_english',grade:'6',paper:'G6-E10',duration:20,count:25,color:'var(--accent)'},
+  {id:'e241',title:'Grade 1 Digital Tech – Paper 7',section:'gen_digitech',grade:'1',paper:'G1-D7',duration:20,count:25,color:'var(--purple)'},
+  {id:'e242',title:'Grade 2 Digital Tech – Paper 7',section:'gen_digitech',grade:'2',paper:'G2-D7',duration:20,count:25,color:'var(--purple)'},
+  {id:'e243',title:'Grade 3 Digital Tech – Paper 7',section:'gen_digitech',grade:'3',paper:'G3-D7',duration:20,count:25,color:'var(--purple)'},
+  {id:'e244',title:'Grade 4 Digital Tech – Paper 7',section:'gen_digitech',grade:'4',paper:'G4-D7',duration:20,count:25,color:'var(--purple)'},
+  {id:'e245',title:'Grade 5 Digital Tech – Paper 7',section:'gen_digitech',grade:'5',paper:'G5-D7',duration:20,count:25,color:'var(--purple)'},
+  {id:'e246',title:'Grade 6 Digital Tech – Paper 7',section:'gen_digitech',grade:'6',paper:'G6-D7',duration:20,count:25,color:'var(--purple)'},
 ];
 
 const WRITING_PROMPTS = [
@@ -324,6 +348,7 @@ let browsePage=0,examReviewPage=0;
 const PAGE_SIZE=20;
 let selState='VIC',selSec=null,selPQs=[],selPAns=[],selPSub=false;
 let selWritingPrompt=null,selWritingText='',selWritingFeedback='',selWritingLoading=false;
+let wpGrade=null,wpSelected=null,wpText='',wpChecked={};
 let studySub=null,studyTopic=null,studyNotes='',studyLoading=false;
 let tutorQ='',tutorR='',tutorLoading=false;
 let funTab='little',funAnswered={},funShowExp={},littleZone='early',littleSection=null;
@@ -475,7 +500,7 @@ function render(){
   const el=document.getElementById('app');
   try{
   if(!currentUser&&screen!=='profile'){el.innerHTML=renderProfilePicker();return;}
-  const R={home:renderHome,browse:renderBrowse,practice:renderPractice,exams:renderExams,examrun:renderExamRun,selective:renderSelective,tips:renderTips,study:renderStudy,tutor:renderTutor,funzone:renderFunZone,languages:renderLanguages,profile:renderProfile};
+  const R={home:renderHome,browse:renderBrowse,practice:renderPractice,exams:renderExams,examrun:renderExamRun,selective:renderSelective,tips:renderTips,study:renderStudy,tutor:renderTutor,funzone:renderFunZone,languages:renderLanguages,profile:renderProfile,writing:renderWritingPrompts};
   el.innerHTML=(R[screen]||renderHome)();
   }catch(err){
     console.error('render error:',err);
@@ -809,8 +834,57 @@ function renderPracticeMenu(){
         </div>
       </div>
     </div>
+    <div class="card mb24 hov" style="border-color:rgba(247,79,142,.4)" onclick="nav('writing')">
+      <div class="fc jsb wrap gap8"><div><div style="font-size:28px;margin-bottom:8px">✍️</div><h3 class="mb8">Writing Prompts (Gr 1-6)</h3><p class="mt sm">${typeof WRITING_PROMPT_LIBRARY!=='undefined'?WRITING_PROMPT_LIBRARY.length:0} original narrative, persuasive, descriptive &amp; informative tasks with self-check lists and tips.</p></div><button class="btn bsm" style="background:var(--pink);color:#fff;min-width:100px">Open →</button></div>
+    </div>
     <h2 class="mb14">By Section</h2><div class="g3 mb20">${rows.map(s=>{const cnt=filterQs({section:s.s}).length;return `<div class="card hov" onclick="startPractice({section:'${s.s}'},'oneByOne',9999)"><div style="font-weight:800;margin-bottom:3px">${s.l}</div><div class="mt xs">${cnt} questions available</div><div class="fc gap8 mt14 wrap"><button class="btn bsm" style="background:${s.c};color:#fff" onclick="event.stopPropagation();startPractice({section:'${s.s}'},'oneByOne',10)">10 Qs</button><button class="btn bsm" style="background:${s.c};color:#fff" onclick="event.stopPropagation();startPractice({section:'${s.s}'},'oneByOne',9999)">All ${cnt}</button></div></div>`;}).join('')}</div>
     <h2 class="mb14">By Provider Style</h2><div class="g3">${styles.map(st=>{const cnt=filterQs({style:st}).length;return `<div class="card hov" onclick="startPractice({style:'${st}'},'oneByOne',9999)"><div style="font-weight:800;margin-bottom:3px">${STL[st]}</div><div class="mt xs">${cnt} questions</div><div class="fc gap8 mt14 wrap"><button class="btn bm bsm" onclick="event.stopPropagation();startPractice({style:'${st}'},'oneByOne',10)">10 Qs</button><button class="btn bm bsm" onclick="event.stopPropagation();startPractice({style:'${st}'},'oneByOne',9999)">All ${cnt}</button></div></div>`;}).join('')}</div>
+  </div>`;
+}
+
+// ── WRITING PROMPTS (Gr 1-6 library, separate from Selective AI-marked writing) ────
+function renderWritingPrompts(){
+  const lib=(typeof WRITING_PROMPT_LIBRARY!=='undefined')?WRITING_PROMPT_LIBRARY:[];
+  if(!wpSelected){
+    const grades=['1','2','3','4','5','6'];
+    const list=wpGrade?lib.filter(p=>p.grade===wpGrade):lib;
+    return `<div class="page">${profileBar()}<button class="btn bm bsm mb14" onclick="nav('practice')">← Practice Mode</button><h1>✍️ Writing Prompts</h1><p class="mt mb20">Original narrative, persuasive, descriptive and informative writing tasks for Grades 1–6. Each prompt includes a self-check list and writing tips — there's no AI marking here, just a space to plan, write, and self-review.</p>
+    <div class="fc gap8 wrap mb20">
+      <button class="btn ${!wpGrade?'bp':'bm'} bsm" onclick="wpGrade=null;render()">All Grades</button>
+      ${grades.map(g=>`<button class="btn ${wpGrade===g?'bp':'bm'} bsm" onclick="wpGrade='${g}';render()">Grade ${g}</button>`).join('')}
+    </div>
+    <div class="g2">${list.map(p=>`<div class="card hov" onclick="wpSelected='${p.id}';wpText=localStorage.getItem('ss_wp_${p.id}')||'';wpChecked=JSON.parse(localStorage.getItem('ss_wpchk_${p.id}')||'{}');render()">
+      <div class="fc jsb mb8 wrap gap8"><span class="tag tm xs">Grade ${p.grade}</span><span class="tag ta xs">${p.type}</span></div>
+      <h3 style="margin-bottom:6px">${p.title}</h3>
+      <p class="mt sm">${p.prompt.length>90?p.prompt.slice(0,90)+'…':p.prompt}</p>
+      <div class="mt xs" style="margin-top:10px">⏱ ~${p.timeMinutes} min · ${p.suggestedLength}</div>
+    </div>`).join('')}</div>
+    ${!list.length?`<p class="mt sm">No prompts found for this grade yet.</p>`:''}
+    </div>`;
+  }
+  const p=lib.find(x=>x.id===wpSelected);
+  if(!p){wpSelected=null;return renderWritingPrompts();}
+  const wc=wpText.split(/\s+/).filter(Boolean).length;
+  return `<div class="page">${profileBar()}
+    <button class="btn bm bsm mb14" onclick="wpSelected=null;render()">← All Prompts</button>
+    <div class="card mb20" style="border-left:3px solid var(--pink);padding-left:16px">
+      <div class="fc gap8 mb8 wrap"><span class="tag tm xs">Grade ${p.grade}</span><span class="tag ta xs">${p.type}</span><span class="tag tg xs">⏱ ~${p.timeMinutes} min</span></div>
+      <h2 style="margin-bottom:8px">${p.title}</h2>
+      <p style="font-size:14px;line-height:1.7">${p.prompt}</p>
+      ${(p.choices&&p.choices.length)?p.choices.map(c=>`<div class="mt14"><strong style="font-size:13px">${c.category}:</strong><div class="fc gap8 wrap mt8">${c.options.map(o=>`<span class="tag tm xs">${o}</span>`).join('')}</div></div>`).join(''):''}
+    </div>
+    <textarea style="min-height:220px" placeholder="Write your response here (suggested length: ${p.suggestedLength})..." oninput="wpText=this.value;localStorage.setItem('ss_wp_${p.id}',this.value)">${wpText}</textarea>
+    <div class="fc jsb mt14 mb20 wrap gap8"><span class="mt sm">${wc} words</span></div>
+    <div class="g2">
+      <div class="card">
+        <h3 class="mb12">✅ Self-Check List</h3>
+        ${p.checklist.map((item,i)=>`<label class="fc gap8 mb8" style="align-items:flex-start;cursor:pointer"><input type="checkbox" ${wpChecked[i]?'checked':''} onchange="wpChecked[${i}]=this.checked;localStorage.setItem('ss_wpchk_${p.id}',JSON.stringify(wpChecked));render()" style="margin-top:3px"><span style="font-size:13px">${item}</span></label>`).join('')}
+      </div>
+      <div class="card">
+        <h3 class="mb12">💡 Tips</h3>
+        ${p.tips.map(t=>`<p class="mt sm mb8">• ${t}</p>`).join('')}
+      </div>
+    </div>
   </div>`;
 }
 
