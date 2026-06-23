@@ -344,6 +344,7 @@ let revealedIds=new Set(), hintVisible={};
 let pQs=[],pAns=[],pSub=false,pMode='oneByOne',pScore=0,pIdx=0,pResult=null;
 let pPageSize=10,pPagePool=[],pPageFilters={},pTotalDone=0,pTotalCorrect=0; // pagination
 let exam=null,examSub=false,examTL=0,examTimer=null,examStart=null,examResult=null;
+let examTab='all',examGenGrade='ALL',examGenSubject='ALL';
 let browsePage=0,examReviewPage=0;
 const PAGE_SIZE=20;
 let selState='VIC',selSec=null,selPQs=[],selPAns=[],selPSub=false;
@@ -1115,11 +1116,47 @@ function submitExam(){
   examResult=currentUser?Profiles.recordSession(currentUser,exam.questions,exam.answers,'exam',exam.def):null;
   render();
 }
+function groupExam(def){
+  if(def.style==='seal')return'seal';
+  if(def.state==='VIC')return'vic';
+  if(def.state==='NSW')return'nsw';
+  if(def.section&&def.section.indexOf('gen_')===0)return'primary';
+  return'mixed';
+}
+const EXAM_TABS=[
+  {id:'all',l:'All Exams',c:'var(--muted)'},
+  {id:'vic',l:'VIC Selective',c:'var(--accent)'},
+  {id:'nsw',l:'NSW Selective',c:'var(--yellow)'},
+  {id:'seal',l:'SEAL (Gr 7)',c:'var(--red)'},
+  {id:'primary',l:'Primary (Gr 1-6)',c:'var(--green)'},
+  {id:'mixed',l:'Style Practice',c:'var(--purple)'},
+];
+const PRIMARY_SUBJECTS=[
+  {s:'gen_maths',l:'➗ Maths'},{s:'gen_english',l:'📚 English'},{s:'gen_science',l:'🔬 Science'},
+  {s:'gen_digitech',l:'💻 Digital Tech'},{s:'gen_puzzles',l:'🧩 Puzzles'},
+];
 function renderExams(){
+  const tagged=EXAM_DEFS.map((def,i)=>({def,i,grp:groupExam(def)}));
+  let visible=examTab==='all'?tagged:tagged.filter(x=>x.grp===examTab);
+  if(examTab==='primary'){
+    if(examGenSubject!=='ALL')visible=visible.filter(x=>x.def.section===examGenSubject);
+    if(examGenGrade!=='ALL')visible=visible.filter(x=>x.def.grade===examGenGrade);
+  }
+  const tabCounts={};tagged.forEach(x=>{tabCounts[x.grp]=(tabCounts[x.grp]||0)+1;});
   return `<div class="page">${profileBar()}<h1>📝 Mock Exams</h1><p class="mt mb20">Timed exams. Stars awarded for accuracy. AI coaching after submission. ${EXAM_DEFS.length} exams available.</p>
-    <div class="g2">${EXAM_DEFS.map((def,i)=>{const stTag=def.state?`<span class="tag ${def.state==='NSW'?'ty':'ta'} xs">${def.state}</span>`:'';const stlTag='';const dTag=def.difficulty?`<span class="tag tg xs">${def.difficulty}</span>`:'';
+    <div class="fc gap8 wrap mb20">${EXAM_TABS.map(t=>`<button class="btn ${examTab===t.id?'bp':'bm'} bsm" onclick="examTab='${t.id}';examGenGrade='ALL';examGenSubject='ALL';render()">${t.l} <span class="tag tm xs" style="margin-left:5px">${t.id==='all'?EXAM_DEFS.length:(tabCounts[t.id]||0)}</span></button>`).join('')}</div>
+    ${examTab==='primary'?`<div class="fc gap8 wrap mb14">
+      <button class="btn ${examGenSubject==='ALL'?'bp':'bm'} bsm" onclick="examGenSubject='ALL';render()">All Subjects</button>
+      ${PRIMARY_SUBJECTS.map(p=>`<button class="btn ${examGenSubject===p.s?'bp':'bm'} bsm" onclick="examGenSubject='${p.s}';render()">${p.l}</button>`).join('')}
+    </div>
+    <div class="fc gap8 wrap mb20">
+      <button class="btn ${examGenGrade==='ALL'?'bp':'bm'} bsm" onclick="examGenGrade='ALL';render()">All Grades</button>
+      ${['1','2','3','4','5','6'].map(g=>`<button class="btn ${examGenGrade===g?'bp':'bm'} bsm" onclick="examGenGrade='${g}';render()">Grade ${g}</button>`).join('')}
+    </div>`:''}
+    <div class="g2">${visible.map(({def,i})=>{const stTag=def.state?`<span class="tag ${def.state==='NSW'?'ty':'ta'} xs">${def.state}</span>`:'';const stlTag=def.style?`<span class="tag tpu xs">${STL[def.style]||def.style}</span>`:'';const dTag=def.difficulty?`<span class="tag tg xs">${def.difficulty}</span>`:'';
       return `<div class="card hov" style="border-color:${def.color}44"><div class="fc gap8 mb8 wrap">${stTag}${stlTag}${dTag}</div><h3 style="margin-bottom:5px">${def.title}</h3><p class="mt sm mb14">⏱ ${def.duration} min · 📋 ${def.count} Qs · ⭐ Up to 3 stars</p><button class="btn bsm" style="background:${def.color};color:${def.color.includes('yellow')?'#1a1200':'#fff'}" onclick="startExam(${i})">Start →</button></div>`;
-    }).join('')}</div></div>`;
+    }).join('')}</div>
+    ${!visible.length?`<p class="mt sm">No exams match this filter yet.</p>`:''}</div>`;
 }
 function renderExamRun(){
   if(!exam)return renderExams();
