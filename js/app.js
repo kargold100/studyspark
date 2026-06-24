@@ -6,6 +6,40 @@ const SC  = {vic_reading:'ta',vic_maths:'tg',vic_verbal:'tpu',vic_quant:'to',nsw
 const DC  = {easy:'tg',medium:'to',hard:'tp'};
 const STL = {standard:'Standard',eshs:'E/SHS',singapore:'Singapore',logic:'Logic',reading:'Reading',assessment:'Assessment',advanced:'Advanced',opportunity:'OC',scholarship:'Scholarship',seal:'SEAL',language:'Language',academic:'Academic',tutorial:'Tutorial'};
 
+// ── IMPROVEMENT FEEDBACK: section groups & suggested resources ────────────────
+const SECTION_GROUP = {
+  vic_maths:'maths', nsw_maths:'maths', gen_maths:'maths', sec_maths:'maths', vic_quant:'reasoning',
+  vic_verbal:'english', vic_reading:'english', nsw_reading:'english', gen_english:'english', sec_english:'english',
+  nsw_thinking:'reasoning', gen_puzzles:'reasoning',
+  gen_science:'science', sec_science:'science',
+  gen_digitech:'digitech',
+};
+const GROUP_LABEL = {maths:'Maths', english:'English', reasoning:'Logical Reasoning', science:'Science', digitech:'Digital Tech'};
+const GROUP_RESOURCES = {
+  maths:['🎥 Khan Academy — free video lessons & practice, searchable by topic','📘 A school maths workbook for that year level, for extra worked examples'],
+  english:['🎥 Khan Academy — Grammar & Reading sections','📚 Your local library — free books matched to reading level are great low-pressure practice'],
+  reasoning:['🧩 Puzzle books (logic grids, Sudoku) — great for pattern-recognition practice','🎥 Khan Academy — Pre-algebra has good foundations for quantitative reasoning'],
+  science:['🎥 Khan Academy — Science section, by topic','📺 ABC Education — free, Australian curriculum-aligned videos'],
+  digitech:['🎥 Khan Academy — Computer Science section','💻 Code.org — free, beginner-friendly coding lessons'],
+};
+let _topicSectionMap=null;
+function topicToSection(topic){
+  if(!_topicSectionMap){
+    _topicSectionMap={};
+    for(const q of QUESTIONS){ if(!_topicSectionMap[q.topic]) _topicSectionMap[q.topic]=q.section; }
+  }
+  return _topicSectionMap[topic]||null;
+}
+function topicFeedback(topic){
+  const sec=topicToSection(topic);
+  const group=sec?SECTION_GROUP[sec]:null;
+  return {
+    sectionLabel: sec?SL[sec]:null,
+    groupLabel: group?GROUP_LABEL[group]:null,
+    resources: group?GROUP_RESOURCES[group]:[],
+  };
+}
+
 const NAV_ITEMS = [
   {id:'home',l:'🏠 Home'},{id:'browse',l:'📋 Questions'},
   {id:'practice',l:'✏️ Practice'},{id:'exams',l:'📝 Exams'},
@@ -718,10 +752,14 @@ function renderProfile(){
       </div>
       <div>
         ${stats.weakTopics.length?`<div class="card mb14" style="border-color:rgba(247,79,79,.3)"><h3 style="color:var(--red);margin-bottom:10px">⚠️ Needs Work</h3>
-          ${stats.weakTopics.map(t=>`<div class="fc jsb sm mb8"><span>${t.topic}</span>
+          <p class="sm mt mb14" style="line-height:1.6">${(()=>{const groups=[...new Set(stats.weakTopics.map(t=>topicFeedback(t.topic).groupLabel).filter(Boolean))];return groups.length?`Based on recent answers, the area${groups.length>1?'s':''} to focus on ${groups.length>1?'are':'is'} <strong>${groups.join(', ')}</strong>.`:'';})()}</p>
+          ${stats.weakTopics.map(t=>{const fb=topicFeedback(t.topic);return `<div class="mb14" style="padding-bottom:12px;border-bottom:1px solid var(--border)">
+            <div class="fc jsb sm mb6"><span><strong>${t.topic}</strong>${fb.sectionLabel?` <span class="xs mt">(${fb.sectionLabel})</span>`:''}</span>
             <div class="fc gap8"><span style="color:var(--red);font-weight:700">${t.pct}%</span>
-            <button class="btn bsm" style="background:var(--red);color:#fff;padding:2px 8px;font-size:11px" onclick="startPractice({topic:'${t.topic}'},'oneByOne',6)">Fix</button></div>
-          </div>`).join('')}</div>`:''}
+            <button class="btn bsm" style="background:var(--red);color:#fff;padding:2px 8px;font-size:11px" onclick="startPractice({topic:'${t.topic}'},'oneByOne',6)">Fix</button>
+            <button class="btn bsm bm" style="padding:2px 8px;font-size:11px" onclick="tutorQ='Can you explain ${t.topic} simply, with an example, and a tip for remembering it?';nav('tutor')">🤖 Ask</button></div></div>
+            ${fb.resources.length?`<div class="xs mt" style="line-height:1.6">${fb.resources[0]}</div>`:''}
+          </div>`;}).join('')}</div>`:''}
         ${stats.strongTopics.length?`<div class="card" style="border-color:rgba(61,214,140,.3)"><h3 style="color:var(--green);margin-bottom:10px">⭐ Strong Areas</h3>
           ${stats.strongTopics.map(t=>`<div class="fc jsb sm mb8"><span>${t.topic}</span><span style="color:var(--green);font-weight:700">${t.pct}% ✓</span></div>`).join('')}</div>`:''}
       </div>
@@ -1757,7 +1795,7 @@ function renderHome(){
       </div>
     </div>
 
-    ${weakSpots.length?`<div class="card mb24" style="border-color:rgba(247,79,79,.3)"><h3 style="color:var(--red);margin-bottom:10px">⚠️ Your Weak Spots — Practise to Level Up!</h3><div class="fc gap8 wrap">${weakSpots.map(t=>`<button class="btn bm bsm" onclick="startPractice({topic:'${t.topic}'},'oneByOne',8)">${t.topic} — ${t.pct}% · Fix it ✏️</button>`).join('')}</div></div>`:''}
+    ${weakSpots.length?`<div class="card mb24" style="border-color:rgba(247,79,79,.3)"><h3 style="color:var(--red);margin-bottom:10px">⚠️ Your Weak Spots — Practise to Level Up!</h3><div class="fc gap8 wrap mb10">${weakSpots.map(t=>`<button class="btn bm bsm" onclick="startPractice({topic:'${t.topic}'},'oneByOne',8)">${t.topic} — ${t.pct}% · Fix it ✏️</button>`).join('')}</div><p class="xs mt" style="line-height:1.6">${(()=>{const g=topicFeedback(weakSpots[0].topic);return g.resources.length?`💡 For ${g.groupLabel||'this area'}: ${g.resources[0]}`:'';})()}</p></div>`:''}
 
     <!-- Tips & techniques callout -->
     <div class="card mb24" style="border-color:rgba(79,216,247,.35);background:linear-gradient(135deg,rgba(79,216,247,.05),transparent);padding:22px">
