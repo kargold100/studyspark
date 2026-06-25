@@ -1,17 +1,17 @@
 // app.js — StudySpark v3: Personalised profiles, quizzes, achievements
 // ─────────────────────────────────────────────────────────────────────────────
 
-const SL  = {vic_reading:'📖 VIC Reading',vic_maths:'🔢 VIC Maths',vic_verbal:'🧠 VIC Verbal',vic_quant:'📐 VIC Quant',nsw_reading:'📖 NSW Reading',nsw_maths:'🔢 NSW Maths',nsw_thinking:'🧩 NSW Thinking',gen_maths:'➗ Primary Maths',gen_english:'📚 Primary English',gen_science:'🔬 Primary Science',gen_digitech:'💻 Digital Tech',gen_puzzles:'🧩 Logic Puzzles',sec_maths:'🔢 Secondary Maths',sec_english:'📚 Secondary English',sec_science:'🔬 Secondary Science'};
-const SC  = {vic_reading:'ta',vic_maths:'tg',vic_verbal:'tpu',vic_quant:'to',nsw_reading:'ta',nsw_maths:'tg',nsw_thinking:'tpu',gen_maths:'tg',gen_english:'ta',gen_science:'to',gen_digitech:'tpu',gen_puzzles:'ty',sec_maths:'tg',sec_english:'ta',sec_science:'to'};
+const SL  = {vic_reading:'📖 VIC Reading',vic_maths:'🔢 VIC Maths',vic_verbal:'🧠 VIC Verbal',vic_quant:'📐 VIC Quant',nsw_reading:'📖 NSW Reading',nsw_maths:'🔢 NSW Maths',nsw_thinking:'🧩 NSW Thinking',gen_maths:'➗ Primary Maths',gen_english:'📚 Primary English',gen_science:'🔬 Primary Science',gen_digitech:'💻 Digital Tech',gen_puzzles:'🧩 Logic Puzzles',sec_maths:'🔢 Secondary Maths',sec_english:'📚 Secondary English',sec_science:'🔬 Secondary Science',sr_english:'📚 Senior English',sr_biology:'🧬 Senior Biology',sr_chemistry:'⚗️ Senior Chemistry',sr_physics:'⚛️ Senior Physics',sr_genmaths:'📊 Senior General Maths',sr_methods:'📈 Senior Maths Methods',sr_specialist:'∫ Senior Specialist Maths'};
+const SC  = {vic_reading:'ta',vic_maths:'tg',vic_verbal:'tpu',vic_quant:'to',nsw_reading:'ta',nsw_maths:'tg',nsw_thinking:'tpu',gen_maths:'tg',gen_english:'ta',gen_science:'to',gen_digitech:'tpu',gen_puzzles:'ty',sec_maths:'tg',sec_english:'ta',sec_science:'to',sr_english:'ta',sr_biology:'to',sr_chemistry:'to',sr_physics:'to',sr_genmaths:'tg',sr_methods:'tg',sr_specialist:'tg'};
 const DC  = {easy:'tg',medium:'to',hard:'tp'};
 const STL = {standard:'Standard',eshs:'E/SHS',singapore:'Singapore',logic:'Logic',reading:'Reading',assessment:'Assessment',advanced:'Advanced',opportunity:'OC',scholarship:'Scholarship',seal:'SEAL',language:'Language',academic:'Academic',tutorial:'Tutorial'};
 
 // ── IMPROVEMENT FEEDBACK: section groups & suggested resources ────────────────
 const SECTION_GROUP = {
-  vic_maths:'maths', nsw_maths:'maths', gen_maths:'maths', sec_maths:'maths', vic_quant:'reasoning',
-  vic_verbal:'english', vic_reading:'english', nsw_reading:'english', gen_english:'english', sec_english:'english',
+  vic_maths:'maths', nsw_maths:'maths', gen_maths:'maths', sec_maths:'maths', vic_quant:'reasoning', sr_genmaths:'maths', sr_methods:'maths', sr_specialist:'maths',
+  vic_verbal:'english', vic_reading:'english', nsw_reading:'english', gen_english:'english', sec_english:'english', sr_english:'english',
   nsw_thinking:'reasoning', gen_puzzles:'reasoning',
-  gen_science:'science', sec_science:'science',
+  gen_science:'science', sec_science:'science', sr_biology:'science', sr_chemistry:'science', sr_physics:'science',
   gen_digitech:'digitech',
 };
 const GROUP_LABEL = {maths:'Maths', english:'English', reasoning:'Logical Reasoning', science:'Science', digitech:'Digital Tech'};
@@ -343,6 +343,62 @@ const EXAM_DEFS = [
   {id:'e292',title:'Year 10 Science – Paper 2',section:'sec_science',grade:'10',paper:'G10-S2',duration:40,count:25,color:'var(--orange)'},
   {id:'e293',title:'Year 10 Science – Paper 3',section:'sec_science',grade:'10',paper:'G10-S3',duration:40,count:25,color:'var(--orange)'},
   {id:'e294',title:'Year 10 Science – Paper 4',section:'sec_science',grade:'10',paper:'G10-S4',duration:40,count:25,color:'var(--orange)'},
+  {id:'e295',title:'Year 11 English – Paper 1',section:'sr_english',grade:'11',paper:'G11-E1',duration:45,count:25,color:'var(--accent)'},
+  {id:'e296',title:'Year 11 English – Paper 2',section:'sr_english',grade:'11',paper:'G11-E2',duration:45,count:25,color:'var(--accent)'},
+  {id:'e297',title:'Year 11 English – Paper 3',section:'sr_english',grade:'11',paper:'G11-E3',duration:45,count:25,color:'var(--accent)'},
+  {id:'e298',title:'Year 11 English – Paper 4',section:'sr_english',grade:'11',paper:'G11-E4',duration:45,count:25,color:'var(--accent)'},
+  {id:'e299',title:'Year 12 English – Paper 1',section:'sr_english',grade:'12',paper:'G12-E1',duration:50,count:25,color:'var(--accent)'},
+  {id:'e300',title:'Year 12 English – Paper 2',section:'sr_english',grade:'12',paper:'G12-E2',duration:50,count:25,color:'var(--accent)'},
+  {id:'e301',title:'Year 12 English – Paper 3',section:'sr_english',grade:'12',paper:'G12-E3',duration:50,count:25,color:'var(--accent)'},
+  {id:'e302',title:'Year 12 English – Paper 4',section:'sr_english',grade:'12',paper:'G12-E4',duration:50,count:25,color:'var(--accent)'},
+  {id:'e303',title:'Year 11 Biology – Paper 1',section:'sr_biology',grade:'11',paper:'G11-B1',duration:45,count:25,color:'var(--orange)'},
+  {id:'e304',title:'Year 11 Biology – Paper 2',section:'sr_biology',grade:'11',paper:'G11-B2',duration:45,count:25,color:'var(--orange)'},
+  {id:'e305',title:'Year 11 Biology – Paper 3',section:'sr_biology',grade:'11',paper:'G11-B3',duration:45,count:25,color:'var(--orange)'},
+  {id:'e306',title:'Year 11 Biology – Paper 4',section:'sr_biology',grade:'11',paper:'G11-B4',duration:45,count:25,color:'var(--orange)'},
+  {id:'e307',title:'Year 12 Biology – Paper 1',section:'sr_biology',grade:'12',paper:'G12-B1',duration:50,count:25,color:'var(--orange)'},
+  {id:'e308',title:'Year 12 Biology – Paper 2',section:'sr_biology',grade:'12',paper:'G12-B2',duration:50,count:25,color:'var(--orange)'},
+  {id:'e309',title:'Year 12 Biology – Paper 3',section:'sr_biology',grade:'12',paper:'G12-B3',duration:50,count:25,color:'var(--orange)'},
+  {id:'e310',title:'Year 12 Biology – Paper 4',section:'sr_biology',grade:'12',paper:'G12-B4',duration:50,count:25,color:'var(--orange)'},
+  {id:'e311',title:'Year 11 Chemistry – Paper 1',section:'sr_chemistry',grade:'11',paper:'G11-C1',duration:45,count:25,color:'var(--orange)'},
+  {id:'e312',title:'Year 11 Chemistry – Paper 2',section:'sr_chemistry',grade:'11',paper:'G11-C2',duration:45,count:25,color:'var(--orange)'},
+  {id:'e313',title:'Year 11 Chemistry – Paper 3',section:'sr_chemistry',grade:'11',paper:'G11-C3',duration:45,count:25,color:'var(--orange)'},
+  {id:'e314',title:'Year 11 Chemistry – Paper 4',section:'sr_chemistry',grade:'11',paper:'G11-C4',duration:45,count:25,color:'var(--orange)'},
+  {id:'e315',title:'Year 12 Chemistry – Paper 1',section:'sr_chemistry',grade:'12',paper:'G12-C1',duration:50,count:25,color:'var(--orange)'},
+  {id:'e316',title:'Year 12 Chemistry – Paper 2',section:'sr_chemistry',grade:'12',paper:'G12-C2',duration:50,count:25,color:'var(--orange)'},
+  {id:'e317',title:'Year 12 Chemistry – Paper 3',section:'sr_chemistry',grade:'12',paper:'G12-C3',duration:50,count:25,color:'var(--orange)'},
+  {id:'e318',title:'Year 12 Chemistry – Paper 4',section:'sr_chemistry',grade:'12',paper:'G12-C4',duration:50,count:25,color:'var(--orange)'},
+  {id:'e319',title:'Year 11 Physics – Paper 1',section:'sr_physics',grade:'11',paper:'G11-P1',duration:45,count:25,color:'var(--orange)'},
+  {id:'e320',title:'Year 11 Physics – Paper 2',section:'sr_physics',grade:'11',paper:'G11-P2',duration:45,count:25,color:'var(--orange)'},
+  {id:'e321',title:'Year 11 Physics – Paper 3',section:'sr_physics',grade:'11',paper:'G11-P3',duration:45,count:25,color:'var(--orange)'},
+  {id:'e322',title:'Year 11 Physics – Paper 4',section:'sr_physics',grade:'11',paper:'G11-P4',duration:45,count:25,color:'var(--orange)'},
+  {id:'e323',title:'Year 12 Physics – Paper 1',section:'sr_physics',grade:'12',paper:'G12-P1',duration:50,count:25,color:'var(--orange)'},
+  {id:'e324',title:'Year 12 Physics – Paper 2',section:'sr_physics',grade:'12',paper:'G12-P2',duration:50,count:25,color:'var(--orange)'},
+  {id:'e325',title:'Year 12 Physics – Paper 3',section:'sr_physics',grade:'12',paper:'G12-P3',duration:50,count:25,color:'var(--orange)'},
+  {id:'e326',title:'Year 12 Physics – Paper 4',section:'sr_physics',grade:'12',paper:'G12-P4',duration:50,count:25,color:'var(--orange)'},
+  {id:'e327',title:'Year 11 General Maths – Paper 1',section:'sr_genmaths',grade:'11',paper:'G11-G1',duration:45,count:25,color:'var(--green)'},
+  {id:'e328',title:'Year 11 General Maths – Paper 2',section:'sr_genmaths',grade:'11',paper:'G11-G2',duration:45,count:25,color:'var(--green)'},
+  {id:'e329',title:'Year 11 General Maths – Paper 3',section:'sr_genmaths',grade:'11',paper:'G11-G3',duration:45,count:25,color:'var(--green)'},
+  {id:'e330',title:'Year 11 General Maths – Paper 4',section:'sr_genmaths',grade:'11',paper:'G11-G4',duration:45,count:25,color:'var(--green)'},
+  {id:'e331',title:'Year 12 General Maths – Paper 1',section:'sr_genmaths',grade:'12',paper:'G12-G1',duration:50,count:25,color:'var(--green)'},
+  {id:'e332',title:'Year 12 General Maths – Paper 2',section:'sr_genmaths',grade:'12',paper:'G12-G2',duration:50,count:25,color:'var(--green)'},
+  {id:'e333',title:'Year 12 General Maths – Paper 3',section:'sr_genmaths',grade:'12',paper:'G12-G3',duration:50,count:25,color:'var(--green)'},
+  {id:'e334',title:'Year 12 General Maths – Paper 4',section:'sr_genmaths',grade:'12',paper:'G12-G4',duration:50,count:25,color:'var(--green)'},
+  {id:'e335',title:'Year 11 Maths Methods – Paper 1',section:'sr_methods',grade:'11',paper:'G11-M1',duration:45,count:25,color:'var(--green)'},
+  {id:'e336',title:'Year 11 Maths Methods – Paper 2',section:'sr_methods',grade:'11',paper:'G11-M2',duration:45,count:25,color:'var(--green)'},
+  {id:'e337',title:'Year 11 Maths Methods – Paper 3',section:'sr_methods',grade:'11',paper:'G11-M3',duration:45,count:25,color:'var(--green)'},
+  {id:'e338',title:'Year 11 Maths Methods – Paper 4',section:'sr_methods',grade:'11',paper:'G11-M4',duration:45,count:25,color:'var(--green)'},
+  {id:'e339',title:'Year 12 Maths Methods – Paper 1',section:'sr_methods',grade:'12',paper:'G12-M1',duration:50,count:25,color:'var(--green)'},
+  {id:'e340',title:'Year 12 Maths Methods – Paper 2',section:'sr_methods',grade:'12',paper:'G12-M2',duration:50,count:25,color:'var(--green)'},
+  {id:'e341',title:'Year 12 Maths Methods – Paper 3',section:'sr_methods',grade:'12',paper:'G12-M3',duration:50,count:25,color:'var(--green)'},
+  {id:'e342',title:'Year 12 Maths Methods – Paper 4',section:'sr_methods',grade:'12',paper:'G12-M4',duration:50,count:25,color:'var(--green)'},
+  {id:'e343',title:'Year 11 Specialist Maths – Paper 1',section:'sr_specialist',grade:'11',paper:'G11-S1',duration:45,count:25,color:'var(--green)'},
+  {id:'e344',title:'Year 11 Specialist Maths – Paper 2',section:'sr_specialist',grade:'11',paper:'G11-S2',duration:45,count:25,color:'var(--green)'},
+  {id:'e345',title:'Year 11 Specialist Maths – Paper 3',section:'sr_specialist',grade:'11',paper:'G11-S3',duration:45,count:25,color:'var(--green)'},
+  {id:'e346',title:'Year 11 Specialist Maths – Paper 4',section:'sr_specialist',grade:'11',paper:'G11-S4',duration:45,count:25,color:'var(--green)'},
+  {id:'e347',title:'Year 12 Specialist Maths – Paper 1',section:'sr_specialist',grade:'12',paper:'G12-S1',duration:50,count:25,color:'var(--green)'},
+  {id:'e348',title:'Year 12 Specialist Maths – Paper 2',section:'sr_specialist',grade:'12',paper:'G12-S2',duration:50,count:25,color:'var(--green)'},
+  {id:'e349',title:'Year 12 Specialist Maths – Paper 3',section:'sr_specialist',grade:'12',paper:'G12-S3',duration:50,count:25,color:'var(--green)'},
+  {id:'e350',title:'Year 12 Specialist Maths – Paper 4',section:'sr_specialist',grade:'12',paper:'G12-S4',duration:50,count:25,color:'var(--green)'},
 ];
 
 const WRITING_PROMPTS = [
@@ -894,7 +950,7 @@ function submitBatch(){
 function renderPractice(){if(!pQs.length)return renderPracticeMenu();return pMode==='oneByOne'?renderOneByOne():renderBatch();}
 
 function renderPracticeMenu(){
-  const rows=[{s:'vic_maths',l:'🔢 VIC Maths',c:'var(--green)'},{s:'vic_verbal',l:'🧠 VIC Verbal',c:'var(--purple)'},{s:'vic_quant',l:'📐 VIC Quant',c:'var(--orange)'},{s:'vic_reading',l:'📖 VIC Reading',c:'var(--accent)'},{s:'nsw_thinking',l:'🧩 NSW Thinking',c:'var(--purple)'},{s:'nsw_maths',l:'🔢 NSW Maths',c:'var(--green)'},{s:'nsw_reading',l:'📖 NSW Reading',c:'var(--accent)'},{s:'gen_maths',l:'➗ Primary Maths (Gr 1-6)',c:'var(--green)'},{s:'gen_english',l:'📚 Primary English (Gr 1-6)',c:'var(--accent)'},{s:'gen_science',l:'🔬 Primary Science (Gr 1-6)',c:'var(--orange)'},{s:'gen_digitech',l:'💻 Digital Tech (Gr 1-6)',c:'var(--purple)'},{s:'gen_puzzles',l:'🧩 Logic Puzzles (Gr 1-6)',c:'var(--yellow)'},{s:'sec_maths',l:'🔢 Secondary Maths (Yr 7-10)',c:'var(--green)'},{s:'sec_english',l:'📚 Secondary English (Yr 7-10)',c:'var(--accent)'},{s:'sec_science',l:'🔬 Secondary Science (Yr 7-10)',c:'var(--orange)'}];
+  const rows=[{s:'vic_maths',l:'🔢 VIC Maths',c:'var(--green)'},{s:'vic_verbal',l:'🧠 VIC Verbal',c:'var(--purple)'},{s:'vic_quant',l:'📐 VIC Quant',c:'var(--orange)'},{s:'vic_reading',l:'📖 VIC Reading',c:'var(--accent)'},{s:'nsw_thinking',l:'🧩 NSW Thinking',c:'var(--purple)'},{s:'nsw_maths',l:'🔢 NSW Maths',c:'var(--green)'},{s:'nsw_reading',l:'📖 NSW Reading',c:'var(--accent)'},{s:'gen_maths',l:'➗ Primary Maths (Gr 1-6)',c:'var(--green)'},{s:'gen_english',l:'📚 Primary English (Gr 1-6)',c:'var(--accent)'},{s:'gen_science',l:'🔬 Primary Science (Gr 1-6)',c:'var(--orange)'},{s:'gen_digitech',l:'💻 Digital Tech (Gr 1-6)',c:'var(--purple)'},{s:'gen_puzzles',l:'🧩 Logic Puzzles (Gr 1-6)',c:'var(--yellow)'},{s:'sec_maths',l:'🔢 Secondary Maths (Yr 7-10)',c:'var(--green)'},{s:'sec_english',l:'📚 Secondary English (Yr 7-10)',c:'var(--accent)'},{s:'sec_science',l:'🔬 Secondary Science (Yr 7-10)',c:'var(--orange)'},{s:'sr_english',l:'📚 Senior English (Yr 11-12)',c:'var(--accent)'},{s:'sr_biology',l:'🧬 Senior Biology (Yr 11-12)',c:'var(--orange)'},{s:'sr_chemistry',l:'⚗️ Senior Chemistry (Yr 11-12)',c:'var(--orange)'},{s:'sr_physics',l:'⚛️ Senior Physics (Yr 11-12)',c:'var(--orange)'},{s:'sr_genmaths',l:'📊 Senior General Maths (Yr 11-12)',c:'var(--green)'},{s:'sr_methods',l:'📈 Senior Maths Methods (Yr 11-12)',c:'var(--green)'},{s:'sr_specialist',l:'∫ Senior Specialist Maths (Yr 11-12)',c:'var(--green)'}];
   const styles=['standard','eshs','singapore','logic','reading','assessment','advanced','scholarship','opportunity'];
   return `<div class="page">${profileBar()}<h1>✏️ Practice Mode</h1><p class="mt mb20">Every correct answer earns XP and counts toward achievements.</p>
     <div class="g2 mb24">
@@ -1206,6 +1262,7 @@ function groupExam(def){
   if(def.style==='seal')return'seal';
   if(def.state==='VIC')return'vic';
   if(def.state==='NSW')return'nsw';
+  if(def.section&&def.section.indexOf('sr_')===0)return'senior';
   if(def.section&&def.section.indexOf('sec_')===0)return'secondary';
   if(def.section&&def.section.indexOf('gen_')===0)return'primary';
   return'mixed';
@@ -1217,6 +1274,7 @@ const EXAM_TABS=[
   {id:'seal',l:'SEAL (Gr 7)',c:'var(--red)'},
   {id:'primary',l:'Primary (Gr 1-6)',c:'var(--green)'},
   {id:'secondary',l:'Secondary (Yr 7-10)',c:'var(--teal)'},
+  {id:'senior',l:'Senior (Yr 11-12)',c:'var(--pink)'},
   {id:'mixed',l:'Style Practice',c:'var(--purple)'},
 ];
 const PRIMARY_SUBJECTS=[
@@ -1226,10 +1284,13 @@ const PRIMARY_SUBJECTS=[
 const SECONDARY_SUBJECTS=[
   {s:'sec_maths',l:'🔢 Maths'},{s:'sec_english',l:'📚 English'},{s:'sec_science',l:'🔬 Science'},
 ];
+const SENIOR_SUBJECTS=[
+  {s:'sr_english',l:'📚 English'},{s:'sr_biology',l:'🧬 Biology'},{s:'sr_chemistry',l:'⚗️ Chemistry'},{s:'sr_physics',l:'⚛️ Physics'},{s:'sr_genmaths',l:'📊 General Maths'},{s:'sr_methods',l:'📈 Maths Methods'},{s:'sr_specialist',l:'∫ Specialist Maths'},
+];
 function renderExams(){
   const tagged=EXAM_DEFS.map((def,i)=>({def,i,grp:groupExam(def)}));
   let visible=examTab==='all'?tagged:tagged.filter(x=>x.grp===examTab);
-  if(examTab==='primary'||examTab==='secondary'){
+  if(examTab==='primary'||examTab==='secondary'||examTab==='senior'){
     if(examGenSubject!=='ALL')visible=visible.filter(x=>x.def.section===examGenSubject);
     if(examGenGrade!=='ALL')visible=visible.filter(x=>x.def.grade===examGenGrade);
   }
@@ -1259,6 +1320,14 @@ function renderExams(){
     <div class="fc gap8 wrap mb20">
       <button class="btn ${examGenGrade==='ALL'?'bp':'bm'} bsm" onclick="examGenGrade='ALL';render()">All Years</button>
       ${['7','8','9','10'].map(g=>`<button class="btn ${examGenGrade===g?'bp':'bm'} bsm" onclick="examGenGrade='${g}';render()">Year ${g}</button>`).join('')}
+    </div>`:''}
+    ${examTab==='senior'?`<div class="fc gap8 wrap mb14">
+      <button class="btn ${examGenSubject==='ALL'?'bp':'bm'} bsm" onclick="examGenSubject='ALL';render()">All Subjects</button>
+      ${SENIOR_SUBJECTS.map(p=>`<button class="btn ${examGenSubject===p.s?'bp':'bm'} bsm" onclick="examGenSubject='${p.s}';render()">${p.l}</button>`).join('')}
+    </div>
+    <div class="fc gap8 wrap mb20">
+      <button class="btn ${examGenGrade==='ALL'?'bp':'bm'} bsm" onclick="examGenGrade='ALL';render()">All Years</button>
+      ${['11','12'].map(g=>`<button class="btn ${examGenGrade===g?'bp':'bm'} bsm" onclick="examGenGrade='${g}';render()">Year ${g}</button>`).join('')}
     </div>`:''}
     <div class="g2">${visible.map(({def,i})=>{const stTag=def.state?`<span class="tag ${def.state==='NSW'?'ty':'ta'} xs">${def.state}</span>`:'';const stlTag=def.style?`<span class="tag tpu xs">${STL[def.style]||def.style}</span>`:'';const dTag=def.difficulty?`<span class="tag tg xs">${def.difficulty}</span>`:'';
       return `<div class="card hov" style="border-color:${def.color}44"><div class="fc gap8 mb8 wrap">${stTag}${stlTag}${dTag}</div><h3 style="margin-bottom:5px">${def.title}</h3><p class="mt sm mb14">⏱ ${def.duration} min · 📋 ${def.count} Qs · ⭐ Up to 3 stars</p><button class="btn bsm" style="background:${def.color};color:${def.color.includes('yellow')?'#1a1200':'#fff'}" onclick="startExam(${i})">Start →</button></div>`;
