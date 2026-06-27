@@ -3,6 +3,7 @@
 
 [build]
   publish = "."
+  functions = "netlify/functions"
 
 # Single-page app routing — serve index.html for all routes
 [[redirects]]

@@ -85,7 +85,7 @@ Questions are in `data/questions.json`. Each question looks like:
 
 ---
 
-## 🔑 API Key Setup
+## 🔑 AI Features Setup (Netlify Function Proxy)
 
 The portal uses the Anthropic Claude API for:
 - AI feedback on every answer
@@ -93,11 +93,27 @@ The portal uses the Anthropic Claude API for:
 - AI-generated study notes
 - Writing marking
 
-The API key is called directly from the browser. For a production site:
-1. Set `ANTHROPIC_API_KEY` in your browser's localStorage: `localStorage.setItem('ss_api_key', 'sk-ant-...')`
-2. Or add a settings page to enter it in the UI
+AI calls go through a server-side proxy (`netlify/functions/claude-proxy.js`) instead of calling Anthropic directly from the browser. This means **no visitor ever has to paste in an API key** — it works the same on first visit, on any device, on any browser, whether the page is loaded from GitHub Pages or from Netlify.
 
-For development/testing, the API calls in `js/app.js` include a note about where to add your key.
+### One-time setup (you, the site owner)
+1. Get an API key at **console.anthropic.com** (API Keys → Create new key)
+2. **Set a spend limit on that key** in the Anthropic Console under Settings → Limits. Do this regardless of the steps below — it's the real backstop against unexpected cost, since this proxy is reachable by anyone with its URL.
+3. Connect this repo to Netlify (netlify.com → Add new site → Import from Git)
+4. In Netlify → Site configuration → Environment variables, add:
+   - `ANTHROPIC_API_KEY` = your key from step 1
+   - `ALLOWED_ORIGINS` = comma-separated list of every domain that's allowed to call the function, e.g. `https://yourname.github.io,https://your-site.netlify.app` (optional — without it, any `*.github.io`/`*.netlify.app`/`localhost` origin is allowed by default)
+5. Deploy. Netlify will give you a URL like `https://your-site-name.netlify.app`
+6. Open `js/app.js`, find the line near the top starting with `const PROXY_URL =`, and replace the placeholder with your real function URL:
+   `https://your-site-name.netlify.app/.netlify/functions/claude-proxy`
+7. Push that change — both your GitHub Pages copy and your Netlify copy now call the same function.
+
+That's it — nobody using the site will ever see an API key prompt.
+
+### Free tier limits
+Anthropic's free tier gives enough credit for hundreds of AI sessions. For a family or small community using it daily, a small paid plan (~$5/month) is more than enough. The function also caps usage per visitor (60 AI requests/day/IP) as an extra layer of protection.
+
+### Non-AI features (always work, no setup needed)
+All question practice, exams, Fun Zone puzzles, Language Zone, Tips & Techniques, and progress tracking work fully without any of the above — only the four AI features need the proxy configured.
 
 ---
 
@@ -128,30 +144,3 @@ For development/testing, the API calls in `js/app.js` include a note about where
 ---
 
 Built with ❤️ for Australian students. All questions are original.
-
----
-
-## 🔑 Setting Up Your API Key (Required for AI Features)
-
-AI features include: AI Coaching on answers, AI Tutor, Study Notes, Writing Feedback.
-
-### Step 1 — Get a free API key
-1. Go to **console.anthropic.com**
-2. Sign up for a free account
-3. Go to API Keys → Create new key
-4. Copy the key (starts with `sk-ant-...`)
-
-### Step 2 — Enter the key in StudySpark
-1. Open StudySpark in your browser
-2. Log in with your profile
-3. Click **👤 Profile** in the nav
-4. Click **🔑 Set API Key**
-5. Paste your key and click **Save & Continue**
-
-The key is saved only in your browser's local storage — never sent anywhere except Anthropic's API.
-
-### Free tier limits
-Anthropic's free tier gives you enough credits for hundreds of AI coaching sessions. For a family using it daily, a small paid plan (~$5/month) would be more than enough.
-
-### Non-AI features (work without a key)
-All question practice, exams, Fun Zone puzzles, Language Zone, Little Learners, Tips & Techniques, and progress tracking work **without any API key**.
