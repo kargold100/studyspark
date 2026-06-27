@@ -5,11 +5,15 @@
   publish = "."
   functions = "netlify/functions"
 
-# Single-page app routing — serve index.html for all routes
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# NOTE: there is intentionally no catch-all "/*  →  /index.html" redirect here.
+# StudySpark is a single index.html page with no real URL-based routing (it
+# switches screens purely via JavaScript state, the URL never changes), so
+# that rule was never actually needed — and it was silently intercepting
+# every request to /.netlify/functions/* and serving index.html instead,
+# which is why the AI proxy never worked no matter how it was configured.
+# If you ever DO add real client-side routes later, scope any redirect
+# narrowly (e.g. "/app/*") rather than using "/*", so it can never shadow
+# /.netlify/functions/* again.
 
 # Security and performance headers
 [[headers]]

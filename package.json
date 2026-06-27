@@ -2,8 +2,6 @@
   "name": "studyspark",
   "private": true,
   "version": "1.0.0",
-  "description": "StudySpark static site — package.json exists solely so Netlify installs dependencies for netlify/functions/claude-proxy.js",
-  "dependencies": {
-    "@netlify/blobs": "^8.1.0"
-  }
+  "description": "StudySpark static site. No required dependencies — netlify/functions/claude-proxy.js optionally uses @netlify/blobs for rate-limiting if available, but is written to work correctly without it too, so nothing here can break the build.",
+  "dependencies": {}
 }
