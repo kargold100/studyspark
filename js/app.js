@@ -685,9 +685,13 @@ function setExamReviewPage(p){examReviewPage=Math.max(0,p);render();}
 // IMPORTANT — set this to YOUR deployed function's URL after setting up
 // Netlify (see netlify/functions/claude-proxy.js for setup notes). This one
 // URL works whether the page itself is loaded from GitHub Pages or Netlify.
-const PROXY_URL = 'https://studysparkau.netlify.app/.netlify/functions/claude-proxy';
+const PROXY_URL = 'https://YOUR-SITE-NAME.netlify.app/.netlify/functions/claude-proxy';
 
 async function callClaude(system,user,maxTok=400,model='fast'){
+  if(PROXY_URL.includes('YOUR-SITE-NAME')){
+    console.error('%c[StudySpark AI] PROXY_URL is still the placeholder value — it was never set to a real deployed Netlify function URL. See js/app.js near the top, search for "const PROXY_URL".','font-weight:bold;color:red');
+    return '__NOT_CONFIGURED__';
+  }
   const controller = new AbortController();
   const timeout = setTimeout(()=>controller.abort(), 25000); // 25s timeout
   try{
@@ -698,26 +702,39 @@ async function callClaude(system,user,maxTok=400,model='fast'){
       body:JSON.stringify({system,user,maxTok,model})
     });
     clearTimeout(timeout);
-    const d=await r.json();
+    let d={};
+    try{ d=await r.json(); }catch{ /* non-JSON response, e.g. a 404 HTML page */ }
     if(!r.ok || d.error){
-      console.error('AI proxy error:',r.status,d.error);
       if(d.error==='rate_limited') return '__RATE_LIMITED__';
+      if(r.status===403){
+        console.error(`%c[StudySpark AI] Proxy rejected this site's origin (${location.origin}). Either add it to the ALLOWED_ORIGINS environment variable in Netlify, or check it matches the *.github.io / *.netlify.app default pattern in netlify/functions/claude-proxy.js.`,'font-weight:bold;color:red');
+        return '__BLOCKED__';
+      }
+      if(r.status===500 && d.error==='server_not_configured'){
+        console.error('%c[StudySpark AI] ANTHROPIC_API_KEY is not set in the Netlify function\'s environment variables. Add it under Site configuration → Environment variables, then redeploy.','font-weight:bold;color:red');
+        return '__NOT_CONFIGURED__';
+      }
+      console.error('[StudySpark AI] Proxy returned an error:',r.status,d.error||'(no JSON body — check the URL is correct)');
       return '';
     }
     return d.text||'';
   }catch(e){
     clearTimeout(timeout);
-    if(e.name==='AbortError') console.error('API timeout');
-    else console.error('callClaude error:',e.message);
+    if(e.name==='AbortError') console.error('[StudySpark AI] Request timed out after 25s.');
+    else console.error('[StudySpark AI] Network/fetch error calling proxy — likely a wrong PROXY_URL, a CORS rejection, or the function is down:',e.message);
     return '';
   }
 }
 
-// Wrapper that surfaces a friendly message on rate-limit, otherwise just returns the text
+// Wrapper that surfaces a friendly message for known failure types, otherwise just returns the text
 async function callClaudeUI(system,user,maxTok=400,_unused,model='fast'){
   const result=await callClaude(system,user,maxTok,model);
   if(result==='__RATE_LIMITED__'){
     alert("You've hit today's AI usage limit — please try again tomorrow.");
+    return null;
+  }
+  if(result==='__NOT_CONFIGURED__'||result==='__BLOCKED__'){
+    alert("AI features aren't set up correctly yet. (Details logged to the browser console for the site owner — press F12.)");
     return null;
   }
   return result;
@@ -732,7 +749,7 @@ ${correct?'✅ [why correct, 8 words]':'❌ [what went wrong, 8 words]'}
 🎯 [one practice tip, 8 words]`;
   const usr=`${q.topic} Q: ${q.q.slice(0,100)}. Chosen: ${q.options[userAns]}. Correct: ${q.options[q.answer]}.`;
   const fb=await callClaude(sys,usr,120);
-  if(fb && fb!=='__RATE_LIMITED__') AIcache[key]=fb;
+  if(fb && !['__RATE_LIMITED__','__NOT_CONFIGURED__','__BLOCKED__'].includes(fb)) AIcache[key]=fb;
   AIloading.delete(key);render();
 }
 
@@ -1339,7 +1356,7 @@ function renderBrowse(){
               ${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''}
               ${q.topic?`<span class="tag tm">${q.topic}</span>`:''}
               ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''}
-
+              
             </div>
             <div class="qtxt">Q${startIdx+i+1}. ${q.q}</div>
             ${opts}${hint}${result}${exp}

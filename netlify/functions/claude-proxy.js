@@ -62,6 +62,22 @@ exports.handler = async (event) => {
   const origin = event.headers.origin || event.headers.Origin || '';
   const allowed = isAllowedOrigin(origin);
 
+  // Health check — visit the function URL directly in a browser (GET request)
+  // to confirm it's deployed and configured correctly. Reveals no secrets.
+  if (event.httpMethod === 'GET') {
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ok: true,
+        message: 'StudySpark AI proxy is deployed and reachable.',
+        anthropicKeyConfigured: !!process.env.ANTHROPIC_API_KEY,
+        allowedOriginsEnvVarSet: ALLOWED_ORIGINS.length > 0,
+        allowedOriginsConfigured: ALLOWED_ORIGINS.length > 0 ? ALLOWED_ORIGINS : '(using default *.github.io / *.netlify.app / localhost pattern)',
+      }, null, 2),
+    };
+  }
+
   // Preflight
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 204, headers: corsHeaders(allowed ? origin : ''), body: '' };
@@ -72,7 +88,8 @@ exports.handler = async (event) => {
   }
 
   if (!allowed) {
-    return { statusCode: 403, headers: corsHeaders(''), body: JSON.stringify({ error: 'origin_not_allowed' }) };
+    console.error(`Rejected request from disallowed origin: "${origin}". Add it to ALLOWED_ORIGINS if this should be permitted.`);
+    return { statusCode: 403, headers: corsHeaders(''), body: JSON.stringify({ error: 'origin_not_allowed', yourOrigin: origin }) };
   }
 
   const headers = corsHeaders(origin);
