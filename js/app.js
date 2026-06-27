@@ -714,7 +714,15 @@ async function callClaude(system,user,maxTok=400,model='fast'){
         console.error('%c[StudySpark AI] ANTHROPIC_API_KEY is not set in the Netlify function\'s environment variables. Add it under Site configuration → Environment variables, then redeploy.','font-weight:bold;color:red');
         return '__NOT_CONFIGURED__';
       }
-      console.error('[StudySpark AI] Proxy returned an error:',r.status,d.error||'(no JSON body — check the URL is correct)');
+      if(d.error==='upstream_error' && (d.type==='authentication_error'||d.type==='permission_error')){
+        console.error(`%c[StudySpark AI] Anthropic REJECTED the API key (${d.type}). The key set in Netlify's ANTHROPIC_API_KEY is missing, wrong, or was revoked/rotated in the Anthropic Console without updating Netlify's environment variable to match. Go to Netlify → Site configuration → Environment variables, update the value, then redeploy.`,'font-weight:bold;color:red');
+        return '__NOT_CONFIGURED__';
+      }
+      if(d.error==='upstream_error'){
+        console.error(`%c[StudySpark AI] Anthropic itself returned an error: ${d.type||'unknown'}. This usually means the key has no credit/spend limit reached, or the model name is wrong.`,'font-weight:bold;color:red');
+        return '';
+      }
+      console.error('[StudySpark AI] Proxy returned an error:',r.status,d.error||'(no JSON body — check PROXY_URL points to a real deployed function)');
       return '';
     }
     return d.text||'';
