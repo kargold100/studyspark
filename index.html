@@ -4,10 +4,10 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>StudySpark — Australian Selective Exam Prep</title>
-<meta name="description" content="Free study portal for Australian students Grades 1–12. 61300+ questions, personalised profiles, achievements and AI coaching."/>
+<meta name="description" content="Free study portal for Australian students Grades 1–12. 62500+ questions, personalised profiles, achievements and AI coaching."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/style.css?v=20260627a"/>
 </head>
 <body>
 <div class="hdr">
@@ -18,40 +18,56 @@
   <div class="loading">
     <span class="spin" style="font-size:32px">⏳</span>
     <div style="margin-top:12px;font-weight:700">Loading StudySpark...</div>
-    <div class="mt sm" style="margin-top:6px">61300+ questions · Personalised profiles · AI coaching</div>
+    <div class="mt sm" style="margin-top:6px">62500+ questions · Personalised profiles · AI coaching</div>
   </div>
 </div>
+<script>
+  // Safety net: if the app hasn't replaced this loading screen within 10s,
+  // something failed to load (often a stale cached file after an update).
+  // Offer a one-click hard reload instead of leaving people on a stuck spinner.
+  setTimeout(function(){
+    var loadingEl = document.querySelector('#app .loading');
+    if (loadingEl) {
+      loadingEl.innerHTML =
+        '<div style="font-size:32px">⚠️</div>' +
+        '<div style="margin-top:12px;font-weight:700">Taking longer than expected</div>' +
+        '<div class="mt sm" style="margin-top:6px;max-width:320px;margin-left:auto;margin-right:auto">' +
+        'Your browser may be holding onto an old cached version. Try a hard refresh:</div>' +
+        '<button class="btn ba" style="margin-top:14px" onclick="location.reload(true)">🔄 Reload Now</button>';
+    }
+  }, 10000);
+</script>
 <div style="text-align:center;padding:14px 16px 22px;color:var(--muted);font-size:11px;line-height:1.6;opacity:.85">
   StudySpark v1.0 — For learning and practice purposes only. Questions are original, sample-style practice material and are not an official or guaranteed exam preparation resource.
 </div>
-<script src="data/funzone.js"></script>
-<script src="data/tips.js"></script>
-<script src="data/languages.js"></script>
-<script src="data/writing.js"></script>
-<script src="js/profiles.js"></script>
-<script src="data/questions/vic_maths.js"></script>
-<script src="data/questions/vic_verbal.js"></script>
-<script src="data/questions/vic_quant.js"></script>
-<script src="data/questions/vic_reading.js"></script>
-<script src="data/questions/nsw_thinking.js"></script>
-<script src="data/questions/nsw_maths.js"></script>
-<script src="data/questions/nsw_reading.js"></script>
-<script src="data/questions/gen_maths.js"></script>
-<script src="data/questions/gen_english.js"></script>
-<script src="data/questions/gen_science.js"></script>
-<script src="data/questions/gen_digitech.js"></script>
-<script src="data/questions/gen_puzzles.js"></script>
-<script src="data/questions/sec_maths.js"></script>
-<script src="data/questions/sec_english.js"></script>
-<script src="data/questions/sec_science.js"></script>
-<script src="data/questions/sr_english.js"></script>
-<script src="data/questions/sr_biology.js"></script>
-<script src="data/questions/sr_chemistry.js"></script>
-<script src="data/questions/sr_physics.js"></script>
-<script src="data/questions/sr_genmaths.js"></script>
-<script src="data/questions/sr_methods.js"></script>
-<script src="data/questions/sr_specialist.js"></script>
-<script src="js/questions.js"></script>
-<script src="js/app.js"></script>
+<script src="data/funzone.js?v=20260627a"></script>
+<script src="data/tips.js?v=20260627a"></script>
+<script src="data/languages.js?v=20260627a"></script>
+<script src="data/writing.js?v=20260627a"></script>
+<script src="js/profiles.js?v=20260627a"></script>
+<script src="data/questions/vic_maths.js?v=20260627a"></script>
+<script src="data/questions/vic_verbal.js?v=20260627a"></script>
+<script src="data/questions/vic_quant.js?v=20260627a"></script>
+<script src="data/questions/vic_reading.js?v=20260627a"></script>
+<script src="data/questions/nsw_thinking.js?v=20260627a"></script>
+<script src="data/questions/nsw_maths.js?v=20260627a"></script>
+<script src="data/questions/nsw_reading.js?v=20260627a"></script>
+<script src="data/questions/gen_maths.js?v=20260627a"></script>
+<script src="data/questions/gen_english.js?v=20260627a"></script>
+<script src="data/questions/gen_science.js?v=20260627a"></script>
+<script src="data/questions/gen_digitech.js?v=20260627a"></script>
+<script src="data/questions/gen_puzzles.js?v=20260627a"></script>
+<script src="data/questions/sec_maths.js?v=20260627a"></script>
+<script src="data/questions/sec_english.js?v=20260627a"></script>
+<script src="data/questions/sec_science.js?v=20260627a"></script>
+<script src="data/questions/sr_english.js?v=20260627a"></script>
+<script src="data/questions/sr_biology.js?v=20260627a"></script>
+<script src="data/questions/sr_chemistry.js?v=20260627a"></script>
+<script src="data/questions/sr_physics.js?v=20260627a"></script>
+<script src="data/questions/sr_genmaths.js?v=20260627a"></script>
+<script src="data/questions/sr_methods.js?v=20260627a"></script>
+<script src="data/questions/sr_specialist.js?v=20260627a"></script>
+<script src="js/questions.js?v=20260627a"></script>
+<script src="js/app.js?v=20260627a"></script>
 </body>
 </html>

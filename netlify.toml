@@ -19,7 +19,23 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Cache question bank and assets aggressively
+# index.html must always be fetched fresh — it contains the ?v= version
+# pointers for every other file. If THIS gets cached, updates never reach
+# visitors no matter how the other files are cached below.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
+
+# Cache question bank and assets aggressively — safe to do, since each file
+# is requested with a ?v= version query string in index.html. A new deploy
+# that bumps the version is a brand-new URL the browser has never cached,
+# so it's always fetched fresh regardless of the long max-age below.
 [[headers]]
   for = "/data/*"
   [headers.values]
