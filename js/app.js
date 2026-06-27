@@ -677,74 +677,34 @@ function paginationBar(page,totalPages,onPageFn){
 function setBrowsePage(p){browsePage=Math.max(0,p);render();}
 function setExamReviewPage(p){examReviewPage=Math.max(0,p);render();}
 
-// ── API KEY MANAGEMENT ───────────────────────────────────────────────────────
-function getApiKey(){return localStorage.getItem('ss_apikey')||'';}
-function setApiKey(k){localStorage.setItem('ss_apikey',k.trim());}
-function hasApiKey(){return !!getApiKey();}
-
-function showApiKeyPrompt(onSave){
-  const existing=getApiKey();
-  const modal=document.createElement('div');
-  modal.className='modal-overlay';modal.id='apikey-modal';
-  modal.innerHTML=`<div class="modal" style="max-width:500px">
-    <h3 class="mb8">🔑 Enter your Anthropic API Key</h3>
-    <p class="mt sm mb14" style="line-height:1.7">AI features (coaching, study notes, writing feedback, tutor) need an Anthropic API key.<br/>
-    Get a free key at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a></p>
-    <p class="mt xs mb14">Your key is stored only in this browser — never sent anywhere except Anthropic.</p>
-    <input type="password" id="apikey-input" placeholder="sk-ant-api03-..." value="${existing}" style="margin-bottom:12px;font-family:monospace;font-size:12px"/>
-    <div class="fc gap8">
-      <button class="btn ba" onclick="
-        const k=document.getElementById('apikey-input').value.trim();
-        if(!k){alert('Please paste your API key.');return;}
-        setApiKey(k);
-        document.getElementById('apikey-modal').remove();
-        ${onSave?onSave:'render();'}
-      ">Save & Continue</button>
-      <button class="btn bm" onclick="document.getElementById('apikey-modal').remove()">Cancel</button>
-    </div>
-    <p class="xs mt" style="margin-top:12px;line-height:1.6">💡 Tip: after pasting your key once, it's remembered in this browser. You only need to enter it again if you clear your browser data or switch devices.</p>
-  </div>`;
-  document.body.appendChild(modal);
-  setTimeout(()=>document.getElementById('apikey-input')?.focus(),100);
-}
+// ── AI PROXY (Netlify Function) ─────────────────────────────────────────────
+// AI features now call a server-side proxy instead of the Anthropic API
+// directly, so no visitor ever needs to supply or store an API key.
+// The key lives only as an environment variable on the Netlify function.
+//
+// IMPORTANT — set this to YOUR deployed function's URL after setting up
+// Netlify (see netlify/functions/claude-proxy.js for setup notes). This one
+// URL works whether the page itself is loaded from GitHub Pages or Netlify.
+const PROXY_URL = 'https://studysparkau.netlify.app/.netlify/functions/claude-proxy';
 
 async function callClaude(system,user,maxTok=400,model='fast'){
-  const key=getApiKey();
-  if(!key) return '__NO_KEY__';
-  // Use Haiku for speed on feedback/tutor, Sonnet only for writing marking
-  const modelId = model==='smart'
-    ? 'claude-sonnet-4-6'
-    : 'claude-haiku-4-5-20251001';
   const controller = new AbortController();
   const timeout = setTimeout(()=>controller.abort(), 25000); // 25s timeout
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{
+    const r=await fetch(PROXY_URL,{
       method:'POST',
       signal:controller.signal,
-      headers:{
-        'Content-Type':'application/json',
-        'x-api-key':key,
-        'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access':'true'
-      },
-      body:JSON.stringify({
-        model:modelId,
-        max_tokens:maxTok,
-        system,
-        messages:[{role:'user',content:user}]
-      })
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({system,user,maxTok,model})
     });
     clearTimeout(timeout);
     const d=await r.json();
-    if(d.error){
-      console.error('API error:',d.error.type, d.error.message);
-      if(d.error.type==='authentication_error'||d.error.type==='permission_error'){
-        localStorage.removeItem('ss_apikey');
-        return '__BAD_KEY__';
-      }
+    if(!r.ok || d.error){
+      console.error('AI proxy error:',r.status,d.error);
+      if(d.error==='rate_limited') return '__RATE_LIMITED__';
       return '';
     }
-    return d.content?.map(c=>c.text||'').join('')||'';
+    return d.text||'';
   }catch(e){
     clearTimeout(timeout);
     if(e.name==='AbortError') console.error('API timeout');
@@ -753,21 +713,16 @@ async function callClaude(system,user,maxTok=400,model='fast'){
   }
 }
 
-// Wrapper that handles key errors gracefully
-async function callClaudeUI(system,user,maxTok=400,onNoKey,model='fast'){
+// Wrapper that surfaces a friendly message on rate-limit, otherwise just returns the text
+async function callClaudeUI(system,user,maxTok=400,_unused,model='fast'){
   const result=await callClaude(system,user,maxTok,model);
-  if(result==='__NO_KEY__'){
-    showApiKeyPrompt(onNoKey||'render()');
-    return null;
-  }
-  if(result==='__BAD_KEY__'){
-    showApiKeyPrompt("alert('Key saved. Please try again.');render();");
+  if(result==='__RATE_LIMITED__'){
+    alert("You've hit today's AI usage limit — please try again tomorrow.");
     return null;
   }
   return result;
 }
 async function getAIFeedback(q,userAns,correct){
-  if(!hasApiKey()) return;
   const key=`${q.id}_${userAns}`;
   if(AIcache[key]||AIloading.has(key)) return;
   AIloading.add(key);
@@ -777,8 +732,7 @@ ${correct?'✅ [why correct, 8 words]':'❌ [what went wrong, 8 words]'}
 🎯 [one practice tip, 8 words]`;
   const usr=`${q.topic} Q: ${q.q.slice(0,100)}. Chosen: ${q.options[userAns]}. Correct: ${q.options[q.answer]}.`;
   const fb=await callClaude(sys,usr,120);
-  if(fb && fb!=='__NO_KEY__' && fb!=='__BAD_KEY__') AIcache[key]=fb;
-  else if(fb==='__BAD_KEY__') localStorage.removeItem('ss_apikey');
+  if(fb && fb!=='__RATE_LIMITED__') AIcache[key]=fb;
   AIloading.delete(key);render();
 }
 
@@ -915,7 +869,6 @@ function renderProfile(){
     <div class="fc gap8 mb20 wrap">
       <button class="btn bm bsm" onclick="currentUser=null;showCreateForm=false;screen='profile';render()">🔄 Switch Profile</button>
       <button class="btn bm bsm" onclick="changeAvatarPrompt()">🎨 Change Avatar</button>
-      <button class="btn bm bsm" onclick="showApiKeyPrompt('render()')" style="border-color:${hasApiKey()?'rgba(61,214,140,.5)':'rgba(247,144,79,.5)'}">🔑 ${hasApiKey()?'✅ API Key Set':'⚠️ Set API Key'}</button>
       ${profiles.length>1?`<button class="btn bm bsm" style="color:var(--red)" onclick="if(confirm('Delete profile ${stats.nickname}? All progress will be lost.')){Profiles.deleteProfile('${stats.nickname}');currentUser=null;screen='profile';render();}">🗑 Delete</button>`:''}
     </div>
 
@@ -1030,7 +983,7 @@ function qCard(q,idx,mode,userAns,submitted,revealed,showHint){
         <div class="aifb-hdr" style="color:var(--${correct?'green':'orange'})">🤖 Quick Tip</div>
         ${lines.map(l=>`<div style="margin-bottom:3px">${l}</div>`).join('')}
       </div>`;
-    } else if(hasApiKey()){
+    } else {
       // Show a small "get tip" button instead of auto-loading
       aiFb=`<div style="margin-top:8px"><button class="btn bm bsm" style="font-size:12px" onclick="getAIFeedback(QUESTIONS.find(x=>x.id==='${q.id}')||{id:'${q.id}',topic:'${q.topic||''}',difficulty:'${q.difficulty||'medium'}',q:'',options:${JSON.stringify(q.options)},answer:${q.answer},exp:''},${userAns},${correct})">🤖 Get quick tip</button></div>`;
     }
@@ -1386,7 +1339,7 @@ function renderBrowse(){
               ${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''}
               ${q.topic?`<span class="tag tm">${q.topic}</span>`:''}
               ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''}
-              
+
             </div>
             <div class="qtxt">Q${startIdx+i+1}. ${q.q}</div>
             ${opts}${hint}${result}${exp}
@@ -1591,9 +1544,8 @@ function renderStudy(){
     ?`<div class="card mb14" style="border-color:rgba(247,79,79,.4);padding:24px;text-align:center">
       <div style="font-size:28px;margin-bottom:8px">⚠️</div>
       <h3 style="color:var(--red);margin-bottom:8px">Could not generate notes</h3>
-      <p class="mt sm mb16">Please set a valid Anthropic API key to use AI features.</p>
+      <p class="mt sm mb16">The AI tutor service is temporarily unavailable. Please try again.</p>
       <div class="fc gap8 wrap" style="justify-content:center">
-        <button class="btn bo" onclick="showApiKeyPrompt('doLoadNotes()')">🔑 Set API Key</button>
         <button class="btn bm" onclick="doLoadNotes()">🔄 Try Again</button>
       </div>
     </div>`
@@ -1602,14 +1554,13 @@ function renderStudy(){
   </div>`;
 }
 async function doLoadNotes(){
-  if(!hasApiKey()){showApiKeyPrompt('doLoadNotes()');return;}
   studyNotes='';studyLoading=true;render();
   try{
     const t=await callClaudeUI(
       'Australian selective school tutor, Grades 4-10. Write clear study notes:\n## Key Concepts\n• 3-5 concise bullet points covering the core ideas\n## Formula / Rule\n[The key formula or rule to remember]\n## Worked Example\n[One step-by-step example]\n## Exam Tips\n• 2-3 tips specific to selective exams\nUnder 300 words. Plain text, use ## headings and bullet points.',
       `Topic: ${studyTopic} | Subject: ${studySub} | Australian curriculum, selective exam focus.`
     );
-    if(t===null){studyLoading=false;return;}  // user shown API key prompt
+    if(t===null){studyLoading=false;return;}  // rate-limited; alert already shown
     studyNotes=t||'__ERROR__';
   }catch(e){
     console.error('Study notes error:',e);
@@ -1683,7 +1634,6 @@ function renderTutor(){
 async function doAsk(){
   const inp=document.getElementById('tutor-input');if(inp)tutorQ=inp.value;
   if(!tutorQ.trim())return;
-  if(!hasApiKey()){showApiKeyPrompt('doAsk()');return;}
   tutorLoading=true;tutorR='';render();
   const t=await callClaudeUI('Australian selective exam tutor, Grades 4-10. Clear explanation, show full working for maths. Under 200 words. Plain text only.',tutorQ,400);
   if(t===null){tutorLoading=false;render();return;}
