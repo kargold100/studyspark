@@ -17,7 +17,12 @@
 //      if you trust steps 1-3; they can all be bypassed by someone calling
 //      this URL directly instead of through the website.
 
-const { getStore } = require('@netlify/blobs');
+let getStore = null;
+try {
+  getStore = require('@netlify/blobs').getStore;
+} catch (e) {
+  console.error('@netlify/blobs unavailable — rate limiting disabled, AI proxy continues normally:', e.message);
+}
 
 // ── Configuration ───────────────────────────────────────────────────────────
 // Comma-separated list of allowed origins, e.g.
@@ -117,27 +122,31 @@ exports.handler = async (event) => {
   }
 
   // ── Per-IP daily rate limit (Netlify Blobs — persistent KV, no extra setup) ─
-  const ip = event.headers['x-nf-client-connection-ip']
-    || (event.headers['x-forwarded-for'] || '').split(',')[0].trim()
-    || 'unknown';
-  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-  const blobKey = `${ip}_${today}`;
+  // Skipped entirely if @netlify/blobs failed to load — never let this optional
+  // safety net block the core feature from working.
+  if (getStore) {
+    const ip = event.headers['x-nf-client-connection-ip']
+      || (event.headers['x-forwarded-for'] || '').split(',')[0].trim()
+      || 'unknown';
+    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const blobKey = `${ip}_${today}`;
 
-  try {
-    const store = getStore('claude-proxy-ratelimits');
-    const current = parseInt((await store.get(blobKey)) || '0', 10);
-    if (current >= DAILY_LIMIT_PER_IP) {
-      return {
-        statusCode: 429,
-        headers,
-        body: JSON.stringify({ error: 'rate_limited', message: 'Daily AI request limit reached. Please try again tomorrow.' }),
-      };
+    try {
+      const store = getStore('claude-proxy-ratelimits');
+      const current = parseInt((await store.get(blobKey)) || '0', 10);
+      if (current >= DAILY_LIMIT_PER_IP) {
+        return {
+          statusCode: 429,
+          headers,
+          body: JSON.stringify({ error: 'rate_limited', message: 'Daily AI request limit reached. Please try again tomorrow.' }),
+        };
+      }
+      await store.set(blobKey, String(current + 1));
+    } catch (e) {
+      // If Blobs is unavailable for any reason, fail OPEN rather than breaking the feature —
+      // the Anthropic spend cap remains the real backstop.
+      console.error('Rate limit store error (continuing without it):', e.message);
     }
-    await store.set(blobKey, String(current + 1));
-  } catch (e) {
-    // If Blobs is unavailable for any reason, fail OPEN rather than breaking the feature —
-    // the Anthropic spend cap remains the real backstop.
-    console.error('Rate limit store error (continuing without it):', e.message);
   }
 
   // ── Forward to Anthropic ────────────────────────────────────────────────────
