@@ -685,7 +685,7 @@ function setExamReviewPage(p){examReviewPage=Math.max(0,p);render();}
 // IMPORTANT — set this to YOUR deployed function's URL after setting up
 // Netlify (see netlify/functions/claude-proxy.js for setup notes). This one
 // URL works whether the page itself is loaded from GitHub Pages or Netlify.
-const PROXY_URL = 'https://YOUR-SITE-NAME.netlify.app/.netlify/functions/claude-proxy';
+const PROXY_URL = 'https://studysparkau.netlify.app/.netlify/functions/claude-proxy';
 
 async function callClaude(system,user,maxTok=400,model='fast'){
   if(PROXY_URL.includes('YOUR-SITE-NAME')){
