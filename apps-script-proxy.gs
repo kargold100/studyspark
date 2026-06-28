@@ -99,11 +99,15 @@ function doPost(e) {
 
 // Visit the deployed URL directly in a browser to use this — confirms the
 // key is configured without needing to test a real AI request.
+var CODE_VERSION = '2026-06-28-v2'; // bump this string whenever you update this file, so the
+                                      // health-check response below proves which code is actually live
+
 function doGet(e) {
   var apiKey = PropertiesService.getScriptProperties().getProperty('ANTHROPIC_API_KEY');
   return jsonResponse({
     ok: true,
     message: 'StudySpark AI proxy (Apps Script) is deployed and reachable.',
+    codeVersion: CODE_VERSION,
     anthropicKeyConfigured: !!apiKey
   });
 }
