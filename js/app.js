@@ -677,19 +677,21 @@ function paginationBar(page,totalPages,onPageFn){
 function setBrowsePage(p){browsePage=Math.max(0,p);render();}
 function setExamReviewPage(p){examReviewPage=Math.max(0,p);render();}
 
-// ── AI PROXY (Netlify Function) ─────────────────────────────────────────────
-// AI features now call a server-side proxy instead of the Anthropic API
-// directly, so no visitor ever needs to supply or store an API key.
-// The key lives only as an environment variable on the Netlify function.
+// ── AI PROXY (Google Apps Script) ───────────────────────────────────────────
+// AI calls go through a Google Apps Script Web App instead of either a
+// client-stored key or a Netlify Function. The key lives only in the Apps
+// Script project's Script Properties — never sent to any visitor's browser.
+// See apps-script-proxy.gs for the server-side code and full setup steps.
 //
-// IMPORTANT — set this to YOUR deployed function's URL after setting up
-// Netlify (see netlify/functions/claude-proxy.js for setup notes). This one
-// URL works whether the page itself is loaded from GitHub Pages or Netlify.
-const PROXY_URL = 'https://studysparkau.netlify.app/.netlify/functions/claude-proxy';
+// IMPORTANT — replace this with YOUR deployed Apps Script Web App URL after
+// setup (Deploy → New deployment → Web app → copy the URL it gives you).
+// This one URL works whether the page itself is loaded from GitHub Pages or
+// Netlify — both call the exact same backend.
+const PROXY_URL = 'https://script.google.com/macros/s/AKfycbwRLR5lcf31113FEC--02tgROgigdIf97hlKXUPIKGiC5YURbFy7zkiLPtw2XQzHOFZQA/exec';
 
 async function callClaude(system,user,maxTok=400,model='fast'){
-  if(PROXY_URL.includes('YOUR-SITE-NAME')){
-    console.error('%c[StudySpark AI] PROXY_URL is still the placeholder value — it was never set to a real deployed Netlify function URL. See js/app.js near the top, search for "const PROXY_URL".','font-weight:bold;color:red');
+  if(PROXY_URL.includes('YOUR_DEPLOYMENT_ID')){
+    console.error('%c[StudySpark AI] PROXY_URL is still the placeholder value. See js/app.js near the top, search for "const PROXY_URL", and replace it with your deployed Apps Script Web App URL.','font-weight:bold;color:red');
     return '__NOT_CONFIGURED__';
   }
   const controller = new AbortController();
@@ -698,38 +700,38 @@ async function callClaude(system,user,maxTok=400,model='fast'){
     const r=await fetch(PROXY_URL,{
       method:'POST',
       signal:controller.signal,
-      headers:{'Content-Type':'application/json'},
+      // Deliberately text/plain, NOT application/json — this avoids a CORS
+      // preflight (OPTIONS) request, which Apps Script Web Apps don't handle
+      // reliably. The body content is still valid JSON text; Apps Script
+      // parses it the same way regardless of this header.
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
       body:JSON.stringify({system,user,maxTok,model})
     });
     clearTimeout(timeout);
     let d={};
-    try{ d=await r.json(); }catch{ /* non-JSON response, e.g. a 404 HTML page */ }
+    try{ d=await r.json(); }catch{ /* non-JSON response */ }
     if(!r.ok || d.error){
       if(d.error==='rate_limited') return '__RATE_LIMITED__';
-      if(r.status===403){
-        console.error(`%c[StudySpark AI] Proxy rejected this site's origin (${location.origin}). Either add it to the ALLOWED_ORIGINS environment variable in Netlify, or check it matches the *.github.io / *.netlify.app default pattern in netlify/functions/claude-proxy.js.`,'font-weight:bold;color:red');
-        return '__BLOCKED__';
-      }
-      if(r.status===500 && d.error==='server_not_configured'){
-        console.error('%c[StudySpark AI] ANTHROPIC_API_KEY is not set in the Netlify function\'s environment variables. Add it under Site configuration → Environment variables, then redeploy.','font-weight:bold;color:red');
+      if(d.error==='server_not_configured'){
+        console.error('%c[StudySpark AI] ANTHROPIC_API_KEY is not set in the Apps Script project\'s Script Properties. Open the script at script.google.com, Project Settings → Script Properties, add it, then create a NEW deployment (not just save).','font-weight:bold;color:red');
         return '__NOT_CONFIGURED__';
       }
       if(d.error==='upstream_error' && (d.type==='authentication_error'||d.type==='permission_error')){
-        console.error(`%c[StudySpark AI] Anthropic REJECTED the API key (${d.type}). The key set in Netlify's ANTHROPIC_API_KEY is missing, wrong, or was revoked/rotated in the Anthropic Console without updating Netlify's environment variable to match. Go to Netlify → Site configuration → Environment variables, update the value, then redeploy.`,'font-weight:bold;color:red');
+        console.error(`%c[StudySpark AI] Anthropic REJECTED the API key (${d.type}). Check the ANTHROPIC_API_KEY value in Script Properties matches a currently-active key, then create a NEW deployment.`,'font-weight:bold;color:red');
         return '__NOT_CONFIGURED__';
       }
       if(d.error==='upstream_error'){
-        console.error(`%c[StudySpark AI] Anthropic itself returned an error: ${d.type||'unknown'}. This usually means the key has no credit/spend limit reached, or the model name is wrong.`,'font-weight:bold;color:red');
+        console.error(`%c[StudySpark AI] Anthropic itself returned an error: ${d.type||'unknown'}.`,'font-weight:bold;color:red');
         return '';
       }
-      console.error('[StudySpark AI] Proxy returned an error:',r.status,d.error||'(no JSON body — check PROXY_URL points to a real deployed function)');
+      console.error('[StudySpark AI] Proxy returned an error:',r.status,d.error||'(check PROXY_URL points to a real deployed Apps Script web app, and that it was deployed with "Who has access: Anyone")');
       return '';
     }
     return d.text||'';
   }catch(e){
     clearTimeout(timeout);
     if(e.name==='AbortError') console.error('[StudySpark AI] Request timed out after 25s.');
-    else console.error('[StudySpark AI] Network/fetch error calling proxy — likely a wrong PROXY_URL, a CORS rejection, or the function is down:',e.message);
+    else console.error('[StudySpark AI] Network/fetch error calling proxy:',e.message);
     return '';
   }
 }
@@ -738,10 +740,10 @@ async function callClaude(system,user,maxTok=400,model='fast'){
 async function callClaudeUI(system,user,maxTok=400,_unused,model='fast'){
   const result=await callClaude(system,user,maxTok,model);
   if(result==='__RATE_LIMITED__'){
-    alert("You've hit today's AI usage limit — please try again tomorrow.");
+    alert("You've hit today's site-wide AI usage limit — please try again tomorrow.");
     return null;
   }
-  if(result==='__NOT_CONFIGURED__'||result==='__BLOCKED__'){
+  if(result==='__NOT_CONFIGURED__'){
     alert("AI features aren't set up correctly yet. (Details logged to the browser console for the site owner — press F12.)");
     return null;
   }
@@ -757,7 +759,7 @@ ${correct?'✅ [why correct, 8 words]':'❌ [what went wrong, 8 words]'}
 🎯 [one practice tip, 8 words]`;
   const usr=`${q.topic} Q: ${q.q.slice(0,100)}. Chosen: ${q.options[userAns]}. Correct: ${q.options[q.answer]}.`;
   const fb=await callClaude(sys,usr,120);
-  if(fb && !['__RATE_LIMITED__','__NOT_CONFIGURED__','__BLOCKED__'].includes(fb)) AIcache[key]=fb;
+  if(fb && !['__RATE_LIMITED__','__NOT_CONFIGURED__'].includes(fb)) AIcache[key]=fb;
   AIloading.delete(key);render();
 }
 
@@ -1364,7 +1366,7 @@ function renderBrowse(){
               ${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''}
               ${q.topic?`<span class="tag tm">${q.topic}</span>`:''}
               ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''}
-              
+
             </div>
             <div class="qtxt">Q${startIdx+i+1}. ${q.q}</div>
             ${opts}${hint}${result}${exp}
@@ -1585,7 +1587,7 @@ async function doLoadNotes(){
       'Australian selective school tutor, Grades 4-10. Write clear study notes:\n## Key Concepts\n• 3-5 concise bullet points covering the core ideas\n## Formula / Rule\n[The key formula or rule to remember]\n## Worked Example\n[One step-by-step example]\n## Exam Tips\n• 2-3 tips specific to selective exams\nUnder 300 words. Plain text, use ## headings and bullet points.',
       `Topic: ${studyTopic} | Subject: ${studySub} | Australian curriculum, selective exam focus.`
     );
-    if(t===null){studyLoading=false;return;}  // rate-limited; alert already shown
+    if(t===null){studyLoading=false;return;}  // rate-limited or not-configured; alert already shown
     studyNotes=t||'__ERROR__';
   }catch(e){
     console.error('Study notes error:',e);
