@@ -80,7 +80,7 @@ function doPost(e) {
 
     if (result.error) {
       Logger.log('Anthropic API error: ' + result.error.type + ' — ' + result.error.message);
-      return jsonResponse({ error: 'upstream_error', type: result.error.type });
+      return jsonResponse({ error: 'upstream_error', type: result.error.type, message: result.error.message });
     }
 
     var text = '';

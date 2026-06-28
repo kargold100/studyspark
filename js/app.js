@@ -687,7 +687,7 @@ function setExamReviewPage(p){examReviewPage=Math.max(0,p);render();}
 // setup (Deploy → New deployment → Web app → copy the URL it gives you).
 // This one URL works whether the page itself is loaded from GitHub Pages or
 // Netlify — both call the exact same backend.
-const PROXY_URL = 'https://script.google.com/macros/s/AKfycbwRLR5lcf31113FEC--02tgROgigdIf97hlKXUPIKGiC5YURbFy7zkiLPtw2XQzHOFZQA/exec';
+const PROXY_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
 
 async function callClaude(system,user,maxTok=400,model='fast'){
   if(PROXY_URL.includes('YOUR_DEPLOYMENT_ID')){
@@ -721,7 +721,7 @@ async function callClaude(system,user,maxTok=400,model='fast'){
         return '__NOT_CONFIGURED__';
       }
       if(d.error==='upstream_error'){
-        console.error(`%c[StudySpark AI] Anthropic itself returned an error: ${d.type||'unknown'}.`,'font-weight:bold;color:red');
+        console.error(`%c[StudySpark AI] Anthropic itself returned an error: ${d.type||'unknown'}. Message: ${d.message||'(none provided)'}`,'font-weight:bold;color:red');
         return '';
       }
       console.error('[StudySpark AI] Proxy returned an error:',r.status,d.error||'(check PROXY_URL points to a real deployed Apps Script web app, and that it was deployed with "Who has access: Anyone")');
@@ -1366,7 +1366,7 @@ function renderBrowse(){
               ${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''}
               ${q.topic?`<span class="tag tm">${q.topic}</span>`:''}
               ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''}
-
+              
             </div>
             <div class="qtxt">Q${startIdx+i+1}. ${q.q}</div>
             ${opts}${hint}${result}${exp}
@@ -1576,7 +1576,7 @@ function renderStudy(){
         <button class="btn bm" onclick="doLoadNotes()">🔄 Try Again</button>
       </div>
     </div>`
-    :`<div class="card mb14" style="padding:22px 26px;line-height:1.9;font-size:14px">${studyNotes.replace(/^## (.+)$/gm,'<h3 style="color:var(--accent);margin:16px 0 8px;font-size:15px">$1</h3>').replace(/^• (.+)$/gm,'<div style="padding-left:12px">• $1</div>').replace(/\n/g,'<br>')}</div>
+    :`<div class="card mb14" style="padding:22px 26px;line-height:1.9;font-size:14px">${studyNotes.replace(/^## (.+)$/gm,'<h3 style="color:var(--accent);margin:16px 0 8px;font-size:15px">$1</h3>').replace(/^[-•] (.+)$/gm,'<div style="padding-left:12px">• $1</div>').replace(/\n/g,'<br>')}</div>
     <div class="fc gap8 wrap"><button class="btn ba" onclick="startPractice({topic:'${studyTopic}'},'oneByOne',8)">✏️ Practice</button><button class="btn bog" onclick="doLoadNotes()">🔄 Regenerate</button><button class="btn bm" onclick="tutorQ='Give me 3 practice questions about ${studyTopic} with full solutions';nav('tutor')">🤖 Ask Tutor</button></div>`}
   </div>`;
 }
@@ -1584,7 +1584,7 @@ async function doLoadNotes(){
   studyNotes='';studyLoading=true;render();
   try{
     const t=await callClaudeUI(
-      'Australian selective school tutor, Grades 4-10. Write clear study notes:\n## Key Concepts\n• 3-5 concise bullet points covering the core ideas\n## Formula / Rule\n[The key formula or rule to remember]\n## Worked Example\n[One step-by-step example]\n## Exam Tips\n• 2-3 tips specific to selective exams\nUnder 300 words. Plain text, use ## headings and bullet points.',
+      'Australian selective school tutor, Grades 4-10. Write clear study notes:\n## Key Concepts\n- 3-5 concise points covering the core ideas\n## Formula / Rule\n[The key formula or rule to remember]\n## Worked Example\n[One step-by-step example]\n## Exam Tips\n- 2-3 tips specific to selective exams\nUnder 300 words. Plain text, use ## headings and hyphen bullet points.',
       `Topic: ${studyTopic} | Subject: ${studySub} | Australian curriculum, selective exam focus.`
     );
     if(t===null){studyLoading=false;return;}  // rate-limited or not-configured; alert already shown
