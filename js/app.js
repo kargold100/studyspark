@@ -687,7 +687,7 @@ function setExamReviewPage(p){examReviewPage=Math.max(0,p);render();}
 // setup (Deploy → New deployment → Web app → copy the URL it gives you).
 // This one URL works whether the page itself is loaded from GitHub Pages or
 // Netlify — both call the exact same backend.
-const PROXY_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+const PROXY_URL = 'https://script.google.com/macros/s/AKfycbwRLR5lcf31113FEC--02tgROgigdIf97hlKXUPIKGiC5YURbFy7zkiLPtw2XQzHOFZQA/exec';
 
 async function callClaude(system,user,maxTok=400,model='fast'){
   if(PROXY_URL.includes('YOUR_DEPLOYMENT_ID')){
@@ -1366,7 +1366,7 @@ function renderBrowse(){
               ${q.section?`<span class="tag ${SC[q.section]||'tm'}">${SL[q.section]||q.section}</span>`:''}
               ${q.topic?`<span class="tag tm">${q.topic}</span>`:''}
               ${q.difficulty?`<span class="tag ${DC[q.difficulty]||'tm'}">${q.difficulty}</span>`:''}
-              
+
             </div>
             <div class="qtxt">Q${startIdx+i+1}. ${q.q}</div>
             ${opts}${hint}${result}${exp}
