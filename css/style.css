@@ -106,7 +106,7 @@ body {
 
 /* ── BUTTONS ── */
 .btn {
-  padding: 9px 15px;
+  padding: 11px 17px;
   border-radius: 9px;
   border: none;
   font-weight: 700;
@@ -118,7 +118,10 @@ body {
   align-items: center;
   gap: 6px;
   text-decoration: none;
+  min-height: 40px;
+  -webkit-tap-highlight-color: transparent;
 }
+.btn:active { transform: scale(0.97); }
 .btn:hover { opacity: .88; transform: translateY(-1px); }
 .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
 .ba { background: var(--accent); color: #fff; }
@@ -154,7 +157,7 @@ input, textarea, select {
   border-radius: 9px;
   color: var(--text);
   padding: 9px 12px;
-  font-size: 14px;
+  font-size: 16px; /* must be >=16px or iOS Safari auto-zooms the whole page on focus */
   outline: none;
   font-family: var(--font);
   transition: border-color .15s;
@@ -214,7 +217,7 @@ h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
 .qcard.correct { border-color: rgba(61,214,140,.5); background: rgba(61,214,140,.03); }
 .qcard.wrong { border-color: rgba(247,79,79,.4); background: rgba(247,79,79,.03); }
 .qcard.revealed { border-color: rgba(79,142,247,.4); }
-.qtxt { font-weight: 700; margin-bottom: 12px; line-height: 1.65; white-space: pre-line; font-size: 14px; }
+.qtxt { font-weight: 700; margin-bottom: 12px; line-height: 1.65; white-space: pre-line; font-size: 15px; }
 .opt {
   display: flex;
   align-items: flex-start;
@@ -222,15 +225,18 @@ h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
   background: #090b18;
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 9px 12px;
+  padding: 13px 14px;
   cursor: pointer;
   color: var(--text);
-  font-size: 13px;
-  margin-bottom: 7px;
+  font-size: 14px;
+  margin-bottom: 8px;
   transition: all .12s;
   user-select: none;
   line-height: 1.5;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
 }
+.opt:active:not(.dis) { transform: scale(0.99); }
 .opt:hover:not(.dis) { border-color: var(--accent); background: rgba(79,142,247,.07); }
 .opt.sel { border-color: var(--accent); background: rgba(79,142,247,.12); color: var(--accent); }
 .opt.cor { border-color: var(--green); background: rgba(61,214,140,.1); color: var(--green); font-weight: 700; }
@@ -330,7 +336,7 @@ h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
 .history-badge { min-width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
 
 /* ── MODAL ── */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
 .modal { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; max-width: 560px; width: 100%; max-height: 80vh; overflow-y: auto; }
 
 /* ── STATS RING ── */
@@ -473,24 +479,3 @@ h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
   margin-bottom: 20px;
 }
 .stars-display { font-size: 36px; margin: 10px 0; letter-spacing: 4px; }
-
-/* ── API KEY MODAL ─────────────────────────────────────────────────────── */
-.modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.75);
-  z-index: 9998;
-  display: flex; align-items: center; justify-content: center;
-  padding: 20px;
-  backdrop-filter: blur(4px);
-}
-.modal {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 26px;
-  max-width: 520px;
-  width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-}
-.modal h3 { margin-bottom: 10px; }
