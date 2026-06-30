@@ -4,7 +4,7 @@
 const SL  = {vic_reading:'📖 VIC Reading',vic_maths:'🔢 VIC Maths',vic_verbal:'🧠 VIC Verbal',vic_quant:'📐 VIC Quant',nsw_reading:'📖 NSW Reading',nsw_maths:'🔢 NSW Maths',nsw_thinking:'🧩 NSW Thinking',gen_maths:'➗ Primary Maths',gen_english:'📚 Primary English',gen_science:'🔬 Primary Science',gen_digitech:'💻 Digital Tech',gen_puzzles:'🧩 Logic Puzzles',sec_maths:'🔢 Secondary Maths',sec_english:'📚 Secondary English',sec_science:'🔬 Secondary Science',sr_english:'📚 Senior English',sr_biology:'🧬 Senior Biology',sr_chemistry:'⚗️ Senior Chemistry',sr_physics:'⚛️ Senior Physics',sr_genmaths:'📊 Senior General Maths',sr_methods:'📈 Senior Maths Methods',sr_specialist:'∫ Senior Specialist Maths'};
 const SC  = {vic_reading:'ta',vic_maths:'tg',vic_verbal:'tpu',vic_quant:'to',nsw_reading:'ta',nsw_maths:'tg',nsw_thinking:'tpu',gen_maths:'tg',gen_english:'ta',gen_science:'to',gen_digitech:'tpu',gen_puzzles:'ty',sec_maths:'tg',sec_english:'ta',sec_science:'to',sr_english:'ta',sr_biology:'to',sr_chemistry:'to',sr_physics:'to',sr_genmaths:'tg',sr_methods:'tg',sr_specialist:'tg'};
 const DC  = {easy:'tg',medium:'to',hard:'tp'};
-const STL = {standard:'Standard',eshs:'E/SHS',singapore:'Singapore',logic:'Logic',reading:'Reading',assessment:'Assessment',advanced:'Advanced',opportunity:'OC',scholarship:'Scholarship',seal:'SEAL',language:'Language',academic:'Academic',tutorial:'Tutorial'};
+const STL = {standard:'Standard',eshs:'E/SHS',singapore:'Singapore',logic:'Logic',reading:'Reading',assessment:'Assessment',advanced:'Advanced',opportunity:'OC',scholarship:'Scholarship',seal:'SEAL',language:'Language',academic:'Academic',tutorial:'Tutorial',competition:'Competition',olympiad:'Olympiad',enrichment:'Enrichment'};
 
 // ── IMPROVEMENT FEEDBACK: section groups & suggested resources ────────────────
 const SECTION_GROUP = {
@@ -118,6 +118,12 @@ const EXAM_DEFS = [
   {id:'e67',title:'Grade 4 Science – Paper 1',section:'gen_science',grade:'4',paper:'G4-S1',duration:20,count:25,color:'var(--orange)'},
   {id:'e68',title:'Grade 4 Science – Paper 2',section:'gen_science',grade:'4',paper:'G4-S2',duration:20,count:25,color:'var(--orange)'},
   {id:'e69',title:'Grade 4 Digital Tech – Paper 1',section:'gen_digitech',grade:'4',paper:'G4-D1',duration:20,count:25,color:'var(--purple)'},
+  {id:'e512',title:'🏆 Grade 4 Maths Competition – Paper 1',section:'gen_maths',grade:'4',paper:'G4-C1',style:'competition',duration:35,count:25,color:'var(--pink)'},
+  {id:'e513',title:'🏆 Grade 3 Maths Competition – Paper 1',section:'gen_maths',grade:'3',paper:'G3-C1',style:'competition',duration:30,count:25,color:'var(--pink)'},
+  {id:'e514',title:'🏆 Grade 5 Maths Competition – Paper 1',section:'gen_maths',grade:'5',paper:'G5-C1',style:'competition',duration:35,count:25,color:'var(--pink)'},
+  {id:'e515',title:'🏆 Grade 6 Maths Competition – Paper 1',section:'gen_maths',grade:'6',paper:'G6-C1',style:'competition',duration:40,count:25,color:'var(--pink)'},
+  {id:'e516',title:'🏆 Grade 1 Maths Competition – Paper 1',section:'gen_maths',grade:'1',paper:'G1-C1',style:'competition',duration:25,count:25,color:'var(--pink)'},
+  {id:'e517',title:'🏆 Grade 2 Maths Competition – Paper 1',section:'gen_maths',grade:'2',paper:'G2-C1',style:'competition',duration:25,count:25,color:'var(--pink)'},
   {id:'e70',title:'Grade 4 Digital Tech – Paper 2',section:'gen_digitech',grade:'4',paper:'G4-D2',duration:20,count:25,color:'var(--purple)'},
   {id:'e71',title:'Grade 5 Maths – Paper 1',section:'gen_maths',grade:'5',paper:'G5-M1',duration:25,count:25,color:'var(--green)'},
   {id:'e72',title:'Grade 5 Maths – Paper 2',section:'gen_maths',grade:'5',paper:'G5-M2',duration:25,count:25,color:'var(--green)'},
@@ -638,7 +644,7 @@ let revealedIds=new Set(), hintVisible={};
 let pQs=[],pAns=[],pSub=false,pMode='oneByOne',pScore=0,pIdx=0,pResult=null;
 let pPageSize=10,pPagePool=[],pPageFilters={},pTotalDone=0,pTotalCorrect=0; // pagination
 let exam=null,examSub=false,examTL=0,examTimer=null,examStart=null,examResult=null;
-let examTab='all',examGenGrade='ALL',examGenSubject='ALL';
+let examTab='all',examGenGrade='ALL',examGenSubject='ALL',examGenTier='ALL';
 let browsePage=0,examReviewPage=0;
 const PAGE_SIZE=20;
 let selState='VIC',selSec=null,selPQs=[],selPAns=[],selPSub=false;
@@ -1396,6 +1402,7 @@ function submitExam(){
 }
 function groupExam(def){
   if(def.style==='seal')return'seal';
+  if(['competition','olympiad','enrichment'].includes(def.style))return'challenge';
   if(def.state==='VIC')return'vic';
   if(def.state==='NSW')return'nsw';
   if(def.section&&def.section.indexOf('sr_')===0)return'senior';
@@ -1408,6 +1415,7 @@ const EXAM_TABS=[
   {id:'vic',l:'VIC Selective',c:'var(--accent)'},
   {id:'nsw',l:'NSW Selective',c:'var(--yellow)'},
   {id:'seal',l:'SEAL (Gr 7)',c:'var(--red)'},
+  {id:'challenge',l:'🏆 Challenge Papers',c:'var(--pink)'},
   {id:'primary',l:'Primary (Gr 1-6)',c:'var(--green)'},
   {id:'secondary',l:'Secondary (Yr 7-10)',c:'var(--teal)'},
   {id:'senior',l:'Senior (Yr 11-12)',c:'var(--pink)'},
@@ -1426,13 +1434,14 @@ const SENIOR_SUBJECTS=[
 function renderExams(){
   const tagged=EXAM_DEFS.map((def,i)=>({def,i,grp:groupExam(def)}));
   let visible=examTab==='all'?tagged:tagged.filter(x=>x.grp===examTab);
-  if(examTab==='primary'||examTab==='secondary'||examTab==='senior'){
+  if(examTab==='primary'||examTab==='secondary'||examTab==='senior'||examTab==='challenge'){
     if(examGenSubject!=='ALL')visible=visible.filter(x=>x.def.section===examGenSubject);
     if(examGenGrade!=='ALL')visible=visible.filter(x=>x.def.grade===examGenGrade);
   }
+  if(examTab==='challenge'&&examGenTier!=='ALL')visible=visible.filter(x=>x.def.style===examGenTier);
   const tabCounts={};tagged.forEach(x=>{tabCounts[x.grp]=(tabCounts[x.grp]||0)+1;});
   return `<div class="page">${profileBar()}<h1>📝 Mock Exams</h1><p class="mt mb20">Timed exams. Stars awarded for accuracy. AI coaching after submission. ${EXAM_DEFS.length} exams available.</p>
-    <div class="fc gap8 wrap mb20">${EXAM_TABS.map(t=>`<button class="btn ${examTab===t.id?'bp':'bm'} bsm" onclick="examTab='${t.id}';examGenGrade='ALL';examGenSubject='ALL';render()">${t.l} <span class="tag tm xs" style="margin-left:5px">${t.id==='all'?EXAM_DEFS.length:(tabCounts[t.id]||0)}</span></button>`).join('')}</div>
+    <div class="fc gap8 wrap mb20">${EXAM_TABS.map(t=>`<button class="btn ${examTab===t.id?'bp':'bm'} bsm" onclick="examTab='${t.id}';examGenGrade='ALL';examGenSubject='ALL';examGenTier='ALL';render()">${t.l} <span class="tag tm xs" style="margin-left:5px">${t.id==='all'?EXAM_DEFS.length:(tabCounts[t.id]||0)}</span></button>`).join('')}</div>
     ${examTab==='seal'?`<div class="card mb20" style="border-left:3px solid var(--red);padding-left:16px">
       <h3 class="mb8">🎯 Preparing for the SEAL entrance test?</h3>
       <p class="mt sm mb14" style="line-height:1.7">SEAL is a Year 7 entry program — students sit the entrance test while in Grade 6, covering Maths, Verbal Reasoning, Quantitative Reasoning and Reading. These 5 SEAL-tagged papers are great direct practice, but the skills overlap heavily with VIC Selective entry prep, which has a much deeper question pool (thousands more questions) across the same four areas.</p>
@@ -1440,6 +1449,25 @@ function renderExams(){
         <button class="btn bp bsm" onclick="examTab='vic';examGenGrade='ALL';examGenSubject='ALL';render()">📝 Browse VIC Selective Exams</button>
         <button class="btn bm bsm" onclick="nav('selective')">🏆 Go to Selective Exam Prep</button>
       </div>
+    </div>`:''}
+    ${examTab==='challenge'?`<div class="card mb20" style="border-left:3px solid var(--pink);padding-left:16px">
+      <h3 class="mb8">🏆 Challenge Papers</h3>
+      <p class="mt sm mb14" style="line-height:1.7">Harder, extension-style papers for students wanting more of a stretch than standard curriculum practice. Three tiers, roughly in order of difficulty:</p>
+      <p class="mt sm mb8" style="line-height:1.7"><strong>Competition</strong> — trickier, multi-step problems in a competition-maths style.<br/><strong>Olympiad</strong> — the hardest tier, academic-olympiad style problems requiring creative reasoning.<br/><strong>Enrichment</strong> — broader extension content, going beyond the standard curriculum's scope.</p>
+    </div>
+    <div class="fc gap8 wrap mb14">
+      <button class="btn ${examGenTier==='ALL'?'bp':'bm'} bsm" onclick="examGenTier='ALL';render()">All Tiers</button>
+      <button class="btn ${examGenTier==='competition'?'bp':'bm'} bsm" onclick="examGenTier='competition';render()">Competition</button>
+      <button class="btn ${examGenTier==='olympiad'?'bp':'bm'} bsm" onclick="examGenTier='olympiad';render()">Olympiad</button>
+      <button class="btn ${examGenTier==='enrichment'?'bp':'bm'} bsm" onclick="examGenTier='enrichment';render()">Enrichment</button>
+    </div>
+    <div class="fc gap8 wrap mb14">
+      <button class="btn ${examGenSubject==='ALL'?'bp':'bm'} bsm" onclick="examGenSubject='ALL';render()">All Subjects</button>
+      ${PRIMARY_SUBJECTS.map(p=>`<button class="btn ${examGenSubject===p.s?'bp':'bm'} bsm" onclick="examGenSubject='${p.s}';render()">${p.l}</button>`).join('')}
+    </div>
+    <div class="fc gap8 wrap mb20">
+      <button class="btn ${examGenGrade==='ALL'?'bp':'bm'} bsm" onclick="examGenGrade='ALL';render()">All Grades</button>
+      ${['1','2','3','4','5','6'].map(g=>`<button class="btn ${examGenGrade===g?'bp':'bm'} bsm" onclick="examGenGrade='${g}';render()">Grade ${g}</button>`).join('')}
     </div>`:''}
     ${examTab==='primary'?`<div class="fc gap8 wrap mb14">
       <button class="btn ${examGenSubject==='ALL'?'bp':'bm'} bsm" onclick="examGenSubject='ALL';render()">All Subjects</button>
