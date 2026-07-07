@@ -3836,7 +3836,7 @@ const SENIOR_SUBJECTS=[
 ];
 function renderExams(){
   const tagged=EXAM_DEFS.map((def,i)=>({def,i,grp:groupExam(def)}));
-  let visible=examTab==='all'?tagged:tagged.filter(x=>x.grp===examTab);
+  let visible=(examTab==='all'?tagged:tagged.filter(x=>x.grp===examTab)).filter(x=>x.def.color&&x.def.title);
   if(examTab==='primary'||examTab==='secondary'||examTab==='senior'||examTab==='challenge'){
     if(examGenSubject!=='ALL')visible=visible.filter(x=>x.def.section===examGenSubject);
     if(examGenGrade!=='ALL')visible=visible.filter(x=>x.def.grade===examGenGrade);
@@ -3897,7 +3897,7 @@ function renderExams(){
       ${['11','12'].map(g=>`<button class="btn ${examGenGrade===g?'bp':'bm'} bsm" onclick="examGenGrade='${g}';render()">Year ${g}</button>`).join('')}
     </div>`:''}
     <div class="g2">${visible.map(({def,i})=>{const stTag=def.state?`<span class="tag ${def.state==='NSW'?'ty':'ta'} xs">${def.state}</span>`:'';const stlTag=def.style?`<span class="tag tpu xs">${STL[def.style]||def.style}</span>`:'';const dTag=def.difficulty?`<span class="tag tg xs">${def.difficulty}</span>`:'';
-      return `<div class="card hov" style="border-color:${def.color}44"><div class="fc gap8 mb8 wrap">${stTag}${stlTag}${dTag}</div><h3 style="margin-bottom:5px">${def.title}</h3><p class="mt sm mb14">⏱ ${def.duration} min · 📋 ${def.count} Qs · ⭐ Up to 3 stars</p><button class="btn bsm" style="background:${def.color};color:${def.color.includes('yellow')?'#1a1200':'#fff'}" onclick="startExam(${i})">Start →</button></div>`;
+      return `<div class="card hov" style="border-color:${def.color}44"><div class="fc gap8 mb8 wrap">${stTag}${stlTag}${dTag}</div><h3 style="margin-bottom:5px">${def.title}</h3><p class="mt sm mb14">⏱ ${def.duration} min · 📋 ${def.count} Qs · ⭐ Up to 3 stars</p><button class="btn bsm" style="background:${def.color};color:${(def.color||'').includes('yellow')?'#1a1200':'#fff'}" onclick="startExam(${i})">Start →</button></div>`;
     }).join('')}</div>
     ${!visible.length?`<p class="mt sm">No exams match this filter yet.</p>`:''}</div>`;
 }
