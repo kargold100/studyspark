@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>StudySpark — Australian Selective Exam Prep</title>
-<meta name="description" content="Free study portal for Australian students Grades 1–12. 63600+ questions, personalised profiles, achievements and AI coaching."/>
+<meta name="description" content="Free study portal for Australian students Grades 1–12. 100,000+ questions, personalised profiles, achievements and AI coaching."/>
+<meta name="theme-color" content="#0d0f1a"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta property="og:title" content="StudySpark — Australian Selective Exam Prep"/>
+<meta property="og:description" content="Free study portal for Australian students. 100,000+ questions, AI coaching, personalised profiles."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/style.css?v=20260705j"/>
+<link rel="stylesheet" href="css/style.css?v=20260705v"/>
 </head>
 <body>
+<noscript>
+  <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:#0d0f1a;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;z-index:9999;font-family:sans-serif">
+    <div>
+      <div style="font-size:48px;margin-bottom:16px">⚠️</div>
+      <h2 style="margin-bottom:12px">JavaScript Required</h2>
+      <p style="color:#aaa;max-width:400px;line-height:1.6">StudySpark requires JavaScript to run. Please enable JavaScript in your browser settings and reload the page.</p>
+    </div>
+  </div>
+</noscript>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <div class="hdr">
   <span class="logo" onclick="App.home()">🎓 StudySpark</span>
   <div class="nav" id="nav-bar"></div>
 </div>
-<div id="app">
-  <div class="loading">
-    <span class="spin" style="font-size:32px">⏳</span>
-    <div style="margin-top:12px;font-weight:700">Loading StudySpark...</div>
-    <div class="mt sm" style="margin-top:6px">63600+ questions · Personalised profiles · AI coaching</div>
+<div id="app" role="main" aria-label="StudySpark content" aria-live="polite">
+  <div class="loading" role="status" aria-live="polite" aria-label="Loading StudySpark application">
+    <div class="spin-ring" aria-hidden="true"></div>
+    <div style="margin-top:16px;font-weight:700;font-size:18px">Loading StudySpark</div>
+    <div class="mt sm" style="margin-top:8px;color:var(--muted)">100,000+ questions · AI coaching · Free forever</div>
+    <div id="load-progress" style="margin-top:12px;font-size:12px;color:var(--muted)" aria-live="polite"></div>
   </div>
 </div>
 <script>
@@ -40,38 +56,38 @@
 <div style="text-align:center;padding:14px 16px 22px;color:var(--muted);font-size:11px;line-height:1.6;opacity:.85">
   StudySpark v1.0 — For learning and practice purposes only. Questions are original, sample-style practice material and are not an official or guaranteed exam preparation resource.
 </div>
-<script src="data/funzone.js?v=20260705j"></script>
-<script src="data/tips.js?v=20260705j"></script>
-<script src="data/languages.js?v=20260705j"></script>
-<script src="data/writing.js?v=20260705j"></script>
-<script src="js/profiles.js?v=20260705j"></script>
-<script src="data/questions/vic_maths.js?v=20260705j"></script>
-<script src="data/questions/vic_verbal.js?v=20260705j"></script>
-<script src="data/questions/vic_quant.js?v=20260705j"></script>
-<script src="data/questions/vic_reading.js?v=20260705j"></script>
-<script src="data/questions/nsw_thinking.js?v=20260705j"></script>
-<script src="data/questions/nsw_maths.js?v=20260705j"></script>
-<script src="data/questions/nsw_reading.js?v=20260705j"></script>
-<script src="data/questions/gen_maths.js?v=20260705j"></script>
-<script src="data/questions/gen_english.js?v=20260705j"></script>
-<script src="data/questions/gen_science.js?v=20260705j"></script>
-<script src="data/questions/gen_digitech.js?v=20260705j"></script>
-<script src="data/questions/gen_puzzles.js?v=20260705j"></script>
-    <script src="data/questions/icas_maths.js?v=20260705j"></script>
-    <script src="data/questions/icas_english.js?v=20260705j"></script>
-    <script src="data/questions/icas_science.js?v=20260705j"></script>
-    <script src="data/questions/icas_digital.js?v=20260705j"></script>
-<script src="data/questions/sec_maths.js?v=20260705j"></script>
-<script src="data/questions/sec_english.js?v=20260705j"></script>
-<script src="data/questions/sec_science.js?v=20260705j"></script>
-<script src="data/questions/sr_english.js?v=20260705j"></script>
-<script src="data/questions/sr_biology.js?v=20260705j"></script>
-<script src="data/questions/sr_chemistry.js?v=20260705j"></script>
-<script src="data/questions/sr_physics.js?v=20260705j"></script>
-<script src="data/questions/sr_genmaths.js?v=20260705j"></script>
-<script src="data/questions/sr_methods.js?v=20260705j"></script>
-<script src="data/questions/sr_specialist.js?v=20260705j"></script>
-<script src="js/questions.js?v=20260705j"></script>
-<script src="js/app.js?v=20260705j"></script>
+<script src="data/funzone.js?v=20260705v" defer></script>
+<script src="data/tips.js?v=20260705v" defer></script>
+<script src="data/languages.js?v=20260705v" defer></script>
+<script src="data/writing.js?v=20260705v" defer></script>
+<script src="data/questions/gen_digitech.js?v=20260705v" defer></script>
+<script src="data/questions/gen_english.js?v=20260705v" defer></script>
+<script src="data/questions/gen_maths.js?v=20260705v" defer></script>
+<script src="data/questions/gen_puzzles.js?v=20260705v" defer></script>
+<script src="data/questions/gen_science.js?v=20260705v" defer></script>
+<script src="data/questions/icas_digital.js?v=20260705v" defer></script>
+<script src="data/questions/icas_english.js?v=20260705v" defer></script>
+<script src="data/questions/icas_maths.js?v=20260705v" defer></script>
+<script src="data/questions/icas_science.js?v=20260705v" defer></script>
+<script src="data/questions/nsw_maths.js?v=20260705v" defer></script>
+<script src="data/questions/nsw_reading.js?v=20260705v" defer></script>
+<script src="data/questions/nsw_thinking.js?v=20260705v" defer></script>
+<script src="data/questions/sec_english.js?v=20260705v" defer></script>
+<script src="data/questions/sec_maths.js?v=20260705v" defer></script>
+<script src="data/questions/sec_science.js?v=20260705v" defer></script>
+<script src="data/questions/sr_biology.js?v=20260705v" defer></script>
+<script src="data/questions/sr_chemistry.js?v=20260705v" defer></script>
+<script src="data/questions/sr_english.js?v=20260705v" defer></script>
+<script src="data/questions/sr_genmaths.js?v=20260705v" defer></script>
+<script src="data/questions/sr_methods.js?v=20260705v" defer></script>
+<script src="data/questions/sr_physics.js?v=20260705v" defer></script>
+<script src="data/questions/sr_specialist.js?v=20260705v" defer></script>
+<script src="data/questions/vic_maths.js?v=20260705v" defer></script>
+<script src="data/questions/vic_quant.js?v=20260705v" defer></script>
+<script src="data/questions/vic_reading.js?v=20260705v" defer></script>
+<script src="data/questions/vic_verbal.js?v=20260705v" defer></script>
+<script src="js/profiles.js?v=20260705v" defer></script>
+<script src="js/questions.js?v=20260705v" defer></script>
+<script src="js/app.js?v=20260705v" defer></script>
 </body>
 </html>

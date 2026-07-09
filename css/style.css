@@ -479,3 +479,207 @@ h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
   margin-bottom: 20px;
 }
 .stars-display { font-size: 36px; margin: 10px 0; letter-spacing: 4px; }
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   ACCESSIBILITY  ·  MOBILE  ·  UX ENHANCEMENTS
+   ════════════════════════════════════════════════════════════════ */
+
+/* Skip to main content — visible on keyboard focus */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 8px;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 10000;
+  text-decoration: none;
+  transition: top 0.15s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.4);
+}
+.skip-link:focus {
+  top: 8px;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Focus rings — visible on keyboard navigation, hidden on mouse */
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+button:focus-visible,
+.btn:focus-visible,
+.nb:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(79,150,247,.2);
+}
+
+/* Touch targets — WCAG 2.5.5: at least 44×44px */
+.btn, button, .nb, select {
+  min-height: 44px;
+  min-width: 44px;
+}
+.nb {
+  min-height: 38px;
+  padding: 8px 10px;
+}
+.btn.bsm {
+  min-height: 36px;
+  min-width: 36px;
+}
+
+/* Progress bars */
+.prog-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+/* Header bar inside pages */
+.hdr-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+/* Tag colour variants */
+.tr { background: rgba(247,79,79,.15); color: var(--red); border: 1px solid rgba(247,79,79,.3); }
+
+/* Grid utilities */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+
+/* Smooth font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── REDUCED MOTION (prefers-reduced-motion) ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .spin-ring { animation: none !important; border-top-color: var(--accent); }
+}
+
+/* ── LOADING SPINNER ─── */
+.spin-ring {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin-anim 0.7s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin-anim { to { transform: rotate(360deg); } }
+
+/* ── MOBILE: Extra small phones ≤ 380px ─── */
+@media (max-width: 380px) {
+  body { font-size: 14px; }
+  .hdr { padding: 0 6px 0 12px; height: 52px; }
+  .logo { font-size: 15px; }
+  #app, main { padding: 8px 6px 24px; }
+  .card { padding: 14px 12px; }
+  .btn { font-size: 13px; padding: 10px 14px; }
+  h1 { font-size: 20px; }
+  h2 { font-size: 17px; }
+  h3 { font-size: 14px; }
+  .g4, .g3 { grid-template-columns: 1fr 1fr !important; }
+  .g2 { grid-template-columns: 1fr !important; }
+  .fc { flex-wrap: wrap !important; }
+}
+
+/* ── MOBILE: Standard phones ≤ 480px ─── */
+@media (max-width: 480px) {
+  body { font-size: 14px; }
+  #app, main { padding: 10px 8px 28px; }
+  .card { padding: 14px 12px; border-radius: 10px; }
+  .btn { font-size: 13px; padding: 10px 16px; }
+  h2 { font-size: 18px; }
+  h3 { font-size: 15px; }
+  .g4 { grid-template-columns: 1fr 1fr !important; }
+  .g3 { grid-template-columns: 1fr 1fr !important; }
+  /* Exam option buttons — full width, larger text */
+  .q-opts { gap: 8px !important; }
+  .opt { font-size: 14px !important; padding: 13px 14px !important; min-height: 48px; }
+  /* Tab bars wrap */
+  .tabs { flex-wrap: wrap !important; gap: 4px !important; }
+  .tab { font-size: 12px !important; padding: 6px 10px !important; }
+  /* Hero buttons stack */
+  .hero .fc { flex-direction: column !important; }
+  .hero .btn { width: 100%; justify-content: center; }
+  /* Nav bar items smaller */
+  .nb { font-size: 10px !important; padding: 6px 7px !important; }
+}
+
+/* ── TABLET: 481–768px ─── */
+@media (min-width: 481px) and (max-width: 768px) {
+  #app, main { padding: 14px 12px 32px; }
+  .g4 { grid-template-columns: 1fr 1fr !important; }
+  .card { padding: 16px 14px; }
+}
+
+/* ── QUESTION TEXT on mobile ─── */
+@media (max-width: 640px) {
+  .q-text, .q-body { font-size: 16px !important; line-height: 1.55 !important; }
+  .q-opts { grid-template-columns: 1fr !important; }
+  .opt { padding: 13px 16px !important; font-size: 14px !important; text-align: left; }
+  .exp { font-size: 13px; line-height: 1.5; }
+  .timer-bar { height: 6px !important; }
+}
+
+/* ── HIGH CONTRAST MODE ─── */
+@media (forced-colors: active) {
+  .btn, .nb { border: 2px solid ButtonText; }
+  .card { border: 1px solid ButtonText; }
+  .prog-fill { background: Highlight; }
+}
+
+/* ── PRINT ─── */
+@media print {
+  .hdr, .nav, .nb, .btn, .back-btn, .skip-link { display: none !important; }
+  body { background: white !important; color: black !important; font-size: 12pt; }
+  .card { border: 1px solid #ccc !important; box-shadow: none !important; page-break-inside: avoid; }
+  .page { padding: 0 !important; }
+}
+
+/* ── CONTENT VISIBILITY (perf) ─── */
+.page-section { content-visibility: auto; contain-intrinsic-size: 0 400px; }
+
+/* ── UX MICRO-INTERACTIONS ─── */
+.btn { transition: transform 0.1s ease, opacity 0.15s ease, box-shadow 0.15s ease; }
+.btn:active { transform: scale(0.97); }
+.card.hov { transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; }
+.card.hov:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+.card.hov:active { transform: translateY(0); }
+
+/* ── SELECTION COLOUR ─── */
+::selection { background: rgba(79,150,247,.35); color: var(--text); }
