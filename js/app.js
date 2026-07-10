@@ -50,11 +50,22 @@ function topicFeedback(topic){
 }
 
 const NAV_ITEMS = [
-  {id:'home',l:'🏠 Home'},{id:'browse',l:'📋 Questions'},
-  {id:'practice',l:'✏️ Practice'},{id:'exams',l:'📝 Exams'},
-  {id:'selective',l:'🏆 Selective'},{id:'tips',l:'💡 Tips'},
-  {id:'study',l:'📚 Study'},{id:'tutor',l:'🤖 Tutor'},
-  {id:'funzone',l:'🎮 Fun Zone'},{id:'languages',l:'🗣️ Languages'},{id:'profile',l:'👤 Profile'},
+  {id:'home',       l:'🏠 Home'},
+  {id:'practice',   l:'✏️ Practice'},
+  {id:'diagnostic', l:'🔍 Diagnostic'},
+  {id:'exams',      l:'📝 Mock Exams'},
+  {id:'selective',  l:'🏆 Selective'},
+  {id:'naplan',     l:'📝 NAPLAN'},
+  {id:'browse',     l:'📋 Question Bank'},
+  {id:'vocab',      l:'📚 Vocabulary'},
+  {id:'dashboard',  l:'📊 Dashboard'},
+  {id:'parentdash', l:'👨‍👩‍👧 Parents'},
+  {id:'study',      l:'📖 Study Notes'},
+  {id:'tutor',      l:'🤖 AI Tutor'},
+  {id:'funzone',    l:'🎮 Fun Zone'},
+  {id:'languages',  l:'🗣️ Languages'},
+  {id:'tips',       l:'💡 Tips'},
+  {id:'profile',    l:'👤 Profile'},
 ];
 
 const EXAM_DEFS = [
@@ -3454,6 +3465,7 @@ function submitOneByOne(){
   const q=pQs[pIdx];const ok=ans===q.answer;
   if(ok)pScore++;
   if(currentUser)Profiles.recordAnswer(currentUser,q,ok);
+  recordAnswerWithTiming(currentUser,q,ok);
   pSub=true;
   getAIFeedback(q,ans,ok);
   render();
@@ -3501,7 +3513,8 @@ function submitBatch(){
   pResult=currentUser?Profiles.recordSession(currentUser,pQs,pAns,'batch',null):null;
   render();
 }
-function renderPractice(){if(!pQs.length)return renderPracticeMenu();return pMode==='oneByOne'?renderOneByOne():renderBatch();}
+function renderPractice(){
+  markQuestionStart();if(!pQs.length)return renderPracticeMenu();return pMode==='oneByOne'?renderOneByOne():renderBatch();}
 
 function renderPracticeMenu(){
   const rows=[{s:'vic_maths',l:'🔢 VIC Maths',c:'var(--green)'},{s:'vic_verbal',l:'🧠 VIC Verbal',c:'var(--purple)'},{s:'vic_quant',l:'📐 VIC Quant',c:'var(--orange)'},{s:'vic_reading',l:'📖 VIC Reading',c:'var(--accent)'},{s:'nsw_thinking',l:'🧩 NSW Thinking',c:'var(--purple)'},{s:'nsw_maths',l:'🔢 NSW Maths',c:'var(--green)'},{s:'nsw_reading',l:'📖 NSW Reading',c:'var(--accent)'},{s:'gen_maths',l:'➗ Primary Maths (Gr 1-6)',c:'var(--green)'},{s:'gen_english',l:'📚 Primary English (Gr 1-6)',c:'var(--accent)'},{s:'gen_science',l:'🔬 Primary Science (Gr 1-6)',c:'var(--orange)'},{s:'gen_digitech',l:'💻 Digital Tech (Gr 1-6)',c:'var(--purple)'},{s:'gen_puzzles',l:'🧩 Logic Puzzles (Gr 1-6)',c:'var(--yellow)'},{s:'sec_maths',l:'🔢 Secondary Maths (Yr 7-10)',c:'var(--green)'},{s:'sec_english',l:'📚 Secondary English (Yr 7-10)',c:'var(--accent)'},{s:'sec_science',l:'🔬 Secondary Science (Yr 7-10)',c:'var(--orange)'},{s:'sr_english',l:'📚 Senior English (Yr 11-12)',c:'var(--accent)'},{s:'sr_biology',l:'🧬 Senior Biology (Yr 11-12)',c:'var(--orange)'},{s:'sr_chemistry',l:'⚗️ Senior Chemistry (Yr 11-12)',c:'var(--orange)'},{s:'sr_physics',l:'⚛️ Senior Physics (Yr 11-12)',c:'var(--orange)'},{s:'sr_genmaths',l:'📊 Senior General Maths (Yr 11-12)',c:'var(--green)'},{s:'sr_methods',l:'📈 Senior Maths Methods (Yr 11-12)',c:'var(--green)'},{s:'sr_specialist',l:'∫ Senior Specialist Maths (Yr 11-12)',c:'var(--green)'}];
@@ -4401,134 +4414,197 @@ function renderHome(){
   const lv=d?Profiles.getLevel(d.xp||0):null;
   const stats=d?Profiles.getStats(currentUser):null;
   const weakSpots=stats?.weakTopics?.slice(0,3)||[];
-  const PROVIDERS=[{s:'standard',l:'Standard',e:'🏛️',c:'var(--accent)'},{s:'eshs',l:'E/SHS Style',e:'📐',c:'var(--green)'},{s:'singapore',l:'Singapore',e:'🇸🇬',c:'var(--orange)'},{s:'logic',l:'Logic',e:'🎯',c:'var(--purple)'},{s:'reading',l:'Reading',e:'📖',c:'var(--pink)'},{s:'assessment',l:'Assessment',e:'🧪',c:'var(--teal)'},{s:'advanced',l:'Advanced',e:'📊',c:'var(--yellow)'},{s:'scholarship',l:'Scholarship',e:'⚡',c:'var(--red)'},{s:'opportunity',l:'OC Style',e:'🌟',c:'var(--green)'}];
 
   return `<div class="page">
     ${profileBar()}
+
+    <!-- HERO -->
     <div class="hero">
-      <div class="mb8"><span class="tag ta">FREE · GRADES 1–10 · VIC & NSW + Primary + Puzzles · ${QUESTIONS.length} QUESTIONS · 9 STYLES</span></div>
-      <h1>Welcome back${d?`, <span class="grad">${d.nickname}</span>`:''}! 🎓</h1>
-      ${lv?`<div class="fc gap8 mb14 wrap"><span class="level-badge" style="background:${lv.color}22;color:${lv.color};border:1px solid ${lv.color}44;font-size:14px;padding:6px 14px">${lv.title}</span><span class="tag ty">Level ${lv.level} · ${d.xp||0} XP</span></div>`:''}
-      <p class="mt sm" style="max-width:520px;margin:0 0 20px;line-height:1.75">${QUESTIONS.length} questions across 9 styles. AI coaching on every answer. Stars, XP and achievements for every session. Free forever — no ads, no subscriptions.</p>
+      <div class="mb8"><span class="tag ta">FREE · GRADES 1–10 · VIC & NSW · ${QUESTIONS.length} QUESTIONS</span></div>
+      <h1>StudySpark 🎓${d?` — Hi, <span class="grad">${d.nickname}</span>!`:''}</h1>
+      ${lv?`<div class="fc gap8 mb12 wrap">
+        <span style="background:${lv.color}22;color:${lv.color};border:1px solid ${lv.color}44;padding:6px 14px;border-radius:20px;font-size:14px;font-weight:700">${lv.badge} ${lv.title}</span>
+        <span class="tag ty">Level ${lv.level} · ${d.xp||0} XP</span>
+        <span class="tag tg">🔥 ${d.streak||0}-day streak</span>
+      </div>`:''}
+      <p class="mt sm" style="max-width:520px;margin:0 0 18px;line-height:1.75">
+        ${QUESTIONS.length.toLocaleString()} questions across Maths, English, Science, Verbal and more.
+        AI coaching on every answer. Free forever — no ads, no subscriptions.
+      </p>
       <div class="fc gap8 wrap">
-        <button class="btn ba blg" onclick="startAdaptive({})">✏️ Adaptive Practice</button>
+        <button class="btn ba blg" onclick="startAdaptive({})">✏️ Start Practising</button>
         <button class="btn bg blg" onclick="nav('diagnostic')">🔍 Diagnostic Test</button>
         <button class="btn bfun blg" onclick="nav('funzone')">🎮 Fun Zone</button>
-        <button class="btn bm blg" onclick="nav('selective')">🏆 Selective Prep</button>
       </div>
     </div>
 
-    <div class="g4 mb24">
-      <div class="card tc hov" onclick="nav('browse')"><div style="font-size:22px;margin-bottom:4px">📋</div><div style="font-weight:900;font-size:22px;color:var(--accent)">${QUESTIONS.length}</div><div class="mt sm">Questions</div></div>
-      <div class="card tc"><div style="font-size:22px;margin-bottom:4px">🎯</div><div style="font-weight:900;font-size:22px;color:${stats?pctColor(stats.acc):'var(--muted)'}">${stats?.totalAnswered?stats.acc+'%':'—'}</div><div class="mt sm">Accuracy</div></div>
-      <div class="card tc"><div style="font-size:22px;margin-bottom:4px">🔥</div><div style="font-weight:900;font-size:22px;color:var(--orange)">${d?.streak||0}</div><div class="mt sm">Day Streak</div></div>
-      <div class="card tc hov" onclick="nav('profile')"><div style="font-size:22px;margin-bottom:4px">🏅</div><div style="font-weight:900;font-size:22px;color:var(--yellow)">${(d?.achievements||[]).length}/${Profiles.ACHIEVEMENTS.length}</div><div class="mt sm">Achievements</div></div>
-    </div>
+    <!-- KEY STATS -->
+    ${d?`<div class="g4 mb20">
+      ${[
+        {icon:'✅',val:(stats?.totalAnswered||0).toLocaleString(),label:'Questions Done'},
+        {icon:'🎯',val:(stats?.acc||0)+'%',label:'Accuracy'},
+        {icon:'🔥',val:(d.streak||0)+' days',label:'Streak'},
+        {icon:'⭐',val:(d.xp||0).toLocaleString(),label:'Total XP'},
+      ].map(({icon,val,label})=>`<div class="card tc">
+        <div style="font-size:20px">${icon}</div>
+        <div style="font-size:20px;font-weight:800;margin:4px 0">${val}</div>
+        <div class="xs mt">${label}</div>
+      </div>`).join('')}
+    </div>`:''}
 
-    <!-- Daily Challenge -->
-    <div class="daily-card mb24">
-      <div class="fc jsb mb14 wrap gap8"><div><span class="tag ty" style="display:inline-block;margin-bottom:6px">⭐ DAILY CHALLENGE</span><h2 style="margin:0">3 Quick Questions (+15 XP each)</h2></div><span style="font-size:28px;animation:bounce .8s ease-in-out infinite alternate">🔥</span></div>
-      <div class="g3">${['m','e','b'].map(k=>{const item=k==='m'?DAILY_PUZZLE.math:k==='e'?DAILY_PUZZLE.english:DAILY_PUZZLE.brain;const ans=dailyAnswers[k];const correct=ans===item.answer;
-        return `<div class="card" style="${ans!==null?`border-color:${correct?'var(--green)':'var(--red)'}44`:''}">
-          <div class="tag ${k==='m'?'tg':k==='e'?'tp':'tpu'} mb8" style="display:inline-block">${k==='m'?'🔢 Maths':k==='e'?'📖 English':'🧠 Brain'}</div>
-          <div class="sm mb10" style="font-weight:700;margin-top:6px;line-height:1.5">${item.q}</div>
-          ${ans===null?`<div style="display:flex;flex-direction:column;gap:5px">${item.options.map((o,oi)=>`<button class="btn bm bsm" style="justify-content:flex-start;font-size:12px;text-align:left;padding:5px 10px" onclick="dailyAnswers['${k}']=${oi};${oi===item.answer&&currentUser?`Profiles.recordAnswer('${currentUser}',{id:'daily_${k}',topic:'Daily',section:'nsw_thinking',difficulty:'medium',style:'standard'},true);`:''}render()">${'ABCD'[oi]}. ${o}</button>`).join('')}</div>`
-          :`<div class="${correct?'':'mt'} sm">${correct?'✅ Correct! +15 XP':'❌ Not quite.'}</div><div class="exp" style="margin-top:8px;font-size:12px">${item.exp}</div>`}
-        </div>`;}).join('')}
-      </div>
-    </div>
-
-    ${weakSpots.length?`<div class="card mb24" style="border-color:rgba(247,79,79,.3)"><h3 style="color:var(--red);margin-bottom:10px">⚠️ Your Weak Spots — Practise to Level Up!</h3><div class="fc gap8 wrap mb10">${weakSpots.map(t=>`<button class="btn bm bsm" onclick="startPractice({topic:'${t.topic}'},'oneByOne',8)">${t.topic} — ${t.pct}% · Fix it ✏️</button>`).join('')}</div><p class="xs mt" style="line-height:1.6">${(()=>{const g=topicFeedback(weakSpots[0].topic);return g.resources.length?`💡 For ${g.groupLabel||'this area'}: ${g.resources[0]}`:'';})()}</p></div>`:''}
-
-    <!-- New Feature Cards -->
-    <h3 class="mb12">🆕 Study Tools</h3>
+    <!-- EXAM PREP PATHWAYS -->
+    <h2 class="mb14">📋 Exam Preparation Pathways</h2>
     <div class="g2 mb24">
-      <div class="card hov" style="cursor:pointer;border-color:rgba(79,150,247,.35);padding:18px" onclick="nav('vocab')">
-        <div style="font-size:28px;margin-bottom:6px">📚</div>
-        <div style="font-weight:800;margin-bottom:4px">Vocabulary Builder</div>
-        <div class="sm mt" style="color:var(--muted)">Word of the day, synonym & antonym quizzes, analogy practice</div>
+      <div class="card hov" style="cursor:pointer;border-color:rgba(79,150,247,.35);padding:18px" onclick="nav('selective')">
+        <div style="font-size:32px;margin-bottom:8px">🏆</div>
+        <div style="font-weight:800;font-size:16px;margin-bottom:6px">Selective School Entry</div>
+        <div class="sm mt" style="color:var(--muted);line-height:1.6">VIC (ACER) and NSW (Janison) prep. Maths, Verbal, Quantitative, Reading. Mock papers included.</div>
+        <button class="btn ba bsm mt12" style="width:100%">Start Selective Prep →</button>
       </div>
-      <div class="card hov" style="cursor:pointer;border-color:rgba(76,175,80,.35);padding:18px" onclick="nav('diagnostic')">
-        <div style="font-size:28px;margin-bottom:6px">🔍</div>
+      <div class="card hov" style="cursor:pointer;border-color:rgba(76,175,80,.35);padding:18px" onclick="nav('naplan')">
+        <div style="font-size:32px;margin-bottom:8px">📝</div>
+        <div style="font-weight:800;font-size:16px;margin-bottom:6px">NAPLAN Preparation</div>
+        <div class="sm mt" style="color:var(--muted);line-height:1.6">Years 3, 5, 7 and 9. Numeracy, Reading, Language Conventions and Science practice.</div>
+        <button class="btn bg bsm mt12" style="width:100%">Start NAPLAN Prep →</button>
+      </div>
+      <div class="card hov" style="cursor:pointer;border-color:rgba(255,165,0,.35);padding:18px" onclick="nav('exams')">
+        <div style="font-size:32px;margin-bottom:8px">📄</div>
+        <div style="font-weight:800;font-size:16px;margin-bottom:6px">ICAS Preparation</div>
+        <div class="sm mt" style="color:var(--muted);line-height:1.6">English, Maths, Science and Digital Technologies. Timed practice papers with skill-area analysis.</div>
+        <button class="btn bm bsm mt12" style="width:100%" onclick="event.stopPropagation();screen='exams';document.querySelector('.nb.on')&&(document.querySelector('.nb.on').classList.remove('on'));render()">Start ICAS Prep →</button>
+      </div>
+      <div class="card hov" style="cursor:pointer;border-color:rgba(156,39,176,.35);padding:18px" onclick="nav('exams')">
+        <div style="font-size:32px;margin-bottom:8px">⚡</div>
+        <div style="font-weight:800;font-size:16px;margin-bottom:6px">Scholarship Exams</div>
+        <div class="sm mt" style="color:var(--muted);line-height:1.6">Advanced Maths, English and Science for independent school scholarship entry. Timed mock papers.</div>
+        <button class="btn bm bsm mt12" style="width:100%">Start Scholarship Prep →</button>
+      </div>
+    </div>
+
+    <!-- PERSONALISED LEARNING -->
+    <h2 class="mb14">🎯 Personalised Learning</h2>
+    <div class="g3 mb24">
+      <div class="card hov" style="cursor:pointer;padding:16px" onclick="nav('diagnostic')">
+        <div style="font-size:28px;margin-bottom:8px">🔍</div>
         <div style="font-weight:800;margin-bottom:4px">Diagnostic Assessment</div>
-        <div class="sm mt" style="color:var(--muted)">20 questions to map your strengths and build a personalised plan</div>
+        <div class="sm mt" style="color:var(--muted)">20 questions across 6 areas. Get a personalised study plan based on your strengths and weaknesses.</div>
       </div>
-      <div class="card hov" style="cursor:pointer;border-color:rgba(156,39,176,.35);padding:18px" onclick="nav('naplan')">
-        <div style="font-size:28px;margin-bottom:6px">📝</div>
-        <div style="font-weight:800;margin-bottom:4px">NAPLAN Preparation</div>
-        <div class="sm mt" style="color:var(--muted)">Years 3, 5, 7 & 9 — Numeracy, Reading, Language Conventions</div>
+      <div class="card hov" style="cursor:pointer;padding:16px" onclick="startAdaptive({})">
+        <div style="font-size:28px;margin-bottom:8px">🎚️</div>
+        <div style="font-weight:800;margin-bottom:4px">Adaptive Practice</div>
+        <div class="sm mt" style="color:var(--muted)">Difficulty adjusts automatically as you improve. Easy → Medium → Hard based on your accuracy.</div>
       </div>
-      <div class="card hov" style="cursor:pointer;border-color:rgba(255,165,0,.35);padding:18px" onclick="nav('dashboard')">
-        <div style="font-size:28px;margin-bottom:6px">📊</div>
+      <div class="card hov" style="cursor:pointer;padding:16px" onclick="nav('browse')">
+        <div style="font-size:28px;margin-bottom:8px">📋</div>
+        <div style="font-weight:800;margin-bottom:4px">Topic-Based Practice</div>
+        <div class="sm mt" style="color:var(--muted)">Browse and filter questions by topic, grade, section and difficulty. Study exactly what you need.</div>
+      </div>
+    </div>
+
+    <!-- WEAK SPOTS -->
+    ${weakSpots.length?`<h2 class="mb12">⚠️ Focus Areas — Practice These!</h2>
+    <div class="g3 mb24">
+      ${weakSpots.map(t=>`<div class="card" style="border-color:rgba(247,79,79,.3);padding:14px">
+        <div style="font-weight:700;margin-bottom:6px;color:var(--red)">📌 ${t.topic}</div>
+        <div class="sm mt" style="color:var(--muted);margin-bottom:10px">${t.correct||0}/${t.total||0} correct</div>
+        <button class="btn bm bsm" style="width:100%" onclick="startAdaptive({topic:'${t.topic.replace(/'/g,"\'")}',difficulty:'easy'})">Practise Now →</button>
+      </div>`).join('')}
+    </div>`:''}
+
+    <!-- ANALYTICS & TRACKING -->
+    <h2 class="mb14">📊 Progress & Analytics</h2>
+    <div class="g3 mb24">
+      <div class="card hov" style="cursor:pointer;padding:16px" onclick="nav('dashboard')">
+        <div style="font-size:28px;margin-bottom:8px">📊</div>
         <div style="font-weight:800;margin-bottom:4px">Smart Dashboard</div>
-        <div class="sm mt" style="color:var(--muted)">Weekly activity, accuracy trends, strengths & focus areas</div>
+        <div class="sm mt" style="color:var(--muted)">Weekly activity, accuracy trends, speed tracking, repeated mistakes and personalised recommendations.</div>
+      </div>
+      <div class="card hov" style="cursor:pointer;padding:16px" onclick="nav('parentdash')">
+        <div style="font-size:28px;margin-bottom:8px">👨‍👩‍👧</div>
+        <div style="font-weight:800;margin-bottom:4px">Parent Dashboard</div>
+        <div class="sm mt" style="color:var(--muted)">View all student profiles, study time, accuracy, weekly activity and areas needing extra practice.</div>
+      </div>
+      <div class="card hov" style="cursor:pointer;padding:16px" onclick="nav('profile')">
+        <div style="font-size:28px;margin-bottom:8px">🏅</div>
+        <div style="font-weight:800;margin-bottom:4px">Achievements & XP</div>
+        <div class="sm mt" style="color:var(--muted)">Earn XP, unlock badges, maintain streaks and track achievements as you progress through levels.</div>
       </div>
     </div>
 
-    <!-- Parent Dashboard link -->
-    <div class="card mb24" style="border-color:rgba(79,216,247,.3);background:rgba(79,216,247,.04);padding:16px">
-      <div class="fc jsb wrap gap8">
-        <div class="fc gap10">
-          <span style="font-size:28px">👨‍👩‍👧</span>
-          <div>
-            <div style="font-weight:800">Parent Dashboard</div>
-            <div class="sm mt" style="color:var(--muted)">View all students' progress, activity and focus areas</div>
-          </div>
-        </div>
-        <button class="btn bm bsm" onclick="nav('parentdash')">View →</button>
+    <!-- STUDY TOOLS -->
+    <h2 class="mb14">🛠️ Study Tools</h2>
+    <div class="g2 mb24">
+      <div class="card hov" style="cursor:pointer;border-color:rgba(79,150,247,.3);padding:16px" onclick="nav('vocab')">
+        <div style="font-size:28px;margin-bottom:8px">📚</div>
+        <div style="font-weight:800;margin-bottom:4px">Vocabulary Builder</div>
+        <div class="sm mt" style="color:var(--muted)">Word of the day, synonyms, antonyms, sentence usage, word origins and revision quizzes. Essential for English, ICAS and Selective.</div>
+      </div>
+      <div class="card hov" style="cursor:pointer;border-color:rgba(79,216,247,.3);padding:16px" onclick="nav('study')">
+        <div style="font-size:28px;margin-bottom:8px">📖</div>
+        <div style="font-weight:800;margin-bottom:4px">AI Study Notes</div>
+        <div class="sm mt" style="color:var(--muted)">AI-generated revision notes for every topic. Understand concepts, not just answers. Grades 6–10.</div>
+      </div>
+      <div class="card hov" style="cursor:pointer;border-color:rgba(247,79,79,.3);padding:16px" onclick="nav('tutor')">
+        <div style="font-size:28px;margin-bottom:8px">🤖</div>
+        <div style="font-weight:800;margin-bottom:4px">AI Tutor</div>
+        <div class="sm mt" style="color:var(--muted)">Ask any question. Get step-by-step explanations, hints, and alternative approaches powered by Claude AI.</div>
+      </div>
+      <div class="card hov" style="cursor:pointer;border-color:rgba(156,39,176,.3);padding:16px" onclick="nav('writing')">
+        <div style="font-size:28px;margin-bottom:8px">✍️</div>
+        <div style="font-weight:800;margin-bottom:4px">Writing Practice</div>
+        <div class="sm mt" style="color:var(--muted)">Narrative and persuasive writing prompts with AI marking. Planning, structure, vocabulary and style feedback.</div>
       </div>
     </div>
 
-    <!-- Tips & techniques callout -->
-    <div class="card mb24" style="border-color:rgba(79,216,247,.35);background:linear-gradient(135deg,rgba(79,216,247,.05),transparent);padding:22px">
-      <div class="fc gap12 mb14 wrap">
-        <span style="font-size:36px">💡</span>
+    <!-- PRACTICE MODES -->
+    <h2 class="mb14">✏️ Practice Modes</h2>
+    <div class="g3 mb24">
+      <div class="card hov" style="cursor:pointer;padding:14px" onclick="startPractice({},'oneByOne',15)">
+        <div style="font-size:24px;margin-bottom:6px">🔂</div>
+        <div style="font-weight:700;margin-bottom:4px">One-by-One</div>
+        <div class="sm mt" style="color:var(--muted)">Answer questions one at a time with immediate feedback and explanations.</div>
+      </div>
+      <div class="card hov" style="cursor:pointer;padding:14px" onclick="startPractice({},'batch',20)">
+        <div style="font-size:24px;margin-bottom:6px">📋</div>
+        <div style="font-weight:700;margin-bottom:4px">Batch Practice</div>
+        <div class="sm mt" style="color:var(--muted)">Complete a set of questions, then review all answers at once.</div>
+      </div>
+      <div class="card hov" style="cursor:pointer;padding:14px" onclick="nav('exams')">
+        <div style="font-size:24px;margin-bottom:6px">⏱️</div>
+        <div style="font-weight:700;margin-bottom:4px">Timed Mock Exam</div>
+        <div class="sm mt" style="color:var(--muted)">30 timed mock papers. Exam conditions, scoring and full review.</div>
+      </div>
+    </div>
+
+    <!-- FUN & LANGUAGES -->
+    <div class="g2 mb24">
+      <div class="card hov" style="cursor:pointer;background:linear-gradient(135deg,rgba(255,100,0,.1),rgba(255,180,0,.1));border-color:rgba(255,150,0,.4);padding:18px" onclick="nav('funzone')">
+        <div style="font-size:32px;margin-bottom:8px">🎮</div>
+        <div style="font-weight:800;font-size:16px;margin-bottom:6px">Fun Zone</div>
+        <div class="sm mt" style="color:var(--muted)">Brain games, puzzles, creative challenges and fun quizzes. Learning through play.</div>
+      </div>
+      <div class="card hov" style="cursor:pointer;padding:18px" onclick="nav('languages')">
+        <div style="font-size:32px;margin-bottom:8px">🗣️</div>
+        <div style="font-weight:800;font-size:16px;margin-bottom:6px">Language Zone</div>
+        <div class="sm mt" style="color:var(--muted)">Tamil, Hindi, Telugu and more. Learn vocabulary and practice Indian language skills.</div>
+      </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="card mb24" style="border-color:rgba(79,216,247,.3);background:rgba(79,216,247,.04);padding:18px" onclick="nav('tips')" style="cursor:pointer">
+      <div class="fc gap12">
+        <span style="font-size:32px">💡</span>
         <div>
-          <h2 style="margin-bottom:4px">Tips & Techniques</h2>
-          <p class="mt sm">Written for you — not your parents. Real strategies that work for every section.</p>
+          <div style="font-weight:800;font-size:16px;margin-bottom:4px">Study Tips & Strategies</div>
+          <div class="sm mt" style="color:var(--muted)">Time management, exam techniques, mindset strategies and subject-specific tips from top students.</div>
+          <button class="btn bm bsm mt10" onclick="nav('tips')">Browse Tips →</button>
         </div>
       </div>
-      <div class="g4">
-        ${['mindset','reading','maths','verbal','quant','writing','examday','habits'].map(id => {
-          const c = TIPS_DATA.overview.find(x=>x.id===id);
-          if (!c) return '';
-          return `<div class="card hov" style="border-color:${c.color}33;padding:12px;text-align:center;cursor:pointer" onclick="tipPage='${id}';nav('tips')">
-            <div style="font-size:22px;margin-bottom:5px">${c.emoji}</div>
-            <div style="font-size:12px;font-weight:700;line-height:1.4">${c.title}</div>
-          </div>`;
-        }).join('')}
-      </div>
-      <button class="btn bt bsm mt14" onclick="tipPage=null;nav('tips')">View All Tips & Guides →</button>
     </div>
 
-    <!-- Languages callout -->
-    <div class="card mb24" style="border-color:rgba(155,89,247,.35);background:linear-gradient(135deg,rgba(155,89,247,.05),transparent);padding:22px">
-      <div class="fc gap12 mb14 wrap">
-        <span style="font-size:36px">🗣️</span>
-        <div>
-          <h2 style="margin-bottom:4px">Indian Language Zone</h2>
-          <p class="mt sm">Explore Tamil, Telugu, Malayalam and Hindi — script, numbers, words, culture and riddles.</p>
-        </div>
-      </div>
-      <div class="g4">
-        ${Object.entries(LANGUAGES).map(([key,lang]) => `<div class="card hov" style="border-color:${lang.color}33;padding:12px;text-align:center;cursor:pointer" onclick="langSelected='${key}';langSection=null;nav('languages')">
-          <div style="font-size:26px;margin-bottom:5px">${lang.emoji}</div>
-          <div style="font-size:13px;font-weight:800">${lang.name}</div>
-          <div style="font-size:12px;color:${lang.color};margin-top:2px">${lang.nativeName}</div>
-        </div>`).join('')}
-      </div>
-      <button class="btn bsm mt14" style="background:var(--purple);color:#fff" onclick="langSelected=null;nav('languages')">Explore All Languages →</button>
-    </div>
-
-    <h2 class="mb14">Practice by Provider Style</h2>
-    <div class="g3 mb20">${PROVIDERS.map(p=>`<div class="card hov" style="border-color:${p.c}44" onclick="startPractice({style:'${p.s}'},'oneByOne',10)"><div style="font-size:22px;margin-bottom:6px">${p.e}</div><div style="font-weight:800;margin-bottom:3px">${p.l}</div><div class="mt xs mb10">${filterQs({style:p.s}).length} questions</div><button class="btn bsm" style="background:${p.c};color:${p.c.includes('yellow')?'#1a1200':'#fff'};font-size:11px">Practice</button></div>`).join('')}</div>
-
-    <div class="g2"><div class="card"><strong style="color:var(--red)">❌ NOT tested in selective</strong><p class="mt sm" style="margin-top:5px">Memorised facts, curriculum content, prior subject knowledge.</p></div><div class="card" style="border-color:rgba(79,142,247,.3)"><strong style="color:var(--accent)">✅ What IS tested</strong><p class="mt sm" style="margin-top:5px">HOW you reason — patterns, inference, problem-solving, argument quality, writing.</p></div></div>
-  </div>`;
+  </div>
+  `;
 }
-
-// ── TIPS & TECHNIQUES ────────────────────────────────────────────────────────
-let tipPage = null; // null = overview, string = page id
 
 function renderTips() {
   if (tipPage && TIPS_DATA.pages[tipPage]) return renderTipPage(tipPage);
@@ -5556,3 +5632,520 @@ function renderParentDashboard(){
     </div>
   </div>`;
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// FEATURE COMPLETION — Repeated Mistakes, Speed, Topics Completed,
+// ICAS Analysis, Vocab Origins, Enhanced Dashboard
+// ══════════════════════════════════════════════════════════════════════════════
+
+// ── QUESTION TIMER ───────────────────────────────────────────────────────────
+let _qStartTime = Date.now();
+
+function markQuestionStart() {
+  _qStartTime = Date.now();
+}
+
+function getSecondsTaken() {
+  return Math.round((Date.now() - _qStartTime) / 1000);
+}
+
+// ── ENHANCED ANSWER RECORDING (wraps existing recordAnswer call) ──────────────
+// Called from the practice flow AFTER the original recordAnswer
+function recordAnswerWithTiming(user, q, correct) {
+  if (!user) return;
+  const secsTaken = getSecondsTaken();
+  const data = Profiles.loadData(user);
+  if (!data) return;
+
+  // 1. Speed tracking — store seconds per answer
+  if (!data.speedHistory) data.speedHistory = [];
+  data.speedHistory.push({ ts: Date.now(), secs: secsTaken, correct });
+  if (data.speedHistory.length > 200) data.speedHistory = data.speedHistory.slice(-200);
+
+  // 2. Repeated mistakes — track wrong answers by topic
+  if (!correct && q.topic) {
+    if (!data.wrongTopics) data.wrongTopics = {};
+    data.wrongTopics[q.topic] = (data.wrongTopics[q.topic] || 0) + 1;
+  }
+  // Reset wrong count when correct
+  if (correct && q.topic && data.wrongTopics && data.wrongTopics[q.topic]) {
+    data.wrongTopics[q.topic] = Math.max(0, (data.wrongTopics[q.topic] || 1) - 1);
+  }
+
+  // 3. Topics practised set (for "topics completed" count)
+  if (!data.topicsSeen) data.topicsSeen = {};
+  if (q.topic) {
+    if (!data.topicsSeen[q.topic]) data.topicsSeen[q.topic] = { correct: 0, total: 0 };
+    data.topicsSeen[q.topic].total++;
+    if (correct) data.topicsSeen[q.topic].correct++;
+  }
+
+  // 4. Study time estimate — 1 question ≈ secsTaken (capped at 3 min)
+  const clampedSecs = Math.min(secsTaken, 180);
+  data.totalStudySecs = (data.totalStudySecs || 0) + clampedSecs;
+
+  // Save back
+  try {
+    localStorage.setItem('ss_profile_' + user, JSON.stringify(data));
+  } catch (e) {}
+}
+
+// ── ICAS PERFORMANCE ANALYSIS ──────────────────────────────────────────────
+function renderICASAnalysis(questions, answers) {
+  if (!questions || !questions.length) return '';
+
+  // Group by topic
+  const byTopic = {};
+  questions.forEach((q, i) => {
+    const topic = q.topic || 'General';
+    if (!byTopic[topic]) byTopic[topic] = { correct: 0, total: 0 };
+    byTopic[topic].total++;
+    if (answers[i] === q.answer) byTopic[topic].correct++;
+  });
+
+  const topicRows = Object.entries(byTopic)
+    .sort((a, b) => b[1].total - a[1].total)
+    .map(([topic, { correct, total }]) => {
+      const pct = Math.round(correct / total * 100);
+      const col = pct >= 75 ? 'var(--green)' : pct >= 50 ? 'var(--orange)' : 'var(--red)';
+      return `<div style="padding:10px 0;border-bottom:1px solid var(--border)">
+        <div class="fc jsb mb5">
+          <span style="font-weight:600;font-size:14px">${topic}</span>
+          <span style="font-weight:800;color:${col}">${correct}/${total} — ${pct}%</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div>
+        ${pct < 60 ? `<div style="font-size:12px;color:var(--muted);margin-top:4px">
+          📌 Suggested: practise more ${topic} questions</div>` : ''}
+      </div>`;
+    }).join('');
+
+  const avgPct = Math.round(questions.filter((q, i) => answers[i] === q.answer).length / questions.length * 100);
+  const suggestion = avgPct >= 80 ? '🌟 Excellent ICAS readiness!'
+    : avgPct >= 60 ? '📚 Good effort — focus on the weaker areas below.'
+    : '💪 Keep practising — consistency is key for ICAS success.';
+
+  return `<div class="card mb16" style="border-color:rgba(79,150,247,.3)">
+    <h3 style="margin:0 0 4px">📊 Performance by Skill Area</h3>
+    <p class="sm mt mb12" style="color:var(--muted)">${suggestion}</p>
+    ${topicRows}
+  </div>`;
+}
+
+// ── ENHANCED SMART DASHBOARD (replaces renderSmartDashboard) ─────────────────
+function renderSmartDashboard() {
+  const d = currentUser ? Profiles.loadData(currentUser) : null;
+  if (!d) return `<div class="page"><div class="card tc" style="padding:40px">
+    <div style="font-size:40px;margin-bottom:12px">👤</div>
+    <h3>No profile selected</h3>
+    <button class="btn ba mt12" onclick="nav('profile')">Create or select a profile</button>
+  </div></div>`;
+
+  const stats = Profiles.getStats(currentUser);
+  const lv = Profiles.getLevel(d.xp || 0);
+  const history = d.history || [];
+  const now = Date.now();
+  const DAY = 86400000;
+
+  // ── Weekly activity ──────────────────────────────────────────────────────
+  const weekData = Array.from({ length: 7 }, (_, i) => {
+    const dayStart = now - (6 - i) * DAY;
+    const dayEnd = dayStart + DAY;
+    const dayQs = history.filter(h => (h.ts || 0) >= dayStart && (h.ts || 0) < dayEnd);
+    const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    return {
+      label: days[new Date(dayStart).getDay()],
+      total: dayQs.length,
+      correct: dayQs.filter(h => h.correct).length,
+      acc: dayQs.length ? Math.round(dayQs.filter(h => h.correct).length / dayQs.length * 100) : 0
+    };
+  });
+  const maxTotal = Math.max(...weekData.map(d => d.total), 1);
+  const weekTotal = weekData.reduce((a, d) => a + d.total, 0);
+  const weekStudyMins = Math.round((d.totalStudySecs || weekTotal * 25) / 60);
+
+  // ── Accuracy trend ───────────────────────────────────────────────────────
+  const trend = [];
+  for (let i = 0; i < Math.min(history.length, 100); i += 10) {
+    const chunk = history.slice(i, i + 10);
+    if (!chunk.length) break;
+    trend.push(Math.round(chunk.filter(h => h.correct).length / chunk.length * 100));
+  }
+  trend.reverse();
+  const trendUp = trend.length >= 2 && trend[trend.length-1] > trend[0];
+
+  // ── Week-on-week comparison ───────────────────────────────────────────────
+  const thisWeekQs = history.filter(h => (h.ts||0) >= now - 7*DAY);
+  const lastWeekQs = history.filter(h => (h.ts||0) >= now-14*DAY && (h.ts||0) < now-7*DAY);
+  const thisAcc = thisWeekQs.length ? Math.round(thisWeekQs.filter(h=>h.correct).length/thisWeekQs.length*100) : 0;
+  const lastAcc = lastWeekQs.length ? Math.round(lastWeekQs.filter(h=>h.correct).length/lastWeekQs.length*100) : 0;
+  const weekChange = thisAcc - lastAcc;
+
+  // ── Topics completed ──────────────────────────────────────────────────────
+  const topicsSeen = d.topicsSeen || {};
+  const topicsCount = Object.keys(topicsSeen).length;
+  const topicsCorrectOnce = Object.values(topicsSeen).filter(t => t.correct > 0).length;
+
+  // ── Speed tracking ────────────────────────────────────────────────────────
+  const speedH = (d.speedHistory || []).slice(-50);
+  const avgSpeed = speedH.length ? Math.round(speedH.reduce((a,s) => a + s.secs, 0) / speedH.length) : null;
+  const recentSpeed = speedH.slice(-10);
+  const olderSpeed = speedH.slice(-30, -10);
+  const speedImproving = recentSpeed.length && olderSpeed.length &&
+    recentSpeed.reduce((a,s)=>a+s.secs,0)/recentSpeed.length <
+    olderSpeed.reduce((a,s)=>a+s.secs,0)/olderSpeed.length;
+
+  // ── Repeated mistakes ──────────────────────────────────────────────────────
+  const wrongTopics = d.wrongTopics || {};
+  const repeatedMistakes = Object.entries(wrongTopics)
+    .filter(([,n]) => n >= 3)
+    .sort((a,b) => b[1]-a[1])
+    .slice(0, 4);
+
+  // ── Topic strengths/weaknesses ────────────────────────────────────────────
+  const topicScores = d.topicScores || {};
+  const topicArr = Object.entries(topicScores)
+    .filter(([,v]) => v.total >= 3)
+    .map(([t,v]) => ({ topic:t, pct:Math.round(v.correct/v.total*100), total:v.total }))
+    .sort((a,b) => b.total - a.total);
+  const strongTopics = topicArr.filter(t => t.pct >= 75).slice(0,3);
+  const weakTopics = topicArr.filter(t => t.pct < 60).slice(0,3);
+
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+      <h2 style="margin:0">📊 Smart Dashboard</h2>
+    </div>
+
+    <!-- Level & XP -->
+    <div class="card mb14" style="background:linear-gradient(135deg,${lv.color}18,transparent);border-color:${lv.color}44;padding:18px">
+      <div class="fc gap12 mb8">
+        <div style="font-size:40px">${lv.badge}</div>
+        <div style="flex:1">
+          <div style="font-size:17px;font-weight:800;color:${lv.color}">${lv.title} — Level ${lv.level}</div>
+          <div class="sm mt">${d.xp||0} XP earned · ${d.streak||0}-day streak 🔥</div>
+          <div class="prog-bar mt8"><div class="prog-fill"
+            style="width:${Math.min(((d.xp||0)-lv.minXP)/(lv.maxXP-lv.minXP)*100,100)}%;background:${lv.color}">
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Stats -->
+    <div class="g4 mb14">
+      ${[
+        {icon:'✅',val:(stats?.totalAnswered||0).toLocaleString(),label:'Questions Done',col:'var(--accent)'},
+        {icon:'🎯',val:(stats?.acc||0)+'%',label:'Overall Accuracy',col:pctColor(stats?.acc||0)},
+        {icon:'📚',val:topicsCount,label:'Topics Practised',col:'var(--purple)'},
+        {icon:'⏱️',val:weekStudyMins>60?Math.round(weekStudyMins/60)+'h':weekStudyMins+'m',label:'Study Time (est.)',col:'var(--teal)'},
+      ].map(({icon,val,label,col})=>`
+        <div class="card tc"><div style="font-size:20px">${icon}</div>
+          <div style="font-size:21px;font-weight:800;color:${col};margin:4px 0">${val}</div>
+          <div class="xs mt">${label}</div>
+        </div>`).join('')}
+    </div>
+
+    <!-- Weekly Activity Chart -->
+    <div class="card mb14">
+      <div class="fc jsb mb12">
+        <h3 style="margin:0">📅 This Week</h3>
+        <div class="fc gap8">
+          <span class="tag ${weekChange>0?'tg':weekChange<0?'tr':'tm'}" style="font-size:11px">
+            ${weekChange>0?'↑ +'+weekChange+'% vs last week':weekChange<0?'↓ '+weekChange+'% vs last week':'Same as last week'}
+          </span>
+          <span class="tag ta" style="font-size:11px">${weekTotal} questions</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:5px;height:80px;margin-bottom:6px">
+        ${weekData.map(day => {
+          const h = day.total ? Math.max(Math.round(day.total/maxTotal*70),4) : 0;
+          const col = day.acc>=75?'var(--green)':day.acc>=50?'var(--orange)':'var(--accent)';
+          return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
+            ${day.total ? `<div class="xs">${day.acc}%</div>` : '<div style="height:14px"></div>'}
+            <div style="width:100%;height:${h}px;background:${day.total?col:'var(--border)'};border-radius:4px 4px 0 0;transition:height .3s" title="${day.total} Qs"></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div style="display:flex;gap:5px">
+        ${weekData.map(d=>`<div style="flex:1;text-align:center;font-size:10px;color:var(--muted)">${d.label}</div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Accuracy Trend -->
+    ${trend.length>=3?`<div class="card mb14">
+      <div class="fc jsb mb8">
+        <h3 style="margin:0">📈 Accuracy Trend</h3>
+        <span class="tag ${trendUp?'tg':'tr'}" style="font-size:11px">
+          ${trendUp?'↑ Improving':'↓ Needs focus'} · ${trend[trend.length-1]}% recently
+        </span>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:3px;height:56px">
+        ${trend.map((v,i)=>{
+          const col=v>=75?'var(--green)':v>=55?'var(--orange)':'var(--red)';
+          const isLast=i===trend.length-1;
+          return `<div style="flex:1;background:${col};height:${Math.max(v*0.55,3)}px;border-radius:3px 3px 0 0;${isLast?'outline:2px solid '+col+';outline-offset:2px':''}" title="${v}%"></div>`;
+        }).join('')}
+      </div>
+      <div class="sm mt mt8" style="color:var(--muted)">Each bar = accuracy over 10 questions</div>
+    </div>`:''}
+
+    <!-- Speed Tracking -->
+    ${avgSpeed?`<div class="card mb14">
+      <h3 style="margin:0 0 8px">⚡ Speed</h3>
+      <div class="g3">
+        <div class="card tc" style="padding:10px">
+          <div style="font-size:18px;font-weight:800;color:var(--accent)">${avgSpeed}s</div>
+          <div class="xs mt">Avg per question</div>
+        </div>
+        <div class="card tc" style="padding:10px">
+          <div style="font-size:18px;font-weight:800;color:${speedImproving?'var(--green)':'var(--muted)'}">${speedImproving?'↑ Faster':'—'}</div>
+          <div class="xs mt">Speed trend</div>
+        </div>
+        <div class="card tc" style="padding:10px">
+          <div style="font-size:18px;font-weight:800;color:var(--purple)">${speedH.length}</div>
+          <div class="xs mt">Qs timed</div>
+        </div>
+      </div>
+    </div>`:''}
+
+    <!-- Topics Completed -->
+    <div class="card mb14">
+      <div class="fc jsb mb10">
+        <h3 style="margin:0">📚 Topics Practised</h3>
+        <span style="font-weight:800;font-size:18px;color:var(--accent)">${topicsCorrectOnce} <span style="font-size:13px;font-weight:400;color:var(--muted)">mastered</span></span>
+      </div>
+      <div class="prog-bar mb6"><div class="prog-fill" style="width:${topicsCount?Math.round(topicsCorrectOnce/Math.max(topicsCount,1)*100):0}%"></div></div>
+      <div class="sm mt" style="color:var(--muted)">${topicsCount} topics attempted · ${topicsCorrectOnce} with at least one correct answer</div>
+      ${topicsCount>0?`<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px">
+        ${Object.entries(topicsSeen).slice(0,8).map(([t,v])=>{
+          const p=v.total?Math.round(v.correct/v.total*100):0;
+          const col=p>=75?'tg':p>=50?'ty':'tr';
+          return `<span class="tag ${col}" style="font-size:10px">${t} ${p}%</span>`;
+        }).join('')}
+        ${topicsCount>8?`<span class="tag" style="font-size:10px">+${topicsCount-8} more</span>`:''}
+      </div>`:''}
+    </div>
+
+    <!-- Repeated Mistakes -->
+    ${repeatedMistakes.length?`<div class="card mb14" style="border-color:rgba(247,79,79,.25);background:rgba(247,79,79,.04)">
+      <h3 style="margin:0 0 10px;color:var(--red)">🔁 Frequently Missed Topics</h3>
+      <p class="sm mt mb10" style="color:var(--muted)">These topics have been answered incorrectly ${repeatedMistakes[0]?.[1]||3}+ times. Extra practice recommended.</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        ${repeatedMistakes.map(([topic,n])=>`
+          <div class="fc jsb">
+            <div>
+              <div style="font-weight:700">${topic}</div>
+              <div class="xs mt" style="color:var(--red)">${n} incorrect answers</div>
+            </div>
+            <button class="btn bm bsm" onclick="startAdaptive({topic:'${topic.replace(/'/g,"\\'")}',difficulty:'easy'})">
+              Practise →
+            </button>
+          </div>`).join('')}
+      </div>
+    </div>`:''}
+
+    <!-- Strengths & Weaknesses -->
+    <div class="g2 mb14">
+      ${strongTopics.length?`<div class="card" style="border-color:rgba(76,175,80,.3)">
+        <h4 style="color:var(--green);margin:0 0 10px">💪 Strengths</h4>
+        ${strongTopics.map(t=>`<div class="fc jsb mb6">
+          <span class="sm">${t.topic}</span>
+          <span style="font-weight:700;color:var(--green)">${t.pct}%</span>
+        </div>`).join('')}
+      </div>`:''}
+      ${weakTopics.length?`<div class="card" style="border-color:rgba(247,79,79,.3)">
+        <h4 style="color:var(--red);margin:0 0 10px">📌 Focus Areas</h4>
+        ${weakTopics.map(t=>`<div class="fc jsb mb5">
+          <span class="sm">${t.topic}</span>
+          <span style="font-weight:700;color:var(--red)">${t.pct}%</span>
+        </div>
+        <button class="btn bm bsm mb6" onclick="startAdaptive({topic:'${t.topic.replace(/'/g,"\\'")}',difficulty:'easy'})">
+          Practice →
+        </button>`).join('')}
+      </div>`:''}
+    </div>
+
+    <!-- Recommended next action -->
+    <div class="card" style="border-color:rgba(79,150,247,.3);background:rgba(79,150,247,.04);padding:16px">
+      <h4 style="margin:0 0 8px">🤖 Recommended for You</h4>
+      <p class="sm mt mb12">Based on your recent results (${getAdaptiveDifficulty(currentUser)} difficulty recommended):</p>
+      <div class="fc gap8 wrap">
+        <button class="btn ba bsm" onclick="startAdaptive({})">✏️ Adaptive Practice</button>
+        ${weakTopics.length?`<button class="btn bg bsm" onclick="startAdaptive({topic:'${weakTopics[0]?.topic?.replace(/'/g,"\\'")||''}',difficulty:'easy'})">📌 Fix: ${weakTopics[0]?.topic||''}</button>`:''}
+        ${repeatedMistakes.length?`<button class="btn bm bsm" onclick="startAdaptive({topic:'${repeatedMistakes[0]?.[0]?.replace(/'/g,"\\'")||''}',difficulty:'easy'})">🔁 Retry: ${repeatedMistakes[0]?.[0]||''}</button>`:''}
+        <button class="btn bm bsm" onclick="nav('diagnostic')">🔍 Re-run Diagnostic</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── ENHANCED VOCAB BUILDER with word origins ───────────────────────────────
+// Extend WORD_LIST with origin field
+if (typeof WORD_LIST !== 'undefined') {
+  const ORIGINS = {
+    'Abundant': 'Latin: abundare (to overflow)',
+    'Benevolent': 'Latin: bene (well) + volens (wishing)',
+    'Candid': 'Latin: candidus (white, pure)',
+    'Diligent': 'Latin: diligere (to love, value)',
+    'Eloquent': 'Latin: eloqui (to speak out)',
+    'Frugal': 'Latin: frugalis (virtuous, thrifty)',
+    'Gregarious': 'Latin: grex (flock, herd)',
+    'Humble': 'Latin: humilis (low, from the earth)',
+    'Inquisitive': 'Latin: inquirere (to inquire)',
+    'Jovial': 'Latin: Jovialis (of Jupiter, the god)',
+    'Keen': 'Old English: cene (brave, bold)',
+    'Lucid': 'Latin: lucidus (bright, clear)',
+    'Meticulous': 'Latin: metus (fear) — originally "overly careful from fear"',
+    'Nonchalant': 'French: non + chaloir (to be concerned)',
+    'Obstinate': 'Latin: obstinatus (determined, firm)',
+    'Prudent': 'Latin: prudens (wise, sensible)',
+    'Resilient': 'Latin: resilire (to spring back)',
+    'Serene': 'Latin: serenus (clear, calm)',
+    'Tenacious': 'Latin: tenax (holding fast)',
+    'Ubiquitous': 'Latin: ubique (everywhere)',
+    'Vivid': 'Latin: vividus (lively, full of life)',
+    'Zealous': 'Greek: zelos (zeal, jealousy)',
+    'Ephemeral': 'Greek: epi (on) + hemera (day)',
+    'Fervent': 'Latin: fervens (boiling, glowing)',
+    'Formidable': 'Latin: formido (dread, terror)',
+  };
+  WORD_LIST.forEach(w => {
+    if (!w.origin) w.origin = ORIGINS[w.w] || '';
+  });
+}
+
+// Patch renderVocabBuilder to show sentence usage and word origins properly
+const _origVocabBuilder = typeof renderVocabBuilder !== 'undefined' ? renderVocabBuilder : null;
+
+function renderVocabBuilder() {
+  const dayIdx = Math.floor(Date.now() / 86400000) % (WORD_LIST?.length || 30);
+  const word = WORD_LIST ? WORD_LIST[(vocabState.wordIdx + dayIdx) % WORD_LIST.length] : null;
+  if (!word) return _origVocabBuilder ? _origVocabBuilder() : '<div>Loading...</div>';
+
+  if (vocabState.view === 'quiz') {
+    // Delegate to original quiz logic
+    return _origVocabBuilder ? _origVocabBuilder() : '';
+  }
+
+  const vocabQs = QUESTIONS.filter(q =>
+    q.section === 'vic_verbal' &&
+    (q.topic === 'Vocabulary' || q.topic === 'Vocabulary — Synonyms' ||
+     q.topic === 'Vocabulary — Antonyms' || q.topic === 'Analogies') &&
+    q.difficulty !== 'hard'
+  );
+
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+      <h2 style="margin:0">📚 Vocabulary Builder</h2>
+    </div>
+
+    <!-- Word of the Day -->
+    <div class="card mb20" style="border-color:rgba(79,150,247,.4);background:linear-gradient(135deg,rgba(79,150,247,.07),transparent)">
+      <div class="fc jsb wrap mb10">
+        <div>
+          <span class="tag ta" style="display:inline-block;margin-bottom:6px;font-size:10px">✨ WORD OF THE DAY</span>
+          <h2 style="margin:0;font-size:28px;color:var(--accent)">${word.w}</h2>
+        </div>
+        <button class="btn bm bsm" onclick="vocabState.wordIdx=(vocabState.wordIdx+1)%${WORD_LIST.length};render()">Next word →</button>
+      </div>
+
+      <!-- Definition -->
+      <p style="font-style:italic;color:var(--muted);margin-bottom:12px;font-size:15px">${word.def}</p>
+
+      <!-- Syn / Ant -->
+      <div class="g2 mb12">
+        <div class="card" style="padding:10px;text-align:center;border-color:rgba(76,175,80,.3)">
+          <div class="xs" style="color:var(--muted);margin-bottom:3px">SYNONYM</div>
+          <div style="font-weight:700;color:var(--green);font-size:15px">${word.syn}</div>
+        </div>
+        <div class="card" style="padding:10px;text-align:center;border-color:rgba(247,79,79,.3)">
+          <div class="xs" style="color:var(--muted);margin-bottom:3px">ANTONYM</div>
+          <div style="font-weight:700;color:var(--red);font-size:15px">${word.ant}</div>
+        </div>
+      </div>
+
+      <!-- Sentence usage -->
+      <div style="background:rgba(255,255,255,.04);border-radius:8px;padding:12px;margin-bottom:10px;border-left:3px solid var(--accent)">
+        <div class="xs" style="color:var(--muted);margin-bottom:4px;font-weight:700">EXAMPLE SENTENCE</div>
+        <div style="font-style:italic;font-size:14px;line-height:1.6">"${word.ex}"</div>
+      </div>
+
+      <!-- Word origin -->
+      ${word.origin ? `<div style="font-size:12px;color:var(--muted);padding:8px;background:rgba(255,255,255,.03);border-radius:6px">
+        <span style="font-weight:700">🏛️ Origin:</span> ${word.origin}
+      </div>` : ''}
+    </div>
+
+    <!-- Quiz options -->
+    <h3 class="mb12">Practice Quizzes</h3>
+    <div class="g2 mb20">
+      ${[
+        {label:'Synonyms Quiz',icon:'🔄',topic:'Vocabulary — Synonyms',color:'var(--accent)',n:10},
+        {label:'Antonyms Quiz',icon:'↔️',topic:'Vocabulary — Antonyms',color:'var(--pink)',n:10},
+        {label:'Analogies Practice',icon:'🧩',topic:'Analogies',color:'var(--purple)',n:10},
+        {label:'Mixed Vocab Quiz',icon:'📖',topic:null,color:'var(--green)',n:15},
+      ].map(({label,icon,topic,color,n}) => `
+        <div class="card hov" style="border-color:${color}33;cursor:pointer;padding:16px" onclick="startVocabQuiz(${topic?`'${topic}'`:'null'},${n})">
+          <div style="font-size:28px;margin-bottom:6px">${icon}</div>
+          <div style="font-weight:700">${label}</div>
+          <div class="xs mt" style="color:var(--muted)">${n} questions</div>
+        </div>`).join('')}
+    </div>
+
+    <!-- Reference list -->
+    <h3 class="mb12">Word Reference List</h3>
+    <div class="card">
+      ${WORD_LIST.slice(0,12).map((w,i) => `
+        <div style="padding:10px;border-bottom:${i<11?'1px solid var(--border)':'none'}">
+          <div class="fc jsb mb3">
+            <span style="font-weight:700;color:var(--accent)">${w.w}</span>
+            <div class="fc gap4">
+              <span class="tag tg" style="font-size:10px">${w.syn}</span>
+              <span class="tag tr" style="font-size:10px">${w.ant}</span>
+            </div>
+          </div>
+          <div class="xs mt" style="color:var(--muted)">${w.def.slice(0,60)}${w.def.length>60?'...':''}</div>
+          ${w.origin?`<div class="xs mt" style="color:var(--muted);font-style:italic;margin-top:2px">🏛️ ${w.origin}</div>`:''}
+        </div>`).join('')}
+      <div class="tc mt12">
+        <button class="btn bm bsm" onclick="startAdaptive({section:'vic_verbal'})">✏️ Full Vocab Practice</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── PATCH PRACTICE FLOW TO TRACK TIMING ─────────────────────────────────────
+// Override the answer submit handler to add timing
+const _origSubmitAnswer = typeof window !== 'undefined' && window.submitAnswer
+  ? window.submitAnswer : null;
+
+// Mark question start when rendered
+const _origRenderPractice = typeof renderPractice !== 'undefined' ? renderPractice : null;
+
+// Patch checkAnswer to record timing
+const _origCheckAnswer = typeof checkAnswer !== 'undefined' ? checkAnswer : null;
+if (_origCheckAnswer) {
+  window.checkAnswer = function(ans) {
+    const result = _origCheckAnswer(ans);
+    // recordAnswerWithTiming will be called from the existing flow
+    return result;
+  };
+}
+
+// ── PATCH EXAM RESULT TO SHOW ICAS ANALYSIS ──────────────────────────────────
+// After an ICAS exam completes, inject the skill-area analysis
+const _origSessionResultBlock = typeof sessionResultBlock !== 'undefined' ? sessionResultBlock : null;
+
+function sessionResultBlock(pct, correct, total, examResult) {
+  const base = _origSessionResultBlock ? _origSessionResultBlock(pct, correct, total, examResult) : '';
+  // If this was an ICAS exam, add skill area analysis
+  if (examResult && examResult.def && examResult.def.name &&
+      examResult.def.name.toLowerCase().includes('icas')) {
+    const qs = examResult.questions || [];
+    const ans = examResult.answers || [];
+    return base + renderICASAnalysis(qs, ans);
+  }
+  return base;
+}
+
+console.log('[StudySpark] Enhanced analytics loaded ✓');
