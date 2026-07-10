@@ -3527,15 +3527,61 @@ function qCard(q,idx,mode,userAns,submitted,revealed,showHint){
 
 // ── HANDLERS ──────────────────────────────────────────────────────────────────
 function handleAnswer(mode,idx,oi){
+  const scrollY = window.scrollY; // preserve scroll before any re-render
   if(mode==='oneByOne'){
     if(pSub)return;
-    pAns[pIdx]=oi;render();
-  }else if(mode==='batch'){if(pSub)return;pAns[idx]=oi;render();}
-  else if(mode==='exam'){if(examSub)return;exam.answers[idx]=oi;render();}
-  else if(mode==='sel'){if(selPSub)return;selPAns[idx]=oi;render();}
-  else if(mode==='quiz'){if(quizSub)return;quizAnswers[idx]=oi;render();}
+    pAns[idx]=oi; render();
+  }else if(mode==='batch'){
+    if(pSub)return;
+    pAns[idx]=oi;
+    // In batch mode: just update the option visually, don't scroll to top
+    _updateOptionUI('batch',idx,oi);
+    return;
+  }else if(mode==='exam'){
+    if(examSub)return;
+    exam.answers[idx]=oi;
+    // In exam mode: update option UI in place without full re-render
+    _updateOptionUI('exam',idx,oi);
+    _updateExamProgress();
+    return;
+  }else if(mode==='sel'){
+    if(selPSub)return; selPAns[idx]=oi; render();
+  }else if(mode==='quiz'){
+    if(quizSub)return; quizAnswers[idx]=oi; render();
+  }
+  // Restore scroll for non-exam modes too
+  requestAnimationFrame(()=>window.scrollTo(0,scrollY));
 }
 
+// Update just the option buttons for a specific question without full re-render
+function _updateOptionUI(mode,qIdx,chosenOi){
+  const cardEl = document.getElementById('qc_' + (mode==='exam'? (exam?.questions[qIdx]?.id||qIdx) : qIdx));
+  if(!cardEl) { render(); return; } // fallback
+  
+  const opts = cardEl.querySelectorAll('.opt');
+  opts.forEach((el,oi)=>{
+    el.classList.remove('sel');
+    if(oi===chosenOi) el.classList.add('sel');
+  });
+  
+  // Update the answered counter in exam mode
+  if(mode==='exam') _updateExamProgress();
+}
+
+function _updateExamProgress(){
+  const answered = exam?.answers?.filter(a=>a!==null).length||0;
+  const total = exam?.questions?.length||0;
+  const progressEl = document.getElementById('exam-progress-count');
+  if(progressEl) progressEl.textContent = answered+'/'+total+' answered';
+  
+  // Update the mini dot navigator
+  exam?.answers?.forEach((ans,i)=>{
+    const dot = document.getElementById('edot_'+i);
+    if(dot){
+      dot.style.background = ans!==null ? 'var(--accent)' : 'var(--border)';
+    }
+  });
+}
 function submitOneByOne(){
   const ans=pAns[pIdx];
   if(ans===null||pSub)return;
@@ -4109,7 +4155,19 @@ function renderExamRun(){
     <div class="card mb14" style="padding:12px 16px;border-color:var(--accent)33"><h3 style="margin-bottom:8px">📋 Answer Review</h3><p class="sm mt mb8">Your answer, correct answer, and explanation for each question.</p>
     <div class="fc gap4 wrap">${questions.map((_,i)=>{const ok=answers[i]===questions[i]?.answer;const bg=answers[i]===null?'var(--border)':ok?'var(--green)':'var(--orange)';return `<div style="width:24px;height:24px;border-radius:4px;background:${bg};cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700" onclick="examReviewPage=${Math.floor(i/PAGE_SIZE)};render();setTimeout(()=>document.getElementById('erq_${i}')?.scrollIntoView({behavior:'smooth'}),100)" title="Q${i+1}">${i+1}</div>`;}).join('')}</div></div>
     ${paginationBar(examReviewPage,totalPages,'setExamReviewPage')}`:''}
-    ${!examSub?`<div class="card mb14" style="padding:10px 14px"><div class="fc jsb sm"><span>${answered}/${questions.length} answered</span><div style="display:flex;gap:4px;flex-wrap:wrap">${questions.map((_,i)=>`<div style="width:20px;height:20px;border-radius:4px;background:${answers[i]!==null?'var(--accent)':'var(--border)'};cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700" onclick="document.getElementById('qc_${questions[i].id||i}')?.scrollIntoView({behavior:'smooth'})">${i+1}</div>`).join('')}</div></div></div>`:''}
+    ${!examSub?`
+    <div class="card mb14" style="padding:12px 16px;position:sticky;top:0;z-index:10;background:var(--bg);border-color:var(--border)">
+      <div class="fc jsb mb8 wrap gap8">
+        <span id="exam-progress-count" style="font-weight:700">${answered}/${questions.length} answered</span>
+        <div class="fc gap8">
+          <button class="btn bm bsm" onclick="document.querySelector('.opt:not(.dis)')?document.querySelector('[id^=qc_]')?.scrollIntoView({behavior:'smooth'}):null">Jump to Unanswered ↓</button>
+          <button class="btn bo bsm" onclick="if(confirm('Submit exam now?'))submitExam()">Submit →</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:3px;flex-wrap:wrap">
+        ${questions.map((_,i)=>`<div id="edot_${i}" style="width:22px;height:22px;border-radius:4px;background:${answers[i]!==null?'var(--accent)':'var(--border)'};cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;transition:background .15s" onclick="document.getElementById('qc_${questions[i].id||i}')?.scrollIntoView({behavior:'smooth',block:'center'})" title="Q${i+1}: ${answers[i]!==null?'Answered':'Not answered'}">${i+1}</div>`).join('')}
+      </div>
+    </div>`:''}
     ${pageQs.map((q,pi)=>{const gi=sIdx+pi;const ua=answers[gi];
       if(!examSub)return qCard(q,gi,'exam',ua,false,false,false);
       const ok=ua===q.answer;const uTxt=ua!==null&&ua!==undefined?q.options[ua]:'(Not answered)';const cTxt=q.options[q.answer];
@@ -5193,1017 +5251,6 @@ const WORD_LIST=[
   {w:'Fervent',def:'Having or displaying strong feeling',syn:'Passionate',ant:'Indifferent',ex:'He was a fervent supporter of the local football club.'},
 ];
 
-function startVocabQuiz(topic, n){
-  const pool = QUESTIONS.filter(q =>
-    q.section === 'vic_verbal' &&
-    (topic ? q.topic === topic : true) &&
-    q.difficulty !== 'hard'
-  );
-  vocabState.quiz = pool.sort(() => Math.random() - .5).slice(0, n);
-  vocabState.idx = 0;
-  vocabState.answers = {};
-  vocabState.view = 'quiz';
-  render();
-}
-
-function renderVocabBuilder(){
-  const dayIdx=Math.floor(Date.now()/86400000)%WORD_LIST.length;
-  const word=WORD_LIST[(vocabState.wordIdx+dayIdx)%WORD_LIST.length];
-  const vocabQs=QUESTIONS.filter(q=>
-    q.section==='vic_verbal'&&
-    (q.topic==='Vocabulary'||q.topic==='Vocabulary — Synonyms'||q.topic==='Vocabulary — Antonyms'||q.topic==='Analogies')
-    &&['easy','medium'].includes(q.difficulty)
-  );
-
-  if(vocabState.view==='quiz'){
-    const picked=vocabState.quiz;
-    const cur=picked[vocabState.idx];
-    if(!cur||vocabState.idx>=picked.length){
-      const score=Object.values(vocabState.answers).filter(Boolean).length;
-      const total=picked.length;
-      const pct=Math.round(score/total*100);
-      return `<div class="page"><div class="hdr-bar fc jsb mb14">
-        <button class="btn bm bsm" onclick="vocabState.view='home';render()">← Back</button>
-        <span class="tag ty">Vocab Quiz Complete</span></div>
-        <div class="card tc mb20" style="padding:32px">
-          <div style="font-size:48px;margin-bottom:12px">${pct>=80?'🏆':pct>=60?'⭐':'📚'}</div>
-          <h2 style="margin-bottom:8px">${score}/${total} correct</h2>
-          <div class="tag ${pctColor(pct)?'tg':'tp'} mb16">${pct}% accuracy</div>
-          <p class="sm mt" style="margin-bottom:20px">
-            ${pct>=80?'Outstanding vocabulary skills! You\'re ready for any exam.':
-              pct>=60?'Good work! Review the words you missed and try again.':
-              'Keep practising — vocabulary improves with daily exposure.'}
-          </p>
-          <div class="fc gap8 wrap tc">
-            <button class="btn ba" onclick="vocabState={view:'home',quiz:[],idx:0,answers:{},wordIdx:0};render()">🏠 Back to Vocab Home</button>
-            <button class="btn bg" onclick="startAdaptive({section:'vic_verbal'})">✏️ More Practice</button>
-          </div>
-        </div></div>`;
-    }
-    const ans=vocabState.answers[vocabState.idx];
-    const isCorrect=ans===cur.answer;
-    return `<div class="page">
-      <div class="hdr-bar fc jsb mb14">
-        <button class="btn bm bsm" onclick="vocabState.view='home';render()">← Back</button>
-        <span class="tag ty">Question ${vocabState.idx+1} of ${picked.length}</span>
-      </div>
-      <div class="prog-bar mb16"><div class="prog-fill" style="width:${(vocabState.idx/picked.length)*100}%"></div></div>
-      <div class="card mb14">
-        <div class="tag tp mb8" style="display:inline-block">📚 Vocabulary</div>
-        <p style="font-size:17px;font-weight:700;line-height:1.5;margin:10px 0 18px">${cur.q}</p>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          ${cur.options.map((o,i)=>{
-            let st='';
-            if(ans!==undefined){
-              if(i===cur.answer) st='border-color:var(--green);background:rgba(76,175,80,.1)';
-              else if(i===ans) st='border-color:var(--red);background:rgba(247,79,79,.08)';
-            }
-            return `<button class="btn bm" style="justify-content:flex-start;text-align:left;${st}"
-              onclick="vocabState.answers[${vocabState.idx}]=${i};render()" ${ans!==undefined?'disabled':''}>
-              <span style="font-weight:800;margin-right:8px">${'ABCD'[i]}.</span>${o}
-            </button>`;
-          }).join('')}
-        </div>
-        ${ans!==undefined?`<div class="exp mt14">${cur.exp}</div>
-          <button class="btn ba mt12" onclick="vocabState.idx++;render()">
-            ${vocabState.idx+1<picked.length?'Next Question →':'See Results 🏆'}
-          </button>`:''}
-      </div>
-    </div>`;
-  }
-
-  // Home view
-  return `<div class="page">
-    <div class="hdr-bar fc jsb mb16">
-      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
-      <h2 style="margin:0">📚 Vocabulary Builder</h2>
-    </div>
-
-    <!-- Word of the Day -->
-    <div class="card mb20" style="border-color:rgba(79,150,247,.4);background:linear-gradient(135deg,rgba(79,150,247,.06),transparent)">
-      <div class="fc jsb wrap mb10">
-        <div><span class="tag ta" style="display:inline-block;margin-bottom:6px">✨ WORD OF THE DAY</span>
-          <h2 style="margin:0;font-size:26px;color:var(--accent)">${word.w}</h2></div>
-        <div class="fc gap6">
-          <button class="btn bm bsm" onclick="vocabState.wordIdx=(vocabState.wordIdx+1)%${WORD_LIST.length};render()">Next →</button>
-        </div>
-      </div>
-      <p style="font-style:italic;color:var(--muted);margin-bottom:10px">${word.def}</p>
-      <div class="g3 mb12">
-        <div class="card" style="padding:10px;text-align:center">
-          <div class="xs" style="color:var(--muted);margin-bottom:3px">SYNONYM</div>
-          <div style="font-weight:700;color:var(--green)">${word.syn}</div>
-        </div>
-        <div class="card" style="padding:10px;text-align:center">
-          <div class="xs" style="color:var(--muted);margin-bottom:3px">ANTONYM</div>
-          <div style="font-weight:700;color:var(--red)">${word.ant}</div>
-        </div>
-      </div>
-      <div class="exp" style="font-style:italic">📝 "${word.ex}"</div>
-    </div>
-
-    <!-- Quiz options -->
-    <h3 class="mb12">Practice Quizzes</h3>
-    <div class="g2 mb20">
-      ${[
-        {label:'Synonyms Quiz',icon:'🔄',topic:'Vocabulary — Synonyms',color:'var(--accent)',n:10},
-        {label:'Antonyms Quiz',icon:'↔️',topic:'Vocabulary — Antonyms',color:'var(--pink)',n:10},
-        {label:'Analogies Practice',icon:'🧩',topic:'Analogies',color:'var(--purple)',n:10},
-        {label:'Mixed Vocab Quiz',icon:'📖',topic:null,color:'var(--green)',n:15},
-      ].map(({label,icon,topic,color,n})=>`
-        <div class="card hov" style="border-color:${color}33;cursor:pointer;padding:16px"
-          onclick="startVocabQuiz(null, 15)">
-          <div style="font-size:28px;margin-bottom:6px">${icon}</div>
-          <div style="font-weight:700">${label}</div>
-          <div class="xs mt" style="color:var(--muted)">${n} questions</div>
-        </div>`).join('')}
-    </div>
-
-    <!-- Daily words list -->
-    <h3 class="mb12">Word Reference List</h3>
-    <div class="card">
-      <div style="display:flex;flex-direction:column;gap:2px">
-        ${WORD_LIST.slice(0,10).map((w,i)=>`
-          <div style="padding:10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <span style="font-weight:700;color:var(--accent)">${w.w}</span>
-              <span class="xs mt" style="color:var(--muted);margin-left:8px">— ${w.def.slice(0,40)}...</span>
-            </div>
-            <div class="fc gap6">
-              <span class="tag tg" style="font-size:10px">${w.syn}</span>
-              <span class="tag tr" style="font-size:10px">${w.ant}</span>
-            </div>
-          </div>`).join('')}
-      </div>
-      <div class="tc mt12">
-        <button class="btn bm bsm" onclick="startAdaptive({section:'vic_verbal',topic:'Vocabulary'})">✏️ Full Vocab Practice</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-// ── 3. DIAGNOSTIC ASSESSMENT ──────────────────────────────────────────────────
-let diagState={running:false,qs:[],idx:0,answers:[],done:false,results:null};
-
-function buildDiagnostic(){
-  const sections=[
-    {sec:'gen_maths_a',topic:null,grade:5,n:4,label:'Numeracy'},
-    {sec:'gen_english',topic:null,grade:5,n:4,label:'English'},
-    {sec:'vic_quant',topic:null,grade:'selective',n:3,label:'Quantitative Reasoning'},
-    {sec:'nsw_thinking',topic:null,grade:'selective',n:3,label:'General Ability'},
-    {sec:'vic_verbal',topic:'Vocabulary',grade:'selective',n:3,label:'Verbal Reasoning'},
-    {sec:'gen_science',topic:null,grade:5,n:3,label:'Science'},
-  ];
-  const picked=[];
-  sections.forEach(({sec,topic,grade,n})=>{
-    const pool=QUESTIONS.filter(q=>
-      q.section===sec&&
-      (topic?q.topic===topic:true)&&
-      gradeMatch(q,grade)&&
-      q.difficulty==='medium'
-    );
-    const easy=pool.filter(q=>q.difficulty==='easy');
-    const med=pool.filter(q=>q.difficulty==='medium');
-    const src=med.length>=n?med:pool;
-    src.sort(()=>Math.random()-.5);
-    picked.push(...src.slice(0,n));
-  });
-  return picked.sort(()=>Math.random()-.5);
-}
-
-function renderDiagnostic(){
-  if(!diagState.running && !diagState.done){
-    return `<div class="page">
-      <div class="hdr-bar fc jsb mb16">
-        <button class="btn bm bsm" onclick="nav('home')">← Home</button>
-        <h2 style="margin:0">🔍 Diagnostic Assessment</h2>
-      </div>
-      <div class="card mb20" style="text-align:center;padding:32px">
-        <div style="font-size:48px;margin-bottom:16px">🎯</div>
-        <h2 style="margin-bottom:10px">Find Your Level</h2>
-        <p class="sm mt" style="max-width:380px;margin:0 auto 20px;line-height:1.7">
-          Answer 20 short questions across <strong>Maths, English, Verbal Reasoning, and General Ability</strong>.
-          StudySpark will identify your strengths and areas to focus on, then recommend a personalised study plan.
-        </p>
-        <div class="g3 mb20" style="text-align:center">
-          ${[['⏱️','~8 minutes'],['📊','20 questions'],['🎓','6 skill areas']].map(([e,l])=>`
-            <div class="card" style="padding:12px"><div style="font-size:24px">${e}</div><div class="xs mt mt6">${l}</div></div>`).join('')}
-        </div>
-        <button class="btn ba blg" onclick="diagState={running:true,qs:buildDiagnostic(),idx:0,answers:[],done:false};render()">
-          🚀 Start Assessment
-        </button>
-      </div>
-    </div>`;
-  }
-
-  if(diagState.done){
-    const r=diagState.results;
-    const bySection=r.bySection;
-    return `<div class="page">
-      <div class="hdr-bar fc jsb mb16">
-        <button class="btn bm bsm" onclick="diagState={running:false,qs:[],idx:0,answers:[],done:false};nav('home')">✓ Done</button>
-        <h2 style="margin:0">📊 Your Results</h2>
-      </div>
-      <div class="card mb16" style="text-align:center;padding:24px">
-        <div style="font-size:40px;margin-bottom:8px">${r.overall>=80?'🏆':r.overall>=60?'⭐':'📚'}</div>
-        <h2 style="margin-bottom:4px">Overall Score: ${r.overall}%</h2>
-        <p class="sm mt">${r.overall>=80?'Excellent! You\'re performing at a high level.':r.overall>=60?'Good foundation. Focus on your weaker areas.':'Great start! Consistent practice will improve your score quickly.'}</p>
-      </div>
-      <h3 class="mb12">Results by Area</h3>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
-        ${Object.entries(bySection).map(([sec,{correct,total,label}])=>{
-          const pct=Math.round(correct/total*100);
-          const col=pct>=80?'var(--green)':pct>=60?'var(--orange)':'var(--red)';
-          return `<div class="card" style="padding:12px 16px">
-            <div class="fc jsb mb6">
-              <span style="font-weight:700">${label}</span>
-              <span style="font-weight:800;color:${col}">${correct}/${total} — ${pct}%</span>
-            </div>
-            <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div>
-          </div>`;
-        }).join('')}
-      </div>
-      <h3 class="mb12">📚 Your Personalised Plan</h3>
-      <div class="card mb20" style="border-color:rgba(79,216,247,.4)">
-        ${r.recommendations.map((rec,i)=>`
-          <div style="padding:12px 0;${i>0?'border-top:1px solid var(--border)':''}">
-            <div style="font-weight:700;margin-bottom:4px">${i===0?'🎯 Top Priority':'📋 Also recommended'}: ${rec.label}</div>
-            <div class="sm mt" style="color:var(--muted);margin-bottom:8px">${rec.why}</div>
-            <button class="btn bg bsm" onclick="startAdaptive({section:'${rec.section}'})">Start Practising →</button>
-          </div>`).join('')}
-      </div>
-      <div class="fc gap8 wrap">
-        <button class="btn ba" onclick="nav('practice')">✏️ Go to Practice</button>
-        <button class="btn bm" onclick="diagState={running:false,qs:[],idx:0,answers:[],done:false};render()">🔄 Re-take Assessment</button>
-      </div>
-    </div>`;
-  }
-
-  // Running state
-  const {qs,idx}=diagState;
-  const cur=qs[idx];
-  if(!cur){
-    // Calculate results
-    const correct=diagState.answers.filter(Boolean).length;
-    const bySection={};
-    const LABELS={'gen_maths_a':'Numeracy','gen_maths_b':'Numeracy','gen_maths_c':'Numeracy','gen_english':'English','vic_quant':'Quantitative Reasoning','nsw_thinking':'General Ability','vic_verbal':'Verbal Reasoning','gen_science':'Science'};
-    qs.forEach((q,i)=>{
-      const key=LABELS[q.section]||q.section;
-      if(!bySection[key]) bySection[key]={correct:0,total:0,label:key,section:q.section};
-      bySection[key].total++;
-      if(diagState.answers[i]) bySection[key].correct++;
-    });
-    const recs=Object.entries(bySection)
-      .sort((a,b)=>a[1].correct/a[1].total - b[1].correct/b[1].total)
-      .slice(0,3)
-      .map(([label,{section,correct,total}])=>({
-        label,section,
-        why:`${correct}/${total} correct (${Math.round(correct/total*100)}%) — needs the most attention.`
-      }));
-    diagState.done=true;
-    diagState.results={overall:Math.round(correct/qs.length*100),bySection,recommendations:recs};
-    render();
-    return '';
-  }
-  const ans=diagState.answers[idx];
-  const isCorrect=ans===cur.answer;
-  return `<div class="page">
-    <div class="hdr-bar fc jsb mb10">
-      <button class="btn bm bsm" onclick="diagState.running=false;nav('home')">✕ Exit</button>
-      <span class="sm mt">Question ${idx+1} of ${qs.length}</span>
-    </div>
-    <div class="prog-bar mb16"><div class="prog-fill" style="width:${(idx/qs.length)*100}%"></div></div>
-    <div class="card mb14">
-      <div class="tag ta mb8" style="display:inline-block;font-size:11px">
-        ${({'gen_maths_a':'🔢 Numeracy','gen_maths_b':'🔢 Numeracy','gen_maths_c':'🔢 Numeracy','gen_english':'📖 English','vic_quant':'📊 Quantitative','nsw_thinking':'🧠 General Ability','vic_verbal':'💬 Verbal','gen_science':'🔬 Science'})[cur.section]||'📝 Question'}
-      </div>
-      <p style="font-size:16px;font-weight:700;line-height:1.55;margin:8px 0 18px">${cur.q}</p>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        ${cur.options.map((o,i)=>{
-          let st='';
-          if(ans!==undefined){
-            if(i===cur.answer) st='border-color:var(--green);background:rgba(76,175,80,.1)';
-            else if(i===ans) st='border-color:var(--red);background:rgba(247,79,79,.08)';
-          }
-          return `<button class="btn bm" style="justify-content:flex-start;text-align:left;${st}"
-            onclick="diagState.answers[${idx}]=${i};render()" ${ans!==undefined?'disabled':''}>
-            <span style="font-weight:800;margin-right:8px">${'ABCD'[i]}.</span>${o}
-          </button>`;
-        }).join('')}
-      </div>
-      ${ans!==undefined?`<div style="margin-top:12px;font-size:13px;color:${isCorrect?'var(--green)':'var(--red)'}">
-        ${isCorrect?'✅ Correct!':'❌ The correct answer is: '+cur.options[cur.answer]}
-      </div>
-      ${cur.exp?`<div class="exp mt10">${cur.exp}</div>`:''}
-      <button class="btn ba mt12" onclick="diagState.idx++;render()">
-        ${idx+1<qs.length?'Next →':'See Results 🏆'}
-      </button>`:''}
-    </div>
-  </div>`;
-}
-
-// ── 4. NAPLAN PREP ────────────────────────────────────────────────────────────
-let naplanState={grade:null,area:null};
-const NAPLAN_GRADES=[3,5,7,9];
-const NAPLAN_AREAS=[
-  {id:'numeracy',label:'Numeracy',icon:'🔢',sections:['gen_maths_a','gen_maths_b','gen_maths_c'],color:'var(--accent)'},
-  {id:'reading',label:'Reading',icon:'📖',sections:['gen_english','vic_reading','nsw_reading'],color:'var(--green)'},
-  {id:'conventions',label:'Language Conventions',icon:'✍️',sections:['gen_english'],color:'var(--purple)'},
-  {id:'science',label:'Science & Technology',icon:'🔬',sections:['gen_science'],color:'var(--teal)'},
-];
-
-function renderNAPLAN(){
-  if(!naplanState.grade){
-    return `<div class="page">
-      <div class="hdr-bar fc jsb mb16">
-        <button class="btn bm bsm" onclick="nav('home')">← Home</button>
-        <h2 style="margin:0">📝 NAPLAN Preparation</h2>
-      </div>
-      <div class="card mb20" style="background:linear-gradient(135deg,rgba(76,175,80,.08),transparent);border-color:rgba(76,175,80,.3);padding:22px">
-        <div class="fc gap12 mb12">
-          <span style="font-size:36px">🎓</span>
-          <div>
-            <h3 style="margin:0 0 4px">Australian curriculum-aligned</h3>
-            <p class="sm mt">NAPLAN tests are held in Years 3, 5, 7 and 9. Select your year to begin targeted practice.</p>
-          </div>
-        </div>
-      </div>
-      <h3 class="mb12">Select Your Year Level</h3>
-      <div class="g2 mb20">
-        ${NAPLAN_GRADES.map(g=>`
-          <div class="card hov" style="text-align:center;cursor:pointer;padding:24px" onclick="naplanState.grade=${g};render()">
-            <div style="font-size:32px;margin-bottom:8px">📚</div>
-            <div style="font-size:20px;font-weight:800">Year ${g}</div>
-            <div class="xs mt mt6" style="color:var(--muted)">
-              ${g===3?'Ages 8–9':g===5?'Ages 10–11':g===7?'Ages 12–13':'Ages 14–15'}
-            </div>
-          </div>`).join('')}
-      </div>
-      <div class="card" style="border-color:rgba(79,216,247,.3);padding:16px">
-        <h4 style="margin:0 0 8px">🏆 What NAPLAN Tests</h4>
-        <div class="g2">
-          ${NAPLAN_AREAS.map(a=>`<div style="padding:8px 0">
-            <span style="margin-right:8px">${a.icon}</span>
-            <span style="font-weight:600">${a.label}</span>
-          </div>`).join('')}
-        </div>
-      </div>
-    </div>`;
-  }
-
-  if(!naplanState.area){
-    return `<div class="page">
-      <div class="hdr-bar fc jsb mb16">
-        <button class="btn bm bsm" onclick="naplanState.grade=null;render()">← Years</button>
-        <h2 style="margin:0">Year ${naplanState.grade} — Choose Area</h2>
-      </div>
-      <div class="g2 mb16">
-        ${NAPLAN_AREAS.map(a=>`
-          <div class="card hov" style="cursor:pointer;border-color:${a.color}33;padding:18px;text-align:center"
-            onclick="naplanState.area='${a.id}';startPractice({section:${JSON.stringify(a.sections[0])},grade:${naplanState.grade}},'oneByOne',20)">
-            <div style="font-size:32px;margin-bottom:8px">${a.icon}</div>
-            <div style="font-weight:700">${a.label}</div>
-            <div class="xs mt mt6 mb10" style="color:var(--muted)">20 questions</div>
-            <button class="btn bsm" style="background:${a.color};color:#fff;border-color:${a.color};width:100%">
-              Start Practice →
-            </button>
-          </div>`).join('')}
-      </div>
-      <div class="card" style="border-color:rgba(255,165,0,.3);background:rgba(255,165,0,.04);padding:14px">
-        <strong>💡 Year ${naplanState.grade} NAPLAN Tips</strong>
-        <ul class="sm mt" style="margin:8px 0 0;padding-left:18px;line-height:2">
-          ${(naplanState.grade<=5?['Read the question twice before answering','Show all working in maths questions','Check for keywords: always, never, sometimes','Write in complete sentences for writing tasks']:
-            ['Use process of elimination for tricky questions','Watch your time — don\'t spend too long on one question','In writing, plan for 3–5 minutes before you begin','Practice numeracy without a calculator to build speed']).map(t=>`<li>${t}</li>`).join('')}
-        </ul>
-      </div>
-    </div>`;
-  }
-  naplanState.area=null;
-  return renderNAPLAN();
-}
-
-// ── 5. SMART PROGRESS DASHBOARD ──────────────────────────────────────────────
-function renderSmartDashboard(){
-  const d=currentUser?Profiles.loadData(currentUser):null;
-  if(!d) return `<div class="page"><div class="card tc" style="padding:40px">
-    <div style="font-size:40px;margin-bottom:12px">👤</div>
-    <h3>No profile selected</h3>
-    <button class="btn ba mt12" onclick="nav('profile')">Create Profile</button>
-  </div></div>`;
-
-  const history=d.history||[];
-  const stats=Profiles.getStats(currentUser);
-  const lv=Profiles.getLevel(d.xp||0);
-
-  // Weekly data (last 7 days)
-  const now=Date.now();
-  const DAY=86400000;
-  const weekData=Array.from({length:7},(_,i)=>{
-    const dayStart=now-((6-i)*DAY);
-    const dayEnd=dayStart+DAY;
-    const dayQs=history.filter(h=>{
-      const ts=h.ts||0;
-      return ts>=dayStart&&ts<dayEnd;
-    });
-    const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    const date=new Date(dayStart);
-    return {
-      label:days[date.getDay()]||'?',
-      total:dayQs.length,
-      correct:dayQs.filter(h=>h.correct).length,
-      acc:dayQs.length?Math.round(dayQs.filter(h=>h.correct).length/dayQs.length*100):0
-    };
-  });
-
-  const maxTotal=Math.max(...weekData.map(d=>d.total),1);
-
-  // Topic performance
-  const topicPerf={};
-  history.forEach(h=>{
-    if(!h.topic) return;
-    if(!topicPerf[h.topic]) topicPerf[h.topic]={correct:0,total:0};
-    topicPerf[h.topic].total++;
-    if(h.correct) topicPerf[h.topic].correct++;
-  });
-  const topicArr=Object.entries(topicPerf)
-    .filter(([,v])=>v.total>=3)
-    .map(([t,v])=>({topic:t,pct:Math.round(v.correct/v.total*100),total:v.total}))
-    .sort((a,b)=>b.total-a.total)
-    .slice(0,8);
-
-  const strongTopics=topicArr.filter(t=>t.pct>=75).slice(0,3);
-  const weakTopics=topicArr.filter(t=>t.pct<60).slice(0,3);
-
-  // Recent accuracy trend (last 10 sessions of 10 each)
-  const trend=[];
-  for(let i=0;i<Math.min(history.length,100);i+=10){
-    const chunk=history.slice(i,i+10);
-    if(chunk.length===0) break;
-    trend.push(Math.round(chunk.filter(h=>h.correct).length/chunk.length*100));
-  }
-  trend.reverse();
-
-  return `<div class="page">
-    <div class="hdr-bar fc jsb mb16">
-      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
-      <h2 style="margin:0">📊 Smart Dashboard</h2>
-    </div>
-
-    <!-- Level & XP -->
-    <div class="card mb16" style="background:linear-gradient(135deg,${lv.color}15,transparent);border-color:${lv.color}44;padding:20px">
-      <div class="fc gap12 mb10">
-        <div style="font-size:44px">${lv.badge}</div>
-        <div>
-          <div style="font-size:18px;font-weight:800;color:${lv.color}">${lv.title}</div>
-          <div class="sm mt">Level ${lv.level} · ${d.xp||0} XP earned</div>
-          <div class="prog-bar mt8" style="width:160px"><div class="prog-fill" style="width:${Math.min(((d.xp||0)-lv.minXP)/(lv.maxXP-lv.minXP)*100,100)}%;background:${lv.color}"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Key Stats -->
-    <div class="g4 mb16">
-      ${[
-        {icon:'✅',val:stats?.totalAnswered||0,label:'Questions Done',col:'var(--accent)'},
-        {icon:'🎯',val:(stats?.acc||0)+'%',label:'Accuracy',col:pctColor(stats?.acc||0)},
-        {icon:'🔥',val:d.streak||0,label:'Day Streak',col:'var(--orange)'},
-        {icon:'⭐',val:d.xp||0,label:'Total XP',col:'var(--yellow)'},
-      ].map(({icon,val,label,col})=>`
-        <div class="card tc"><div style="font-size:20px">${icon}</div>
-          <div style="font-size:22px;font-weight:800;color:${col};margin:4px 0">${val}</div>
-          <div class="xs mt">${label}</div>
-        </div>`).join('')}
-    </div>
-
-    <!-- Weekly Activity Chart -->
-    <div class="card mb16">
-      <h3 style="margin:0 0 14px">📅 This Week's Activity</h3>
-      <div style="display:flex;align-items:flex-end;gap:6px;height:80px;margin-bottom:6px">
-        ${weekData.map(day=>{
-          const h=day.total?Math.max(Math.round(day.total/maxTotal*70),4):0;
-          const col=day.acc>=75?'var(--green)':day.acc>=50?'var(--orange)':'var(--accent)';
-          return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px">
-            ${day.total?`<div class="xs" style="color:var(--muted)">${day.acc}%</div>`:'<div style="height:13px"></div>'}
-            <div style="width:100%;height:${h}px;background:${day.total?col:'var(--border)'};border-radius:4px 4px 0 0" title="${day.total} questions"></div>
-          </div>`;
-        }).join('')}
-      </div>
-      <div style="display:flex;gap:6px">
-        ${weekData.map(day=>`<div style="flex:1;text-align:center;font-size:11px;color:var(--muted)">${day.label}</div>`).join('')}
-      </div>
-      ${weekData.reduce((a,d)=>a+d.total,0)===0?`<p class="sm mt tc mt10" style="color:var(--muted)">No activity this week yet — start practising! 🚀</p>`:''}
-    </div>
-
-    <!-- Accuracy Trend -->
-    ${trend.length>=3?`<div class="card mb16">
-      <h3 style="margin:0 0 10px">📈 Accuracy Trend</h3>
-      <div style="display:flex;align-items:flex-end;gap:4px;height:60px">
-        ${trend.map((v,i)=>{
-          const col=v>=75?'var(--green)':v>=55?'var(--orange)':'var(--red)';
-          return `<div style="flex:1;background:${col};height:${Math.max(v*0.6,4)}px;border-radius:3px 3px 0 0" title="${v}%"></div>`;
-        }).join('')}
-      </div>
-      <div class="sm mt mt8" style="color:var(--muted)">Each bar = last 10 questions (${trend[trend.length-1]}% most recent)</div>
-    </div>`:''}
-
-    <!-- Strengths & Weaknesses -->
-    <div class="g2 mb16">
-      ${strongTopics.length?`<div class="card" style="border-color:rgba(76,175,80,.3)">
-        <h4 style="color:var(--green);margin:0 0 10px">💪 Strengths</h4>
-        ${strongTopics.map(t=>`<div class="fc jsb mb6">
-          <span class="sm">${t.topic}</span>
-          <span style="font-weight:700;color:var(--green)">${t.pct}%</span>
-        </div>`).join('')}
-      </div>`:''}
-      ${weakTopics.length?`<div class="card" style="border-color:rgba(247,79,79,.3)">
-        <h4 style="color:var(--red);margin:0 0 10px">📌 Focus Areas</h4>
-        ${weakTopics.map(t=>`<div class="fc jsb mb6">
-          <span class="sm">${t.topic}</span>
-          <span style="font-weight:700;color:var(--red)">${t.pct}%</span>
-        </div>
-        <button class="btn bm bsm mb6" onclick="startAdaptive({topic:'${t.topic}'})">Practice ${t.topic} →</button>`).join('')}
-      </div>`:''}
-    </div>
-
-    <!-- Adaptive recommendation -->
-    <div class="card" style="border-color:rgba(79,150,247,.3);background:rgba(79,150,247,.04);padding:16px">
-      <h4 style="margin:0 0 8px">🤖 Recommended for You</h4>
-      <p class="sm mt mb12">Based on your recent performance (${getAdaptiveDifficulty(currentUser)} difficulty recommended):</p>
-      <div class="fc gap8 wrap">
-        <button class="btn ba bsm" onclick="startAdaptive({})">✏️ Adaptive Practice</button>
-        ${weakTopics.length?`<button class="btn bg bsm" onclick="startAdaptive({topic:'${weakTopics[0].topic}'})">📌 Fix: ${weakTopics[0].topic}</button>`:''}
-        <button class="btn bm bsm" onclick="nav('diagnostic')">🔍 Re-run Diagnostic</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-// ── 6. PARENT DASHBOARD ───────────────────────────────────────────────────────
-function renderParentDashboard(){
-  const profiles=Profiles.getProfileList();
-  if(!profiles.length){
-    return `<div class="page"><div class="card tc" style="padding:40px">
-      <div style="font-size:40px;margin-bottom:12px">👨‍👩‍👧</div>
-      <h3>No profiles yet</h3>
-      <p class="sm mt mb16">Create a student profile to get started.</p>
-      <button class="btn ba" onclick="nav('profile')">Create Profile</button>
-    </div></div>`;
-  }
-  return `<div class="page">
-    <div class="hdr-bar fc jsb mb16">
-      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
-      <h2 style="margin:0">👨‍👩‍👧 Parent Dashboard</h2>
-    </div>
-    <p class="sm mt mb16" style="color:var(--muted)">Overview of all student profiles and recent activity.</p>
-
-    ${profiles.map(({nickname})=>{
-      const d=Profiles.loadData(nickname);
-      const stats=Profiles.getStats(nickname);
-      const lv=Profiles.getLevel(d?.xp||0);
-      const history=d?.history||[];
-      const recent=history.slice(-50);
-      const todayStart=new Date().setHours(0,0,0,0);
-      const todayQs=history.filter(h=>(h.ts||0)>=todayStart);
-      const weekStart=Date.now()-7*86400000;
-      const weekQs=history.filter(h=>(h.ts||0)>=weekStart);
-      const weakTopics=(stats?.weakTopics||[]).slice(0,2);
-
-      return `<div class="card mb14" style="border-color:${lv.color}33">
-        <div class="fc jsb mb12 wrap gap8">
-          <div class="fc gap10">
-            <div style="font-size:32px">${lv.badge}</div>
-            <div>
-              <div style="font-weight:800;font-size:16px">${nickname}</div>
-              <div class="xs mt" style="color:${lv.color}">${lv.title} · Level ${lv.level} · ${d?.xp||0} XP</div>
-            </div>
-          </div>
-          <div class="fc gap6">
-            <span style="font-size:20px">🔥</span>
-            <span style="font-weight:700">${d?.streak||0}-day streak</span>
-          </div>
-        </div>
-
-        <!-- Stats row -->
-        <div class="g4 mb12">
-          ${[
-            {label:'Today',val:todayQs.length+' Qs',sub:todayQs.length?Math.round(todayQs.filter(h=>h.correct).length/todayQs.length*100)+'% acc':'No activity'},
-            {label:'This Week',val:weekQs.length+' Qs',sub:weekQs.length?Math.round(weekQs.filter(h=>h.correct).length/weekQs.length*100)+'% acc':'No activity'},
-            {label:'Overall',val:(stats?.totalAnswered||0)+' Qs',sub:(stats?.acc||0)+'% accuracy'},
-            {label:'Achievements',val:`${(d?.achievements||[]).length}/${Profiles.ACHIEVEMENTS.length}`,sub:'unlocked'},
-          ].map(({label,val,sub})=>`<div class="card tc" style="padding:10px">
-            <div class="xs" style="color:var(--muted)">${label}</div>
-            <div style="font-weight:800;font-size:14px;margin:2px 0">${val}</div>
-            <div class="xs" style="color:var(--muted)">${sub}</div>
-          </div>`).join('')}
-        </div>
-
-        ${weakTopics.length?`<div style="padding:10px;background:rgba(247,79,79,.05);border-radius:8px;margin-bottom:10px">
-          <span style="font-size:12px;font-weight:700;color:var(--red)">📌 Needs practice: </span>
-          ${weakTopics.map(t=>`<span class="tag tr" style="margin-left:6px;font-size:11px">${t.topic}</span>`).join('')}
-        </div>`:''}
-
-        <div class="fc gap6 wrap">
-          <button class="btn bm bsm" onclick="currentUser='${nickname}';nav('dashboard')">📊 Full Report</button>
-          <button class="btn bg bsm" onclick="currentUser='${nickname}';startAdaptive({})">▶️ Start Practice</button>
-        </div>
-      </div>`;
-    }).join('')}
-
-    <div class="card" style="padding:14px;border-color:rgba(79,216,247,.3)">
-      <h4 style="margin:0 0 8px">📋 Quick Tips for Parents</h4>
-      <ul class="sm mt" style="margin:0;padding-left:18px;line-height:2">
-        <li>Aim for <strong>15–20 minutes</strong> of daily practice for best results</li>
-        <li>Focus on <strong>weak topics</strong> shown above for biggest improvement</li>
-        <li>The <strong>streak counter</strong> helps build a consistent study habit</li>
-        <li>Check the <strong>Full Report</strong> to see accuracy trends over time</li>
-      </ul>
-    </div>
-  </div>`;
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// FEATURE COMPLETION — Repeated Mistakes, Speed, Topics Completed,
-// ICAS Analysis, Vocab Origins, Enhanced Dashboard
-// ══════════════════════════════════════════════════════════════════════════════
-
-// ── QUESTION TIMER ───────────────────────────────────────────────────────────
-let _qStartTime = Date.now();
-
-function markQuestionStart() {
-  _qStartTime = Date.now();
-}
-
-function getSecondsTaken() {
-  return Math.round((Date.now() - _qStartTime) / 1000);
-}
-
-// ── ENHANCED ANSWER RECORDING (wraps existing recordAnswer call) ──────────────
-// Called from the practice flow AFTER the original recordAnswer
-function recordAnswerWithTiming(user, q, correct) {
-  if (!user) return;
-  const secsTaken = getSecondsTaken();
-  const data = Profiles.loadData(user);
-  if (!data) return;
-
-  // 1. Speed tracking — store seconds per answer
-  if (!data.speedHistory) data.speedHistory = [];
-  data.speedHistory.push({ ts: Date.now(), secs: secsTaken, correct });
-  if (data.speedHistory.length > 200) data.speedHistory = data.speedHistory.slice(-200);
-
-  // 2. Repeated mistakes — track wrong answers by topic
-  if (!correct && q.topic) {
-    if (!data.wrongTopics) data.wrongTopics = {};
-    data.wrongTopics[q.topic] = (data.wrongTopics[q.topic] || 0) + 1;
-  }
-  // Reset wrong count when correct
-  if (correct && q.topic && data.wrongTopics && data.wrongTopics[q.topic]) {
-    data.wrongTopics[q.topic] = Math.max(0, (data.wrongTopics[q.topic] || 1) - 1);
-  }
-
-  // 3. Topics practised set (for "topics completed" count)
-  if (!data.topicsSeen) data.topicsSeen = {};
-  if (q.topic) {
-    if (!data.topicsSeen[q.topic]) data.topicsSeen[q.topic] = { correct: 0, total: 0 };
-    data.topicsSeen[q.topic].total++;
-    if (correct) data.topicsSeen[q.topic].correct++;
-  }
-
-  // 4. Study time estimate — 1 question ≈ secsTaken (capped at 3 min)
-  const clampedSecs = Math.min(secsTaken, 180);
-  data.totalStudySecs = (data.totalStudySecs || 0) + clampedSecs;
-
-  // Save back
-  try {
-    localStorage.setItem('ss_profile_' + user, JSON.stringify(data));
-  } catch (e) {}
-}
-
-// ── ICAS PERFORMANCE ANALYSIS ──────────────────────────────────────────────
-function renderICASAnalysis(questions, answers) {
-  if (!questions || !questions.length) return '';
-
-  // Group by topic
-  const byTopic = {};
-  questions.forEach((q, i) => {
-    const topic = q.topic || 'General';
-    if (!byTopic[topic]) byTopic[topic] = { correct: 0, total: 0 };
-    byTopic[topic].total++;
-    if (answers[i] === q.answer) byTopic[topic].correct++;
-  });
-
-  const topicRows = Object.entries(byTopic)
-    .sort((a, b) => b[1].total - a[1].total)
-    .map(([topic, { correct, total }]) => {
-      const pct = Math.round(correct / total * 100);
-      const col = pct >= 75 ? 'var(--green)' : pct >= 50 ? 'var(--orange)' : 'var(--red)';
-      return `<div style="padding:10px 0;border-bottom:1px solid var(--border)">
-        <div class="fc jsb mb5">
-          <span style="font-weight:600;font-size:14px">${topic}</span>
-          <span style="font-weight:800;color:${col}">${correct}/${total} — ${pct}%</span>
-        </div>
-        <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div>
-        ${pct < 60 ? `<div style="font-size:12px;color:var(--muted);margin-top:4px">
-          📌 Suggested: practise more ${topic} questions</div>` : ''}
-      </div>`;
-    }).join('');
-
-  const avgPct = Math.round(questions.filter((q, i) => answers[i] === q.answer).length / questions.length * 100);
-  const suggestion = avgPct >= 80 ? '🌟 Excellent ICAS readiness!'
-    : avgPct >= 60 ? '📚 Good effort — focus on the weaker areas below.'
-    : '💪 Keep practising — consistency is key for ICAS success.';
-
-  return `<div class="card mb16" style="border-color:rgba(79,150,247,.3)">
-    <h3 style="margin:0 0 4px">📊 Performance by Skill Area</h3>
-    <p class="sm mt mb12" style="color:var(--muted)">${suggestion}</p>
-    ${topicRows}
-  </div>`;
-}
-
-// ── ENHANCED SMART DASHBOARD (replaces renderSmartDashboard) ─────────────────
-function renderSmartDashboard() {
-  const d = currentUser ? Profiles.loadData(currentUser) : null;
-  if (!d) return `<div class="page"><div class="card tc" style="padding:40px">
-    <div style="font-size:40px;margin-bottom:12px">👤</div>
-    <h3>No profile selected</h3>
-    <button class="btn ba mt12" onclick="nav('profile')">Create or select a profile</button>
-  </div></div>`;
-
-  const stats = Profiles.getStats(currentUser);
-  const lv = Profiles.getLevel(d.xp || 0);
-  const history = d.history || [];
-  const now = Date.now();
-  const DAY = 86400000;
-
-  // ── Weekly activity ──────────────────────────────────────────────────────
-  const weekData = Array.from({ length: 7 }, (_, i) => {
-    const dayStart = now - (6 - i) * DAY;
-    const dayEnd = dayStart + DAY;
-    const dayQs = history.filter(h => (h.ts || 0) >= dayStart && (h.ts || 0) < dayEnd);
-    const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    return {
-      label: days[new Date(dayStart).getDay()],
-      total: dayQs.length,
-      correct: dayQs.filter(h => h.correct).length,
-      acc: dayQs.length ? Math.round(dayQs.filter(h => h.correct).length / dayQs.length * 100) : 0
-    };
-  });
-  const maxTotal = Math.max(...weekData.map(d => d.total), 1);
-  const weekTotal = weekData.reduce((a, d) => a + d.total, 0);
-  const weekStudyMins = Math.round((d.totalStudySecs || weekTotal * 25) / 60);
-
-  // ── Accuracy trend ───────────────────────────────────────────────────────
-  const trend = [];
-  for (let i = 0; i < Math.min(history.length, 100); i += 10) {
-    const chunk = history.slice(i, i + 10);
-    if (!chunk.length) break;
-    trend.push(Math.round(chunk.filter(h => h.correct).length / chunk.length * 100));
-  }
-  trend.reverse();
-  const trendUp = trend.length >= 2 && trend[trend.length-1] > trend[0];
-
-  // ── Week-on-week comparison ───────────────────────────────────────────────
-  const thisWeekQs = history.filter(h => (h.ts||0) >= now - 7*DAY);
-  const lastWeekQs = history.filter(h => (h.ts||0) >= now-14*DAY && (h.ts||0) < now-7*DAY);
-  const thisAcc = thisWeekQs.length ? Math.round(thisWeekQs.filter(h=>h.correct).length/thisWeekQs.length*100) : 0;
-  const lastAcc = lastWeekQs.length ? Math.round(lastWeekQs.filter(h=>h.correct).length/lastWeekQs.length*100) : 0;
-  const weekChange = thisAcc - lastAcc;
-
-  // ── Topics completed ──────────────────────────────────────────────────────
-  const topicsSeen = d.topicsSeen || {};
-  const topicsCount = Object.keys(topicsSeen).length;
-  const topicsCorrectOnce = Object.values(topicsSeen).filter(t => t.correct > 0).length;
-
-  // ── Speed tracking ────────────────────────────────────────────────────────
-  const speedH = (d.speedHistory || []).slice(-50);
-  const avgSpeed = speedH.length ? Math.round(speedH.reduce((a,s) => a + s.secs, 0) / speedH.length) : null;
-  const recentSpeed = speedH.slice(-10);
-  const olderSpeed = speedH.slice(-30, -10);
-  const speedImproving = recentSpeed.length && olderSpeed.length &&
-    recentSpeed.reduce((a,s)=>a+s.secs,0)/recentSpeed.length <
-    olderSpeed.reduce((a,s)=>a+s.secs,0)/olderSpeed.length;
-
-  // ── Repeated mistakes ──────────────────────────────────────────────────────
-  const wrongTopics = d.wrongTopics || {};
-  const repeatedMistakes = Object.entries(wrongTopics)
-    .filter(([,n]) => n >= 3)
-    .sort((a,b) => b[1]-a[1])
-    .slice(0, 4);
-
-  // ── Topic strengths/weaknesses ────────────────────────────────────────────
-  const topicScores = d.topicScores || {};
-  const topicArr = Object.entries(topicScores)
-    .filter(([,v]) => v.total >= 3)
-    .map(([t,v]) => ({ topic:t, pct:Math.round(v.correct/v.total*100), total:v.total }))
-    .sort((a,b) => b.total - a.total);
-  const strongTopics = topicArr.filter(t => t.pct >= 75).slice(0,3);
-  const weakTopics = topicArr.filter(t => t.pct < 60).slice(0,3);
-
-  return `<div class="page">
-    <div class="hdr-bar fc jsb mb16">
-      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
-      <h2 style="margin:0">📊 Smart Dashboard</h2>
-    </div>
-
-    <!-- Level & XP -->
-    <div class="card mb14" style="background:linear-gradient(135deg,${lv.color}18,transparent);border-color:${lv.color}44;padding:18px">
-      <div class="fc gap12 mb8">
-        <div style="font-size:40px">${lv.badge}</div>
-        <div style="flex:1">
-          <div style="font-size:17px;font-weight:800;color:${lv.color}">${lv.title} — Level ${lv.level}</div>
-          <div class="sm mt">${d.xp||0} XP earned · ${d.streak||0}-day streak 🔥</div>
-          <div class="prog-bar mt8"><div class="prog-fill"
-            style="width:${Math.min(((d.xp||0)-lv.minXP)/(lv.maxXP-lv.minXP)*100,100)}%;background:${lv.color}">
-          </div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Key Stats -->
-    <div class="g4 mb14">
-      ${[
-        {icon:'✅',val:(stats?.totalAnswered||0).toLocaleString(),label:'Questions Done',col:'var(--accent)'},
-        {icon:'🎯',val:(stats?.acc||0)+'%',label:'Overall Accuracy',col:pctColor(stats?.acc||0)},
-        {icon:'📚',val:topicsCount,label:'Topics Practised',col:'var(--purple)'},
-        {icon:'⏱️',val:weekStudyMins>60?Math.round(weekStudyMins/60)+'h':weekStudyMins+'m',label:'Study Time (est.)',col:'var(--teal)'},
-      ].map(({icon,val,label,col})=>`
-        <div class="card tc"><div style="font-size:20px">${icon}</div>
-          <div style="font-size:21px;font-weight:800;color:${col};margin:4px 0">${val}</div>
-          <div class="xs mt">${label}</div>
-        </div>`).join('')}
-    </div>
-
-    <!-- Weekly Activity Chart -->
-    <div class="card mb14">
-      <div class="fc jsb mb12">
-        <h3 style="margin:0">📅 This Week</h3>
-        <div class="fc gap8">
-          <span class="tag ${weekChange>0?'tg':weekChange<0?'tr':'tm'}" style="font-size:11px">
-            ${weekChange>0?'↑ +'+weekChange+'% vs last week':weekChange<0?'↓ '+weekChange+'% vs last week':'Same as last week'}
-          </span>
-          <span class="tag ta" style="font-size:11px">${weekTotal} questions</span>
-        </div>
-      </div>
-      <div style="display:flex;align-items:flex-end;gap:5px;height:80px;margin-bottom:6px">
-        ${weekData.map(day => {
-          const h = day.total ? Math.max(Math.round(day.total/maxTotal*70),4) : 0;
-          const col = day.acc>=75?'var(--green)':day.acc>=50?'var(--orange)':'var(--accent)';
-          return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
-            ${day.total ? `<div class="xs">${day.acc}%</div>` : '<div style="height:14px"></div>'}
-            <div style="width:100%;height:${h}px;background:${day.total?col:'var(--border)'};border-radius:4px 4px 0 0;transition:height .3s" title="${day.total} Qs"></div>
-          </div>`;
-        }).join('')}
-      </div>
-      <div style="display:flex;gap:5px">
-        ${weekData.map(d=>`<div style="flex:1;text-align:center;font-size:10px;color:var(--muted)">${d.label}</div>`).join('')}
-      </div>
-    </div>
-
-    <!-- Accuracy Trend -->
-    ${trend.length>=3?`<div class="card mb14">
-      <div class="fc jsb mb8">
-        <h3 style="margin:0">📈 Accuracy Trend</h3>
-        <span class="tag ${trendUp?'tg':'tr'}" style="font-size:11px">
-          ${trendUp?'↑ Improving':'↓ Needs focus'} · ${trend[trend.length-1]}% recently
-        </span>
-      </div>
-      <div style="display:flex;align-items:flex-end;gap:3px;height:56px">
-        ${trend.map((v,i)=>{
-          const col=v>=75?'var(--green)':v>=55?'var(--orange)':'var(--red)';
-          const isLast=i===trend.length-1;
-          return `<div style="flex:1;background:${col};height:${Math.max(v*0.55,3)}px;border-radius:3px 3px 0 0;${isLast?'outline:2px solid '+col+';outline-offset:2px':''}" title="${v}%"></div>`;
-        }).join('')}
-      </div>
-      <div class="sm mt mt8" style="color:var(--muted)">Each bar = accuracy over 10 questions</div>
-    </div>`:''}
-
-    <!-- Speed Tracking -->
-    ${avgSpeed?`<div class="card mb14">
-      <h3 style="margin:0 0 8px">⚡ Speed</h3>
-      <div class="g3">
-        <div class="card tc" style="padding:10px">
-          <div style="font-size:18px;font-weight:800;color:var(--accent)">${avgSpeed}s</div>
-          <div class="xs mt">Avg per question</div>
-        </div>
-        <div class="card tc" style="padding:10px">
-          <div style="font-size:18px;font-weight:800;color:${speedImproving?'var(--green)':'var(--muted)'}">${speedImproving?'↑ Faster':'—'}</div>
-          <div class="xs mt">Speed trend</div>
-        </div>
-        <div class="card tc" style="padding:10px">
-          <div style="font-size:18px;font-weight:800;color:var(--purple)">${speedH.length}</div>
-          <div class="xs mt">Qs timed</div>
-        </div>
-      </div>
-    </div>`:''}
-
-    <!-- Topics Completed -->
-    <div class="card mb14">
-      <div class="fc jsb mb10">
-        <h3 style="margin:0">📚 Topics Practised</h3>
-        <span style="font-weight:800;font-size:18px;color:var(--accent)">${topicsCorrectOnce} <span style="font-size:13px;font-weight:400;color:var(--muted)">mastered</span></span>
-      </div>
-      <div class="prog-bar mb6"><div class="prog-fill" style="width:${topicsCount?Math.round(topicsCorrectOnce/Math.max(topicsCount,1)*100):0}%"></div></div>
-      <div class="sm mt" style="color:var(--muted)">${topicsCount} topics attempted · ${topicsCorrectOnce} with at least one correct answer</div>
-      ${topicsCount>0?`<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px">
-        ${Object.entries(topicsSeen).slice(0,8).map(([t,v])=>{
-          const p=v.total?Math.round(v.correct/v.total*100):0;
-          const col=p>=75?'tg':p>=50?'ty':'tr';
-          return `<span class="tag ${col}" style="font-size:10px">${t} ${p}%</span>`;
-        }).join('')}
-        ${topicsCount>8?`<span class="tag" style="font-size:10px">+${topicsCount-8} more</span>`:''}
-      </div>`:''}
-    </div>
-
-    <!-- Repeated Mistakes -->
-    ${repeatedMistakes.length?`<div class="card mb14" style="border-color:rgba(247,79,79,.25);background:rgba(247,79,79,.04)">
-      <h3 style="margin:0 0 10px;color:var(--red)">🔁 Frequently Missed Topics</h3>
-      <p class="sm mt mb10" style="color:var(--muted)">These topics have been answered incorrectly ${repeatedMistakes[0]?.[1]||3}+ times. Extra practice recommended.</p>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        ${repeatedMistakes.map(([topic,n])=>`
-          <div class="fc jsb">
-            <div>
-              <div style="font-weight:700">${topic}</div>
-              <div class="xs mt" style="color:var(--red)">${n} incorrect answers</div>
-            </div>
-            <button class="btn bm bsm" onclick="startAdaptive({topic:'${topic.replace(/'/g,"\\'")}',difficulty:'easy'})">
-              Practise →
-            </button>
-          </div>`).join('')}
-      </div>
-    </div>`:''}
-
-    <!-- Strengths & Weaknesses -->
-    <div class="g2 mb14">
-      ${strongTopics.length?`<div class="card" style="border-color:rgba(76,175,80,.3)">
-        <h4 style="color:var(--green);margin:0 0 10px">💪 Strengths</h4>
-        ${strongTopics.map(t=>`<div class="fc jsb mb6">
-          <span class="sm">${t.topic}</span>
-          <span style="font-weight:700;color:var(--green)">${t.pct}%</span>
-        </div>`).join('')}
-      </div>`:''}
-      ${weakTopics.length?`<div class="card" style="border-color:rgba(247,79,79,.3)">
-        <h4 style="color:var(--red);margin:0 0 10px">📌 Focus Areas</h4>
-        ${weakTopics.map(t=>`<div class="fc jsb mb5">
-          <span class="sm">${t.topic}</span>
-          <span style="font-weight:700;color:var(--red)">${t.pct}%</span>
-        </div>
-        <button class="btn bm bsm mb6" onclick="startAdaptive({topic:'${t.topic.replace(/'/g,"\\'")}',difficulty:'easy'})">
-          Practice →
-        </button>`).join('')}
-      </div>`:''}
-    </div>
-
-    <!-- Recommended next action -->
-    <div class="card" style="border-color:rgba(79,150,247,.3);background:rgba(79,150,247,.04);padding:16px">
-      <h4 style="margin:0 0 8px">🤖 Recommended for You</h4>
-      <p class="sm mt mb12">Based on your recent results (${getAdaptiveDifficulty(currentUser)} difficulty recommended):</p>
-      <div class="fc gap8 wrap">
-        <button class="btn ba bsm" onclick="startAdaptive({})">✏️ Adaptive Practice</button>
-        ${weakTopics.length?`<button class="btn bg bsm" onclick="startAdaptive({topic:'${weakTopics[0]?.topic?.replace(/'/g,"\\'")||''}',difficulty:'easy'})">📌 Fix: ${weakTopics[0]?.topic||''}</button>`:''}
-        ${repeatedMistakes.length?`<button class="btn bm bsm" onclick="startAdaptive({topic:'${repeatedMistakes[0]?.[0]?.replace(/'/g,"\\'")||''}',difficulty:'easy'})">🔁 Retry: ${repeatedMistakes[0]?.[0]||''}</button>`:''}
-        <button class="btn bm bsm" onclick="nav('diagnostic')">🔍 Re-run Diagnostic</button>
-      </div>
-    </div>
-  </div>`;
-}
-
-// ── ENHANCED VOCAB BUILDER with word origins ───────────────────────────────
-// Extend WORD_LIST with origin field
-if (typeof WORD_LIST !== 'undefined') {
-  const ORIGINS = {
-    'Abundant': 'Latin: abundare (to overflow)',
-    'Benevolent': 'Latin: bene (well) + volens (wishing)',
-    'Candid': 'Latin: candidus (white, pure)',
-    'Diligent': 'Latin: diligere (to love, value)',
-    'Eloquent': 'Latin: eloqui (to speak out)',
-    'Frugal': 'Latin: frugalis (virtuous, thrifty)',
-    'Gregarious': 'Latin: grex (flock, herd)',
-    'Humble': 'Latin: humilis (low, from the earth)',
-    'Inquisitive': 'Latin: inquirere (to inquire)',
-    'Jovial': 'Latin: Jovialis (of Jupiter, the god)',
-    'Keen': 'Old English: cene (brave, bold)',
-    'Lucid': 'Latin: lucidus (bright, clear)',
-    'Meticulous': 'Latin: metus (fear) — originally "overly careful from fear"',
-    'Nonchalant': 'French: non + chaloir (to be concerned)',
-    'Obstinate': 'Latin: obstinatus (determined, firm)',
-    'Prudent': 'Latin: prudens (wise, sensible)',
-    'Resilient': 'Latin: resilire (to spring back)',
-    'Serene': 'Latin: serenus (clear, calm)',
-    'Tenacious': 'Latin: tenax (holding fast)',
-    'Ubiquitous': 'Latin: ubique (everywhere)',
-    'Vivid': 'Latin: vividus (lively, full of life)',
-    'Zealous': 'Greek: zelos (zeal, jealousy)',
-    'Ephemeral': 'Greek: epi (on) + hemera (day)',
-    'Fervent': 'Latin: fervens (boiling, glowing)',
-    'Formidable': 'Latin: formido (dread, terror)',
-  };
-  WORD_LIST.forEach(w => {
-    if (!w.origin) w.origin = ORIGINS[w.w] || '';
-  });
-}
-
-// Patch renderVocabBuilder to show sentence usage and word origins properly
-const _origVocabBuilder = typeof renderVocabBuilder !== 'undefined' ? renderVocabBuilder : null;
-
 function renderVocabBuilder() {
   const dayIdx = Math.floor(Date.now() / 86400000) % (WORD_LIST?.length || 30);
   const word = WORD_LIST ? WORD_LIST[(vocabState.wordIdx + dayIdx) % WORD_LIST.length] : null;
@@ -6410,8 +5457,14 @@ function renderAccount() {
             <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">STATE</label>
             <select id="auth-state" class="inp" style="width:100%;box-sizing:border-box">
               <option value="ALL">All states</option>
-              <option value="VIC">Victoria</option>
-              <option value="NSW">New South Wales</option>
+              <option value="VIC">Victoria (VIC)</option>
+              <option value="NSW">New South Wales (NSW)</option>
+              <option value="QLD">Queensland (QLD)</option>
+              <option value="SA">South Australia (SA)</option>
+              <option value="WA">Western Australia (WA)</option>
+              <option value="TAS">Tasmania (TAS)</option>
+              <option value="ACT">Australian Capital Territory (ACT)</option>
+              <option value="NT">Northern Territory (NT)</option>
             </select>
           </div>
         </div>
@@ -7026,4 +6079,217 @@ function doAdminExportData() {
   URL.revokeObjectURL(url);
   _adminMsg = '✅ Data exported';
   render();
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// SMART DASHBOARD — Full progress view with weekly chart, trends, analytics
+// ══════════════════════════════════════════════════════════════════════════════
+function renderSmartDashboard() {
+  const d = currentUser ? Profiles.loadData(currentUser) : null;
+  if (!d) return `<div class="page"><div class="card tc" style="padding:40px">
+    <div style="font-size:40px;margin-bottom:12px">👤</div>
+    <h3>No profile selected</h3>
+    <button class="btn ba mt12" onclick="nav('profile')">Create or select a profile</button>
+  </div></div>`;
+
+  const stats = Profiles.getStats(currentUser);
+  const lv = Profiles.getLevel(d.xp || 0);
+  const history = d.history || [];
+  const now = Date.now();
+  const DAY = 86400000;
+
+  // ── Weekly activity ──────────────────────────────────────────────────────
+  const weekData = Array.from({ length: 7 }, (_, i) => {
+    const dayStart = now - (6 - i) * DAY;
+    const dayEnd = dayStart + DAY;
+    const dayQs = history.filter(h => (h.ts || 0) >= dayStart && (h.ts || 0) < dayEnd);
+    const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    return {
+      label: days[new Date(dayStart).getDay()],
+      total: dayQs.length,
+      correct: dayQs.filter(h => h.correct).length,
+      acc: dayQs.length ? Math.round(dayQs.filter(h => h.correct).length / dayQs.length * 100) : 0
+    };
+  });
+  const maxTotal = Math.max(...weekData.map(d => d.total), 1);
+  const weekTotal = weekData.reduce((a, d) => a + d.total, 0);
+  const weekStudyMins = Math.round((d.totalStudySecs || weekTotal * 25) / 60);
+
+  // ── Accuracy trend ───────────────────────────────────────────────────────
+  const trend = [];
+  for (let i = 0; i < Math.min(history.length, 100); i += 10) {
+    const chunk = history.slice(i, i + 10);
+    if (!chunk.length) break;
+    trend.push(Math.round(chunk.filter(h => h.correct).length / chunk.length * 100));
+  }
+  trend.reverse();
+  const trendUp = trend.length >= 2 && trend[trend.length-1] > trend[0];
+
+  // ── Week-on-week ─────────────────────────────────────────────────────────
+  const thisWeekQs = history.filter(h => (h.ts||0) >= now - 7*DAY);
+  const lastWeekQs = history.filter(h => (h.ts||0) >= now-14*DAY && (h.ts||0) < now-7*DAY);
+  const thisAcc = thisWeekQs.length ? Math.round(thisWeekQs.filter(h=>h.correct).length/thisWeekQs.length*100) : 0;
+  const lastAcc = lastWeekQs.length ? Math.round(lastWeekQs.filter(h=>h.correct).length/lastWeekQs.length*100) : 0;
+  const weekChange = thisAcc - lastAcc;
+
+  // ── Topics completed ──────────────────────────────────────────────────────
+  const topicsSeen = d.topicsSeen || {};
+  const topicsCount = Object.keys(topicsSeen).length;
+  const topicsCorrectOnce = Object.values(topicsSeen).filter(t => (t.correct||0) > 0).length;
+
+  // ── Speed tracking ────────────────────────────────────────────────────────
+  const speedH = (d.speedHistory || []).slice(-50);
+  const avgSpeed = speedH.length ? Math.round(speedH.reduce((a,s) => a + s.secs, 0) / speedH.length) : null;
+  const recentSpeed = speedH.slice(-10);
+  const olderSpeed = speedH.slice(-30, -10);
+  const speedImproving = recentSpeed.length && olderSpeed.length &&
+    recentSpeed.reduce((a,s)=>a+s.secs,0)/recentSpeed.length <
+    olderSpeed.reduce((a,s)=>a+s.secs,0)/olderSpeed.length;
+
+  // ── Repeated mistakes ──────────────────────────────────────────────────────
+  const wrongTopics = d.wrongTopics || {};
+  const repeatedMistakes = Object.entries(wrongTopics)
+    .filter(([,n]) => n >= 3)
+    .sort((a,b) => b[1]-a[1])
+    .slice(0, 4);
+
+  // ── Topic strengths/weaknesses ────────────────────────────────────────────
+  const topicScores = d.topicScores || {};
+  const topicArr = Object.entries(topicScores)
+    .filter(([,v]) => v.total >= 3)
+    .map(([t,v]) => ({ topic:t, pct:Math.round(v.correct/v.total*100), total:v.total }))
+    .sort((a,b) => b.total - a.total);
+  const strongTopics = topicArr.filter(t => t.pct >= 75).slice(0,3);
+  const weakTopics = topicArr.filter(t => t.pct < 60).slice(0,3);
+
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+      <h2 style="margin:0">📊 Smart Dashboard</h2>
+    </div>
+
+    <!-- Level & XP -->
+    <div class="card mb14" style="background:linear-gradient(135deg,${lv.color}18,transparent);border-color:${lv.color}44;padding:18px">
+      <div class="fc gap12 mb8">
+        <div style="font-size:40px">${lv.badge}</div>
+        <div style="flex:1">
+          <div style="font-size:17px;font-weight:800;color:${lv.color}">${lv.title} — Level ${lv.level}</div>
+          <div class="sm mt">${d.xp||0} XP · ${d.streak||0}-day streak 🔥</div>
+          <div class="prog-bar mt8"><div class="prog-fill"
+            style="width:${Math.min(((d.xp||0)-lv.minXP)/(lv.maxXP-lv.minXP)*100,100)}%;background:${lv.color}">
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Stats -->
+    <div class="g4 mb14">
+      ${[
+        {icon:'✅',val:(stats?.totalAnswered||0).toLocaleString(),label:'Questions Done',col:'var(--accent)'},
+        {icon:'🎯',val:(stats?.acc||0)+'%',label:'Overall Accuracy',col:pctColor(stats?.acc||0)},
+        {icon:'📚',val:topicsCount,label:'Topics Seen',col:'var(--purple)'},
+        {icon:'⏱️',val:weekStudyMins>60?Math.round(weekStudyMins/60)+'h':weekStudyMins+'m',label:'Study Time',col:'var(--teal)'},
+      ].map(({icon,val,label,col})=>`
+        <div class="card tc"><div style="font-size:20px">${icon}</div>
+          <div style="font-size:21px;font-weight:800;color:${col};margin:4px 0">${val}</div>
+          <div class="xs mt">${label}</div>
+        </div>`).join('')}
+    </div>
+
+    <!-- Weekly Chart -->
+    <div class="card mb14">
+      <div class="fc jsb mb12">
+        <h3 style="margin:0">📅 This Week</h3>
+        <span class="tag ${weekChange>0?'tg':weekChange<0?'tr':'tm'}" style="font-size:11px">
+          ${weekChange>0?'↑ +'+weekChange+'%':weekChange<0?'↓ '+weekChange+'%':'Same'} vs last week · ${weekTotal} Qs
+        </span>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:5px;height:80px;margin-bottom:6px">
+        ${weekData.map(day => {
+          const h = day.total ? Math.max(Math.round(day.total/maxTotal*70),4) : 0;
+          const col = day.acc>=75?'var(--green)':day.acc>=50?'var(--orange)':'var(--accent)';
+          return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
+            ${day.total?`<div class="xs">${day.acc}%</div>`:'<div style="height:14px"></div>'}
+            <div style="width:100%;height:${h}px;background:${day.total?col:'var(--border)'};border-radius:4px 4px 0 0;transition:height .3s"></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div style="display:flex;gap:5px">
+        ${weekData.map(d=>`<div style="flex:1;text-align:center;font-size:10px;color:var(--muted)">${d.label}</div>`).join('')}
+      </div>
+      ${weekTotal===0?`<p class="sm mt tc mt10" style="color:var(--muted)">No activity this week yet — start practising! 🚀</p>`:''}
+    </div>
+
+    <!-- Accuracy Trend -->
+    ${trend.length>=3?`<div class="card mb14">
+      <div class="fc jsb mb8">
+        <h3 style="margin:0">📈 Accuracy Trend</h3>
+        <span class="tag ${trendUp?'tg':'tr'}" style="font-size:11px">
+          ${trendUp?'↑ Improving':'↓ Needs focus'} · ${trend[trend.length-1]}% recently
+        </span>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:3px;height:56px">
+        ${trend.map((v,i)=>{
+          const col=v>=75?'var(--green)':v>=55?'var(--orange)':'var(--red)';
+          const isLast=i===trend.length-1;
+          return `<div style="flex:1;background:${col};height:${Math.max(v*0.55,3)}px;border-radius:3px 3px 0 0;${isLast?'outline:2px solid '+col+';outline-offset:2px':''}" title="${v}%"></div>`;
+        }).join('')}
+      </div>
+      <div class="sm mt mt8" style="color:var(--muted)">Each bar = accuracy over 10 questions</div>
+    </div>`:''}
+
+    <!-- Speed -->
+    ${avgSpeed?`<div class="card mb14">
+      <h3 style="margin:0 0 10px">⚡ Speed</h3>
+      <div class="g3">
+        <div class="card tc" style="padding:10px"><div style="font-size:18px;font-weight:800;color:var(--accent)">${avgSpeed}s</div><div class="xs mt">Avg per question</div></div>
+        <div class="card tc" style="padding:10px"><div style="font-size:18px;font-weight:800;color:${speedImproving?'var(--green)':'var(--muted)'}">${speedImproving?'↑ Faster':'—'}</div><div class="xs mt">Speed trend</div></div>
+        <div class="card tc" style="padding:10px"><div style="font-size:18px;font-weight:800;color:var(--purple)">${speedH.length}</div><div class="xs mt">Qs timed</div></div>
+      </div>
+    </div>`:''}
+
+    <!-- Topics -->
+    <div class="card mb14">
+      <div class="fc jsb mb8">
+        <h3 style="margin:0">📚 Topics Practised</h3>
+        <span style="font-weight:800;color:var(--accent)">${topicsCorrectOnce} mastered</span>
+      </div>
+      <div class="prog-bar mb6"><div class="prog-fill" style="width:${topicsCount?Math.round(topicsCorrectOnce/Math.max(topicsCount,1)*100):0}%"></div></div>
+      <div class="sm mt" style="color:var(--muted)">${topicsCount} attempted · ${topicsCorrectOnce} with at least one correct</div>
+    </div>
+
+    <!-- Repeated Mistakes -->
+    ${repeatedMistakes.length?`<div class="card mb14" style="border-color:rgba(247,79,79,.25)">
+      <h3 style="margin:0 0 10px;color:var(--red)">🔁 Frequently Missed</h3>
+      ${repeatedMistakes.map(([topic,n])=>`<div class="fc jsb mb8">
+        <div><div style="font-weight:700">${topic}</div><div class="xs mt" style="color:var(--red)">${n} wrong answers</div></div>
+        <button class="btn bm bsm" onclick="startAdaptive({topic:'${topic.replace(/'/g,"\\'")}'})">Practise →</button>
+      </div>`).join('')}
+    </div>`:''}
+
+    <!-- Strengths & Weaknesses -->
+    ${(strongTopics.length||weakTopics.length)?`<div class="g2 mb14">
+      ${strongTopics.length?`<div class="card" style="border-color:rgba(76,175,80,.3)">
+        <h4 style="color:var(--green);margin:0 0 10px">💪 Strengths</h4>
+        ${strongTopics.map(t=>`<div class="fc jsb mb6"><span class="sm">${t.topic}</span><span style="font-weight:700;color:var(--green)">${t.pct}%</span></div>`).join('')}
+      </div>`:''}
+      ${weakTopics.length?`<div class="card" style="border-color:rgba(247,79,79,.3)">
+        <h4 style="color:var(--red);margin:0 0 10px">📌 Focus Areas</h4>
+        ${weakTopics.map(t=>`<div class="fc jsb mb5"><span class="sm">${t.topic}</span><span style="font-weight:700;color:var(--red)">${t.pct}%</span></div>
+        <button class="btn bm bsm mb6" onclick="startAdaptive({topic:'${t.topic.replace(/'/g,"\\'")}',difficulty:'easy'})">Practice →</button>`).join('')}
+      </div>`:''}
+    </div>`:''}
+
+    <!-- Recommendation -->
+    <div class="card" style="border-color:rgba(79,150,247,.3);background:rgba(79,150,247,.04);padding:16px">
+      <h4 style="margin:0 0 8px">🤖 Recommended for You</h4>
+      <p class="sm mt mb12" style="color:var(--muted)">Based on recent results (${getAdaptiveDifficulty(currentUser)} difficulty recommended):</p>
+      <div class="fc gap8 wrap">
+        <button class="btn ba bsm" onclick="startAdaptive({})">✏️ Adaptive Practice</button>
+        ${weakTopics.length?`<button class="btn bg bsm" onclick="startAdaptive({topic:'${(weakTopics[0]?.topic||'').replace(/'/g,"\\'")}',difficulty:'easy'})">📌 Fix Weakness</button>`:''}
+        ${repeatedMistakes.length?`<button class="btn bm bsm" onclick="startAdaptive({topic:'${(repeatedMistakes[0]?.[0]||'').replace(/'/g,"\\'")}',difficulty:'easy'})">🔁 Retry Mistakes</button>`:''}
+        <button class="btn bm bsm" onclick="nav('diagnostic')">🔍 Diagnostic</button>
+      </div>
+    </div>
+  </div>`;
 }

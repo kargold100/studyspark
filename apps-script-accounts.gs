@@ -131,20 +131,32 @@ function register(params) {
   const progressSheet = getSheet('Progress');
   progressSheet.appendRow([userId, 0, 0, 0, 0, '{}', '[]', '[]', now]);
   
-  // Send welcome email
+  // Send welcome email (requires Apps Script to have Gmail permissions)
   try {
+    const emailBody = role === 'student' && studentCode
+      ? '<div style="font-family:sans-serif;max-width:480px;margin:auto">' +
+        '<h2 style="color:#4F96F7">Welcome to StudySpark, ' + name + '!</h2>' +
+        '<p>Your student account has been created.</p>' +
+        '<p><strong>Your Student Code:</strong></p>' +
+        '<div style="font-size:32px;font-weight:900;letter-spacing:6px;color:#4F96F7;padding:16px;background:#f0f6ff;border-radius:8px;text-align:center;margin:16px 0">' + studentCode + '</div>' +
+        '<p>Share this 6-character code with your parent so they can track your progress.</p>' +
+        '<p>Start practising at <a href="https://studysparkau.netlify.app">studysparkau.netlify.app</a></p>' +
+        '<hr><p style="color:#888;font-size:12px">StudySpark — Free Australian Exam Prep</p></div>'
+      : '<div style="font-family:sans-serif;max-width:480px;margin:auto">' +
+        '<h2 style="color:#4F96F7">Welcome to StudySpark, ' + name + '!</h2>' +
+        '<p>Your ' + role + ' account has been created.</p>' +
+        '<p>Sign in at <a href="https://studysparkau.netlify.app">studysparkau.netlify.app</a> using your email and PIN.</p>' +
+        '<hr><p style="color:#888;font-size:12px">StudySpark — Free Australian Exam Prep</p></div>';
+    
     MailApp.sendEmail({
       to: email,
-      subject: '🎓 Welcome to StudySpark!',
-      htmlBody: `<div style="font-family:sans-serif;max-width:480px;margin:auto">
-        <h2 style="color:#4F96F7">Welcome to StudySpark, ${name}!</h2>
-        <p>Your account has been created. Your student code is:</p>
-        ${studentCode ? `<div style="font-size:28px;font-weight:900;letter-spacing:4px;color:#4F96F7;padding:16px;background:#f0f6ff;border-radius:8px;text-align:center">${studentCode}</div>
-        <p>Share this code with a parent so they can track your progress.</p>` : ''}
-        <p>Start practising at <a href="https://studysparkau.netlify.app">studysparkau.netlify.app</a></p>
-      </div>`
+      subject: 'Welcome to StudySpark! 🎓',
+      htmlBody: emailBody
     });
-  } catch(e) { /* Email optional */ }
+  } catch(e) {
+    // Email sending is optional - account creation still succeeds even if email fails
+    Logger.log('Email send failed: ' + e.message);
+  }
   
   return { userId, studentCode, name, role, yearLevel, state };
 }

@@ -6,7 +6,7 @@
 
 // ── CONFIGURATION ─────────────────────────────────────────────────────────────
 // Replace with your deployed Apps Script Web App URL
-const ACCOUNTS_URL = 'https://script.google.com/macros/s/AKfycby-RD9t5wT0JijxGrv0hod67Ox4qpLQTf7Y7TN1SjVppMnIUPRzoWryVffmOk87si8r/exec';
+const ACCOUNTS_URL = 'https://script.google.com/macros/s/AKfycbw0zqAoyY5w0gDDbxvzcv4M4AA8P97JWzq0YwgxBhVmiiqVIojeyaqvF8OrNbS3RYPZ/exec';
 
 // ── LOCAL CLOUD STATE ─────────────────────────────────────────────────────────
 const CloudAccount = {
@@ -42,6 +42,9 @@ async function hashPIN(pin) {
 
 // ── API CALLS ─────────────────────────────────────────────────────────────────
 async function accountsAPI(action, params = {}) {
+  if (!ACCOUNTS_URL || ACCOUNTS_URL === 'YOUR_APPS_SCRIPT_ACCOUNTS_URL') {
+    throw new Error('Cloud accounts not yet configured. Please set up the Google Apps Script backend first. See GITHUB_UPLOAD_GUIDE.md for instructions.');
+  }
   try {
     const res = await fetch(ACCOUNTS_URL, {
       method: 'POST',
