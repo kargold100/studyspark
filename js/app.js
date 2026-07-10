@@ -4,9 +4,10 @@
 
 // Grade matching: questions with grade='all' match any primary grade (1-6)
 function gradeMatch(q, grade){
+  if(!grade || grade==='ALL') return true;
   if(q.grade==='all') return true;
-  if(Array.isArray(q.grade)) return q.grade.includes(grade);
-  return gradeMatch(q,grade);
+  if(Array.isArray(q.grade)) return q.grade.includes(grade) || q.grade.includes(String(grade));
+  return q.grade===grade || String(q.grade)===String(grade);
 }
 
 
@@ -66,6 +67,7 @@ const NAV_ITEMS = [
   {id:'languages',  l:'🗣️ Languages'},
   {id:'tips',       l:'💡 Tips'},
   {id:'profile',    l:'👤 Profile'},
+  {id:'account',    l:'☁️ Account'},
 ];
 
 const EXAM_DEFS = [
@@ -3070,7 +3072,7 @@ let exam=null,examSub=false,examTL=0,examTimer=null,examStart=null,examResult=nu
 let examTab='all',examGenGrade='ALL',examGenSubject='ALL',examGenTier='ALL';
 let browsePage=0,examReviewPage=0;
 const PAGE_SIZE=20;
-let selState='VIC',selSec=null,selPQs=[],selPAns=[],selPSub=false;
+let selState='VIC',selSec=null,selPQs=[],selPAns=[],selPSub=false,selCumCorrect=0,selCumTotal=0,selRoundCount=0;
 let selWritingPrompt=null,selWritingText='',selWritingFeedback='',selWritingLoading=false;
 let wpGrade=null,wpSelected=null,wpText='',wpChecked={};
 let studySub=null,studyTopic=null,studyNotes='',studyLoading=false;
@@ -3089,7 +3091,7 @@ function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.fl
 function uniq(a){return[...new Set(a)];}
 function pctColor(p){return p>=75?'var(--green)':p>=50?'var(--orange)':'var(--red)';}
 function starsHtml(n,max=3){return Array.from({length:max},(_,i)=>`<span class="star ${i<n?'earned':'empty'}">${i<n?'⭐':'☆'}</span>`).join('');}
-function filterQs(f={}){return QUESTIONS.filter(q=>{if(f.section&&f.section!=='ALL'&&q.section!==f.section)return false;if(f.grade&&f.grade!=='ALL'&&q.grade!==f.grade)return false;if(f.topic&&f.topic!=='ALL'&&q.topic!==f.topic)return false;if(f.difficulty&&f.difficulty!=='ALL'&&q.difficulty!==f.difficulty)return false;if(f.style&&f.style!=='ALL'&&q.style!==f.style)return false;if(f.paper&&q.paper!==f.paper)return false;return true;});}
+function filterQs(f={}){return QUESTIONS.filter(q=>{if(f.section&&f.section!=='ALL'&&q.section!==f.section)return false;if(f.grade&&f.grade!=='ALL'&&!gradeMatch(q,f.grade))return false;if(f.topic&&f.topic!=='ALL'&&q.topic!==f.topic)return false;if(f.difficulty&&f.difficulty!=='ALL'&&q.difficulty!==f.difficulty)return false;if(f.style&&f.style!=='ALL'&&q.style!==f.style)return false;if(f.paper&&q.paper!==f.paper)return false;return true;});}
 function paginationBar(page,totalPages,onPageFn){
   if(totalPages<=1)return '';
   const btns=[];
@@ -3224,7 +3226,8 @@ function profileBar(){
   const d=Profiles.loadData(currentUser);
   const lv=Profiles.getLevel(d.xp||0);
   const prog=Profiles.getLevelProgress(d.xp||0);
-  return `<div class="profile-bar mb20" onclick="nav('profile')">
+  const cloudAcc=typeof CloudAccount!=='undefined'?CloudAccount.get():null;
+  return `<div class="profile-bar mb20" style="cursor:pointer" onclick="nav('profile')">
     <div style="font-size:28px">${d.avatar||'🎓'}</div>
     <div style="flex:1;min-width:0">
       <div class="fc gap8"><strong style="font-size:14px">${d.nickname}</strong>
@@ -3517,42 +3520,136 @@ function renderPractice(){
   markQuestionStart();if(!pQs.length)return renderPracticeMenu();return pMode==='oneByOne'?renderOneByOne():renderBatch();}
 
 function renderPracticeMenu(){
-  const rows=[{s:'vic_maths',l:'🔢 VIC Maths',c:'var(--green)'},{s:'vic_verbal',l:'🧠 VIC Verbal',c:'var(--purple)'},{s:'vic_quant',l:'📐 VIC Quant',c:'var(--orange)'},{s:'vic_reading',l:'📖 VIC Reading',c:'var(--accent)'},{s:'nsw_thinking',l:'🧩 NSW Thinking',c:'var(--purple)'},{s:'nsw_maths',l:'🔢 NSW Maths',c:'var(--green)'},{s:'nsw_reading',l:'📖 NSW Reading',c:'var(--accent)'},{s:'gen_maths',l:'➗ Primary Maths (Gr 1-6)',c:'var(--green)'},{s:'gen_english',l:'📚 Primary English (Gr 1-6)',c:'var(--accent)'},{s:'gen_science',l:'🔬 Primary Science (Gr 1-6)',c:'var(--orange)'},{s:'gen_digitech',l:'💻 Digital Tech (Gr 1-6)',c:'var(--purple)'},{s:'gen_puzzles',l:'🧩 Logic Puzzles (Gr 1-6)',c:'var(--yellow)'},{s:'sec_maths',l:'🔢 Secondary Maths (Yr 7-10)',c:'var(--green)'},{s:'sec_english',l:'📚 Secondary English (Yr 7-10)',c:'var(--accent)'},{s:'sec_science',l:'🔬 Secondary Science (Yr 7-10)',c:'var(--orange)'},{s:'sr_english',l:'📚 Senior English (Yr 11-12)',c:'var(--accent)'},{s:'sr_biology',l:'🧬 Senior Biology (Yr 11-12)',c:'var(--orange)'},{s:'sr_chemistry',l:'⚗️ Senior Chemistry (Yr 11-12)',c:'var(--orange)'},{s:'sr_physics',l:'⚛️ Senior Physics (Yr 11-12)',c:'var(--orange)'},{s:'sr_genmaths',l:'📊 Senior General Maths (Yr 11-12)',c:'var(--green)'},{s:'sr_methods',l:'📈 Senior Maths Methods (Yr 11-12)',c:'var(--green)'},{s:'sr_specialist',l:'∫ Senior Specialist Maths (Yr 11-12)',c:'var(--green)'}];
-  const styles=['standard','eshs','singapore','logic','reading','assessment','advanced','scholarship','opportunity'];
-  return `<div class="page">${profileBar()}<h1>✏️ Practice Mode</h1><p class="mt mb20">Every correct answer earns XP and counts toward achievements.</p>
-    <div class="g2 mb24">
-      <div class="card" style="border-color:rgba(79,142,247,.4)">
-        <div style="font-size:28px;margin-bottom:8px">1️⃣</div>
-        <h3 class="mb8">One at a Time</h3>
-        <p class="mt sm mb14">Select → Check → get tip → Next. Pages of 10 — keep going as long as you like!</p>
-        <p class="xs mt mb10">How many per page?</p>
-        <div class="fc gap8 wrap">
-          <button class="btn ba bsm" onclick="startPractice({},'oneByOne',5)">5 per page</button>
-          <button class="btn ba bsm" onclick="startPractice({},'oneByOne',10)">10 per page</button>
-          <button class="btn ba bsm" onclick="startPractice({},'oneByOne',20)">20 per page</button>
-        </div>
+  // Grade level filter state (stored on window to persist)
+  if(typeof window._pmGrade==='undefined') window._pmGrade='ALL';
+  if(typeof window._pmMode==='undefined') window._pmMode='oneByOne';
+
+  const g = window._pmGrade;
+  const m = window._pmMode;
+
+  const SUBJECTS = [
+    {id:'maths',   label:'🔢 Mathematics',   color:'var(--green)',
+     sections:[
+       {s:'vic_maths',   l:'VIC Maths (Selective)'},
+       {s:'nsw_maths',   l:'NSW Maths (Selective)'},
+       {s:'gen_maths',   l:'Primary Maths (Gr 1–6)'},
+       {s:'sec_maths',   l:'Secondary Maths (Yr 7–10)'},
+       {s:'sr_genmaths', l:'Senior General Maths'},
+       {s:'sr_methods',  l:'Senior Maths Methods'},
+       {s:'sr_specialist',l:'Senior Specialist Maths'},
+     ]},
+    {id:'english', label:'📖 English & Reading', color:'var(--accent)',
+     sections:[
+       {s:'vic_reading',  l:'VIC Reading (Selective)'},
+       {s:'vic_verbal',   l:'VIC Verbal Reasoning'},
+       {s:'nsw_reading',  l:'NSW Reading (Selective)'},
+       {s:'gen_english',  l:'Primary English (Gr 1–6)'},
+       {s:'sec_english',  l:'Secondary English (Yr 7–10)'},
+       {s:'sr_english',   l:'Senior English'},
+     ]},
+    {id:'reasoning', label:'🧩 General Ability',  color:'var(--purple)',
+     sections:[
+       {s:'nsw_thinking', l:'NSW Thinking Skills'},
+       {s:'vic_quant',    l:'VIC Quantitative Reasoning'},
+       {s:'gen_puzzles',  l:'Logic & Puzzles'},
+     ]},
+    {id:'science', label:'🔬 Science',          color:'var(--orange)',
+     sections:[
+       {s:'gen_science',  l:'Primary Science (Gr 1–6)'},
+       {s:'sec_science',  l:'Secondary Science (Yr 7–10)'},
+       {s:'sr_biology',   l:'Senior Biology'},
+       {s:'sr_chemistry', l:'Senior Chemistry'},
+       {s:'sr_physics',   l:'Senior Physics'},
+     ]},
+    {id:'digital', label:'💻 Digital Tech',     color:'var(--teal)',
+     sections:[{s:'gen_digitech', l:'Digital Technologies'}]},
+  ];
+
+  const GRADES = ['ALL','1','2','3','4','5','6','7','8','9','10'];
+
+  // Get available questions per section after grade filter
+  function sectionCount(sec){
+    return filterQs({section:sec, grade: g==='ALL'?undefined:Number(g)||g}).length;
+  }
+
+  return `<div class="page">${profileBar()}
+    <div class="hdr-bar fc jsb mb16">
+      <h1 style="margin:0">✏️ Practice</h1>
+      <button class="btn bg bsm" onclick="startAdaptive({})">🎚️ Adaptive (auto)</button>
+    </div>
+
+    <!-- Practice Mode -->
+    <div class="g2 mb16">
+      <div class="card hov ${m==='oneByOne'?'':'opacity-50'}" style="padding:14px;cursor:pointer;${m==='oneByOne'?'border-color:var(--accent)':''}" onclick="window._pmMode='oneByOne';render()">
+        <div style="font-size:22px;margin-bottom:4px">1️⃣</div>
+        <div style="font-weight:800">One at a Time</div>
+        <div class="xs mt" style="color:var(--muted)">Immediate feedback after each answer</div>
+        ${m==='oneByOne'?'<div class="xs mt" style="color:var(--accent);font-weight:700;margin-top:6px">✓ Selected</div>':''}
       </div>
-      <div class="card" style="border-color:rgba(61,214,140,.4)">
-        <div style="font-size:28px;margin-bottom:8px">📋</div>
-        <h3 class="mb8">Answer All Then Submit</h3>
-        <p class="mt sm mb14">Answer a full page, submit it, review answers, then keep going to the next page.</p>
-        <p class="xs mt mb10">How many per page?</p>
-        <div class="fc gap8 wrap">
-          <button class="btn bg bsm" onclick="startPractice({},'batch',5)">5 per page</button>
-          <button class="btn bg bsm" onclick="startPractice({},'batch',10)">10 per page</button>
-          <button class="btn bg bsm" onclick="startPractice({},'batch',20)">20 per page</button>
-        </div>
+      <div class="card hov ${m==='batch'?'':'opacity-50'}" style="padding:14px;cursor:pointer;${m==='batch'?'border-color:var(--green)':''}" onclick="window._pmMode='batch';render()">
+        <div style="font-size:22px;margin-bottom:4px">📋</div>
+        <div style="font-weight:800">Batch Mode</div>
+        <div class="xs mt" style="color:var(--muted)">Complete a set, then review all at once</div>
+        ${m==='batch'?'<div class="xs mt" style="color:var(--green);font-weight:700;margin-top:6px">✓ Selected</div>':''}
       </div>
     </div>
-    <div class="card mb24 hov" style="border-color:rgba(247,79,142,.4)" onclick="nav('writing')">
-      <div class="fc jsb wrap gap8"><div><div style="font-size:28px;margin-bottom:8px">✍️</div><h3 class="mb8">Writing Prompts (Gr 1-6)</h3><p class="mt sm">${typeof WRITING_PROMPT_LIBRARY!=='undefined'?WRITING_PROMPT_LIBRARY.length:0} original narrative, persuasive, descriptive &amp; informative tasks with self-check lists and tips.</p></div><button class="btn bsm" style="background:var(--pink);color:#fff;min-width:100px">Open →</button></div>
+
+    <!-- Grade Filter -->
+    <div class="card mb16" style="padding:12px 16px">
+      <div class="fc gap8 wrap" style="align-items:center">
+        <span class="xs" style="color:var(--muted);font-weight:700;white-space:nowrap">YEAR LEVEL:</span>
+        ${GRADES.map(gr=>`<button class="btn bsm ${g===gr?'ba':'bm'}" style="min-height:32px;padding:4px 12px;font-size:12px" onclick="window._pmGrade='${gr}';render()">${gr==='ALL'?'All Years':'Yr '+gr}</button>`).join('')}
+      </div>
     </div>
-    <h2 class="mb14">By Section</h2><div class="g3 mb20">${rows.map(s=>{const cnt=filterQs({section:s.s}).length;return `<div class="card hov" onclick="startPractice({section:'${s.s}'},'oneByOne',9999)"><div style="font-weight:800;margin-bottom:3px">${s.l}</div><div class="mt xs">${cnt} questions available</div><div class="fc gap8 mt14 wrap"><button class="btn bsm" style="background:${s.c};color:#fff" onclick="event.stopPropagation();startPractice({section:'${s.s}'},'oneByOne',10)">10 Qs</button><button class="btn bsm" style="background:${s.c};color:#fff" onclick="event.stopPropagation();startPractice({section:'${s.s}'},'oneByOne',9999)">All ${cnt}</button></div></div>`;}).join('')}</div>
-    <h2 class="mb14">By Provider Style</h2><div class="g3">${styles.map(st=>{const cnt=filterQs({style:st}).length;return `<div class="card hov" onclick="startPractice({style:'${st}'},'oneByOne',9999)"><div style="font-weight:800;margin-bottom:3px">${STL[st]}</div><div class="mt xs">${cnt} questions</div><div class="fc gap8 mt14 wrap"><button class="btn bm bsm" onclick="event.stopPropagation();startPractice({style:'${st}'},'oneByOne',10)">10 Qs</button><button class="btn bm bsm" onclick="event.stopPropagation();startPractice({style:'${st}'},'oneByOne',9999)">All ${cnt}</button></div></div>`;}).join('')}</div>
-  </div>`;
+
+    <!-- Subject Sections -->
+    ${SUBJECTS.map(subj => {
+      const rows = subj.sections.map(sec => {
+        const cnt = sectionCount(sec.s);
+        if(cnt === 0) return '';
+        return `<div style="padding:12px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px">
+          <div style="flex:1">
+            <div style="font-weight:700;font-size:14px">${sec.l}</div>
+            <div class="xs mt" style="color:var(--muted)">${cnt} questions available</div>
+          </div>
+          <div class="fc gap6">
+            <button class="btn bsm" style="background:${subj.color};color:#fff;border-color:${subj.color}" onclick="startPractice({section:'${sec.s}',grade:window._pmGrade==='ALL'?undefined:Number(window._pmGrade)||window._pmGrade},'${m}',10)">10 Qs</button>
+            <button class="btn bsm" style="background:${subj.color};color:#fff;border-color:${subj.color}" onclick="startPractice({section:'${sec.s}',grade:window._pmGrade==='ALL'?undefined:Number(window._pmGrade)||window._pmGrade},'${m}',25)">25 Qs</button>
+          </div>
+        </div>`;
+      }).join('');
+      if(!rows.replace(/^\s*$/,'')) return '';
+      return `<div class="card mb12">
+        <div class="fc gap8 mb10" style="align-items:center">
+          <h3 style="margin:0;color:${subj.color}">${subj.label}</h3>
+        </div>
+        ${rows}
+      </div>`;
+    }).join('')}
+
+    <!-- Writing -->
+    <div class="card mb12 hov" style="cursor:pointer;border-color:rgba(247,79,142,.4);padding:16px" onclick="nav('writing')">
+      <div class="fc gap12" style="align-items:center">
+        <span style="font-size:28px">✍️</span>
+        <div>
+          <div style="font-weight:800">Writing Practice</div>
+          <div class="xs mt" style="color:var(--muted)">Narrative, persuasive, descriptive & informative prompts. AI marking for selective prep.</div>
+        </div>
+        <button class="btn bm bsm" style="margin-left:auto">Open →</button>
+      </div>
+    </div>
+
+    <!-- Quick access: Topic Picker -->
+    <div class="card mb12" style="padding:14px">
+      <h3 style="margin:0 0 10px">🎯 Practice by Topic</h3>
+      <p class="sm mt mb12" style="color:var(--muted)">Browse and filter ${QUESTIONS.length.toLocaleString()} questions by section, grade and topic in the Question Bank.</p>
+      <button class="btn ba bsm" onclick="nav('browse')">📋 Open Question Bank →</button>
+    </div>
+
+  </div>
+  `;
 }
 
-// ── WRITING PROMPTS (Gr 1-6 library, separate from Selective AI-marked writing) ────
 function renderWritingPrompts(){
   const lib=(typeof WRITING_PROMPT_LIBRARY!=='undefined')?WRITING_PROMPT_LIBRARY:[];
   if(!wpSelected){
@@ -3971,7 +4068,7 @@ function renderSelective(){
       <button class="btn" style="${selState==='NSW'?'background:var(--yellow);color:#1a1200;':''}${selState==='NSW'?'':'background:var(--card2);color:var(--muted);'}border:1px solid var(--border);padding:9px 16px;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer" onclick="selState='NSW';selSec=null;render()">🟨 New South Wales</button></div>
     <div class="hero mb20"><h1>🏆 ${selState==='VIC'?'VIC Selective (ACER)':'NSW Selective'} Prep</h1><p class="mt sm" style="margin-top:6px;max-width:520px">${info.note}</p><p class="mt xs" style="margin-top:8px">🏫 ${info.schools}</p></div>
     <div class="card mb24" style="padding:0;overflow:hidden">${secs.map((sec,i)=>{const isW=sec.id.includes('writing');const cnt=filterQs({section:sec.id}).length;
-      return `<div class="fc" style="align-items:center;gap:14px;padding:13px 18px;border-bottom:${i<secs.length-1?'1px solid var(--border)':'none'};cursor:pointer;transition:background .12s" onmouseover="this.style.background='rgba(79,142,247,.04)'" onmouseout="this.style.background=''" onclick="selSec='${sec.id}';selPQs=[];selPAns=[];selPSub=false;selWritingFeedback='';render()">
+      return `<div class="fc" style="align-items:center;gap:14px;padding:13px 18px;border-bottom:${i<secs.length-1?'1px solid var(--border)':'none'};cursor:pointer;transition:background .12s" onmouseover="this.style.background='rgba(79,142,247,.04)'" onmouseout="this.style.background=''" onclick="selSec='${sec.id}';selPQs=[];selPAns=[];selPSub=false;selWritingFeedback='';selCumCorrect=0;selCumTotal=0;selRoundCount=0;render()">
         <span style="font-size:22px;min-width:28px">${sec.e}</span>
         <div style="flex:1"><div style="font-weight:700;font-size:14px">${sec.l}</div><div class="mt xs" style="margin-top:2px">${sec.d}</div></div>
         <div style="text-align:right;min-width:90px"><span class="tag tm">${isW?'1 task':cnt+' Qs'}</span><div class="mt xs" style="margin-top:3px">${sec.m} min</div></div>
@@ -4000,13 +4097,30 @@ function renderSelPanel(){
   }else{
     if(!selPQs.length){body=`<div class="loading"><span class="spin">⏳</span></div>`;setTimeout(()=>{const pool=filterQs({section:selSec});selPQs=shuffle(pool).slice(0,Math.min(pool.length,15));selPAns=Array(selPQs.length).fill(null);render();},50);}
     else{const c=selPAns.filter((a,i)=>a===selPQs[i]?.answer).length;const pct=selPSub?Math.round(c/selPQs.length*100):0;
-      body=`${selPSub?`<div class="sbox ${pct>=60?'pass':'fail'} mb14"><div class="stars-display">${starsHtml(pct>=90?3:pct>=70?2:pct>=50?1:0)}</div><div style="font-weight:900;font-size:22px;color:var(--${pct>=60?'green':'orange'})">${c}/${selPQs.length} — ${pct}%</div></div>`:''}
+      body=`${selPSub?`<div class="sbox ${pct>=60?'pass':'fail'} mb14">
+        <div class="stars-display">${starsHtml(pct>=90?3:pct>=70?2:pct>=50?1:0)}</div>
+        <div style="font-weight:900;font-size:22px;color:var(--${pct>=60?'green':'orange'})">${c}/${selPQs.length} — ${pct}% this round</div>
+        ${selRoundCount>1?`<div style="margin-top:8px;font-size:13px;color:var(--muted)">
+          📊 Session total: <strong style="color:var(--accent)">${selCumCorrect}/${selCumTotal}</strong>
+          (${Math.round(selCumCorrect/selCumTotal*100)}%) across ${selRoundCount} rounds
+        </div>`:''}
+      </div>`:''}
       ${selPQs.map((q,i)=>qCard(q,i,'sel',selPAns[i],selPSub,false,false)).join('')}
-      ${!selPSub?`<button class="btn ba bfull mt14" style="padding:11px" onclick="submitSelPractice()">✅ Check Answers</button>`:`<div class="fc gap8 wrap mt14"><button class="btn bm bsm" onclick="selPQs=[];selPAns=[];selPSub=false;render()">🔄 10 New Questions</button><button class="btn ba bsm" onclick="startPractice({section:selSec},'oneByOne',9999)">✏️ Do All in Practice Mode</button></div>`}`;}
+      ${!selPSub?`<button class="btn ba bfull mt14" style="padding:11px" onclick="submitSelPractice()">✅ Check Answers</button>`:`<div class="fc gap8 wrap mt14"><button class="btn bm bsm" onclick="selPQs=[];selPAns=[];selPSub=false;render()">🔄 Next 15 Questions</button><button class="btn ba bsm" onclick="startPractice({section:selSec},'oneByOne',9999)">✏️ Do All in Practice Mode</button></div>`}`;}
   }
   return `<div class="card mb24" style="border-color:rgba(79,142,247,.3)"><div class="fc jsb mb14 wrap gap8"><h2 style="margin:0">${sec.e} ${sec.l}</h2><div class="fc gap8">${!isW?`<button class="btn bm bsm" onclick="selPQs=[];selPAns=[];selPSub=false;render()">🔄 New</button>`:''}<button class="btn bm bsm" onclick="selSec=null;render()">✖</button></div></div>${body}</div>`;
 }
-function submitSelPractice(){selPSub=true;selPQs.forEach((q,i)=>{if(selPAns[i]!==null){if(currentUser)Profiles.recordAnswer(currentUser,q,selPAns[i]===q.answer);}});render();}
+function submitSelPractice(){
+  selPSub=true;
+  const thisCorrect=selPAns.filter((a,i)=>a===selPQs[i]?.answer&&a!==null).length;
+  const thisAnswered=selPAns.filter(a=>a!==null).length;
+  selCumCorrect+=thisCorrect;
+  selCumTotal+=thisAnswered;
+  selRoundCount++;
+  selPQs.forEach((q,i)=>{if(selPAns[i]!==null&&currentUser)Profiles.recordAnswer(currentUser,q,selPAns[i]===q.answer);});
+  autoSyncIfLoggedIn();
+  render();
+}
 async function doWritingMark(){if(selWritingText.split(/\s+/).filter(Boolean).length<20)return;selWritingLoading=true;render();
   const prompt=selWritingPrompt||WRITING_PROMPTS[0];
   const fb=await callClaudeUI('Selective exam writing marker. Format exactly:\nSCORES: Ideas X/10, Structure X/10, Language X/10, Mechanics X/10, TOTAL X/40\nSTRENGTH: [one line]\nIMPROVE: [one line]\nVERDICT: [one encouraging sentence]',`Prompt: ${prompt.text.slice(0,100)}\nResponse: ${selWritingText.slice(0,600)}`,250,null,'smart');
@@ -6149,3 +6263,370 @@ function sessionResultBlock(pct, correct, total, examResult) {
 }
 
 console.log('[StudySpark] Enhanced analytics loaded ✓');
+
+// ══════════════════════════════════════════════════════════════════════════════
+// CLOUD ACCOUNTS UI — Register, Login, Sync, Parent Linking
+// ══════════════════════════════════════════════════════════════════════════════
+
+let _authView = 'login';   // 'login' | 'register' | 'parent'
+let _authMsg  = '';
+let _authLoading = false;
+let _authChildrenData = null;
+
+// ── RENDER ACCOUNT PAGE ───────────────────────────────────────────────────────
+function renderAccount() {
+  const account = CloudAccount.get();
+
+  // If already logged into cloud account — show account dashboard
+  if (account) return renderAccountDashboard(account);
+
+  const isReg = _authView === 'register';
+  const isParent = _authView === 'parent';
+
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+      <h2 style="margin:0">☁️ StudySpark Account</h2>
+    </div>
+
+    <!-- Tab switcher -->
+    <div class="fc gap8 mb20">
+      ${[['login','🔑 Sign In'],['register','✏️ Student Sign Up'],['parent','👨‍👩‍👧 Parent Sign Up']].map(([v,l])=>`
+        <button class="btn bsm ${_authView===v?'ba':'bm'}" style="flex:1" onclick="_authView='${v}';_authMsg='';render()">${l}</button>`).join('')}
+    </div>
+
+    ${_authMsg?`<div class="card mb14" style="border-color:${_authMsg.startsWith('✅')?'var(--green)':'var(--red)'};background:${_authMsg.startsWith('✅')?'rgba(76,175,80,.08)':'rgba(247,79,79,.08)'};padding:12px 16px">
+      <p class="sm" style="margin:0;color:${_authMsg.startsWith('✅')?'var(--green)':'var(--red)'}">${_authMsg}</p>
+    </div>`:''}
+
+    <div class="card" style="padding:24px">
+      ${_authView==='login'?`
+        <h3 class="mb16">Sign in to your account</h3>
+        <div class="mb14">
+          <label class="xs" style="display:block;margin-bottom:6px;font-weight:700;color:var(--muted)">EMAIL ADDRESS</label>
+          <input id="auth-email" type="email" class="inp" placeholder="your@email.com" style="width:100%;box-sizing:border-box" autocomplete="email">
+        </div>
+        <div class="mb20">
+          <label class="xs" style="display:block;margin-bottom:6px;font-weight:700;color:var(--muted)">PIN (4–6 digits)</label>
+          <input id="auth-pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" class="inp" placeholder="••••" style="width:100%;box-sizing:border-box;letter-spacing:6px;font-size:20px" autocomplete="current-password">
+        </div>
+        <button class="btn ba bfull" ${_authLoading?'disabled':''} onclick="doCloudLogin()">
+          ${_authLoading?'<span class="spin-ring" style="width:20px;height:20px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:8px"></span>Signing in...':'🔑 Sign In'}
+        </button>
+        <p class="xs mt mt14 tc" style="color:var(--muted)">Progress saved in the cloud — accessible on any device.</p>
+      `:_authView==='register'?`
+        <h3 class="mb16">Create a student account</h3>
+        <div class="mb12">
+          <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">DISPLAY NAME</label>
+          <input id="auth-name" type="text" class="inp" placeholder="E.g. Adarsh" style="width:100%;box-sizing:border-box" autocomplete="name">
+        </div>
+        <div class="mb12">
+          <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">EMAIL ADDRESS</label>
+          <input id="auth-email" type="email" class="inp" placeholder="student@email.com or parent's email" style="width:100%;box-sizing:border-box" autocomplete="email">
+        </div>
+        <div class="g2 mb12">
+          <div>
+            <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">YEAR LEVEL</label>
+            <select id="auth-year" class="inp" style="width:100%;box-sizing:border-box">
+              <option value="">Select...</option>
+              ${[1,2,3,4,5,6,7,8,9,10].map(y=>`<option value="${y}">Year ${y}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">STATE</label>
+            <select id="auth-state" class="inp" style="width:100%;box-sizing:border-box">
+              <option value="ALL">All states</option>
+              <option value="VIC">Victoria</option>
+              <option value="NSW">New South Wales</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb12">
+          <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">CREATE A PIN (4–6 digits)</label>
+          <input id="auth-pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" class="inp" placeholder="E.g. 1234" style="width:100%;box-sizing:border-box;letter-spacing:6px;font-size:20px">
+        </div>
+        <div class="mb20">
+          <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">CONFIRM PIN</label>
+          <input id="auth-pin2" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" class="inp" placeholder="Repeat PIN" style="width:100%;box-sizing:border-box;letter-spacing:6px;font-size:20px">
+        </div>
+        <button class="btn ba bfull" ${_authLoading?'disabled':''} onclick="doCloudRegister('student')">
+          ${_authLoading?'Creating account...':'✅ Create Student Account'}
+        </button>
+        <p class="xs mt mt14" style="color:var(--muted);text-align:center">You'll receive a unique 6-character student code to share with your parent.</p>
+      `:`
+        <h3 class="mb16">Create a parent account</h3>
+        <div class="mb12">
+          <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">YOUR NAME</label>
+          <input id="auth-name" type="text" class="inp" placeholder="E.g. Parent Name" style="width:100%;box-sizing:border-box">
+        </div>
+        <div class="mb12">
+          <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">YOUR EMAIL</label>
+          <input id="auth-email" type="email" class="inp" placeholder="parent@email.com" style="width:100%;box-sizing:border-box">
+        </div>
+        <div class="mb12">
+          <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">PIN (4–6 digits)</label>
+          <input id="auth-pin" type="password" inputmode="numeric" maxlength="6" class="inp" placeholder="E.g. 5678" style="width:100%;box-sizing:border-box;letter-spacing:6px;font-size:20px">
+        </div>
+        <div class="mb20">
+          <label class="xs" style="display:block;margin-bottom:5px;font-weight:700;color:var(--muted)">CONFIRM PIN</label>
+          <input id="auth-pin2" type="password" inputmode="numeric" maxlength="6" class="inp" placeholder="Repeat PIN" style="width:100%;box-sizing:border-box;letter-spacing:6px;font-size:20px">
+        </div>
+        <button class="btn ba bfull" ${_authLoading?'disabled':''} onclick="doCloudRegister('parent')">
+          ${_authLoading?'Creating account...':'👨‍👩‍👧 Create Parent Account'}
+        </button>
+        <div class="card mt16" style="background:rgba(79,150,247,.06);border-color:rgba(79,150,247,.3);padding:14px">
+          <p class="xs mt" style="color:var(--muted);margin:0">After creating a parent account, you can link your child's account using their unique 6-character student code. You'll then see their full progress dashboard.</p>
+        </div>
+      `}
+    </div>
+
+    <!-- Why create an account -->
+    <div class="card mt16" style="padding:16px">
+      <h4 style="margin:0 0 10px">☁️ Why create an account?</h4>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        ${[
+          ['📱','Access progress on any device — phone, tablet, school computer'],
+          ['🔁','Never lose your XP, streak or achievements again'],
+          ['👨‍👩‍👧','Parents can monitor progress without interrupting study'],
+          ['📊','Full performance analytics across all sessions'],
+          ['🆓','Always free — no subscription, no ads'],
+        ].map(([e,t])=>`<div class="fc gap10"><span>${e}</span><span class="sm">${t}</span></div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Guest mode link -->
+    <div class="tc mt14 mb8">
+      <button class="btn bm bsm" onclick="nav('home')">Continue without account →</button>
+    </div>
+  </div>`;
+}
+
+// ── ACCOUNT DASHBOARD (logged in) ─────────────────────────────────────────────
+function renderAccountDashboard(account) {
+  const isParent = account.role === 'parent';
+  const lastSync = account.lastSync ? new Date(account.lastSync).toLocaleString('en-AU') : 'Never';
+
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+      <h2 style="margin:0">☁️ My Account</h2>
+    </div>
+
+    <!-- Account card -->
+    <div class="card mb16" style="background:linear-gradient(135deg,rgba(79,150,247,.08),transparent);border-color:rgba(79,150,247,.3);padding:20px">
+      <div class="fc gap14 mb14">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">
+          ${isParent?'👨‍👩‍👧':'🎓'}
+        </div>
+        <div>
+          <div style="font-size:18px;font-weight:800">${account.name}</div>
+          <div class="xs mt" style="color:var(--muted)">${account.email}</div>
+          <div class="fc gap6 mt6">
+            <span class="tag ${isParent?'to':'tg'}" style="font-size:10px">${isParent?'Parent Account':'Student Account'}</span>
+            ${account.yearLevel?`<span class="tag tm" style="font-size:10px">Year ${account.yearLevel}</span>`:''}
+            ${account.state&&account.state!=='ALL'?`<span class="tag ta" style="font-size:10px">${account.state}</span>`:''}
+          </div>
+        </div>
+      </div>
+
+      ${!isParent&&account.studentCode?`<div style="background:rgba(0,0,0,.2);border-radius:8px;padding:12px;margin-bottom:12px">
+        <div class="xs" style="color:var(--muted);margin-bottom:4px;font-weight:700">YOUR STUDENT CODE — share with your parent</div>
+        <div style="font-size:24px;font-weight:900;letter-spacing:6px;color:var(--accent);font-family:monospace">${account.studentCode}</div>
+      </div>`:''}
+
+      <div class="xs mt" style="color:var(--muted);margin-bottom:12px">Last synced: ${lastSync}</div>
+
+      <div class="fc gap8 wrap">
+        <button class="btn bg bsm" id="sync-btn" onclick="doSync()">☁️ Sync Now</button>
+        ${!isParent?`<button class="btn bm bsm" onclick="doRefreshFromCloud()">⬇️ Restore from Cloud</button>`:''}
+        <button class="btn bm bsm" onclick="nav('profile')">👤 Local Profiles</button>
+        <button class="btn tr bsm" onclick="doSignOut()" style="margin-left:auto;background:rgba(247,79,79,.12);color:var(--red);border-color:rgba(247,79,79,.3)">Sign Out</button>
+      </div>
+    </div>
+
+    ${_authMsg?`<div class="card mb14" style="border-color:${_authMsg.startsWith('✅')?'var(--green)':'var(--red)'};padding:12px 16px">
+      <p class="sm" style="margin:0;color:${_authMsg.startsWith('✅')?'var(--green)':'var(--red)'}">${_authMsg}</p>
+    </div>`:''}
+
+    ${isParent?renderParentLinkSection():''}
+
+    <!-- What syncs -->
+    <div class="card mt4" style="padding:14px">
+      <h4 style="margin:0 0 8px">What's included in each sync</h4>
+      <div class="g2">
+        ${[['⭐','XP & Level'],['🔥','Daily Streak'],['📊','Topic Scores'],['🏅','Achievements'],['📈','Accuracy Trend'],['📅','Session History']].map(([e,l])=>`
+          <div class="fc gap8"><span>${e}</span><span class="xs">${l}</span></div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderParentLinkSection() {
+  return `<div class="card mb14">
+    <h3 style="margin:0 0 14px">👨‍👩‍👧 Linked Children</h3>
+    ${_authChildrenData===null?`
+      <p class="sm mt mb12" style="color:var(--muted)">Load your children's progress from the cloud.</p>
+      <button class="btn bg bsm" onclick="doLoadChildren()">Load Children's Progress</button>
+    `:_authChildrenData.length===0?`
+      <div class="card" style="text-align:center;padding:20px;border-style:dashed">
+        <div style="font-size:32px;margin-bottom:8px">🔗</div>
+        <div style="font-weight:700;margin-bottom:6px">No children linked yet</div>
+        <p class="sm mt" style="color:var(--muted)">Enter your child's student code below to link their account.</p>
+      </div>
+    `:`
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+        ${_authChildrenData.map(child=>{
+          const pct=child.progress.totalAnswered?Math.round(child.progress.totalCorrect/child.progress.totalAnswered*100):0;
+          const lv=Profiles.getLevel(child.progress.xp||0);
+          return `<div class="card" style="padding:14px;border-color:${lv.color}33">
+            <div class="fc jsb mb8 wrap">
+              <div class="fc gap10">
+                <span style="font-size:24px">${lv.badge}</span>
+                <div>
+                  <div style="font-weight:800">${child.name}</div>
+                  <div class="xs mt" style="color:var(--muted)">${child.yearLevel?'Year '+child.yearLevel:''} ${child.state||''}</div>
+                </div>
+              </div>
+              <div class="tag ${lv.color?'tg':'ta'}" style="color:${lv.color};font-size:10px">${lv.title}</div>
+            </div>
+            <div class="g4">
+              ${[
+                {l:'⭐ XP',v:child.progress.xp||0},
+                {l:'✅ Done',v:child.progress.totalAnswered||0},
+                {l:'🎯 Acc',v:pct+'%'},
+                {l:'🔥 Streak',v:(child.progress.streak||0)+' days'},
+              ].map(({l,v})=>`<div class="card tc" style="padding:8px">
+                <div style="font-size:11px;color:var(--muted)">${l}</div>
+                <div style="font-weight:800;font-size:14px">${v}</div>
+              </div>`).join('')}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+      <button class="btn bm bsm" onclick="_authChildrenData=null;doLoadChildren()">🔄 Refresh</button>
+    `}
+
+    <!-- Link new child -->
+    <div class="card mt14" style="background:rgba(79,150,247,.04);border-color:rgba(79,150,247,.3);padding:14px">
+      <div style="font-weight:700;margin-bottom:8px">🔗 Link a child account</div>
+      <p class="xs mt mb10" style="color:var(--muted)">Ask your child to open StudySpark on their device, go to ☁️ Account, and share their 6-character student code.</p>
+      <div class="fc gap8">
+        <input id="student-code-input" type="text" class="inp" placeholder="E.g. ABC123" maxlength="6"
+          style="text-transform:uppercase;letter-spacing:4px;font-weight:900;font-size:16px;flex:1">
+        <button class="btn ba" onclick="doLinkChild()">Link →</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── ACTION HANDLERS ───────────────────────────────────────────────────────────
+async function doCloudLogin() {
+  const email = document.getElementById('auth-email')?.value?.trim();
+  const pin = document.getElementById('auth-pin')?.value?.trim();
+  if (!email || !pin) { _authMsg = '⚠️ Please enter your email and PIN'; render(); return; }
+
+  _authLoading = true; _authMsg = ''; render();
+  try {
+    const result = await cloudLogin(email, pin);
+    currentUser = result.name;
+    localStorage.setItem('ss_last_user', result.name);
+    _authMsg = `✅ Welcome back, ${result.name}! Progress restored.`;
+    _authLoading = false;
+    setTimeout(() => nav('home'), 800);
+  } catch (e) {
+    _authMsg = '❌ ' + e.message;
+    _authLoading = false;
+    render();
+  }
+}
+
+async function doCloudRegister(role) {
+  const name = document.getElementById('auth-name')?.value?.trim();
+  const email = document.getElementById('auth-email')?.value?.trim();
+  const pin = document.getElementById('auth-pin')?.value?.trim();
+  const pin2 = document.getElementById('auth-pin2')?.value?.trim();
+  const yearLevel = document.getElementById('auth-year')?.value || '';
+  const state = document.getElementById('auth-state')?.value || 'ALL';
+
+  if (!name || !email || !pin) { _authMsg = '⚠️ Please fill in all required fields'; render(); return; }
+  if (pin !== pin2) { _authMsg = '❌ PINs don\'t match — please re-enter'; render(); return; }
+
+  _authLoading = true; _authMsg = ''; render();
+  try {
+    const result = await cloudRegister({ name, email, pin, role, yearLevel, state });
+    currentUser = result.name;
+    localStorage.setItem('ss_last_user', result.name);
+    if (role === 'student') {
+      _authMsg = `✅ Account created! Your student code is: <strong>${result.studentCode}</strong>. Share this with your parent.`;
+    } else {
+      _authMsg = `✅ Parent account created! Sign in your child on their device and ask them to share their student code with you.`;
+    }
+    _authLoading = false;
+    render();
+  } catch (e) {
+    _authMsg = '❌ ' + e.message;
+    _authLoading = false;
+    render();
+  }
+}
+
+async function doSync() {
+  const btn = document.getElementById('sync-btn');
+  if (btn) btn.textContent = '⏳ Syncing...';
+  _authMsg = '';
+  try {
+    const result = await syncProgressToCloud();
+    _authMsg = '✅ Progress synced to cloud at ' + new Date(result.timestamp).toLocaleTimeString('en-AU');
+    render();
+  } catch (e) {
+    _authMsg = '❌ Sync failed: ' + e.message;
+    render();
+  }
+}
+
+async function doRefreshFromCloud() {
+  _authMsg = ''; render();
+  try {
+    await refreshFromCloud();
+    _authMsg = '✅ Progress restored from cloud!';
+    render();
+  } catch (e) {
+    _authMsg = '❌ ' + e.message;
+    render();
+  }
+}
+
+function doSignOut() {
+  if (!confirm('Sign out of your cloud account? Your local progress will remain on this device.')) return;
+  cloudSignOut();
+  _authMsg = '';
+  _authChildrenData = null;
+  render();
+}
+
+async function doLinkChild() {
+  const code = document.getElementById('student-code-input')?.value?.trim().toUpperCase();
+  _authMsg = '';
+  try {
+    const result = await linkChildToParent(code);
+    _authMsg = `✅ Linked ${result.studentName} successfully!`;
+    _authChildrenData = null;
+    render();
+    await doLoadChildren();
+  } catch (e) {
+    _authMsg = '❌ ' + e.message;
+    render();
+  }
+}
+
+async function doLoadChildren() {
+  _authMsg = '';
+  try {
+    const result = await fetchChildrenProgress();
+    _authChildrenData = result.children || [];
+    render();
+  } catch (e) {
+    _authMsg = '❌ Could not load children: ' + e.message;
+    render();
+  }
+}
