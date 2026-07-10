@@ -3206,8 +3206,8 @@ const App={home:()=>nav('home')};
 function render(){
   const el=document.getElementById('app');
   try{
-  if(!currentUser&&screen!=='profile'&&screen!=='diagnostic'&&screen!=='naplan'&&screen!=='parentdash'){el.innerHTML=renderProfilePicker();return;}
-  const R={home:renderHome,browse:renderBrowse,practice:renderPractice,exams:renderExams,examrun:renderExamRun,selective:renderSelective,tips:renderTips,study:renderStudy,tutor:renderTutor,funzone:renderFunZone,languages:renderLanguages,profile:renderProfile,writing:renderWritingPrompts,vocab:renderVocabBuilder,diagnostic:renderDiagnostic,naplan:renderNAPLAN,dashboard:renderSmartDashboard,parentdash:renderParentDashboard};
+  if(!currentUser&&screen!=='profile'&&screen!=='diagnostic'&&screen!=='naplan'&&screen!=='parentdash'&&screen!=='account'&&screen!=='admin'){el.innerHTML=renderProfilePicker();return;}
+  const R={home:renderHome,browse:renderBrowse,practice:renderPractice,exams:renderExams,examrun:renderExamRun,selective:renderSelective,tips:renderTips,study:renderStudy,tutor:renderTutor,funzone:renderFunZone,languages:renderLanguages,profile:renderProfile,writing:renderWritingPrompts,vocab:renderVocabBuilder,diagnostic:renderDiagnostic,naplan:renderNAPLAN,dashboard:renderSmartDashboard,parentdash:renderParentDashboard,account:renderAccount,admin:renderAdmin};
   el.innerHTML=(R[screen]||renderHome)();
   }catch(err){
     console.error('render error:',err);
@@ -3244,46 +3244,120 @@ function profileBar(){
 
 // ── PROFILE PICKER (shown when no user selected) ───────────────────────────────
 function renderProfilePicker(){
-  const profiles=Profiles.getProfileList();
-  const avatarGrid=Profiles.AVATARS.map(a=>`<div class="avatar-opt${newAvatar===a?' selected':''}" onclick="newAvatar='${a}';render()">${a}</div>`).join('');
+  const profiles = Profiles.getProfileList();
+  const account = typeof CloudAccount !== 'undefined' ? CloudAccount.get() : null;
+  const avatarGrid = Profiles.AVATARS.map(a =>
+    `<div class="avatar-opt${newAvatar===a?' selected':''}" onclick="newAvatar='${a}';render()">${a}</div>`
+  ).join('');
+
   return `<div class="profile-picker">
-    <div class="tc mb24" style="margin-top:32px">
+    <div class="tc mb24" style="margin-top:28px">
       <div style="font-size:52px;margin-bottom:10px">🎓</div>
       <h1>Welcome to <span class="grad">StudySpark</span></h1>
-      <p class="mt sm" style="margin-top:8px">Who's studying today? Select your profile or create a new one.</p>
+      <p class="mt sm" style="margin-top:6px;color:var(--muted)">Free Australian exam prep for Grades 1–10</p>
     </div>
-    ${profiles.length?`<h3 class="mb8">Choose your profile</h3>
-      ${profiles.map(p=>{const lv=Profiles.getLevel(p.xp||0);const prog=Profiles.getLevelProgress(p.xp||0);return `<div class="profile-card" onclick="currentUser='${p.nickname}';nav('home')">
-        <div class="avatar-circle">${p.avatar||'🎓'}</div>
-        <div style="flex:1">
-          <div class="fc gap8 mb8"><strong style="font-size:15px">${p.nickname}</strong>
-            <span class="level-badge" style="background:${lv.color}22;color:${lv.color}">${lv.title}</span></div>
-          <div class="xp-bar"><div class="xp-fill" style="width:${prog.pct}%;background:${lv.color}"></div></div>
-          <div class="xs mt" style="margin-top:4px">${p.xp||0} XP</div>
-        </div>
-        <button class="btn ba bsm">Play →</button>
-      </div>`;}).join('')}<div style="margin:16px 0;text-align:center;color:var(--muted);font-size:12px">— or —</div>`:''}
-    ${!showCreateForm?`<button class="btn ba bfull" style="padding:13px;font-size:15px" onclick="showCreateForm=true;render()">➕ Create New Profile</button>`:`
-    <div class="card" style="border-color:rgba(79,142,247,.4)">
-      <h3 class="mb14">Create Your Profile</h3>
-      <div class="mb14">
-        <label class="xs mt" style="display:block;margin-bottom:6px;font-weight:700">CHOOSE YOUR AVATAR</label>
-        <div class="avatar-grid">${avatarGrid}</div>
-      </div>
-      <div class="mb14">
-        <label class="xs mt" style="display:block;margin-bottom:6px;font-weight:700">YOUR NICKNAME (no real name needed!)</label>
-        <input type="text" id="nick-input" placeholder="e.g. StarKid, Adarsh, MathsWiz..." maxlength="20" value="${newNickname}" oninput="newNickname=this.value"/>
-        <p class="xs mt" style="margin-top:5px">💡 Use any name you like — no email, no password, no personal info needed.</p>
-      </div>
-      <div class="fc gap8">
-        <button class="btn ba" onclick="doCreateProfile()" style="padding:10px 20px">Create Profile →</button>
-        <button class="btn bm" onclick="showCreateForm=false;render()">Cancel</button>
-      </div>
-    </div>`}
-  </div>`;
-}
 
-function doCreateProfile(){
+    ${account ? `
+    <!-- Cloud account logged in — quick access -->
+    <div class="card mb16" style="border-color:rgba(79,150,247,.4);background:rgba(79,150,247,.06);padding:16px">
+      <div class="fc gap10 mb12">
+        <div style="font-size:32px">${account.role==='parent'?'👨‍👩‍👧':'☁️'}</div>
+        <div>
+          <div style="font-weight:800">${account.name}</div>
+          <div class="xs mt" style="color:var(--accent)">☁️ ${account.role==='parent'?'Parent Account — Synced':'Cloud Account — Synced'}</div>
+        </div>
+      </div>
+      ${profiles.length ? `
+        <div style="margin-bottom:10px">
+          <div class="xs mt mb8" style="font-weight:700;color:var(--muted)">CHOOSE WHO'S STUDYING</div>
+          ${profiles.map(p => {
+            const lv = Profiles.getLevel(p.xp||0);
+            return `<div class="profile-card" onclick="currentUser='${p.nickname}';nav('home')" style="margin-bottom:8px">
+              <div class="avatar-circle" style="font-size:24px">${p.avatar||'🎓'}</div>
+              <div style="flex:1">
+                <div class="fc gap8"><strong>${p.nickname}</strong>
+                  <span class="level-badge" style="background:${lv.color}22;color:${lv.color};font-size:10px">${lv.title}</span>
+                </div>
+                <div class="xs mt" style="color:var(--muted)">${p.xp||0} XP · ${p.totalAnswered||0} questions</div>
+              </div>
+              <button class="btn ba bsm">Study →</button>
+            </div>`;
+          }).join('')}
+        </div>` : ''}
+      <div class="fc gap8 wrap">
+        ${!showCreateForm ? `<button class="btn bg bsm" onclick="showCreateForm=true;render()">➕ New Profile</button>` : ''}
+        <button class="btn bm bsm" onclick="nav('account')">☁️ Account Settings</button>
+        ${account.role==='parent' ? `<button class="btn bm bsm" onclick="nav('parentdash')">📊 View Children</button>` : ''}
+      </div>
+    </div>` : `
+    <!-- Not logged in — show login options prominently -->
+    <div class="g2 mb16" style="gap:12px">
+      <div class="card" style="padding:18px;border-color:rgba(79,150,247,.4);text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">☁️</div>
+        <div style="font-weight:800;margin-bottom:6px">Sign In</div>
+        <p class="xs mt mb12" style="color:var(--muted)">Access your saved progress from any device</p>
+        <button class="btn ba bsm" style="width:100%" onclick="nav('account')">Sign In →</button>
+      </div>
+      <div class="card" style="padding:18px;border-color:rgba(76,175,80,.4);text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">✨</div>
+        <div style="font-weight:800;margin-bottom:6px">Create Account</div>
+        <p class="xs mt mb12" style="color:var(--muted)">New student or parent? Register free</p>
+        <button class="btn bg bsm" style="width:100%" onclick="_authView='register';nav('account')">Register →</button>
+      </div>
+    </div>
+
+    <!-- Existing local profiles -->
+    ${profiles.length ? `
+      <h3 class="mb10">Or choose a local profile</h3>
+      ${profiles.map(p => {
+        const lv = Profiles.getLevel(p.xp||0);
+        const prog = Profiles.getLevelProgress(p.xp||0);
+        return `<div class="profile-card" onclick="currentUser='${p.nickname}';nav('home')">
+          <div class="avatar-circle">${p.avatar||'🎓'}</div>
+          <div style="flex:1">
+            <div class="fc gap8 mb6"><strong style="font-size:15px">${p.nickname}</strong>
+              <span class="level-badge" style="background:${lv.color}22;color:${lv.color}">${lv.title}</span>
+            </div>
+            <div class="xp-bar"><div class="xp-fill" style="width:${prog.pct}%;background:${lv.color}"></div></div>
+            <div class="xs mt" style="margin-top:4px">${p.xp||0} XP · ${p.totalAnswered||0} questions</div>
+          </div>
+          <button class="btn ba bsm">Study →</button>
+        </div>`;
+      }).join('')}
+      <div style="margin:14px 0 4px;text-align:center;color:var(--muted);font-size:12px">— or —</div>
+    ` : ''}`}
+
+    <!-- Create new local profile form -->
+    ${!account && !showCreateForm ? `
+      <button class="btn bm bfull mt8" style="padding:12px;font-size:14px" onclick="showCreateForm=true;render()">
+        👤 Continue as Guest (no account needed)
+      </button>` : ''}
+
+    ${showCreateForm ? `
+      <div class="card mt8" style="border-color:rgba(79,142,247,.4)">
+        <h3 class="mb14">👤 Guest Profile</h3>
+        <div class="mb12">
+          <label class="xs mt" style="display:block;margin-bottom:6px;font-weight:700">CHOOSE YOUR AVATAR</label>
+          <div class="avatar-grid">${avatarGrid}</div>
+        </div>
+        <div class="mb14">
+          <label class="xs mt" style="display:block;margin-bottom:6px;font-weight:700">YOUR NICKNAME</label>
+          <input type="text" id="nick-input" placeholder="e.g. StarKid, Adarsh, MathsWiz..." maxlength="20"
+            value="${newNickname}" oninput="newNickname=this.value" style="width:100%;box-sizing:border-box"/>
+          <p class="xs mt" style="margin-top:5px;color:var(--muted)">💡 Progress saved on this device only. <a onclick="nav('account')" style="color:var(--accent);cursor:pointer">Create an account</a> to sync across devices.</p>
+        </div>
+        <div class="fc gap8">
+          <button class="btn ba" onclick="doCreateProfile()">Create Profile →</button>
+          <button class="btn bm" onclick="showCreateForm=false;render()">Cancel</button>
+        </div>
+      </div>` : ''}
+
+    <!-- Admin link (small, at bottom) -->
+    <div class="tc mt20 mb8">
+      <button class="btn bm bsm" style="font-size:11px;opacity:.5" onclick="nav('admin')">🔧 Admin</button>
+    </div>
+  </div>`;
+}function doCreateProfile(){
   const nick=document.getElementById('nick-input')?.value||newNickname;
   const result=Profiles.createProfile(nick.trim(),newAvatar);
   if(result.error){alert(result.error);return;}
@@ -6629,4 +6703,327 @@ async function doLoadChildren() {
     _authMsg = '❌ Could not load children: ' + e.message;
     render();
   }
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ADMIN PANEL — Manage profiles, view stats, approve/delete
+// ══════════════════════════════════════════════════════════════════════════════
+
+const ADMIN_PIN_KEY = 'ss_admin_pin';
+let _adminAuthed = false;
+let _adminPin = '';
+let _adminTab = 'profiles';
+let _adminMsg = '';
+
+function renderAdmin() {
+  // Check if admin PIN set, if not prompt to set one
+  const storedPin = localStorage.getItem(ADMIN_PIN_KEY);
+
+  if (!storedPin) return renderAdminSetup();
+  if (!_adminAuthed) return renderAdminLogin(storedPin);
+  return renderAdminDashboard();
+}
+
+function renderAdminSetup() {
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+      <h2 style="margin:0">🔧 Admin Setup</h2>
+    </div>
+    <div class="card" style="padding:24px;max-width:400px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:40px;margin-bottom:10px">🛡️</div>
+        <h3>Set Admin PIN</h3>
+        <p class="sm mt" style="color:var(--muted)">Create a PIN to protect the admin panel. Don't share this with students.</p>
+      </div>
+      <input id="admin-new-pin" type="password" inputmode="numeric" maxlength="8" placeholder="Enter new admin PIN"
+        class="inp" style="width:100%;box-sizing:border-box;letter-spacing:4px;font-size:18px;text-align:center;margin-bottom:10px">
+      <input id="admin-new-pin2" type="password" inputmode="numeric" maxlength="8" placeholder="Confirm PIN"
+        class="inp" style="width:100%;box-sizing:border-box;letter-spacing:4px;font-size:18px;text-align:center;margin-bottom:16px">
+      ${_adminMsg?`<p style="color:var(--red);font-size:13px;margin-bottom:10px">${_adminMsg}</p>`:''}
+      <button class="btn ba bfull" onclick="doSetAdminPin()">Set Admin PIN →</button>
+    </div>
+  </div>`;
+}
+
+function renderAdminLogin(storedPin) {
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+      <h2 style="margin:0">🔧 Admin Login</h2>
+    </div>
+    <div class="card" style="padding:24px;max-width:360px;margin:0 auto;text-align:center">
+      <div style="font-size:40px;margin-bottom:12px">🛡️</div>
+      <h3 style="margin-bottom:16px">Admin Access</h3>
+      <input id="admin-pin-input" type="password" inputmode="numeric" maxlength="8"
+        placeholder="Enter admin PIN" class="inp"
+        style="width:100%;box-sizing:border-box;letter-spacing:6px;font-size:20px;text-align:center;margin-bottom:12px"
+        onkeydown="if(event.key==='Enter')doAdminLogin()">
+      ${_adminMsg?`<p style="color:var(--red);font-size:13px;margin-bottom:10px">${_adminMsg}</p>`:''}
+      <button class="btn ba bfull" onclick="doAdminLogin()">Enter Admin Panel →</button>
+      <p class="xs mt mt12" style="color:var(--muted)">
+        <a onclick="_adminMsg='';localStorage.removeItem('${ADMIN_PIN_KEY}');render()" style="cursor:pointer;color:var(--muted)">Reset admin PIN</a>
+      </p>
+    </div>
+  </div>`;
+}
+
+function renderAdminDashboard() {
+  const profiles = Profiles.getProfileList();
+  const totalQs = profiles.reduce((a,p)=>{const d=Profiles.loadData(p.nickname);return a+(d.totalAnswered||0);},0);
+  const totalXP = profiles.reduce((a,p)=>a+(p.xp||0),0);
+
+  const tabs = [
+    {id:'profiles',label:'👤 Profiles'},
+    {id:'stats',label:'📊 Stats'},
+    {id:'settings',label:'⚙️ Settings'},
+  ];
+
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+      <h2 style="margin:0">🔧 Admin Panel</h2>
+      <button class="btn bm bsm" onclick="_adminAuthed=false;render()">Lock</button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="fc gap8 mb16">
+      ${tabs.map(t=>`<button class="btn bsm ${_adminTab===t.id?'ba':'bm'}" onclick="_adminTab='${t.id}';render()">${t.label}</button>`).join('')}
+    </div>
+
+    ${_adminMsg?`<div class="card mb12" style="border-color:${_adminMsg.startsWith('✅')?'var(--green)':'var(--red)'};padding:12px">
+      <p class="sm" style="margin:0;color:${_adminMsg.startsWith('✅')?'var(--green)':'var(--red)'}">${_adminMsg}</p>
+    </div>`:''}
+
+    ${_adminTab==='profiles'?`
+      <!-- PROFILES TAB -->
+      <div class="fc jsb mb12 wrap gap8">
+        <h3 style="margin:0">Local Profiles (${profiles.length})</h3>
+        <button class="btn bg bsm" onclick="doAdminAddProfile()">➕ Add Profile</button>
+      </div>
+
+      ${profiles.length===0?`<div class="card tc" style="padding:30px;color:var(--muted)">No profiles yet</div>`:''}
+
+      ${profiles.map((p,i)=>{
+        const d = Profiles.loadData(p.nickname);
+        const stats = Profiles.getStats(p.nickname);
+        const lv = Profiles.getLevel(p.xp||0);
+        const lastActive = d.lastActiveDate ? new Date(d.lastActiveDate).toLocaleDateString('en-AU') : 'Never';
+        return `<div class="card mb10" style="border-color:${lv.color}33;padding:14px">
+          <div class="fc jsb wrap gap8 mb10">
+            <div class="fc gap10">
+              <div style="font-size:28px">${p.avatar||'🎓'}</div>
+              <div>
+                <div style="font-weight:800">${p.nickname}</div>
+                <div class="xs mt" style="color:${lv.color}">${lv.title} · Level ${lv.level}</div>
+              </div>
+            </div>
+            <div class="fc gap6">
+              <button class="btn bm bsm" onclick="doAdminViewProfile('${p.nickname}')">View</button>
+              <button class="btn bsm" style="background:rgba(247,79,79,.12);color:var(--red);border-color:rgba(247,79,79,.3)"
+                onclick="doAdminDeleteProfile('${p.nickname}')">Delete</button>
+            </div>
+          </div>
+          <div class="g4">
+            ${[
+              {l:'XP',v:p.xp||0},
+              {l:'Questions',v:d.totalAnswered||0},
+              {l:'Accuracy',v:(stats?.acc||0)+'%'},
+              {l:'Last Active',v:lastActive},
+            ].map(({l,v})=>`<div class="card tc" style="padding:8px">
+              <div class="xs" style="color:var(--muted)">${l}</div>
+              <div style="font-weight:800;font-size:13px">${v}</div>
+            </div>`).join('')}
+          </div>
+        </div>`;
+      }).join('')}
+
+      <!-- Add Profile Form (inline) -->
+      <div class="card mt8" style="border-color:rgba(79,150,247,.3);padding:16px" id="add-profile-form" style="display:none">
+        <h4 style="margin:0 0 12px">Create New Profile</h4>
+        <input id="admin-new-nick" type="text" placeholder="Nickname" class="inp"
+          style="width:100%;box-sizing:border-box;margin-bottom:10px">
+        <div class="fc gap8">
+          <button class="btn ba bsm" onclick="doAdminCreateProfile()">Create →</button>
+          <button class="btn bm bsm" onclick="document.getElementById('add-profile-form').style.display='none'">Cancel</button>
+        </div>
+      </div>
+
+    `:_adminTab==='stats'?`
+      <!-- STATS TAB -->
+      <h3 class="mb14">Usage Statistics</h3>
+      <div class="g2 mb16">
+        ${[
+          {icon:'👤',val:profiles.length,label:'Total Profiles'},
+          {icon:'❓',val:totalQs.toLocaleString(),label:'Questions Answered'},
+          {icon:'⭐',val:totalXP.toLocaleString(),label:'Total XP Earned'},
+          {icon:'🎓',val:profiles.filter(p=>p.xp>100).length,label:'Active Learners'},
+        ].map(({icon,val,label})=>`
+          <div class="card tc" style="padding:16px">
+            <div style="font-size:28px">${icon}</div>
+            <div style="font-size:22px;font-weight:800;margin:6px 0">${val}</div>
+            <div class="xs mt" style="color:var(--muted)">${label}</div>
+          </div>`).join('')}
+      </div>
+
+      <h3 class="mb12">Leaderboard</h3>
+      <div class="card">
+        ${profiles.length===0?`<p class="sm tc" style="color:var(--muted);padding:20px">No profiles yet</p>`:''}
+        ${[...profiles].sort((a,b)=>(b.xp||0)-(a.xp||0)).slice(0,10).map((p,i)=>{
+          const lv=Profiles.getLevel(p.xp||0);
+          const d=Profiles.loadData(p.nickname);
+          const acc=d.totalAnswered?Math.round(d.totalCorrect/d.totalAnswered*100):0;
+          return `<div style="padding:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px">
+            <div style="font-size:18px;font-weight:900;color:${['var(--yellow)','var(--muted)','#cd7f32'][i]||'var(--muted)'};min-width:24px">${['🥇','🥈','🥉'][i]||'#'+(i+1)}</div>
+            <div style="font-size:20px">${p.avatar||'🎓'}</div>
+            <div style="flex:1">
+              <div style="font-weight:700">${p.nickname}</div>
+              <div class="xs mt" style="color:${lv.color}">${lv.title}</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:800;color:var(--accent)">${p.xp||0} XP</div>
+              <div class="xs mt" style="color:var(--muted)">${acc}% acc</div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+
+    `:`
+      <!-- SETTINGS TAB -->
+      <h3 class="mb14">Admin Settings</h3>
+      <div class="card mb14">
+        <h4 style="margin:0 0 12px">Change Admin PIN</h4>
+        <input id="admin-change-pin" type="password" inputmode="numeric" maxlength="8"
+          placeholder="New PIN" class="inp" style="width:100%;box-sizing:border-box;margin-bottom:10px">
+        <input id="admin-change-pin2" type="password" inputmode="numeric" maxlength="8"
+          placeholder="Confirm new PIN" class="inp" style="width:100%;box-sizing:border-box;margin-bottom:12px">
+        <button class="btn ba bsm" onclick="doChangeAdminPin()">Update PIN →</button>
+      </div>
+
+      <div class="card mb14" style="border-color:rgba(247,79,79,.3)">
+        <h4 style="margin:0 0 10px;color:var(--red)">⚠️ Danger Zone</h4>
+        <p class="sm mb12" style="color:var(--muted)">These actions are permanent and cannot be undone.</p>
+        <div class="fc gap8 wrap">
+          <button class="btn bsm" style="background:rgba(247,79,79,.12);color:var(--red);border-color:rgba(247,79,79,.3)"
+            onclick="doAdminClearAll()">🗑️ Delete All Profiles</button>
+          <button class="btn bsm" style="background:rgba(247,79,79,.12);color:var(--red);border-color:rgba(247,79,79,.3)"
+            onclick="doAdminExportData()">📤 Export All Data</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 style="margin:0 0 10px">🔗 Cloud Account Admin</h4>
+        <p class="sm" style="color:var(--muted)">To manage cloud accounts, open your Google Sheet directly. All user data is stored there and can be edited, deleted or queried.</p>
+        <button class="btn bm bsm mt10" onclick="nav('account')">☁️ Open Cloud Account →</button>
+      </div>
+    `}
+  </div>`;
+}
+
+// ── ADMIN ACTIONS ─────────────────────────────────────────────────────────────
+function doSetAdminPin() {
+  const pin = document.getElementById('admin-new-pin')?.value;
+  const pin2 = document.getElementById('admin-new-pin2')?.value;
+  if (!pin || pin.length < 4) { _adminMsg = 'PIN must be at least 4 digits'; render(); return; }
+  if (pin !== pin2) { _adminMsg = 'PINs do not match'; render(); return; }
+  localStorage.setItem(ADMIN_PIN_KEY, pin);
+  _adminAuthed = true;
+  _adminMsg = '';
+  render();
+}
+
+function doAdminLogin() {
+  const entered = document.getElementById('admin-pin-input')?.value;
+  const stored = localStorage.getItem(ADMIN_PIN_KEY);
+  if (entered === stored) {
+    _adminAuthed = true; _adminMsg = ''; render();
+  } else {
+    _adminMsg = 'Incorrect PIN'; render();
+  }
+}
+
+function doAdminDeleteProfile(nickname) {
+  if (!confirm(`Delete profile "${nickname}"? All their progress will be permanently lost.`)) return;
+  
+  // Remove from profile list
+  const list = Profiles.getProfileList().filter(p => p.nickname !== nickname);
+  localStorage.setItem('ss_profiles', JSON.stringify(list));
+  
+  // Remove their data
+  localStorage.removeItem('ss_data_' + nickname);
+  
+  // If they were currentUser, clear that
+  if (currentUser === nickname) {
+    currentUser = null;
+    localStorage.removeItem('ss_last_user');
+  }
+  
+  _adminMsg = `✅ Profile "${nickname}" deleted`;
+  render();
+}
+
+function doAdminAddProfile() {
+  const form = document.getElementById('add-profile-form');
+  if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+function doAdminCreateProfile() {
+  const nick = document.getElementById('admin-new-nick')?.value?.trim();
+  if (!nick) { _adminMsg = 'Enter a nickname'; render(); return; }
+  
+  const result = Profiles.createProfile(nick, '🎓');
+  if (result.error) { _adminMsg = '❌ ' + result.error; render(); return; }
+  
+  _adminMsg = `✅ Profile "${nick}" created`;
+  render();
+}
+
+function doAdminViewProfile(nickname) {
+  currentUser = nickname;
+  _adminAuthed = false; // close admin panel
+  nav('dashboard');
+}
+
+function doChangeAdminPin() {
+  const pin = document.getElementById('admin-change-pin')?.value;
+  const pin2 = document.getElementById('admin-change-pin2')?.value;
+  if (!pin || pin.length < 4) { _adminMsg = 'PIN must be at least 4 digits'; render(); return; }
+  if (pin !== pin2) { _adminMsg = 'PINs do not match'; render(); return; }
+  localStorage.setItem(ADMIN_PIN_KEY, pin);
+  _adminMsg = '✅ Admin PIN updated';
+  render();
+}
+
+function doAdminClearAll() {
+  if (!confirm('DELETE ALL PROFILES? This cannot be undone.')) return;
+  if (!confirm('Are you absolutely sure? All student progress will be lost.')) return;
+  
+  const profiles = Profiles.getProfileList();
+  profiles.forEach(p => localStorage.removeItem('ss_data_' + p.nickname));
+  localStorage.removeItem('ss_profiles');
+  currentUser = null;
+  localStorage.removeItem('ss_last_user');
+  
+  _adminMsg = '✅ All profiles deleted';
+  render();
+}
+
+function doAdminExportData() {
+  const profiles = Profiles.getProfileList();
+  const exportData = profiles.map(p => ({
+    profile: p,
+    data: Profiles.loadData(p.nickname),
+    stats: Profiles.getStats(p.nickname),
+  }));
+  
+  const json = JSON.stringify(exportData, null, 2);
+  const blob = new Blob([json], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `studyspark-export-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  _adminMsg = '✅ Data exported';
+  render();
 }
