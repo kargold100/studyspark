@@ -6,7 +6,7 @@
 
 // ── CONFIGURATION ─────────────────────────────────────────────────────────────
 // Replace with your deployed Apps Script Web App URL
-const ACCOUNTS_URL = 'https://script.google.com/macros/s/AKfycbw0zqAoyY5w0gDDbxvzcv4M4AA8P97JWzq0YwgxBhVmiiqVIojeyaqvF8OrNbS3RYPZ/exec';
+const ACCOUNTS_URL = 'YOUR_APPS_SCRIPT_ACCOUNTS_URL';
 
 // ── LOCAL CLOUD STATE ─────────────────────────────────────────────────────────
 const CloudAccount = {

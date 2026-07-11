@@ -6293,3 +6293,366 @@ function renderSmartDashboard() {
     </div>
   </div>`;
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// RESTORED PAGES: Diagnostic, NAPLAN, Parent Dashboard
+// ══════════════════════════════════════════════════════════════════════════════
+
+// ── STATE VARIABLES ───────────────────────────────────────────────────────────
+let diagState = { running: false, qs: [], idx: 0, answers: [], done: false, results: null };
+let naplanState = { grade: null, area: null };
+
+const NAPLAN_GRADES = [3, 5, 7, 9];
+const NAPLAN_AREAS = [
+  { id: 'numeracy',     label: 'Numeracy',              icon: '🔢', sections: ['gen_maths'], color: 'var(--accent)' },
+  { id: 'reading',      label: 'Reading',               icon: '📖', sections: ['gen_english','vic_reading'], color: 'var(--green)' },
+  { id: 'conventions',  label: 'Language Conventions',  icon: '✍️', sections: ['gen_english'], color: 'var(--purple)' },
+  { id: 'science',      label: 'Science & Technology',  icon: '🔬', sections: ['gen_science'], color: 'var(--teal)' },
+];
+
+// ── DIAGNOSTIC ASSESSMENT ─────────────────────────────────────────────────────
+function buildDiagnostic() {
+  const DIAG_SPECS = [
+    { sec: 'gen_maths',   grade: 'all', n: 4, label: 'Numeracy' },
+    { sec: 'gen_english', grade: 'all', n: 4, label: 'English' },
+    { sec: 'vic_quant',   grade: 'selective', n: 3, label: 'Quantitative Reasoning' },
+    { sec: 'nsw_thinking',grade: 'selective', n: 3, label: 'General Ability' },
+    { sec: 'vic_verbal',  grade: 'selective', n: 3, label: 'Verbal Reasoning' },
+    { sec: 'gen_science', grade: 'all', n: 3, label: 'Science' },
+  ];
+  const picked = [];
+  DIAG_SPECS.forEach(({ sec, n }) => {
+    const pool = QUESTIONS.filter(q => q.section === sec && q.difficulty === 'medium');
+    const src = pool.length >= n ? pool : QUESTIONS.filter(q => q.section === sec);
+    const shuffled = [...src].sort(() => Math.random() - .5);
+    picked.push(...shuffled.slice(0, n));
+  });
+  return picked.sort(() => Math.random() - .5);
+}
+
+function renderDiagnostic() {
+  if (!diagState.running && !diagState.done) {
+    return `<div class="page">
+      <div class="hdr-bar fc jsb mb16">
+        <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+        <h2 style="margin:0">🔍 Diagnostic Assessment</h2>
+      </div>
+      <div class="card mb20" style="text-align:center;padding:32px">
+        <div style="font-size:48px;margin-bottom:16px">🎯</div>
+        <h2 style="margin-bottom:10px">Find Your Level</h2>
+        <p class="sm mt" style="max-width:380px;margin:0 auto 20px;line-height:1.7">
+          Answer <strong>20 short questions</strong> across Maths, English, Verbal Reasoning and General Ability.
+          StudySpark will identify your strengths and create a personalised study plan.
+        </p>
+        <div class="g3 mb20">
+          ${[['⏱️','~8 minutes'],['📊','20 questions'],['🎓','6 skill areas']].map(([e,l])=>`
+            <div class="card" style="padding:12px"><div style="font-size:24px">${e}</div><div class="xs mt mt6">${l}</div></div>`).join('')}
+        </div>
+        <button class="btn ba blg" onclick="diagState={running:true,qs:buildDiagnostic(),idx:0,answers:[],done:false,results:null};render()">
+          🚀 Start Assessment
+        </button>
+      </div>
+    </div>`;
+  }
+
+  if (diagState.done) {
+    const r = diagState.results;
+    return `<div class="page">
+      <div class="hdr-bar fc jsb mb16">
+        <button class="btn bm bsm" onclick="diagState={running:false,qs:[],idx:0,answers:[],done:false,results:null};nav('home')">✓ Done</button>
+        <h2 style="margin:0">📊 Your Results</h2>
+      </div>
+      <div class="card mb16" style="text-align:center;padding:24px">
+        <div style="font-size:40px;margin-bottom:8px">${r.overall>=80?'🏆':r.overall>=60?'⭐':'📚'}</div>
+        <h2 style="margin-bottom:4px">Overall Score: ${r.overall}%</h2>
+        <p class="sm mt">${r.overall>=80?'Excellent — you\'re performing at a high level.':r.overall>=60?'Good foundation. Focus on your weaker areas.':'Great start! Consistent practice will improve your score quickly.'}</p>
+      </div>
+      <h3 class="mb12">Results by Area</h3>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+        ${Object.entries(r.bySection).map(([label,{correct,total}])=>{
+          const pct=Math.round(correct/total*100);
+          const col=pct>=80?'var(--green)':pct>=60?'var(--orange)':'var(--red)';
+          return `<div class="card" style="padding:12px 16px">
+            <div class="fc jsb mb6"><span style="font-weight:700">${label}</span>
+              <span style="font-weight:800;color:${col}">${correct}/${total} — ${pct}%</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <h3 class="mb12">📚 Your Personalised Plan</h3>
+      <div class="card mb20" style="border-color:rgba(79,216,247,.4)">
+        ${r.recommendations.map((rec,i)=>`
+          <div style="padding:12px 0;${i>0?'border-top:1px solid var(--border)':''}">
+            <div style="font-weight:700;margin-bottom:4px">${i===0?'🎯 Top Priority':'📋 Also recommended'}: ${rec.label}</div>
+            <div class="sm mt mb8" style="color:var(--muted)">${rec.why}</div>
+            <button class="btn bg bsm" onclick="startAdaptive({section:'${rec.section}'})">Start Practising →</button>
+          </div>`).join('')}
+      </div>
+      <div class="fc gap8 wrap">
+        <button class="btn ba" onclick="nav('practice')">✏️ Go to Practice</button>
+        <button class="btn bm" onclick="diagState={running:false,qs:[],idx:0,answers:[],done:false,results:null};render()">🔄 Re-take</button>
+      </div>
+    </div>`;
+  }
+
+  // Running state
+  const { qs, idx } = diagState;
+  const cur = qs[idx];
+
+  if (!cur || idx >= qs.length) {
+    // Calculate results
+    const correct = diagState.answers.filter(Boolean).length;
+    const LABELS = {
+      gen_maths:'Numeracy', gen_english:'English', vic_quant:'Quantitative Reasoning',
+      nsw_thinking:'General Ability', vic_verbal:'Verbal Reasoning', gen_science:'Science'
+    };
+    const bySection = {};
+    qs.forEach((q,i) => {
+      const key = LABELS[q.section] || q.section;
+      if (!bySection[key]) bySection[key] = { correct:0, total:0, section:q.section };
+      bySection[key].total++;
+      if (diagState.answers[i]) bySection[key].correct++;
+    });
+    const recs = Object.entries(bySection)
+      .sort((a,b) => a[1].correct/a[1].total - b[1].correct/b[1].total)
+      .slice(0,3)
+      .map(([label,{section,correct,total}]) => ({
+        label, section,
+        why: `${correct}/${total} correct (${Math.round(correct/total*100)}%) — needs the most attention`
+      }));
+    diagState.done = true;
+    diagState.results = { overall: Math.round(correct/qs.length*100), bySection, recommendations: recs };
+    render(); return '';
+  }
+
+  const ans = diagState.answers[idx];
+  const isCorrect = ans === cur.answer;
+  const SECTION_LABELS = {
+    gen_maths:'🔢 Numeracy', gen_english:'📖 English', vic_quant:'📊 Quantitative',
+    nsw_thinking:'🧠 General Ability', vic_verbal:'💬 Verbal', gen_science:'🔬 Science'
+  };
+
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb10">
+      <button class="btn bm bsm" onclick="diagState.running=false;nav('home')">✕ Exit</button>
+      <span class="sm mt">Question ${idx+1} of ${qs.length}</span>
+    </div>
+    <div class="prog-bar mb16"><div class="prog-fill" style="width:${(idx/qs.length)*100}%"></div></div>
+    <div class="card mb14">
+      <div class="tag ta mb8" style="display:inline-block;font-size:11px">${SECTION_LABELS[cur.section]||'📝 Question'}</div>
+      <p style="font-size:16px;font-weight:700;line-height:1.55;margin:8px 0 18px">${cur.q}</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        ${cur.options.map((o,i)=>{
+          let st='';
+          if(ans!==undefined){
+            if(i===cur.answer) st='border-color:var(--green);background:rgba(76,175,80,.1)';
+            else if(i===ans) st='border-color:var(--red);background:rgba(247,79,79,.08)';
+          }
+          return `<button class="btn bm" style="justify-content:flex-start;text-align:left;${st}"
+            onclick="diagState.answers[${idx}]=${i};render()" ${ans!==undefined?'disabled':''}>
+            <span style="font-weight:800;margin-right:8px">${'ABCD'[i]}.</span>${o}
+          </button>`;
+        }).join('')}
+      </div>
+      ${ans!==undefined?`
+        <div style="margin-top:12px;font-size:13px;color:${isCorrect?'var(--green)':'var(--red)'};font-weight:700">
+          ${isCorrect?'✅ Correct!':'❌ Correct answer: '+cur.options[cur.answer]}
+        </div>
+        ${cur.exp?`<div class="exp mt10">${cur.exp}</div>`:''}
+        <button class="btn ba mt12" onclick="diagState.idx++;render()">
+          ${idx+1<qs.length?'Next →':'See Results 🏆'}
+        </button>`:''}
+    </div>
+  </div>`;
+}
+
+// ── NAPLAN PREPARATION ────────────────────────────────────────────────────────
+function renderNAPLAN() {
+  if (!naplanState.grade) {
+    return `<div class="page">
+      <div class="hdr-bar fc jsb mb16">
+        <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+        <h2 style="margin:0">📝 NAPLAN Preparation</h2>
+      </div>
+      <div class="card mb20" style="background:linear-gradient(135deg,rgba(76,175,80,.08),transparent);border-color:rgba(76,175,80,.3);padding:20px">
+        <div class="fc gap12 mb10">
+          <span style="font-size:36px">🎓</span>
+          <div>
+            <h3 style="margin:0 0 4px">Australian Curriculum Aligned</h3>
+            <p class="sm mt" style="color:var(--muted)">NAPLAN tests are held in Years 3, 5, 7 and 9. Select your year level to begin.</p>
+          </div>
+        </div>
+      </div>
+      <h3 class="mb12">Select Your Year Level</h3>
+      <div class="g2 mb20">
+        ${NAPLAN_GRADES.map(g=>`
+          <div class="card hov" style="text-align:center;cursor:pointer;padding:24px" onclick="naplanState.grade=${g};render()">
+            <div style="font-size:32px;margin-bottom:8px">📚</div>
+            <div style="font-size:20px;font-weight:800">Year ${g}</div>
+            <div class="xs mt mt6" style="color:var(--muted)">${g===3?'Ages 8–9':g===5?'Ages 10–11':g===7?'Ages 12–13':'Ages 14–15'}</div>
+          </div>`).join('')}
+      </div>
+      <div class="card" style="border-color:rgba(79,216,247,.3);padding:16px">
+        <h4 style="margin:0 0 8px">🏆 NAPLAN Tests</h4>
+        <div class="g2">
+          ${NAPLAN_AREAS.map(a=>`<div style="padding:8px 0">
+            <span style="margin-right:8px">${a.icon}</span>
+            <span style="font-weight:600">${a.label}</span>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="naplanState.grade=null;render()">← Years</button>
+      <h2 style="margin:0">Year ${naplanState.grade} — Choose Area</h2>
+    </div>
+    <div class="g2 mb16">
+      ${NAPLAN_AREAS.map(a=>`
+        <div class="card hov" style="cursor:pointer;border-color:${a.color}33;padding:18px;text-align:center"
+          onclick="startPractice({section:'${a.sections[0]}',grade:${naplanState.grade}},'oneByOne',20)">
+          <div style="font-size:32px;margin-bottom:8px">${a.icon}</div>
+          <div style="font-weight:700">${a.label}</div>
+          <div class="xs mt mt6 mb10" style="color:var(--muted)">20 questions</div>
+          <button class="btn bsm" style="background:${a.color};color:#fff;border-color:${a.color};width:100%">
+            Start →
+          </button>
+        </div>`).join('')}
+    </div>
+    <div class="card" style="border-color:rgba(255,165,0,.3);background:rgba(255,165,0,.04);padding:14px">
+      <strong>💡 Year ${naplanState.grade} NAPLAN Tips</strong>
+      <ul class="sm mt" style="margin:8px 0 0;padding-left:18px;line-height:2">
+        ${(naplanState.grade<=5
+          ?['Read every question carefully before answering','Show all working in maths questions','Check for keywords: always, never, sometimes','Write in complete sentences for writing tasks']
+          :['Use process of elimination for tricky questions','Don\'t spend too long on any one question','In writing, plan for 3–5 minutes before starting','Practise numeracy without a calculator']
+        ).map(t=>`<li>${t}</li>`).join('')}
+      </ul>
+    </div>
+  </div>`;
+}
+
+// ── PARENT DASHBOARD ──────────────────────────────────────────────────────────
+function renderParentDashboard() {
+  const profiles = Profiles.getProfileList();
+  const cloudAccount = typeof CloudAccount !== 'undefined' ? CloudAccount.get() : null;
+  const isCloudParent = cloudAccount && cloudAccount.role === 'parent';
+
+  if (!profiles.length && !isCloudParent) {
+    return `<div class="page">
+      <div class="hdr-bar fc jsb mb16">
+        <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+        <h2 style="margin:0">👨‍👩‍👧 Parent Dashboard</h2>
+      </div>
+      <div class="card tc" style="padding:40px">
+        <div style="font-size:40px;margin-bottom:12px">👨‍👩‍👧</div>
+        <h3>No student profiles yet</h3>
+        <p class="sm mt mb16" style="color:var(--muted)">Create a student profile to get started, or sign in as a parent to view linked children.</p>
+        <div class="fc gap8 wrap" style="justify-content:center">
+          <button class="btn ba" onclick="nav('profile')">Create Profile</button>
+          <button class="btn bg" onclick="_authView='parent';nav('account')">Parent Sign In →</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  return `<div class="page">
+    <div class="hdr-bar fc jsb mb16">
+      <button class="btn bm bsm" onclick="nav('home')">← Home</button>
+      <h2 style="margin:0">👨‍👩‍👧 Parent Dashboard</h2>
+    </div>
+
+    ${isCloudParent?`<div class="card mb14" style="border-color:rgba(79,150,247,.3);padding:14px">
+      <div class="fc jsb">
+        <div class="fc gap10">
+          <span style="font-size:24px">☁️</span>
+          <div><div style="font-weight:700">${cloudAccount.name}</div>
+            <div class="xs mt" style="color:var(--accent)">Cloud Parent Account</div></div>
+        </div>
+        <button class="btn bm bsm" onclick="doLoadChildren().then(()=>render())">🔄 Refresh Children</button>
+      </div>
+      ${_authChildrenData && _authChildrenData.length?`
+        <div class="mt14">
+          <div class="xs mt mb8" style="font-weight:700;color:var(--muted)">LINKED CHILDREN</div>
+          ${_authChildrenData.map(child=>{
+            const lv=Profiles.getLevel(child.progress.xp||0);
+            const pct=child.progress.totalAnswered?Math.round(child.progress.totalCorrect/child.progress.totalAnswered*100):0;
+            return `<div class="card mb8" style="padding:12px;border-color:${lv.color}33">
+              <div class="fc gap10 mb8">
+                <span style="font-size:24px">${lv.badge}</span>
+                <div><div style="font-weight:800">${child.name}</div>
+                  <div class="xs mt" style="color:${lv.color}">${lv.title} · ${child.yearLevel?'Year '+child.yearLevel:''}</div></div>
+              </div>
+              <div class="g4">
+                ${[{l:'⭐ XP',v:child.progress.xp||0},{l:'✅ Done',v:child.progress.totalAnswered||0},
+                   {l:'🎯 Acc',v:pct+'%'},{l:'🔥 Streak',v:(child.progress.streak||0)+' days'}].map(({l,v})=>
+                  `<div class="card tc" style="padding:6px"><div class="xs" style="color:var(--muted)">${l}</div>
+                   <div style="font-weight:800;font-size:13px">${v}</div></div>`).join('')}
+              </div>
+            </div>`;
+          }).join('')}
+        </div>`:
+        `<p class="sm mt mt10" style="color:var(--muted)">Click Refresh to load your children's progress, or <a onclick="nav('account')" style="color:var(--accent);cursor:pointer">link a child</a> from Account Settings.</p>`}
+    </div>`:''}
+
+    ${profiles.length?`
+      <p class="sm mt mb16" style="color:var(--muted)">Overview of all student profiles on this device.</p>
+      ${profiles.map(({nickname})=>{
+        const d = Profiles.loadData(nickname);
+        const stats = Profiles.getStats(nickname);
+        const lv = Profiles.getLevel(d?.xp||0);
+        const history = d?.history||[];
+        const todayStart = new Date().setHours(0,0,0,0);
+        const todayQs = history.filter(h=>(h.ts||0)>=todayStart);
+        const weekQs = history.filter(h=>(h.ts||0)>=Date.now()-7*86400000);
+        const weakTopics = (stats?.weakTopics||[]).slice(0,2);
+
+        return `<div class="card mb14" style="border-color:${lv.color}33">
+          <div class="fc jsb mb12 wrap gap8">
+            <div class="fc gap10">
+              <div style="font-size:32px">${lv.badge}</div>
+              <div>
+                <div style="font-weight:800;font-size:16px">${nickname}</div>
+                <div class="xs mt" style="color:${lv.color}">${lv.title} · Level ${lv.level} · ${d?.xp||0} XP</div>
+              </div>
+            </div>
+            <div class="fc gap6">
+              <span style="font-size:20px">🔥</span>
+              <span style="font-weight:700">${d?.streak||0}-day streak</span>
+            </div>
+          </div>
+          <div class="g4 mb12">
+            ${[
+              {label:'Today',val:todayQs.length+' Qs',sub:todayQs.length?Math.round(todayQs.filter(h=>h.correct).length/todayQs.length*100)+'% acc':'No activity'},
+              {label:'This Week',val:weekQs.length+' Qs',sub:weekQs.length?Math.round(weekQs.filter(h=>h.correct).length/weekQs.length*100)+'% acc':'No activity'},
+              {label:'Overall',val:(stats?.totalAnswered||0)+' Qs',sub:(stats?.acc||0)+'% accuracy'},
+              {label:'Achievements',val:`${(d?.achievements||[]).length}`,sub:'unlocked'},
+            ].map(({label,val,sub})=>`<div class="card tc" style="padding:10px">
+              <div class="xs" style="color:var(--muted)">${label}</div>
+              <div style="font-weight:800;font-size:14px;margin:2px 0">${val}</div>
+              <div class="xs" style="color:var(--muted)">${sub}</div>
+            </div>`).join('')}
+          </div>
+          ${weakTopics.length?`<div style="padding:10px;background:rgba(247,79,79,.05);border-radius:8px;margin-bottom:10px">
+            <span style="font-size:12px;font-weight:700;color:var(--red)">📌 Needs practice: </span>
+            ${weakTopics.map(t=>`<span class="tag tr" style="margin-left:6px;font-size:11px">${t.topic}</span>`).join('')}
+          </div>`:''}
+          <div class="fc gap6 wrap">
+            <button class="btn bm bsm" onclick="currentUser='${nickname}';nav('dashboard')">📊 Full Report</button>
+            <button class="btn bg bsm" onclick="currentUser='${nickname}';startAdaptive({})">▶️ Start Practice</button>
+          </div>
+        </div>`;
+      }).join('')}
+
+      <div class="card" style="padding:14px;border-color:rgba(79,216,247,.3)">
+        <h4 style="margin:0 0 8px">📋 Quick Tips for Parents</h4>
+        <ul class="sm mt" style="margin:0;padding-left:18px;line-height:2">
+          <li>Aim for <strong>15–20 minutes</strong> of daily practice for best results</li>
+          <li>Focus on <strong>weak topics</strong> shown above for the biggest improvement</li>
+          <li>The <strong>streak counter</strong> builds a consistent study habit</li>
+          <li>Use <strong>Full Report</strong> to see accuracy trends over time</li>
+        </ul>
+      </div>`:''}
+  </div>`;
+}

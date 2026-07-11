@@ -9,7 +9,7 @@
  *                     F:TopicScores(JSON) | G:Achievements(JSON) | H:History(JSON) | I:LastSync
  */
 
-const SHEET_ID = 'https://docs.google.com/spreadsheets/d/1TmEzgjG9lX3mZAk2vlVOyqMYDndy_vrgXZDfVVNewVU/edit?gid=250277815#gid=250277815'; // Replace with your Sheet ID
+const SHEET_ID = 'YOUR_GOOGLE_SHEET_ID'; // Replace with your Sheet ID
 const SALT = 'studyspark_2024_au';
 
 function doPost(e) {
